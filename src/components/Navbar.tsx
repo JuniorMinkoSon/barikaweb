@@ -19,12 +19,7 @@ const Navbar = () => (
       to="/about" 
       className={({ isActive }) => `text-sm sm:text-base font-medium transition-all duration-500 hover:scale-110 hover:-translate-y-0.5 border-b-2 pb-1 ${isActive ? 'text-[rgb(var(--brand))] border-[rgb(var(--brand))]' : 'text-white border-transparent hover:text-[rgb(var(--brand))] hover:border-[rgb(var(--brand))]'}`}
     >
-      À propos
-    </NavLink>
-    <NavLink 
-      to="/services" 
-      className={({ isActive }) => `text-sm sm:text-base font-medium transition-all duration-500 hover:scale-110 hover:-translate-y-0.5 border-b-2 pb-1 ${isActive ? 'text-[rgb(var(--brand))] border-[rgb(var(--brand))]' : 'text-white border-transparent hover:text-[rgb(var(--brand))] hover:border-[rgb(var(--brand))]'}`}
-    >
+    
       Services
     </NavLink>
     <NavLink 

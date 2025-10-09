@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 // Images importées
 const imgTravaux = new URL('../../assets/images/bat-moderne-1.jpg', import.meta.url).href
@@ -24,6 +24,41 @@ const objectives = [
 ]
 
 const carouselImages = [imgTravaux, imgImmobilier, imgFinitions]
+
+const AnimatedNumber = ({ value, suffix = '', duration = 1200 }) => {
+  const [display, setDisplay] = useState(0)
+  const [visible, setVisible] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true)
+      },
+      { threshold: 0.5 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!visible) return
+    let start = 0
+    const increment = value / (duration / 20)
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= value) {
+        setDisplay(value)
+        clearInterval(timer)
+      } else {
+        setDisplay(Math.floor(start))
+      }
+    }, 20)
+    return () => clearInterval(timer)
+  }, [visible, value, duration])
+
+  return <span ref={ref}>{display}{suffix}</span>
+}
 
 const About = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -96,15 +131,21 @@ const About = () => {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="rounded-xl bg-white ring-1 ring-black/5 p-5 shadow-sm hover:shadow-md transition-all text-center">
-            <p className="text-3xl font-bold text-[rgb(var(--brand-strong))]">10+ </p>
+            <p className="text-3xl font-bold text-[rgb(var(--brand-strong))]">
+              <AnimatedNumber value={10} suffix="+" />
+            </p>
             <p className="text-sm text-gray-600">Années d’expérience cumulée</p>
           </div>
           <div className="rounded-xl bg-white ring-1 ring-black/5 p-5 shadow-sm hover:shadow-md transition-all text-center">
-            <p className="text-3xl font-bold text-[rgb(var(--brand-strong))]">50+ </p>
+            <p className="text-3xl font-bold text-[rgb(var(--brand-strong))]">
+              <AnimatedNumber value={50} suffix="+" />
+            </p>
             <p className="text-sm text-gray-600">Projets livrés</p>
           </div>
           <div className="rounded-xl bg-white ring-1 ring-black/5 p-5 shadow-sm hover:shadow-md transition-all text-center">
-            <p className="text-3xl font-bold text-[rgb(var(--brand-strong))]">100% </p>
+            <p className="text-3xl font-bold text-[rgb(var(--brand-strong))]">
+              <AnimatedNumber value={100} suffix="%" />
+            </p>
             <p className="text-sm text-gray-600">Conformité & ACD sécurisés</p>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 // Importer les images via URL pour Vite
 const imgTravaux = new URL('../../assets/images/bat-moderne-1.jpg', import.meta.url).href
@@ -9,19 +9,63 @@ const keyObjectives = [
   {
     title: 'Travaux publics & génie civil',
     description: 'Construction, routes, aménagements et verdissement pour des infrastructures durables.',
-    image: imgTravaux
+    image: imgTravaux,
+    number: 120 // Exemple de chiffre à animer
   },
   {
     title: 'Immobilier & foncier sécurisé',
     description: 'Location, vente de parcelles, lotissements et aménagements de terrains.',
-    image: imgImmobilier
+    image: imgImmobilier,
+    number: 80
   },
   {
     title: 'Finitions & aménagements',
     description: 'Vitrerie, menuiserie, carrelage, peinture et décoration pour un rendu moderne et soigné.',
-    image: imgFinitions
+    image: imgFinitions,
+    number: 60
   }
 ]
+
+type AnimatedNumberProps = {
+  value: number
+  suffix?: string
+  duration?: number // en ms
+}
+
+const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ value, suffix = '', duration = 1200 }) => {
+  const [display, setDisplay] = useState(0)
+  const [visible, setVisible] = useState(false)
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true)
+      },
+      { threshold: 0.5 }
+    )
+    if (ref.current) observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!visible) return
+    let start = 0
+    const increment = value / (duration / 20)
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= value) {
+        setDisplay(value)
+        clearInterval(timer)
+      } else {
+        setDisplay(Math.floor(start))
+      }
+    }, 20)
+    return () => clearInterval(timer)
+  }, [visible, value, duration])
+
+  return <span ref={ref}>{display}{suffix}</span>
+}
 
 const Objectives = () => (
   <main className="bg-white text-black font-sans">
@@ -68,6 +112,9 @@ const Objectives = () => (
           <div className="p-6">
             <h3 className="text-xl font-bold mb-2 text-[rgb(255,140,0)]">{item.title}</h3>
             <p className="text-gray-700 text-sm sm:text-base">{item.description}</p>
+            <p className="mt-4 text-2xl font-extrabold text-[rgb(255,140,0)]">
+              <AnimatedNumber value={item.number} suffix="+" />
+            </p>
           </div>
         </article>
       ))}
@@ -91,19 +138,27 @@ const Objectives = () => (
         <h3 className="text-2xl font-bold mb-6 text-[rgb(255,140,0)]">Témoignages & Statistiques</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="bg-orange-50 p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition">
-            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">50+</p>
+            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">
+              <AnimatedNumber value={50} suffix="+" />
+            </p>
             <p className="mt-2 text-gray-700 text-sm">Projets réalisés</p>
           </div>
           <div className="bg-orange-50 p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition">
-            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">100+</p>
+            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">
+              <AnimatedNumber value={100} suffix="+" />
+            </p>
             <p className="mt-2 text-gray-700 text-sm">Parcelles sécurisées</p>
           </div>
           <div className="bg-orange-50 p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition">
-            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">95%</p>
+            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">
+              <AnimatedNumber value={95} suffix="%" />
+            </p>
             <p className="mt-2 text-gray-700 text-sm">Satisfaction clients</p>
           </div>
           <div className="bg-orange-50 p-6 rounded-2xl text-center shadow-sm hover:shadow-md transition">
-            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">10+</p>
+            <p className="text-3xl font-extrabold text-[rgb(255,140,0)]">
+              <AnimatedNumber value={10} suffix="+" />
+            </p>
             <p className="mt-2 text-gray-700 text-sm">Années d’expérience</p>
           </div>
         </div>

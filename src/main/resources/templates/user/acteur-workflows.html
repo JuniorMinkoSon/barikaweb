@@ -1,0 +1,341 @@
+<!doctype html>
+<html
+  lang="fr"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Workflows MVP | UNEVIE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="max-w-6xl mx-auto px-6 py-10 space-y-6">
+      <section class="bg-white border border-slate-200 rounded-2xl p-6">
+        <h1 class="text-2xl font-extrabold">Workflows métier MVP</h1>
+        <p class="text-slate-600 mt-2">
+          Validation guide, certificats traçables, billetterie et suivi de
+          fréquentation.
+        </p>
+        <p class="text-sm mt-3">
+          Compte connecté:
+          <span class="font-bold" th:text="${acteurUser.email}">email</span>
+        </p>
+
+        <div
+          th:if="${successMessage}"
+          class="mt-3 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg px-4 py-2"
+          th:text="${successMessage}"
+        ></div>
+        <div
+          th:if="${errorMessage}"
+          class="mt-3 bg-red-50 text-red-700 border border-red-200 rounded-lg px-4 py-2"
+          th:text="${errorMessage}"
+        ></div>
+      </section>
+
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article
+          class="bg-white border border-slate-200 rounded-2xl p-6"
+          sec:authorize="hasRole('GUIDE')"
+        >
+          <h2 class="font-extrabold text-lg">1) Soumettre validation guide</h2>
+          <form
+            class="mt-4 flex gap-2"
+            method="post"
+            th:action="@{/acteur/workflows/guide/submit}"
+          >
+            <input
+              name="dossierReference"
+              required
+              placeholder="REF-GUIDE-2026-001"
+              class="flex-1 border border-slate-300 rounded-lg px-3 py-2"
+            />
+            <button class="bg-slate-900 text-white rounded-lg px-4 py-2">
+              Envoyer
+            </button>
+          </form>
+
+          <div class="mt-4 text-sm">
+            <p class="font-semibold">Mes demandes</p>
+            <ul class="mt-2 space-y-1">
+              <li th:each="item : ${guideRequests}">
+                <span th:text="${item.dossierReference}">REF</span> -
+                <span th:text="${item.status}">PENDING</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article
+          class="bg-white border border-slate-200 rounded-2xl p-6"
+          sec:authorize="hasAnyRole('MINISTERE','ADMIN')"
+        >
+          <h2 class="font-extrabold text-lg">2) Traiter validations guide</h2>
+          <div class="mt-4 space-y-3">
+            <form
+              th:each="item : ${pendingGuideRequests}"
+              method="post"
+              th:action="@{/acteur/workflows/guide/{id}/review(id=${item.id})}"
+              class="border border-slate-200 rounded-lg p-3 space-y-2"
+            >
+              <p class="text-sm">
+                <span class="font-semibold" th:text="${item.guide.email}"
+                  >guide@email</span
+                >
+                - <span th:text="${item.dossierReference}">REF</span>
+              </p>
+              <input
+                name="note"
+                placeholder="Note de validation"
+                class="w-full border border-slate-300 rounded px-3 py-2"
+              />
+              <div class="flex gap-2">
+                <button
+                  name="approve"
+                  value="true"
+                  class="bg-emerald-600 text-white rounded px-3 py-1"
+                >
+                  Approuver
+                </button>
+                <button
+                  name="approve"
+                  value="false"
+                  class="bg-red-600 text-white rounded px-3 py-1"
+                >
+                  Rejeter
+                </button>
+              </div>
+            </form>
+          </div>
+        </article>
+
+        <article
+          class="bg-white border border-slate-200 rounded-2xl p-6"
+          sec:authorize="hasAnyRole('GUIDE','ARTISAN','ORGANISATEUR')"
+        >
+          <h2 class="font-extrabold text-lg">
+            3) Demander certificat traçable
+          </h2>
+          <form
+            class="mt-4 grid grid-cols-1 gap-2"
+            method="post"
+            th:action="@{/acteur/workflows/certificate/request}"
+          >
+            <input
+              name="certificateType"
+              required
+              placeholder="GUIDE_LICENSE / ARTISAN_AUTHENTICITY / EVENT_LICENSE"
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <input
+              name="externalReference"
+              required
+              placeholder="REF-METIER-001"
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <button class="bg-slate-900 text-white rounded-lg px-4 py-2">
+              Créer la demande
+            </button>
+          </form>
+
+          <div class="mt-4 text-sm">
+            <p class="font-semibold">Mes certificats</p>
+            <ul class="mt-2 space-y-1">
+              <li th:each="c : ${myCertificates}">
+                <span th:text="${c.certificateType}">TYPE</span> -
+                <span th:text="${c.status}">REQUESTED</span>
+                <span
+                  th:if="${c.certificateHash != null}"
+                  class="text-xs text-slate-500"
+                  >(hash:
+                  <span
+                    th:text="${#strings.substring(c.certificateHash,0,12)}"
+                  ></span
+                  >...)</span
+                >
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <article
+          class="bg-white border border-slate-200 rounded-2xl p-6"
+          sec:authorize="hasAnyRole('MINISTERE','ADMIN')"
+        >
+          <h2 class="font-extrabold text-lg">4) Émettre certificats</h2>
+          <div class="mt-4 space-y-3">
+            <form
+              th:each="c : ${pendingCertificates}"
+              method="post"
+              th:action="@{/acteur/workflows/certificate/{id}/issue(id=${c.id})}"
+              class="border border-slate-200 rounded-lg p-3 flex items-center justify-between gap-2"
+            >
+              <p class="text-sm">
+                <span class="font-semibold" th:text="${c.owner.email}"
+                  >owner</span
+                >
+                - <span th:text="${c.certificateType}">TYPE</span>
+              </p>
+              <button class="bg-slate-900 text-white rounded px-3 py-1">
+                Émettre
+              </button>
+            </form>
+          </div>
+        </article>
+
+        <article
+          class="bg-white border border-slate-200 rounded-2xl p-6"
+          sec:authorize="hasRole('ORGANISATEUR')"
+        >
+          <h2 class="font-extrabold text-lg">5) Billetterie événements</h2>
+          <form
+            class="mt-4 grid grid-cols-1 gap-2"
+            method="post"
+            th:action="@{/acteur/workflows/ticket/create}"
+          >
+            <label for="eventName" class="text-sm font-semibold"
+              >Nom de l'événement</label
+            >
+            <input
+              id="eventName"
+              name="eventName"
+              required
+              placeholder="Festival Abidjan 2026"
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <label for="eventDate" class="text-sm font-semibold"
+              >Date de l'événement</label
+            >
+            <input
+              id="eventDate"
+              type="date"
+              name="eventDate"
+              required
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <label for="totalCapacity" class="text-sm font-semibold"
+              >Capacité totale</label
+            >
+            <input
+              id="totalCapacity"
+              type="number"
+              min="1"
+              name="totalCapacity"
+              required
+              placeholder="Capacité"
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <button class="bg-slate-900 text-white rounded-lg px-4 py-2">
+              Créer billetterie
+            </button>
+          </form>
+
+          <div class="mt-4 space-y-3">
+            <form
+              th:each="event : ${myEvents}"
+              method="post"
+              th:action="@{/acteur/workflows/ticket/{id}/sell(id=${event.id})}"
+              class="border border-slate-200 rounded-lg p-3"
+            >
+              <p class="font-semibold" th:text="${event.eventName}">Event</p>
+              <p class="text-sm text-slate-600">
+                Vendus: <span th:text="${event.soldCount}">0</span> /
+                <span th:text="${event.totalCapacity}">0</span>
+              </p>
+              <div class="mt-2 flex gap-2">
+                <label class="sr-only" th:for="${'quantity-' + event.id}"
+                  >Quantité vendue</label
+                >
+                <input
+                  th:id="${'quantity-' + event.id}"
+                  type="number"
+                  min="1"
+                  name="quantity"
+                  value="1"
+                  aria-label="Quantité vendue"
+                  class="w-24 border border-slate-300 rounded px-2 py-1"
+                />
+                <button class="bg-emerald-600 text-white rounded px-3 py-1">
+                  Enregistrer vente
+                </button>
+              </div>
+            </form>
+          </div>
+        </article>
+
+        <article
+          class="bg-white border border-slate-200 rounded-2xl p-6"
+          sec:authorize="hasAnyRole('MINISTERE','ORGANISATEUR','ADMIN')"
+        >
+          <h2 class="font-extrabold text-lg">6) Suivi fréquentation</h2>
+          <form
+            class="mt-4 grid grid-cols-1 gap-2"
+            method="post"
+            th:action="@{/acteur/workflows/attendance/add}"
+          >
+            <label for="zone" class="text-sm font-semibold"
+              >Zone touristique</label
+            >
+            <input
+              id="zone"
+              name="zone"
+              required
+              placeholder="Grand-Bassam"
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <label for="observationDate" class="text-sm font-semibold"
+              >Date d'observation</label
+            >
+            <input
+              id="observationDate"
+              type="date"
+              name="observationDate"
+              required
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <label for="visitorsCount" class="text-sm font-semibold"
+              >Nombre de visiteurs</label
+            >
+            <input
+              id="visitorsCount"
+              type="number"
+              min="0"
+              name="visitorsCount"
+              required
+              placeholder="Nombre visiteurs"
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <label for="sourceChannel" class="text-sm font-semibold"
+              >Source de donnée</label
+            >
+            <input
+              id="sourceChannel"
+              name="sourceChannel"
+              required
+              placeholder="Compteurs, Tickets, Déclarations"
+              class="border border-slate-300 rounded px-3 py-2"
+            />
+            <button class="bg-slate-900 text-white rounded-lg px-4 py-2">
+              Enregistrer
+            </button>
+          </form>
+
+          <div class="mt-4 text-sm">
+            <p class="font-semibold">Dernières observations</p>
+            <ul class="mt-2 space-y-1">
+              <li th:each="record : ${attendanceRecords}">
+                <span th:text="${record.observationDate}">2026-01-01</span> -
+                <span th:text="${record.zone}">Zone</span> :
+                <span th:text="${record.visitorsCount}">0</span>
+              </li>
+            </ul>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

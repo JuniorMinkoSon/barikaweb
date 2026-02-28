@@ -42,11 +42,12 @@ public class AuthController {
             return "user/inscription";
         }
 
-        // 🔑 RÔLE SELON LE CHOIX UTILISATEUR
-        if ("LIVREUR".equals(type)) {
-            user.setRole(Role.ROLE_LIVREUR);
-        } else {
-            user.setRole(Role.ROLE_USER);
+        switch (type) {
+            case "GUIDE" -> user.setRole(Role.ROLE_GUIDE);
+            case "ARTISAN" -> user.setRole(Role.ROLE_ARTISAN);
+            case "ORGANISATEUR" -> user.setRole(Role.ROLE_ORGANISATEUR);
+            case "MINISTERE" -> user.setRole(Role.ROLE_MINISTERE);
+            default -> user.setRole(Role.ROLE_USER);
         }
 
         userService.saveUser(user);

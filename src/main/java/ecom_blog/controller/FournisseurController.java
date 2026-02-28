@@ -28,9 +28,6 @@ public class FournisseurController {
         private ReservationService reservationService;
 
         @Autowired
-        private ecom_blog.repository.CommandeRepository commandeRepository;
-
-        @Autowired
         private UserService userService;
 
         // ==================== DASHBOARD ====================
@@ -55,17 +52,8 @@ public class FournisseurController {
                 long totalServices = fournisseurService.countByFournisseur(fournisseur.getId());
                 double revenusNets = reservationService.getRevenusNetByFournisseur(fournisseur.getId());
 
-                // Statistiques Commandes (pour traiteur/alimentaire)
-                long commandesEnAttenteCount = commandeRepository.countByService_FournisseurIdAndStatut(
-                                fournisseur.getId(), "EN_ATTENTE");
-                long commandesAccepteesCount = commandeRepository.countByService_FournisseurIdAndStatut(
-                                fournisseur.getId(), "ACCEPTEE");
-
                 // Listes
                 List<Reservation> reservationsEnAttente = reservationService.getReservationsEnCours(fournisseur);
-                List<Commande> commandesEnAttente = commandeRepository
-                                .findByService_FournisseurIdAndStatutOrderByDateCommandeDesc(
-                                                fournisseur.getId(), "EN_ATTENTE");
 
                 model.addAttribute("fournisseur", fournisseur);
 
@@ -76,40 +64,10 @@ public class FournisseurController {
                 model.addAttribute("totalServices", totalServices);
                 model.addAttribute("revenusNets", revenusNets); // TODO: Ajouter revenus commandes
 
-                // Counts spécifiques commandes pour affichage
-                model.addAttribute("commandesEnAttenteCount", commandesEnAttenteCount);
-                model.addAttribute("commandesAccepteesCount", commandesAccepteesCount);
-
                 // Listes
                 model.addAttribute("reservationsEnAttente", reservationsEnAttente);
-                model.addAttribute("commandesEnAttente", commandesEnAttente);
 
                 return "fournisseur/dashboard";
-        }
-
-        // ==================== GESTION DES COMMANDES ====================
-
-        @PostMapping("/commandes/{id}/accepter")
-        public String accepterCommande(@PathVariable Long id) {
-                Commande commande = commandeRepository.findById(id).orElseThrow();
-                if ("EN_ATTENTE".equals(commande.getStatut())) {
-                        commande.setStatut("ACCEPTEE");
-                        commande.setDonneesVisiblesFournisseur(true);
-                        // 5 minutes pour qu'un livreur accepte
-                        commande.setDateExpiration(java.time.LocalDateTime.now().plusMinutes(5));
-                        commandeRepository.save(commande);
-                }
-                return "redirect:/fournisseur/dashboard";
-        }
-
-        @PostMapping("/commandes/{id}/refuser")
-        public String refuserCommande(@PathVariable Long id) {
-                Commande commande = commandeRepository.findById(id).orElseThrow();
-                if ("EN_ATTENTE".equals(commande.getStatut())) {
-                        commande.setStatut("ANNULEE");
-                        commandeRepository.save(commande);
-                }
-                return "redirect:/fournisseur/dashboard";
         }
 
         // ==================== GESTION DES SERVICES ====================

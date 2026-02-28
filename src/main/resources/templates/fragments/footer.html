@@ -1,113 +1,208 @@
 <div th:fragment="footer" class="font-sans">
-    <footer class="bg-premium-dark text-white/60 pt-24 pb-12">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 pb-20">
-
-            <!-- Logo & Description -->
-            <div class="space-y-6">
-                <a th:href="@{/}" class="flex items-center gap-2">
-
-                    <span class="font-extrabold text-2xl text-white tracking-tight">
-                        UNE<span class="text-premium-orange">VIE</span>
-                    </span>
-                </a>
-                <p class="text-sm leading-relaxed max-w-xs">
-                    Une solution pensée pour l'Afrique. Connectant prestataires, propriétaires et clients sur un même
-                    espace fiable.
-                </p>
-                <div class="flex gap-4">
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-premium-orange hover:border-premium-orange transition-all duration-300">
-                        <i class="fab fa-facebook-f text-sm text-white"></i>
-                    </a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-premium-orange hover:border-premium-orange transition-all duration-300">
-                        <i class="fab fa-instagram text-sm text-white"></i>
-                    </a>
-                    <a href="#"
-                        class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-premium-orange hover:border-premium-orange transition-all duration-300">
-                        <i class="fab fa-twitter text-sm text-white"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Services -->
-            <div>
-                <h4 class="text-white font-bold text-lg mb-8">Services</h4>
-                <ul class="space-y-4 text-sm">
-                    <li><a th:href="@{/projets(categorie='VOITURE')}"
-                            class="hover:text-premium-orange transition-colors">Location de Véhicules</a></li>
-                    <li><a th:href="@{/projets(categorie='EVENEMENTIEL')}"
-                            class="hover:text-premium-orange transition-colors">Réservation de Résidences</a>
-                    </li>
-                    <li><a th:href="@{/projets(categorie='EVENEMENTIEL')}"
-                            class="hover:text-premium-orange transition-colors">Services Événementiels</a></li>
-                    <li><a th:href="@{/projets(categorie='ALIMENTAIRE')}"
-                            class="hover:text-premium-orange transition-colors">Services Alimentaires</a></li>
-                </ul>
-            </div>
-
-            <!-- Liens Utiles -->
-            <div>
-                <h4 class="text-white font-bold text-lg mb-8">Liens Utiles</h4>
-                <ul class="space-y-4 text-sm">
-                    <li><a th:href="@{/register}" class="hover:text-premium-orange transition-colors">Devenir
-                            Prestataire</a></li>
-                    <li><a th:href="@{/propos}" class="hover:text-premium-orange transition-colors">À Propos</a></li>
-                    <li><a th:href="@{/contact}" class="hover:text-premium-orange transition-colors">Contact</a></li>
-                    <li><a th:href="@{/faq}" class="hover:text-premium-orange transition-colors">FAQ</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact -->
-            <div>
-                <h4 class="text-white font-bold text-lg mb-8">Contact</h4>
-                <ul class="space-y-6 text-sm">
-                    <li class="flex items-start gap-4">
-                        <div class="bg-premium-orange/10 p-2.5 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-premium-orange">
-                                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-                        </div>
-                        <span class="pt-1 text-white/80">Abidjan, Côte d'Ivoire</span>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div class="bg-premium-orange/10 p-2.5 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-premium-orange">
-                                <path
-                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                            </svg>
-                        </div>
-                        <span class="pt-1 text-white/80">+225 07 00 00 00 00</span>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div class="bg-premium-orange/10 p-2.5 rounded-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-premium-orange">
-                                <rect width="20" height="16" x="2" y="4" rx="2" />
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                            </svg>
-                        </div>
-                        <span class="pt-1 text-white/80">contact@unevie.ci</span>
-                    </li>
-                </ul>
-            </div>
+  <footer class="bg-premium-dark text-white/60 pt-24 pb-12">
+    <div
+      class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 pb-20"
+    >
+      <!-- Logo & Description -->
+      <div class="space-y-6">
+        <a th:href="@{/}" class="flex items-center gap-2">
+          <span class="font-extrabold text-2xl text-white tracking-tight">
+            UNE<span class="text-premium-orange">VIE</span>
+          </span>
+        </a>
+        <p class="text-sm leading-relaxed max-w-xs">
+          Plateforme tourisme Côte d'Ivoire : découverte, réservation et
+          gouvernance multi-acteurs dans un espace fiable.
+        </p>
+        <div class="flex gap-4">
+          <a
+            href="#"
+            aria-label="Facebook"
+            title="Facebook"
+            class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-premium-orange hover:border-premium-orange transition-all duration-300"
+          >
+            <i class="fab fa-facebook-f text-sm text-white"></i>
+          </a>
+          <a
+            href="#"
+            aria-label="Instagram"
+            title="Instagram"
+            class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-premium-orange hover:border-premium-orange transition-all duration-300"
+          >
+            <i class="fab fa-instagram text-sm text-white"></i>
+          </a>
+          <a
+            href="#"
+            aria-label="X"
+            title="X"
+            class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-premium-orange hover:border-premium-orange transition-all duration-300"
+          >
+            <i class="fab fa-twitter text-sm text-white"></i>
+          </a>
         </div>
+      </div>
 
-        <!-- Copyright -->
-        <div
-            class="max-w-7xl mx-auto px-6 lg:px-8 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-            <p>© 2024 UNEVIE. Tous droits réservés.</p>
-            <div class="flex gap-8">
-                <a th:href="@{/mentions-legales}" class="hover:text-white transition-colors">Mentions Légales</a>
-                <a th:href="@{/politique}" class="hover:text-white transition-colors">Politique de Confidentialité</a>
+      <!-- Explorer -->
+      <div>
+        <h4 class="text-white font-bold text-lg mb-8">Explorer</h4>
+        <ul class="space-y-4 text-sm">
+          <li>
+            <a
+              th:href="@{/sejours}"
+              class="hover:text-premium-orange transition-colors"
+              >Séjours & Réservations</a
+            >
+          </li>
+          <li>
+            <a
+              th:href="@{/tourisme-categories}"
+              class="hover:text-premium-orange transition-colors"
+              >Catégories Tourisme</a
+            >
+          </li>
+          <li>
+            <a
+              th:href="@{/reservation/recherche}"
+              class="hover:text-premium-orange transition-colors"
+              >Expériences locales</a
+            >
+          </li>
+          <li>
+            <a
+              th:href="@{/blog}"
+              class="hover:text-premium-orange transition-colors"
+              >Articles & Conseils</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Espace Acteurs -->
+      <div>
+        <h4 class="text-white font-bold text-lg mb-8">Espace Acteurs</h4>
+        <ul class="space-y-4 text-sm">
+          <li>
+            <a
+              th:href="@{/login}"
+              class="hover:text-premium-orange transition-colors"
+              >Connexion</a
+            >
+          </li>
+          <li>
+            <a
+              th:href="@{/redirect}"
+              class="hover:text-premium-orange transition-colors"
+              >Mon Espace</a
+            >
+          </li>
+          <li>
+            <a
+              th:href="@{/acteur/workflows}"
+              class="hover:text-premium-orange transition-colors"
+              >Workflows MVP</a
+            >
+          </li>
+          <li>
+            <a
+              th:href="@{/propos}"
+              class="hover:text-premium-orange transition-colors"
+              >À propos du projet</a
+            >
+          </li>
+          <li>
+            <a
+              th:href="@{/contact}"
+              class="hover:text-premium-orange transition-colors"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="text-white font-bold text-lg mb-8">Contact</h4>
+        <ul class="space-y-6 text-sm">
+          <li class="flex items-start gap-4">
+            <div class="bg-premium-orange/10 p-2.5 rounded-lg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-premium-orange"
+              >
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
             </div>
+            <span class="pt-1 text-white/80">Abidjan, Côte d'Ivoire</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <div class="bg-premium-orange/10 p-2.5 rounded-lg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-premium-orange"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+            </div>
+            <span class="pt-1 text-white/80">+225 07 00 00 00 00</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <div class="bg-premium-orange/10 p-2.5 rounded-lg">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-premium-orange"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </div>
+            <span class="pt-1 text-white/80">contact@unevie.ci</span>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-        </div>
-    </footer>
+    <!-- Copyright -->
+    <div
+      class="max-w-7xl mx-auto px-6 lg:px-8 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs"
+    >
+      <p>© 2026 UNEVIE. Tous droits réservés.</p>
+      <div class="flex gap-8">
+        <a
+          th:href="@{/mentions-legales}"
+          class="hover:text-white transition-colors"
+          >Mentions Légales</a
+        >
+        <a th:href="@{/politique}" class="hover:text-white transition-colors"
+          >Politique de Confidentialité</a
+        >
+      </div>
+    </div>
+  </footer>
 </div>

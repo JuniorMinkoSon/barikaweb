@@ -1,10 +1,8 @@
 package ecom_blog.controller;
 
-import ecom_blog.model.Commande;
 import ecom_blog.model.Reservation;
 import ecom_blog.model.User;
 import ecom_blog.security.CustomUserDetails;
-import ecom_blog.service.CommandeService;
 import ecom_blog.service.ReservationService;
 import ecom_blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,6 @@ public class UserAccountController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private CommandeService commandeService;
 
     @Autowired
     private ReservationService reservationService;
@@ -67,10 +62,9 @@ public class UserAccountController {
             return "redirect:/login";
 
         User user = userDetails.getUser();
-        List<Commande> commandes = commandeService.getByUser(user);
         List<Reservation> reservations = reservationService.getReservationsClient(user.getId());
 
-        model.addAttribute("commandes", commandes);
+        model.addAttribute("commandes", List.of());
         model.addAttribute("reservations", reservations);
 
         return "user/paiements";

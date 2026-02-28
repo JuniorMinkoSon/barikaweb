@@ -1,141 +1,272 @@
 <header
-    class="bg-white/80 backdrop-blur-md border-b border-white/20 sticky top-0 z-50 font-sans transition-all duration-300"
-    xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+  class="bg-white/80 backdrop-blur-md border-b border-white/20 sticky top-0 z-50 font-sans transition-all duration-300"
+  xmlns:th="http://www.thymeleaf.org"
+  th:fragment="header"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <!-- LOGO -->
+      <a
+        th:href="@{/}"
+        class="flex items-center gap-2 group transition-transform hover:scale-105"
+      >
+        <span class="font-extrabold text-2xl text-premium-dark tracking-tight">
+          UNE<span class="text-premium-orange">VIE</span>
+        </span>
+      </a>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-
-            <!-- LOGO -->
-            <a th:href="@{/}" class="flex items-center gap-2 group transition-transform hover:scale-105">
-
-                <span class="font-extrabold text-2xl text-premium-dark tracking-tight">
-                    UNE<span class="text-premium-orange">VIE</span>
-                </span>
-            </a>
-
-            <!-- DESKTOP NAV -->
-            <nav class="hidden lg:flex items-center gap-10 text-premium-dark/80 font-medium">
-                <a th:href="@{/projets}" class="hover:text-premium-orange transition-colors">projets</a>
-                <a th:href="@{/services}" class="hover:text-premium-orange transition-colors">services</a>
-                <a th:href="@{/objectifs}" class="hover:text-premium-orange transition-colors">objectifs</a>
-                <a th:href="@{/propos}" class="hover:text-premium-orange transition-colors">propos</a>
-                <a th:href="@{/contact}" class="hover:text-premium-orange transition-colors">contact</a>
-                <a th:href="@{/blog}" class="hover:text-premium-orange transition-colors">blog</a>
-            </nav>
-
-            <div class="hidden lg:flex items-center gap-6">
-
-
-                <!-- Auth Buttons -->
-                <div class="flex items-center gap-3">
-                    <!-- Guest View -->
-                    <th:block sec:authorize="isAnonymous()">
-                        <a th:href="@{/registration/provider}"
-                            class="text-premium-dark border border-premium-dark/20 px-6 py-2.5 rounded-xl hover:bg-premium-dark hover:text-white transition-all duration-300 font-semibold text-sm">
-                            Devenir Prestataire
-                        </a>
-                        <a th:href="@{/login}"
-                            class="bg-premium-orange text-white px-6 py-2.5 rounded-xl shadow-lg shadow-premium-orange/20 hover:bg-premium-orange/90 hover:-translate-y-0.5 transition-all duration-300 font-semibold text-sm">
-                            Connexion
-                        </a>
-                    </th:block>
-
-                    <!-- Authenticated View -->
-                    <th:block sec:authorize="isAuthenticated()">
-                        <a th:href="@{/reservation/mes-reservations}"
-                            class="flex items-center gap-3 bg-premium-dark text-white px-6 py-2.5 rounded-xl shadow-lg hover:bg-premium-orange hover:-translate-y-0.5 transition-all duration-300 font-semibold text-sm">
-                            <i class="fa-solid fa-user-circle text-lg"></i>
-                            Mon Espace
-                        </a>
-                        <a th:href="@{/logout}"
-                            class="w-10 h-10 flex items-center justify-center rounded-xl bg-premium-dark/5 text-premium-dark/40 hover:bg-red-500 hover:text-white transition-all duration-300"
-                            title="Déconnexion">
-                            <i class="fa-solid fa-power-off"></i>
-                        </a>
-                    </th:block>
-                </div>
-
-                <!-- Language Selector -->
-                <div class="flex items-center gap-2 ml-2">
-                    <a th:href="@{/(lang='fr')}"
-                        class="text-xs font-bold px-2 py-1 rounded bg-premium-dark/5 text-premium-dark/40 hover:bg-premium-orange hover:text-white transition-all"
-                        th:classappend="${#locale.language == 'fr' ? 'bg-premium-orange/10 text-premium-orange' : ''}">FR</a>
-                    <span class="text-premium-dark/20 text-xs">|</span>
-                    <a th:href="@{/(lang='en')}"
-                        class="text-xs font-bold px-2 py-1 rounded bg-premium-dark/5 text-premium-dark/40 hover:bg-premium-orange hover:text-white transition-all"
-                        th:classappend="${#locale.language == 'en' ? 'bg-premium-orange/10 text-premium-orange' : ''}">EN</a>
-                </div>
-            </div>
-
-            <!-- MENU BUTTON (MOBILE) -->
-            <button id="menuBtn"
-                class="lg:hidden p-2 rounded-xl bg-premium-dark/5 hover:bg-premium-dark/10 transition-colors"
-                aria-label="Menu">
-                <svg class="h-6 w-6 text-premium-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-            </button>
-
+      <!-- DESKTOP NAV -->
+      <nav
+        class="hidden lg:flex items-center gap-10 text-premium-dark/80 font-medium"
+      >
+        <a
+          th:href="@{/sejours}"
+          class="hover:text-premium-orange transition-colors"
+          >séjours</a
+        >
+        <a
+          th:href="@{/tourisme-categories}"
+          class="hover:text-premium-orange transition-colors"
+          >tourisme</a
+        >
+        <div class="relative group">
+          <a
+            th:href="@{/tourisme-categories}"
+            class="hover:text-premium-orange transition-colors"
+            >onglets</a
+          >
+          <div
+            class="absolute left-0 mt-3 w-56 rounded-2xl border border-slate-200 bg-white shadow-xl p-2 hidden group-hover:block"
+          >
+            <a
+              th:href="@{/tourisme-categories#cartes}"
+              class="block px-3 py-2 rounded-xl hover:bg-slate-50"
+              >Cartes</a
+            >
+            <a
+              th:href="@{/tourisme-categories#evenements}"
+              class="block px-3 py-2 rounded-xl hover:bg-slate-50"
+              >Événements</a
+            >
+            <a
+              th:href="@{/tourisme-categories#hebergement}"
+              class="block px-3 py-2 rounded-xl hover:bg-slate-50"
+              >Hébergement</a
+            >
+            <a
+              th:href="@{/tourisme-categories#mobilite}"
+              class="block px-3 py-2 rounded-xl hover:bg-slate-50"
+              >Mobilité</a
+            >
+            <a
+              th:href="@{/tourisme-categories#raccourci}"
+              class="block px-3 py-2 rounded-xl hover:bg-slate-50"
+              >Raccourci</a
+            >
+            <a
+              th:href="@{/tourisme-categories#boutique}"
+              class="block px-3 py-2 rounded-xl hover:bg-slate-50"
+              >Boutique</a
+            >
+          </div>
         </div>
+        <a
+          th:href="@{/reservation/recherche}"
+          class="hover:text-premium-orange transition-colors"
+          >expériences</a
+        >
+        <a
+          th:href="@{/objectifs}"
+          class="hover:text-premium-orange transition-colors"
+          >objectifs</a
+        >
+        <a
+          th:href="@{/propos}"
+          class="hover:text-premium-orange transition-colors"
+          >propos</a
+        >
+        <a
+          th:href="@{/contact}"
+          class="hover:text-premium-orange transition-colors"
+          >contact</a
+        >
+        <a
+          th:href="@{/blog}"
+          class="hover:text-premium-orange transition-colors"
+          >blog</a
+        >
+      </nav>
+
+      <div class="hidden lg:flex items-center gap-6">
+        <!-- Auth Buttons -->
+        <div class="flex items-center gap-3">
+          <!-- Guest View -->
+          <th:block sec:authorize="isAnonymous()">
+            <a
+              th:href="@{/registration/provider}"
+              class="text-premium-dark border border-premium-dark/20 px-6 py-2.5 rounded-xl hover:bg-premium-dark hover:text-white transition-all duration-300 font-semibold text-sm"
+            >
+              Devenir Prestataire
+            </a>
+            <a
+              th:href="@{/login}"
+              class="bg-premium-orange text-white px-6 py-2.5 rounded-xl shadow-lg shadow-premium-orange/20 hover:bg-premium-orange/90 hover:-translate-y-0.5 transition-all duration-300 font-semibold text-sm"
+            >
+              Connexion
+            </a>
+          </th:block>
+
+          <!-- Authenticated View -->
+          <th:block sec:authorize="isAuthenticated()">
+            <a
+              th:href="@{/redirect}"
+              class="flex items-center gap-3 bg-premium-dark text-white px-6 py-2.5 rounded-xl shadow-lg hover:bg-premium-orange hover:-translate-y-0.5 transition-all duration-300 font-semibold text-sm"
+            >
+              <i class="fa-solid fa-user-circle text-lg"></i>
+              Mon Espace
+            </a>
+            <a
+              th:href="@{/logout}"
+              class="w-10 h-10 flex items-center justify-center rounded-xl bg-premium-dark/5 text-premium-dark/40 hover:bg-red-500 hover:text-white transition-all duration-300"
+              title="Déconnexion"
+            >
+              <i class="fa-solid fa-power-off"></i>
+            </a>
+          </th:block>
+        </div>
+
+        <!-- Language Selector -->
+        <div class="flex items-center gap-2 ml-2">
+          <a
+            th:href="@{/(lang='fr')}"
+            class="text-xs font-bold px-2 py-1 rounded bg-premium-dark/5 text-premium-dark/40 hover:bg-premium-orange hover:text-white transition-all"
+            th:classappend="${#locale.language == 'fr' ? 'bg-premium-orange/10 text-premium-orange' : ''}"
+            >FR</a
+          >
+          <span class="text-premium-dark/20 text-xs">|</span>
+          <a
+            th:href="@{/(lang='en')}"
+            class="text-xs font-bold px-2 py-1 rounded bg-premium-dark/5 text-premium-dark/40 hover:bg-premium-orange hover:text-white transition-all"
+            th:classappend="${#locale.language == 'en' ? 'bg-premium-orange/10 text-premium-orange' : ''}"
+            >EN</a
+          >
+        </div>
+      </div>
+
+      <!-- MENU BUTTON (MOBILE) -->
+      <button
+        id="menuBtn"
+        class="lg:hidden p-2 rounded-xl bg-premium-dark/5 hover:bg-premium-dark/10 transition-colors"
+        aria-label="Menu"
+      >
+        <svg
+          class="h-6 w-6 text-premium-dark"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
     </div>
+  </div>
 
-    <!-- MOBILE DROPDOWN -->
-    <div id="mobileMenu"
-        class="lg:hidden hidden bg-white border-t border-premium-dark/5 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300">
+  <!-- MOBILE DROPDOWN -->
+  <div
+    id="mobileMenu"
+    class="lg:hidden hidden bg-white border-t border-premium-dark/5 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300"
+  >
+    <nav class="flex flex-col px-6 py-8 gap-5 text-premium-dark font-medium">
+      <a th:href="@{/}" class="text-lg">Accueil</a>
+      <a th:href="@{/tourisme-categories}" class="text-lg">Tourisme ivoirien</a>
+      <a th:href="@{/tourisme-categories#cartes}" class="text-lg">Cartes</a>
+      <a th:href="@{/tourisme-categories#evenements}" class="text-lg"
+        >Événements</a
+      >
+      <a th:href="@{/tourisme-categories#hebergement}" class="text-lg"
+        >Hébergement</a
+      >
+      <a th:href="@{/tourisme-categories#mobilite}" class="text-lg">Mobilité</a>
+      <a th:href="@{/tourisme-categories#raccourci}" class="text-lg"
+        >Raccourci</a
+      >
+      <a th:href="@{/tourisme-categories#boutique}" class="text-lg">Boutique</a>
+      <a th:href="@{/sejours}" class="text-lg">Séjours</a>
+      <a th:href="@{/reservation/recherche}" class="text-lg">Expériences</a>
+      <a th:href="@{/objectifs}" class="text-lg">Objectifs</a>
+      <a th:href="@{/propos}" class="text-lg">À propos</a>
 
-        <nav class="flex flex-col px-6 py-8 gap-5 text-premium-dark font-medium">
-            <a th:href="@{/}" class="text-lg">Accueil</a>
-            <a th:href="@{/projets}" class="text-lg">Véhicules</a>
-            <a th:href="@{/services}" class="text-lg">Résidences</a>
-            <a th:href="@{/objectifs}" class="text-lg">Événements</a>
-            <a th:href="@{/propos}" class="text-lg">Alimentaire</a>
+      <div class="h-px bg-premium-dark/5 my-2"></div>
 
-            <div class="h-px bg-premium-dark/5 my-2"></div>
+      <th:block sec:authorize="isAnonymous()">
+        <a
+          th:href="@{/registration/provider}"
+          class="text-lg text-premium-orange font-semibold"
+          >Devenir Prestataire</a
+        >
+        <a
+          th:href="@{/login}"
+          class="bg-premium-orange text-white text-center py-4 rounded-2xl shadow-xl shadow-premium-orange/20"
+          >Connexion</a
+        >
+      </th:block>
 
-            <th:block sec:authorize="isAnonymous()">
-                <a th:href="@{/registration/provider}" class="text-lg text-premium-orange font-semibold">Devenir
-                    Prestataire</a>
-                <a th:href="@{/login}"
-                    class="bg-premium-orange text-white text-center py-4 rounded-2xl shadow-xl shadow-premium-orange/20">Connexion</a>
-            </th:block>
+      <th:block sec:authorize="isAuthenticated()">
+        <a
+          th:href="@{/redirect}"
+          class="text-lg text-premium-orange font-semibold"
+          >Mon Espace</a
+        >
+        <a
+          th:href="@{/logout}"
+          class="bg-premium-dark text-white text-center py-4 rounded-2xl shadow-xl"
+          >Déconnexion</a
+        >
+      </th:block>
 
-            <th:block sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/dashboard}" class="text-lg text-premium-orange font-semibold">Mon Dashboard</a>
-                <a th:href="@{/logout}"
-                    class="bg-premium-dark text-white text-center py-4 rounded-2xl shadow-xl">Déconnexion</a>
-            </th:block>
+      <!-- Mobile Language Selector -->
+      <div class="flex justify-center gap-8 mt-4">
+        <a
+          th:href="@{/(lang='fr')}"
+          class="font-bold"
+          th:classappend="${#locale.language == 'fr' ? 'text-premium-orange' : 'text-premium-dark/40'}"
+          >FRANÇAIS</a
+        >
+        <a
+          th:href="@{/(lang='en')}"
+          class="font-bold"
+          th:classappend="${#locale.language == 'en' ? 'text-premium-orange' : 'text-premium-dark/40'}"
+          >ENGLISH</a
+        >
+      </div>
+    </nav>
+  </div>
 
-            <!-- Mobile Language Selector -->
-            <div class="flex justify-center gap-8 mt-4">
-                <a th:href="@{/(lang='fr')}" class="font-bold"
-                    th:classappend="${#locale.language == 'fr' ? 'text-premium-orange' : 'text-premium-dark/40'}">FRANÇAIS</a>
-                <a th:href="@{/(lang='en')}" class="font-bold"
-                    th:classappend="${#locale.language == 'en' ? 'text-premium-orange' : 'text-premium-dark/40'}">ENGLISH</a>
-            </div>
-        </nav>
-    </div>
+  <!-- SCRIPT -->
+  <script>
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    const header = document.querySelector('header');
 
-    <!-- SCRIPT -->
-    <script>
-        const btn = document.getElementById("menuBtn");
-        const menu = document.getElementById("mobileMenu");
-        const header = document.querySelector("header");
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
 
-        btn.addEventListener("click", () => {
-            menu.classList.toggle("hidden");
-        });
-
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 20) {
-                header.classList.add("h-16");
-                header.classList.remove("h-20");
-                header.classList.add("shadow-xl");
-            } else {
-                header.classList.remove("h-16");
-                header.classList.add("h-20");
-                header.classList.remove("shadow-xl");
-            }
-        });
-    </script>
-
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        header.classList.add('h-16');
+        header.classList.remove('h-20');
+        header.classList.add('shadow-xl');
+      } else {
+        header.classList.remove('h-16');
+        header.classList.add('h-20');
+        header.classList.remove('shadow-xl');
+      }
+    });
+  </script>
 </header>

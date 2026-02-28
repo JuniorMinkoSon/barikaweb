@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${acteurTitre} + ' | UNEVIE'">Espace Acteur | UNEVIE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              premium: {
+                orange: '#f77f00',
+                dark: '#0f172a',
+                light: '#fff8ef',
+                accent: '#16a34a',
+              },
+            },
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="bg-gradient-to-b from-premium-light to-white text-slate-800 font-sans"
+  >
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="max-w-6xl mx-auto px-6 py-12 space-y-10">
+      <section
+        class="bg-white border border-slate-100 rounded-3xl shadow-sm p-8 md:p-10 space-y-6"
+      >
+        <p
+          class="text-xs font-bold uppercase tracking-[0.2em] text-premium-orange"
+        >
+          Espace Acteur
+        </p>
+        <h1
+          class="text-3xl md:text-4xl font-extrabold text-premium-dark"
+          th:text="${acteurTitre}"
+        >
+          Espace
+        </h1>
+        <p class="text-slate-600 max-w-3xl" th:text="${acteurMission}">
+          Mission
+        </p>
+
+        <div
+          class="bg-premium-dark rounded-2xl p-4 text-white text-sm inline-block"
+          th:if="${acteurUser != null}"
+        >
+          Connecté en tant que :
+          <span class="font-bold" th:text="${acteurUser.email}"
+            >email@demo.ci</span
+          >
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article
+          th:each="action : ${acteurActions}"
+          class="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm"
+        >
+          <p
+            class="text-xs font-bold uppercase tracking-widest text-premium-orange"
+          >
+            Action clé
+          </p>
+          <h2
+            class="mt-2 text-xl font-extrabold text-premium-dark"
+            th:text="${action}"
+          >
+            Action
+          </h2>
+        </article>
+      </section>
+
+      <section
+        class="bg-white border border-slate-100 rounded-3xl p-8 shadow-sm"
+      >
+        <h3 class="text-2xl font-extrabold text-premium-dark">
+          Workflows métier MVP
+        </h3>
+        <p class="mt-3 text-slate-600">
+          Les workflows sont maintenant activés : validation guide, certificats
+          traçables, billetterie événementielle et suivi de fréquentation.
+        </p>
+        <a
+          th:href="@{${workflowUrl}}"
+          class="inline-block mt-4 bg-premium-orange text-white font-bold px-5 py-3 rounded-xl hover:opacity-90 transition"
+        >
+          Ouvrir le module workflows
+        </a>
+      </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

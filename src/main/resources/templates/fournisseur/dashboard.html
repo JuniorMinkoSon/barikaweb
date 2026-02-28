@@ -1,275 +1,259 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html
+  lang="fr"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard Fournisseur | UneVie</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div th:replace="~{fragments/fournisseur-layout :: layout(~{::content})}">
-        <div th:fragment="content">
-
-            <!-- Header -->
-            <div class="mb-10">
-                <h1 class="text-4xl font-extrabold text-slate-800 mb-2">
-                    Bienvenue, <span class="text-premium-orange" th:text="${fournisseur.nomEntreprise}">Mon
-                        Entreprise</span> 👋
-                </h1>
-                <p class="text-slate-500 text-lg">Gérez vos services et suivez vos réservations en temps réel.</p>
-            </div>
-
-            <!-- Alert si contrat non signé -->
-            <div th:if="${!fournisseur.contratAccepte}"
-                class="mb-8 p-6 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-center gap-4">
-                <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
-                    <i class="fa-solid fa-file-signature text-amber-600 text-xl"></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-bold text-amber-800">Contrat en attente de signature</h3>
-                    <p class="text-amber-700 text-sm">Veuillez signer votre contrat pour activer complètement votre
-                        compte.</p>
-                </div>
-                <a th:href="@{/fournisseur/contrat}"
-                    class="px-6 py-3 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 transition-all">
-                    Signer le contrat
-                </a>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-
-                <!-- Réservations en cours -->
-                <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-                            <i class="fa-solid fa-clock text-white text-xl"></i>
-                        </div>
-                        <span class="text-xs font-bold text-blue-500 bg-blue-50 px-3 py-1 rounded-full uppercase">En
-                            attente</span>
-                    </div>
-                    <p class="text-4xl font-extrabold text-slate-800" th:text="${reservationsEnCours}">0</p>
-                    <p class="text-slate-500 font-medium mt-1">Réservations en cours</p>
-                </div>
-
-                <!-- Réservations acceptées -->
-                <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
-                            <i class="fa-solid fa-check-circle text-white text-xl"></i>
-                        </div>
-                        <span
-                            class="text-xs font-bold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full uppercase">Acceptées</span>
-                    </div>
-                    <p class="text-4xl font-extrabold text-slate-800" th:text="${reservationsAcceptees}">0</p>
-                    <p class="text-slate-500 font-medium mt-1">Réservations confirmées</p>
-                </div>
-
-                <!-- Services actifs -->
-                <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/20">
-                            <i class="fa-solid fa-concierge-bell text-white text-xl"></i>
-                        </div>
-                        <span
-                            class="text-xs font-bold text-purple-500 bg-purple-50 px-3 py-1 rounded-full uppercase">Actifs</span>
-                    </div>
-                    <p class="text-4xl font-extrabold text-slate-800" th:text="${totalServices}">0</p>
-                    <p class="text-slate-500 font-medium mt-1">Services disponibles</p>
-                </div>
-
-                <!-- Revenus nets -->
-                <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-14 h-14 bg-gradient-to-br from-premium-orange to-amber-500 rounded-2xl flex items-center justify-center shadow-lg shadow-premium-orange/20">
-                            <i class="fa-solid fa-wallet text-white text-xl"></i>
-                        </div>
-                        <span
-                            class="text-xs font-bold text-premium-orange bg-orange-50 px-3 py-1 rounded-full uppercase">Revenus</span>
-                    </div>
-                    <p class="text-4xl font-extrabold text-slate-800">
-                        <span th:text="${#numbers.formatDecimal(revenusNets, 0, 'COMMA', 0, 'POINT')}">0</span>
-                        <span class="text-xl text-slate-400">FCFA</span>
-                    </p>
-                    <p class="text-slate-500 font-medium mt-1">Revenus nets (après 5% commission)</p>
-                </div>
-            </div>
-
-            <!-- Commandes en attente -->
-            <div class="glass-card rounded-3xl p-8 shadow-xl mt-8">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-extrabold text-slate-800">
-                        <i class="fa-solid fa-utensils text-premium-orange mr-3"></i>
-                        Nouvelles Commandes
-                    </h2>
-                    <span class="bg-premium-orange/10 text-premium-orange px-3 py-1 rounded-full text-xs font-bold"
-                        th:text="${commandesEnAttenteCount + ' en attente'}">0 en attente</span>
-                </div>
-
-                <div th:if="${commandesEnAttente == null || commandesEnAttente.empty}" class="text-center py-12">
-                    <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-basket-shopping text-slate-400 text-3xl"></i>
-                    </div>
-                    <p class="text-slate-500 font-medium">Aucune nouvelle commande alimentaire</p>
-                </div>
-
-                <div th:if="${commandesEnAttente != null && !commandesEnAttente.empty}" class="space-y-4">
-                    <div th:each="cmd : ${commandesEnAttente}"
-                        class="bg-gradient-to-r from-orange-50 to-white p-6 rounded-2xl border border-orange-100 flex items-center justify-between hover:shadow-lg transition-all">
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center">
-                                <i class="fa-solid fa-burger text-premium-orange text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-slate-800" th:text="${cmd.nomClient}">Client</p>
-                                <p class="text-sm text-slate-500 flex items-center gap-2">
-                                    <span class="font-semibold"
-                                        th:text="${cmd.produit != null ? cmd.produit.nom : (cmd.service != null ? cmd.service.nom : 'Article')}">Produit</span>
-                                    <span class="bg-slate-100 px-2 py-0.5 rounded text-xs">x<span
-                                            th:text="${cmd.quantite}">1</span></span>
-                                </p>
-                                <p class="text-xs text-slate-400"
-                                    th:text="${#temporals.format(cmd.dateCommande, 'dd MMM yyyy HH:mm')}">Date</p>
-
-                                <!-- Timer Décompte -->
-                                <div th:if="${cmd.statut == 'EN_ATTENTE'}" class="mt-2"
-                                    th:data-expiration="${cmd.dateExpiration}" th:id="'timer-' + ${cmd.id}">
-                                    <span
-                                        class="text-xs font-bold text-red-500 bg-red-50 px-2 py-1 rounded flex items-center gap-1 w-fit">
-                                        <i class="fa-solid fa-clock"></i>
-                                        <span class="countdown-display">Calcul...</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <script th:inline="javascript">
-                            /*<![CDATA[*/
-                            document.addEventListener('DOMContentLoaded', function () {
-                                function updateTimers() {
-                                    const now = new Date().getTime();
-
-                                    document.querySelectorAll('[id^="timer-"]').forEach(timer => {
-                                        const expirationStr = timer.getAttribute('data-expiration');
-                                        if (!expirationStr) return;
-
-                                        const expirationDate = new Date(expirationStr).getTime();
-                                        const distance = expirationDate - now;
-
-                                        const display = timer.querySelector('.countdown-display');
-
-                                        if (distance < 0) {
-                                            display.innerHTML = "Expiré";
-                                            timer.classList.add('opacity-50');
-                                        } else {
-                                            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                                            display.innerHTML = minutes + "m " + seconds + "s";
-                                        }
-                                    });
-                                }
-
-                                setInterval(updateTimers, 1000);
-                                updateTimers();
-                            });
-                            /*]]>*/
-                        </script>
-
-                        <div class="text-right">
-                            <p class="text-2xl font-extrabold text-slate-800">
-                                <span th:text="${#numbers.formatDecimal(cmd.total, 0, 'COMMA', 0, 'POINT')}">0</span>
-                                <span class="text-sm text-slate-400">FCFA</span>
-                            </p>
-                            <div class="flex gap-2 mt-2">
-                                <form th:action="@{/fournisseur/commandes/{id}/accepter(id=${cmd.id})}" method="post">
-                                    <button type="submit"
-                                        class="px-4 py-2 bg-emerald-500 text-white text-sm font-bold rounded-lg hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20">
-                                        <i class="fa-solid fa-check mr-1"></i> Accepter
-                                    </button>
-                                </form>
-                                <form th:action="@{/fournisseur/commandes/{id}/refuser(id=${cmd.id})}" method="post">
-                                    <button type="submit"
-                                        class="px-4 py-2 bg-slate-200 text-slate-600 text-sm font-bold rounded-lg hover:bg-red-500 hover:text-white transition-all">
-                                        <i class="fa-solid fa-times mr-1"></i> Refuser
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Réservations en attente -->
-            <div class="glass-card rounded-3xl p-8 shadow-xl">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-extrabold text-slate-800">
-                        <i class="fa-solid fa-bell text-premium-orange mr-3"></i>
-                        Nouvelles Réservations
-                    </h2>
-                    <a th:href="@{/fournisseur/reservations}" class="text-premium-orange font-bold hover:underline">
-                        Voir tout <i class="fa-solid fa-arrow-right ml-1"></i>
-                    </a>
-                </div>
-
-                <div th:if="${reservationsEnAttente == null || reservationsEnAttente.empty}" class="text-center py-12">
-                    <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fa-solid fa-inbox text-slate-400 text-3xl"></i>
-                    </div>
-                    <p class="text-slate-500 font-medium">Aucune réservation en attente</p>
-                </div>
-
-                <div th:if="${reservationsEnAttente != null && !reservationsEnAttente.empty}" class="space-y-4">
-                    <div th:each="reservation : ${reservationsEnAttente}"
-                        class="bg-gradient-to-r from-slate-50 to-white p-6 rounded-2xl border border-slate-100 flex items-center justify-between hover:shadow-lg transition-all">
-
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
-                                <i class="fa-solid fa-user text-blue-500 text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="font-bold text-slate-800" th:text="${reservation.nomClient}">Client</p>
-                                <p class="text-sm text-slate-500" th:text="${reservation.service.nom}">Service</p>
-                                <p class="text-xs text-slate-400"
-                                    th:text="${#temporals.format(reservation.dateService, 'dd MMM yyyy')}">Date</p>
-                            </div>
-                        </div>
-
-                        <div class="text-right">
-                            <p class="text-2xl font-extrabold text-slate-800">
-                                <span
-                                    th:text="${#numbers.formatDecimal(reservation.montant, 0, 'COMMA', 0, 'POINT')}">0</span>
-                                <span class="text-sm text-slate-400">FCFA</span>
-                            </p>
-                            <div class="flex gap-2 mt-2">
-                                <form th:action="@{/fournisseur/reservations/{id}/accepter(id=${reservation.id})}"
-                                    method="post">
-                                    <button type="submit"
-                                        class="px-4 py-2 bg-emerald-500 text-white text-sm font-bold rounded-lg hover:bg-emerald-600 transition-all">
-                                        <i class="fa-solid fa-check mr-1"></i> Accepter
-                                    </button>
-                                </form>
-                                <form th:action="@{/fournisseur/reservations/{id}/refuser(id=${reservation.id})}"
-                                    method="post">
-                                    <button type="submit"
-                                        class="px-4 py-2 bg-slate-200 text-slate-600 text-sm font-bold rounded-lg hover:bg-red-500 hover:text-white transition-all">
-                                        <i class="fa-solid fa-times mr-1"></i> Refuser
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+      <div th:fragment="content">
+        <!-- Header -->
+        <div class="mb-10">
+          <h1 class="text-4xl font-extrabold text-slate-800 mb-2">
+            Bienvenue,
+            <span
+              class="text-premium-orange"
+              th:text="${fournisseur.nomEntreprise}"
+              >Mon Entreprise</span
+            >
+            👋
+          </h1>
+          <p class="text-slate-500 text-lg">
+            Gérez vos services et suivez vos réservations en temps réel.
+          </p>
         </div>
-    </div>
-</body>
 
+        <!-- Alert si contrat non signé -->
+        <div
+          th:if="${!fournisseur.contratAccepte}"
+          class="mb-8 p-6 bg-amber-50 border-2 border-amber-200 rounded-2xl flex items-center gap-4"
+        >
+          <div
+            class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center"
+          >
+            <i class="fa-solid fa-file-signature text-amber-600 text-xl"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-amber-800">
+              Contrat en attente de signature
+            </h3>
+            <p class="text-amber-700 text-sm">
+              Veuillez signer votre contrat pour activer complètement votre
+              compte.
+            </p>
+          </div>
+          <a
+            th:href="@{/fournisseur/contrat}"
+            class="px-6 py-3 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 transition-all"
+          >
+            Signer le contrat
+          </a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <!-- Réservations en cours -->
+          <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20"
+              >
+                <i class="fa-solid fa-clock text-white text-xl"></i>
+              </div>
+              <span
+                class="text-xs font-bold text-blue-500 bg-blue-50 px-3 py-1 rounded-full uppercase"
+                >En attente</span
+              >
+            </div>
+            <p
+              class="text-4xl font-extrabold text-slate-800"
+              th:text="${reservationsEnCours}"
+            >
+              0
+            </p>
+            <p class="text-slate-500 font-medium mt-1">Réservations en cours</p>
+          </div>
+
+          <!-- Réservations acceptées -->
+          <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20"
+              >
+                <i class="fa-solid fa-check-circle text-white text-xl"></i>
+              </div>
+              <span
+                class="text-xs font-bold text-emerald-500 bg-emerald-50 px-3 py-1 rounded-full uppercase"
+                >Acceptées</span
+              >
+            </div>
+            <p
+              class="text-4xl font-extrabold text-slate-800"
+              th:text="${reservationsAcceptees}"
+            >
+              0
+            </p>
+            <p class="text-slate-500 font-medium mt-1">
+              Réservations confirmées
+            </p>
+          </div>
+
+          <!-- Services actifs -->
+          <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-purple-500/20"
+              >
+                <i class="fa-solid fa-concierge-bell text-white text-xl"></i>
+              </div>
+              <span
+                class="text-xs font-bold text-purple-500 bg-purple-50 px-3 py-1 rounded-full uppercase"
+                >Actifs</span
+              >
+            </div>
+            <p
+              class="text-4xl font-extrabold text-slate-800"
+              th:text="${totalServices}"
+            >
+              0
+            </p>
+            <p class="text-slate-500 font-medium mt-1">Services disponibles</p>
+          </div>
+
+          <!-- Revenus nets -->
+          <div class="stat-card glass-card rounded-3xl p-6 shadow-xl">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-14 h-14 bg-gradient-to-br from-premium-orange to-amber-500 rounded-2xl flex items-center justify-center shadow-lg shadow-premium-orange/20"
+              >
+                <i class="fa-solid fa-wallet text-white text-xl"></i>
+              </div>
+              <span
+                class="text-xs font-bold text-premium-orange bg-orange-50 px-3 py-1 rounded-full uppercase"
+                >Revenus</span
+              >
+            </div>
+            <p class="text-4xl font-extrabold text-slate-800">
+              <span
+                th:text="${#numbers.formatDecimal(revenusNets, 0, 'COMMA', 0, 'POINT')}"
+                >0</span
+              >
+              <span class="text-xl text-slate-400">FCFA</span>
+            </p>
+            <p class="text-slate-500 font-medium mt-1">
+              Revenus nets (après 5% commission)
+            </p>
+          </div>
+        </div>
+
+        <!-- Réservations en attente -->
+        <div class="glass-card rounded-3xl p-8 shadow-xl">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-extrabold text-slate-800">
+              <i class="fa-solid fa-bell text-premium-orange mr-3"></i>
+              Nouvelles Réservations
+            </h2>
+            <a
+              th:href="@{/fournisseur/reservations}"
+              class="text-premium-orange font-bold hover:underline"
+            >
+              Voir tout <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+          </div>
+
+          <div
+            th:if="${reservationsEnAttente == null || reservationsEnAttente.empty}"
+            class="text-center py-12"
+          >
+            <div
+              class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fa-solid fa-inbox text-slate-400 text-3xl"></i>
+            </div>
+            <p class="text-slate-500 font-medium">
+              Aucune réservation en attente
+            </p>
+          </div>
+
+          <div
+            th:if="${reservationsEnAttente != null && !reservationsEnAttente.empty}"
+            class="space-y-4"
+          >
+            <div
+              th:each="reservation : ${reservationsEnAttente}"
+              class="bg-gradient-to-r from-slate-50 to-white p-6 rounded-2xl border border-slate-100 flex items-center justify-between hover:shadow-lg transition-all"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center"
+                >
+                  <i class="fa-solid fa-user text-blue-500 text-xl"></i>
+                </div>
+                <div>
+                  <p
+                    class="font-bold text-slate-800"
+                    th:text="${reservation.nomClient}"
+                  >
+                    Client
+                  </p>
+                  <p
+                    class="text-sm text-slate-500"
+                    th:text="${reservation.service.nom}"
+                  >
+                    Service
+                  </p>
+                  <p
+                    class="text-xs text-slate-400"
+                    th:text="${#temporals.format(reservation.dateService, 'dd MMM yyyy')}"
+                  >
+                    Date
+                  </p>
+                </div>
+              </div>
+
+              <div class="text-right">
+                <p class="text-2xl font-extrabold text-slate-800">
+                  <span
+                    th:text="${#numbers.formatDecimal(reservation.montant, 0, 'COMMA', 0, 'POINT')}"
+                    >0</span
+                  >
+                  <span class="text-sm text-slate-400">FCFA</span>
+                </p>
+                <div class="flex gap-2 mt-2">
+                  <form
+                    th:action="@{/fournisseur/reservations/{id}/accepter(id=${reservation.id})}"
+                    method="post"
+                  >
+                    <button
+                      type="submit"
+                      class="px-4 py-2 bg-emerald-500 text-white text-sm font-bold rounded-lg hover:bg-emerald-600 transition-all"
+                    >
+                      <i class="fa-solid fa-check mr-1"></i> Accepter
+                    </button>
+                  </form>
+                  <form
+                    th:action="@{/fournisseur/reservations/{id}/refuser(id=${reservation.id})}"
+                    method="post"
+                  >
+                    <button
+                      type="submit"
+                      class="px-4 py-2 bg-slate-200 text-slate-600 text-sm font-bold rounded-lg hover:bg-red-500 hover:text-white transition-all"
+                    >
+                      <i class="fa-solid fa-times mr-1"></i> Refuser
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

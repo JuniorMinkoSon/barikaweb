@@ -1,11 +1,11 @@
 package ecom_blog.controller;
 
+import ecom_blog.dto.WeekendDealDto;
 import ecom_blog.model.Categorie;
 import ecom_blog.model.ServiceFournisseur;
 import ecom_blog.repository.ServiceFournisseurRepository;
 import ecom_blog.service.ArticleService;
 import ecom_blog.service.CategorieService;
-import ecom_blog.service.ProduitService;
 import ecom_blog.service.SearchService;
 import ecom_blog.util.SearchItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 public class HomeController {
 
-    @Autowired
-    private ProduitService produitService;
     @Autowired
     private ArticleService articleService;
     @Autowired
@@ -33,7 +33,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("produits", produitService.getAll());
         model.addAttribute("articles", articleService.getAll());
 
         // 🔥 Services Populaires (Top Rated ou Most Reserved)
@@ -47,7 +46,45 @@ public class HomeController {
         }
         model.addAttribute("topServices", topServices);
 
+        LocalDate dealStart = prochainVendredi(LocalDate.now());
+        LocalDate dealEnd = dealStart.plusDays(2);
+        int nights = 2;
+
+        List<WeekendDealDto> weekendDeals = topServices.stream()
+                .map(service -> {
+                    double basePrice = service.getPrixParJour() != null
+                            ? service.getPrixParJour()
+                            : (service.getPrix() != null ? service.getPrix() : 0.0);
+                    double originalPrice = basePrice * nights;
+                    int discountPercent = 20;
+                    double dealPrice = originalPrice * (1 - (discountPercent / 100.0));
+
+                    double rating = service.getNoteMoyenne() != null ? service.getNoteMoyenne() : 0.0;
+                    String ratingLabel = rating >= 8.0 ? "Très bien" : (rating >= 7.0 ? "Bien" : "Correct");
+
+                    return new WeekendDealDto(
+                            service,
+                            dealStart,
+                            dealEnd,
+                            nights,
+                            originalPrice,
+                            dealPrice,
+                            discountPercent,
+                            ratingLabel);
+                })
+                .toList();
+
+        model.addAttribute("weekendDeals", weekendDeals);
+
         return "user/index";
+    }
+
+    private LocalDate prochainVendredi(LocalDate from) {
+        int diff = DayOfWeek.FRIDAY.getValue() - from.getDayOfWeek().getValue();
+        if (diff <= 0) {
+            diff += 7;
+        }
+        return from.plusDays(diff);
     }
 
     @GetMapping("/blog")
@@ -100,11 +137,6 @@ public class HomeController {
         return "user/contact";
     }
 
-    @GetMapping("/confirmation")
-    public String confirmation() {
-        return "user/confirmation";
-    }
-
     @GetMapping("/services")
     public String services() {
         return "user/services";
@@ -115,10 +147,9 @@ public class HomeController {
         return "user/propos";
     }
 
-    // @GetMapping("/projets")
-    public String projets(Model model) {
-        model.addAttribute("produits", produitService.getAllDisponibles());
-        return "user/projets";
+    @GetMapping("/projets")
+    public String projets() {
+        return "redirect:/sejours";
     }
 
     @GetMapping("/objectifs")
@@ -139,6 +170,11 @@ public class HomeController {
     @GetMapping("/politique")
     public String politique() {
         return "user/politique";
+    }
+
+    @GetMapping("/tourisme-categories")
+    public String tourismeCategories() {
+        return "user/tourisme-categories";
     }
 
 }

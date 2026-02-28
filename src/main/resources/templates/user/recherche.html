@@ -1,110 +1,188 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Recherche | UneVie</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div th:replace="~{fragments/user-layout :: layout(~{::content})}">
-        <div th:fragment="content">
-
-            <div class="mb-10">
-                <h1 class="text-4xl font-extrabold text-slate-800">Recherche</h1>
-                <p class="text-slate-500 mt-2">Trouvez le service ou le prestataire idéal</p>
-            </div>
-
-            <!-- Search Bar -->
-            <div class="bg-white rounded-3xl p-8 shadow-lg mb-12 border border-slate-100">
-                <form th:action="@{/reservation/recherche}" method="get" class="flex flex-col md:flex-row gap-4">
-                    <div class="flex-grow relative">
-                        <i
-                            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                        <input type="text" name="q" th:value="${query}"
-                            placeholder="Ex: Location de voiture, Restaurant..."
-                            class="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-premium-orange focus:border-transparent">
-                    </div>
-                    <div class="md:w-64">
-                        <select name="secteur"
-                            class="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-premium-orange focus:border-transparent">
-                            <option value="">Tous les secteurs</option>
-                            <option th:each="s : ${T(ecom_blog.model.Secteur).values()}" th:value="${s}" th:text="${s}"
-                                th:selected="${secteur == s}"></option>
-                        </select>
-                    </div>
-                    <button type="submit"
-                        class="px-10 py-4 bg-premium-orange text-white font-black rounded-2xl shadow-lg shadow-orange-500/30 hover:bg-orange-600 transition-all">
-                        RECHERCHER
-                    </button>
-                </form>
-            </div>
-
-            <!-- Results -->
-            <div th:if="${services.empty && fournisseurs.empty && query != null}"
-                class="text-center py-20 bg-white rounded-[3rem] shadow-xl">
-                <div class="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fa-solid fa-search-minus text-slate-300 text-4xl"></i>
-                </div>
-                <h3 class="text-2xl font-black text-slate-800">Aucun résultat trouvé</h3>
-                <p class="text-slate-500 mt-2">Essayez avec d'autres mots-clés ou secteurs.</p>
-            </div>
-
-            <div th:unless="${services.empty}" class="mb-12">
-                <h3 class="text-2xl font-black text-slate-800 mb-8 flex items-center gap-3">
-                    <i class="fa-solid fa-concierge-bell text-premium-orange"></i>
-                    Services correspondants
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a th:each="s : ${services}" th:href="@{/reservation/service/{id}(id=${s.id})}"
-                        class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group border border-slate-50">
-                        <div class="h-48 bg-slate-200 relative">
-                            <img th:if="${s.imageUrl != null}" th:src="${s.imageUrl}"
-                                class="w-full h-full object-cover">
-                            <div th:unless="${s.imageUrl != null}"
-                                class="w-full h-full flex items-center justify-center">
-                                <i class="fa-solid fa-image text-slate-400 text-4xl"></i>
-                            </div>
-                            <div
-                                class="absolute top-4 right-4 px-3 py-1 bg-premium-orange text-white text-xs font-black rounded-lg">
-                                <span th:text="${#numbers.formatDecimal(s.prix, 0, 'COMMA', 0, 'POINT')}">0</span> FCFA
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h4 class="text-xl font-black text-slate-800 mb-1 group-hover:text-premium-orange transition-colors"
-                                th:text="${s.nom}">Service</h4>
-                            <p class="text-slate-400 text-sm mb-4" th:text="${s.fournisseur.nomEntreprise}">Fournisseur
-                            </p>
-                            <p class="text-slate-500 text-sm line-clamp-2" th:text="${s.description}">Description</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div th:unless="${fournisseurs.empty}">
-                <h3 class="text-2xl font-black text-slate-800 mb-8 flex items-center gap-3">
-                    <i class="fa-solid fa-store text-premium-orange"></i>
-                    Prestataires correspondants
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <a th:each="f : ${fournisseurs}" th:href="@{/reservation/fournisseur/{id}(id=${f.id})}"
-                        class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100 hover:border-premium-orange transition-all text-center group">
-                        <div
-                            class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-premium-orange/10 transition-colors">
-                            <i
-                                class="fa-solid fa-building text-slate-400 group-hover:text-premium-orange transition-colors text-2xl"></i>
-                        </div>
-                        <h4 class="font-black text-slate-800" th:text="${f.nomEntreprise}">Fournisseur</h4>
-                        <span class="text-xs font-bold text-premium-orange uppercase tracking-widest mt-2 block"
-                            th:text="${f.secteur}">VOITURE</span>
-                        <p class="text-slate-400 text-xs mt-2" th:text="${f.ville}">Ville</p>
-                    </a>
-                </div>
-            </div>
-
+      <div th:fragment="content">
+        <div class="mb-10">
+          <h1 class="text-4xl font-extrabold text-slate-800">Recherche</h1>
+          <p class="text-slate-500 mt-2">
+            Trouvez le service ou le prestataire idéal
+          </p>
         </div>
-    </div>
-</body>
 
+        <!-- Search Bar -->
+        <div
+          class="bg-white rounded-3xl p-8 shadow-lg mb-12 border border-slate-100"
+        >
+          <form
+            th:action="@{/reservation/recherche}"
+            method="get"
+            class="flex flex-col md:flex-row gap-4"
+          >
+            <div class="flex-grow relative">
+              <i
+                class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+              ></i>
+              <input
+                type="text"
+                name="q"
+                th:value="${query}"
+                placeholder="Ex: Location de voiture, Restaurant..."
+                class="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-premium-orange focus:border-transparent"
+              />
+            </div>
+            <div class="md:w-64">
+              <select
+                name="secteur"
+                class="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-premium-orange focus:border-transparent"
+              >
+                <option value="">Tous les secteurs</option>
+                <option
+                  th:each="s : ${T(ecom_blog.model.Secteur).values()}"
+                  th:value="${s}"
+                  th:text="${s}"
+                  th:selected="${secteur == s}"
+                ></option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="px-10 py-4 bg-premium-orange text-white font-black rounded-2xl shadow-lg shadow-orange-500/30 hover:bg-orange-600 transition-all"
+            >
+              RECHERCHER
+            </button>
+          </form>
+        </div>
+
+        <!-- Results -->
+        <div
+          th:if="${services.empty && fournisseurs.empty && query != null}"
+          class="text-center py-20 bg-white rounded-[3rem] shadow-xl"
+        >
+          <div
+            class="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <i class="fa-solid fa-search-minus text-slate-300 text-4xl"></i>
+          </div>
+          <h3 class="text-2xl font-black text-slate-800">
+            Aucun résultat trouvé
+          </h3>
+          <p class="text-slate-500 mt-2">
+            Essayez avec d'autres mots-clés ou secteurs.
+          </p>
+        </div>
+
+        <div th:unless="${services.empty}" class="mb-12">
+          <h3
+            class="text-2xl font-black text-slate-800 mb-8 flex items-center gap-3"
+          >
+            <i class="fa-solid fa-concierge-bell text-premium-orange"></i>
+            Services correspondants
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <a
+              th:each="s : ${services}"
+              th:href="@{/reservation/service/{id}(id=${s.id})}"
+              class="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group border border-slate-50"
+            >
+              <div class="h-48 bg-slate-200 relative">
+                <img
+                  th:if="${s.imageUrl != null}"
+                  th:src="${s.imageUrl}"
+                  onerror="
+                    this.onerror = null;
+                    this.src =
+                      'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80';
+                  "
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  th:unless="${s.imageUrl != null}"
+                  class="w-full h-full flex items-center justify-center"
+                >
+                  <i class="fa-solid fa-image text-slate-400 text-4xl"></i>
+                </div>
+                <div
+                  class="absolute top-4 right-4 px-3 py-1 bg-premium-orange text-white text-xs font-black rounded-lg"
+                >
+                  <span
+                    th:text="${#numbers.formatDecimal(s.prix, 0, 'COMMA', 0, 'POINT')}"
+                    >0</span
+                  >
+                  FCFA
+                </div>
+              </div>
+              <div class="p-6">
+                <h4
+                  class="text-xl font-black text-slate-800 mb-1 group-hover:text-premium-orange transition-colors"
+                  th:text="${s.nom}"
+                >
+                  Service
+                </h4>
+                <p
+                  class="text-slate-400 text-sm mb-4"
+                  th:text="${s.fournisseur.nomEntreprise}"
+                >
+                  Fournisseur
+                </p>
+                <p
+                  class="text-slate-500 text-sm line-clamp-2"
+                  th:text="${s.description}"
+                >
+                  Description
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div th:unless="${fournisseurs.empty}">
+          <h3
+            class="text-2xl font-black text-slate-800 mb-8 flex items-center gap-3"
+          >
+            <i class="fa-solid fa-store text-premium-orange"></i>
+            Prestataires correspondants
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <a
+              th:each="f : ${fournisseurs}"
+              th:href="@{/reservation/fournisseur/{id}(id=${f.id})}"
+              class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100 hover:border-premium-orange transition-all text-center group"
+            >
+              <div
+                class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-premium-orange/10 transition-colors"
+              >
+                <i
+                  class="fa-solid fa-building text-slate-400 group-hover:text-premium-orange transition-colors text-2xl"
+                ></i>
+              </div>
+              <h4
+                class="font-black text-slate-800"
+                th:text="${f.nomEntreprise}"
+              >
+                Fournisseur
+              </h4>
+              <span
+                class="text-xs font-bold text-premium-orange uppercase tracking-widest mt-2 block"
+                th:text="${f.secteur}"
+                >VOITURE</span
+              >
+              <p class="text-slate-400 text-xs mt-2" th:text="${f.ville}">
+                Ville
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Séjours & Réservations | UNEVIE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              premium: {
+                orange: '#f77f00',
+                dark: '#0f172a',
+                light: '#fff8ef',
+                accent: '#16a34a',
+              },
+            },
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body class="bg-slate-50 text-slate-800 font-sans">
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      <section
+        class="bg-white rounded-3xl shadow-sm border border-slate-100 p-4 md:p-6"
+      >
+        <form
+          th:action="@{/sejours}"
+          method="get"
+          class="grid grid-cols-1 md:grid-cols-6 gap-3 md:gap-4 items-end"
+        >
+          <div class="md:col-span-2">
+            <label
+              for="destination"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
+              >Destination</label
+            >
+            <input
+              id="destination"
+              type="text"
+              name="destination"
+              th:value="${destination}"
+              placeholder="Abidjan, Assinie, Yamoussoukro"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-premium-orange/30"
+            />
+          </div>
+
+          <div>
+            <label
+              for="dateArrivee"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
+              >Arrivée</label
+            >
+            <input
+              id="dateArrivee"
+              type="date"
+              name="dateArrivee"
+              th:value="${dateArrivee}"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-premium-orange/30"
+            />
+          </div>
+
+          <div>
+            <label
+              for="dateDepart"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
+              >Départ</label
+            >
+            <input
+              id="dateDepart"
+              type="date"
+              name="dateDepart"
+              th:value="${dateDepart}"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-premium-orange/30"
+            />
+          </div>
+
+          <div>
+            <label
+              for="voyageurs"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
+              >Voyageurs</label
+            >
+            <input
+              id="voyageurs"
+              type="number"
+              min="1"
+              name="voyageurs"
+              th:value="${voyageurs}"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-premium-orange/30"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="h-[50px] rounded-xl bg-premium-orange text-white font-bold hover:bg-premium-orange/90 transition-colors"
+          >
+            Rechercher
+          </button>
+
+          <div>
+            <label
+              for="secteur"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
+              >Type</label
+            >
+            <select
+              id="secteur"
+              name="secteur"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-premium-orange/30"
+            >
+              <option value="">Tous</option>
+              <option
+                th:each="s : ${secteurs}"
+                th:value="${s}"
+                th:text="${s}"
+                th:selected="${secteur == s}"
+              ></option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="budgetMax"
+              class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
+              >Budget max (FCFA)</label
+            >
+            <input
+              id="budgetMax"
+              type="number"
+              min="0"
+              step="5000"
+              name="budgetMax"
+              th:value="${budgetMax}"
+              class="w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-premium-orange/30"
+            />
+          </div>
+        </form>
+      </section>
+
+      <section class="flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-premium-dark">
+            Résultats de recherche
+          </h1>
+          <p class="text-slate-500 text-sm mt-1">
+            <span th:text="${#lists.size(resultats)}">0</span> séjour(s)
+            trouvé(s)
+            <span
+              th:if="${destination != null and !destination.isBlank()}"
+              th:text="'pour ' + ${destination}"
+            ></span>
+          </p>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <article
+          th:each="item : ${resultats}"
+          class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden"
+        >
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-0">
+            <div class="lg:col-span-1 h-52 lg:h-full">
+              <img
+                th:src="${item.imageUrl != null and (#strings.startsWith(item.imageUrl, 'http://') or #strings.startsWith(item.imageUrl, 'https://') or #strings.startsWith(item.imageUrl, '/'))} ? ${item.imageUrl} : (${item.imageUrl != null and !item.imageUrl.isBlank()} ? @{/uploads/{img}(img=${item.imageUrl})} : 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80')"
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80';
+                "
+                alt="Photo de service"
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <div class="lg:col-span-2 p-6 space-y-4">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2
+                    class="text-xl font-extrabold text-premium-dark"
+                    th:text="${item.nom}"
+                  >
+                    Nom service
+                  </h2>
+                  <p class="text-sm text-slate-500 mt-1">
+                    <span th:text="${item.fournisseur.nomEntreprise}"
+                      >Entreprise</span
+                    >
+                    •
+                    <span th:text="${item.fournisseur.ville}">Ville</span>
+                  </p>
+                </div>
+                <span
+                  class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide"
+                >
+                  <i class="fa-solid fa-check"></i> Disponible
+                </span>
+              </div>
+
+              <p
+                class="text-slate-600 leading-relaxed line-clamp-3"
+                th:text="${item.description}"
+              >
+                Description
+              </p>
+
+              <div
+                class="flex flex-wrap items-center gap-4 text-sm text-slate-500"
+              >
+                <span class="inline-flex items-center gap-1.5">
+                  <i class="fa-solid fa-star text-amber-500"></i>
+                  <span
+                    th:text="${item.noteMoyenne != null ? #numbers.formatDecimal(item.noteMoyenne, 1, 1) : 'N/A'}"
+                    >4.5</span
+                  >
+                </span>
+                <span
+                  class="inline-flex items-center gap-1.5"
+                  th:if="${item.capacite != null}"
+                >
+                  <i class="fa-solid fa-users text-premium-orange"></i>
+                  Capacité : <span th:text="${item.capacite}">0</span>
+                </span>
+                <span class="inline-flex items-center gap-1.5">
+                  <i class="fa-solid fa-layer-group text-slate-400"></i>
+                  Secteur : <span th:text="${item.secteur}">SECTEUR</span>
+                </span>
+              </div>
+            </div>
+
+            <div
+              class="lg:col-span-1 p-6 bg-slate-50 border-t lg:border-t-0 lg:border-l border-slate-100 flex flex-col justify-between"
+            >
+              <div class="text-right">
+                <p
+                  class="text-xs uppercase tracking-widest font-bold text-slate-400"
+                >
+                  Prix à partir de
+                </p>
+                <p class="text-3xl font-extrabold text-premium-dark mt-1">
+                  <span
+                    th:text="${#numbers.formatDecimal(item.prix, 0, 'COMMA', 0, 'POINT')}"
+                    >0</span
+                  >
+                  <span class="text-sm font-semibold">FCFA</span>
+                </p>
+              </div>
+
+              <a
+                th:href="@{/reservation/service/{id}(id=${item.id})}"
+                class="mt-6 inline-flex justify-center items-center rounded-xl bg-premium-orange px-4 py-3 text-white font-bold hover:bg-premium-orange/90 transition-colors"
+              >
+                Voir l’offre
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <div
+          th:if="${#lists.isEmpty(resultats)}"
+          class="bg-white border border-dashed border-slate-200 rounded-3xl p-12 text-center"
+        >
+          <p class="text-slate-500">
+            Aucun séjour ne correspond à vos critères.
+          </p>
+          <p class="text-sm text-slate-400 mt-2">
+            Essayez d'élargir la destination, le budget ou les dates.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

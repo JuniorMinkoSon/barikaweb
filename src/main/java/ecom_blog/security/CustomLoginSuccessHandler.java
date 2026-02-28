@@ -42,7 +42,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
             }
 
             if ("ROLE_LIVREUR".equals(role)) {
-                response.sendRedirect("/livreur/dashboard");
+                response.sendRedirect("/sejours");
                 return;
             }
 
@@ -51,8 +51,28 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
                 return;
             }
 
+            if ("ROLE_GUIDE".equals(role)) {
+                response.sendRedirect("/acteur/guide");
+                return;
+            }
+
+            if ("ROLE_ARTISAN".equals(role)) {
+                response.sendRedirect("/acteur/artisan");
+                return;
+            }
+
+            if ("ROLE_ORGANISATEUR".equals(role)) {
+                response.sendRedirect("/acteur/organisateur");
+                return;
+            }
+
+            if ("ROLE_MINISTERE".equals(role)) {
+                response.sendRedirect("/acteur/ministere");
+                return;
+            }
+
             if ("ROLE_USER".equals(role)) {
-                response.sendRedirect("/user/dashboard");
+                response.sendRedirect("/acteur/touriste");
                 return;
             }
         }

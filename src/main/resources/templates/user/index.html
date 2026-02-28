@@ -1,606 +1,1264 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
-
-<head>
-    <meta charset="UTF-8">
+<!doctype html>
+<html
+  lang="fr"
+  xmlns:th="http://www.thymeleaf.org"
+  th:lang="${#locale.language}"
+>
+  <head>
+    <meta charset="UTF-8" />
     <title th:text="#{home.page.title}"></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        premium: {
-                            orange: '#f97316',
-                            dark: '#1a1a1a',
-                            light: '#fdfcfb',
-                            accent: '#fbbf24'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              premium: {
+                orange: '#f77f00',
+                dark: '#0f172a',
+                light: '#fff8ef',
+                accent: '#16a34a',
+                lagune: '#0ea5e9',
+                sable: '#ffedd5',
+              },
+            },
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+            },
+          },
+        },
+      };
     </script>
     <style>
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+      @keyframes fade-in {
+        from {
+          opacity: 0;
         }
 
-        @keyframes slide-up {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+        to {
+          opacity: 1;
+        }
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+      @keyframes slide-up {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
         }
 
-        @keyframes scale-in {
-            from {
-                opacity: 0.9;
-                transform: scale(0.95);
-            }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+      @keyframes scale-in {
+        from {
+          opacity: 0.9;
+          transform: scale(0.95);
         }
 
-        .animate-fade-in {
-            animation: fade-in 1s ease-out forwards;
+        to {
+          opacity: 1;
+          transform: scale(1);
         }
+      }
 
-        .animate-slide-up {
-            animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+      .animate-fade-in {
+        animation: fade-in 1s ease-out forwards;
+      }
 
-        .animate-scale-in {
-            animation: scale-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+      .animate-slide-up {
+        animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+      .animate-scale-in {
+        animation: scale-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-slate-50 text-slate-800">
-
+  <body class="bg-gradient-to-b from-premium-light to-white text-slate-800">
     <div th:replace="~{fragments/header :: header}"></div>
 
     <!-- HERO -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <!-- Background Image with Overlay -->
-        <div class="absolute inset-0">
-            <img src="hero-bg.jpg" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-premium-dark/60 backdrop-blur-[2px]"></div>
-            <!-- Ethnic Pattern Overlay -->
-            <div class="absolute inset-0 opacity-10 mix-blend-overlay"
-                style="background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png');"></div>
+    <section
+      class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+    >
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0">
+        <img
+          src="/images/Whresidencesassinie.jpeg"
+          alt="Plage et résidence touristique en Côte d'Ivoire"
+          class="w-full h-full object-cover"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-premium-dark/80 via-premium-dark/55 to-premium-orange/30 backdrop-blur-[2px]"
+        ></div>
+        <!-- Ethnic Pattern Overlay -->
+        <div
+          class="absolute inset-0 opacity-10 mix-blend-overlay"
+          style="
+            background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png');
+          "
+        ></div>
+      </div>
+
+      <div
+        class="relative z-10 max-w-7xl mx-auto px-6 text-center space-y-12 animate-fade-in"
+      >
+        <!-- Badge -->
+        <div
+          class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 px-4 py-2 rounded-full text-white text-sm animate-bounce"
+        >
+          <span class="w-2 h-2 bg-premium-orange rounded-full"></span>
+          <span>Explorez la Côte d'Ivoire depuis Abidjan</span>
         </div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center space-y-12 animate-fade-in">
-            <!-- Badge -->
+        <!-- Hero Text -->
+        <div class="space-y-6 max-w-4xl mx-auto animate-slide-up">
+          <h1
+            class="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight"
+          >
+            Votre passerelle vers <br />
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-premium-orange to-premium-accent"
+              >le tourisme ivoirien</span
+            >
+          </h1>
+          <p
+            class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed"
+          >
+            Découvrez des expériences locales fiables : transport, hébergement,
+            événements et gastronomie, partout en Côte d'Ivoire.
+          </p>
+        </div>
+
+        <!-- Search Box -->
+        <form
+          th:action="@{/sejours}"
+          method="get"
+          class="max-w-4xl mx-auto bg-white p-2 md:p-3 rounded-2xl md:rounded-3xl shadow-2xl flex flex-col md:flex-row gap-2 animate-slide-up"
+          style="animation-delay: 0.2s"
+        >
+          <div
+            class="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-premium-dark/5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input
+              type="text"
+              name="destination"
+              placeholder="Destination (Abidjan, Assinie...)"
+              class="w-full outline-none text-premium-dark placeholder:text-premium-dark/30 bg-transparent"
+            />
+          </div>
+          <div
+            class="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-premium-dark/5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange"
+            >
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <input
+              type="date"
+              name="dateArrivee"
+              aria-label="Date d'arrivée"
+              class="w-full outline-none text-premium-dark placeholder:text-premium-dark/30 bg-transparent"
+            />
+          </div>
+          <div
+            class="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-premium-dark/5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            <input
+              type="date"
+              name="dateDepart"
+              aria-label="Date de départ"
+              class="w-full outline-none text-premium-dark placeholder:text-premium-dark/30 bg-transparent"
+            />
+          </div>
+          <div
+            class="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-premium-dark/5"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange"
+            >
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            <input
+              type="number"
+              min="1"
+              name="voyageurs"
+              value="2"
+              aria-label="Nombre de voyageurs"
+              placeholder="Voyageurs"
+              class="w-full outline-none text-premium-dark placeholder:text-premium-dark/30 bg-transparent"
+            />
+          </div>
+          <button
+            type="submit"
+            class="bg-premium-orange text-white px-10 py-4 rounded-xl md:rounded-2xl font-bold hover:bg-premium-orange/90 transition-all flex items-center justify-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            Rechercher un séjour
+          </button>
+        </form>
+
+        <!-- Stats -->
+        <div
+          class="flex flex-wrap justify-center gap-12 pt-10 border-t border-white/10 max-w-3xl mx-auto"
+        >
+          <div class="text-center group">
             <div
-                class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xl border border-white/20 px-4 py-2 rounded-full text-white text-sm animate-bounce">
-                <span class="w-2 h-2 bg-premium-orange rounded-full"></span>
-                <span>Basé à Abidjan, Côte d'Ivoire</span>
+              class="text-3xl font-extrabold text-white group-hover:text-premium-orange transition-colors"
+            >
+              500+
             </div>
-
-            <!-- Hero Text -->
-            <div class="space-y-6 max-w-4xl mx-auto animate-slide-up">
-                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight">
-                    Une solution pensée <br>
-                    <span
-                        class="text-transparent bg-clip-text bg-gradient-to-r from-premium-orange to-premium-accent">pour
-                        l'Afrique</span>
-                </h1>
-                <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-                    UNEVIE connecte prestataires, propriétaires et clients sur un même espace fiable et intuitif.
-                    Location de véhicules, réservation de résidences, services événementiels et alimentaires.
-                </p>
+            <div
+              class="text-white/50 text-xs uppercase tracking-widest font-bold"
+            >
+              Partenaires Locaux
             </div>
-
-            <!-- Search Box -->
-            <form th:action="@{/universal-search}" method="get"
-                class="max-w-4xl mx-auto bg-white p-2 md:p-3 rounded-2xl md:rounded-3xl shadow-2xl flex flex-col md:flex-row gap-2 animate-slide-up"
-                style="animation-delay: 0.2s">
-                <div
-                    class="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-premium-dark/5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-premium-orange">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg>
-                    <input type="text" name="q" placeholder="Que recherchez-vous ?"
-                        class="w-full outline-none text-premium-dark placeholder:text-premium-dark/30 bg-transparent">
-                </div>
-                <div
-                    class="flex-1 flex items-center gap-3 px-4 py-3 border-b md:border-b-0 md:border-r border-premium-dark/5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-premium-orange">
-                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                        <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    <input type="text" placeholder="Localisation..."
-                        class="w-full outline-none text-premium-dark placeholder:text-premium-dark/30 bg-transparent">
-                </div>
-                <button type="submit"
-                    class="bg-premium-orange text-white px-10 py-4 rounded-xl md:rounded-2xl font-bold hover:bg-premium-orange/90 transition-all flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg>
-                    Rechercher
-                </button>
-            </form>
-
-            <!-- Stats -->
-            <div class="flex flex-wrap justify-center gap-12 pt-10 border-t border-white/10 max-w-3xl mx-auto">
-                <div class="text-center group">
-                    <div class="text-3xl font-extrabold text-white group-hover:text-premium-orange transition-colors">
-                        500+</div>
-                    <div class="text-white/50 text-xs uppercase tracking-widest font-bold">Prestataires</div>
-                </div>
-                <div class="text-center group">
-                    <div class="text-3xl font-extrabold text-white group-hover:text-premium-orange transition-colors">
-                        2000+</div>
-                    <div class="text-white/50 text-xs uppercase tracking-widest font-bold">Clients Satisfaits</div>
-                </div>
-                <div class="text-center group">
-                    <div class="text-3xl font-extrabold text-white group-hover:text-premium-orange transition-colors">
-                        10+</div>
-                    <div class="text-white/50 text-xs uppercase tracking-widest font-bold">Villes Couvertes</div>
-                </div>
+          </div>
+          <div class="text-center group">
+            <div
+              class="text-3xl font-extrabold text-white group-hover:text-premium-orange transition-colors"
+            >
+              2000+
             </div>
+            <div
+              class="text-white/50 text-xs uppercase tracking-widest font-bold"
+            >
+              Voyageurs Satisfaits
+            </div>
+          </div>
+          <div class="text-center group">
+            <div
+              class="text-3xl font-extrabold text-white group-hover:text-premium-orange transition-colors"
+            >
+              10+
+            </div>
+            <div
+              class="text-white/50 text-xs uppercase tracking-widest font-bold"
+            >
+              Destinations Couvertes
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Bottom Gradient -->
-        <div class="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-premium-light to-transparent"></div>
+      <!-- Bottom Gradient -->
+      <div
+        class="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-premium-light to-transparent"
+      ></div>
+    </section>
+
+    <!-- CATÉGORIES TOURISME IVOIRIEN -->
+    <section class="max-w-7xl mx-auto px-6 py-20 reveal">
+      <div class="text-center space-y-4 mb-14">
+        <span
+          class="inline-flex items-center rounded-full bg-premium-orange/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-premium-orange"
+          >Tourisme ivoirien</span
+        >
+        <h2 class="text-4xl font-extrabold text-premium-dark">
+          Les 4 catégories majeures en Côte d'Ivoire
+        </h2>
+        <p class="text-premium-dark/60 max-w-3xl mx-auto">
+          Culture + Nature + Plages + Événements urbains : une offre complète
+          pour les visiteurs locaux et internationaux.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article
+          class="bg-white border border-slate-100 rounded-3xl p-7 shadow-sm"
+        >
+          <h3 class="text-xl font-extrabold text-premium-dark">
+            1) Tourisme culturel
+          </h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Danses traditionnelles, masques, rites, artisanat, villages,
+            festivals et gastronomie locale.
+          </p>
+          <p
+            class="mt-3 text-xs font-semibold text-slate-500 uppercase tracking-wider"
+          >
+            Grand-Bassam • Musée des Civilisations • MASA
+          </p>
+        </article>
+
+        <article
+          class="bg-white border border-slate-100 rounded-3xl p-7 shadow-sm"
+        >
+          <h3 class="text-xl font-extrabold text-premium-dark">
+            2) Tourisme balnéaire
+          </h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Plages, hôtels, détente et sports nautiques pour les week-ends et
+            séjours loisirs.
+          </p>
+          <p
+            class="mt-3 text-xs font-semibold text-slate-500 uppercase tracking-wider"
+          >
+            Assinie-Mafia • Grand-Béréby
+          </p>
+        </article>
+
+        <article
+          class="bg-white border border-slate-100 rounded-3xl p-7 shadow-sm"
+        >
+          <h3 class="text-xl font-extrabold text-premium-dark">
+            3) Écotourisme
+          </h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Nature, biodiversité et tourisme durable : randonnée, safari et
+            observation animale.
+          </p>
+          <p
+            class="mt-3 text-xs font-semibold text-slate-500 uppercase tracking-wider"
+          >
+            Parc national de Taï • Parc national de la Comoé
+          </p>
+        </article>
+
+        <article
+          class="bg-white border border-slate-100 rounded-3xl p-7 shadow-sm"
+        >
+          <h3 class="text-xl font-extrabold text-premium-dark">
+            4) Urbain & événementiel
+          </h3>
+          <p class="mt-3 text-sm text-slate-600 leading-relaxed">
+            Vie urbaine moderne, restaurants, nightlife, concerts et tourisme
+            d'affaires.
+          </p>
+          <p
+            class="mt-3 text-xs font-semibold text-slate-500 uppercase tracking-wider"
+          >
+            Abidjan • FEMUA
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-10 flex justify-center">
+        <a
+          th:href="@{/tourisme-categories}"
+          class="inline-flex items-center gap-2 rounded-xl bg-premium-dark px-8 py-4 text-white font-bold hover:bg-premium-orange transition-colors"
+        >
+          Voir la page dédiée aux catégories
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- DEALS DU WEEK-END (STYLE BOOKING) -->
+    <section class="max-w-7xl mx-auto px-6 pb-12 reveal">
+      <div class="mb-8 space-y-2">
+        <h2 class="text-3xl font-extrabold text-premium-dark">
+          Deals du week-end
+        </h2>
+        <p class="text-premium-dark/60">
+          Économisez sur les séjours du
+          <span
+            th:text="${!#lists.isEmpty(weekendDeals) ? #temporals.format(weekendDeals[0].startDate, 'dd MMM') : ''}"
+          ></span>
+          au
+          <span
+            th:text="${!#lists.isEmpty(weekendDeals) ? #temporals.format(weekendDeals[0].endDate, 'dd MMM') : ''}"
+          ></span>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <article
+          th:each="deal : ${weekendDeals}"
+          class="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
+        >
+          <div class="relative h-48">
+            <img
+              th:src="${deal.service.imageUrl != null and (#strings.startsWith(deal.service.imageUrl, 'http://') or #strings.startsWith(deal.service.imageUrl, 'https://') or #strings.startsWith(deal.service.imageUrl, '/'))} ? ${deal.service.imageUrl} : (${deal.service.imageUrl != null and !deal.service.imageUrl.isBlank()} ? @{/uploads/{img}(img=${deal.service.imageUrl})} : 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80')"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';
+              "
+              alt="Deal week-end"
+              class="w-full h-full object-cover"
+            />
+            <span
+              class="absolute top-3 left-3 bg-premium-orange text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider"
+              th:text="${'Deal Early 2026 - ' + deal.discountPercent + '%'}"
+            >
+              Deal
+            </span>
+          </div>
+
+          <div class="p-5 space-y-3">
+            <h3
+              class="text-lg font-extrabold text-premium-dark"
+              th:text="${deal.service.nom}"
+            >
+              Hotel
+            </h3>
+            <p class="text-sm text-premium-dark/60">
+              <span th:text="${deal.service.fournisseur.ville}">Abidjan</span>,
+              Côte d'Ivoire
+            </p>
+
+            <div class="flex items-center gap-2 text-xs">
+              <span
+                class="bg-premium-dark text-white px-2.5 py-1 rounded-lg font-bold"
+                th:text="${deal.service.noteMoyenne != null ? #numbers.formatDecimal(deal.service.noteMoyenne, 1, 1) : '8.0'}"
+              >
+                8.1
+              </span>
+              <span
+                class="font-semibold text-premium-dark"
+                th:text="${deal.ratingLabel}"
+                >Très bien</span
+              >
+              <span
+                class="text-premium-dark/50"
+                th:text="${(deal.service.nombreAvis > 0 ? deal.service.nombreAvis : 32) + ' avis'}"
+                >32 avis</span
+              >
+            </div>
+
+            <p
+              class="text-xs text-premium-dark/50"
+              th:text="${deal.nights + ' nuits'}"
+            >
+              2 nuits
+            </p>
+
+            <div class="pt-2 border-t border-slate-100">
+              <p
+                class="text-sm text-premium-dark/40 line-through"
+                th:text="${'XOF ' + #numbers.formatDecimal(deal.originalPrice, 0, 'COMMA', 0, 'POINT')}"
+              >
+                XOF 280,000
+              </p>
+              <p
+                class="text-xl font-extrabold text-premium-dark"
+                th:text="${'XOF ' + #numbers.formatDecimal(deal.dealPrice, 0, 'COMMA', 0, 'POINT')}"
+              >
+                XOF 224,000
+              </p>
+            </div>
+
+            <a
+              th:href="@{/reservation/service/{id}(id=${deal.service.id})}"
+              class="inline-flex w-full justify-center rounded-xl bg-premium-dark text-white py-3 font-bold hover:bg-premium-orange transition-colors"
+            >
+              Voir l'offre
+            </a>
+          </div>
+        </article>
+      </div>
     </section>
 
     <!-- SERVICES GRID -->
     <section class="max-w-7xl mx-auto px-6 py-32 reveal">
-        <div class="text-center space-y-4 mb-20">
-            <h2 class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider">Nos Services</h2>
-            <p class="text-premium-dark/50 max-w-2xl mx-auto">
-                Découvrez notre gamme complète de services pensés pour répondre à tous vos besoins au quotidien.
-            </p>
-        </div>
+      <div class="text-center space-y-4 mb-20">
+        <h2
+          class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider"
+        >
+          Nos Services Tourisme
+        </h2>
+        <p class="text-premium-dark/50 max-w-2xl mx-auto">
+          Des solutions concrètes pour voyager, séjourner et vivre la Côte
+          d'Ivoire dans les meilleures conditions.
+        </p>
+      </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Service Card 1 -->
-            <div
-                class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group">
-                <div
-                    class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-premium-orange group-hover:text-white">
-                        <path
-                            d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2z" />
-                        <circle cx="7" cy="17" r="2" />
-                        <circle cx="15" cy="17" r="2" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-premium-dark mb-3">Location de Véhicules</h3>
-                <p class="text-premium-dark/50 text-sm leading-relaxed">Voitures, motos et utilitaires disponibles près
-                    de chez vous pour tous vos déplacements.</p>
-            </div>
-            <!-- Service Card 2 -->
-            <div
-                class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group">
-                <div
-                    class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-premium-orange group-hover:text-white">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-premium-dark mb-3">Réservation de Résidences</h3>
-                <p class="text-premium-dark/50 text-sm leading-relaxed">Appartements, villas et maisons d'hôtes pour vos
-                    séjours et événements en toute sérénité.</p>
-            </div>
-            <!-- Service Card 3 -->
-            <div
-                class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group">
-                <div
-                    class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-premium-orange group-hover:text-white">
-                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                        <line x1="16" y1="2" x2="16" y2="6" />
-                        <line x1="8" y1="2" x2="8" y2="6" />
-                        <line x1="3" y1="10" x2="21" y2="10" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-premium-dark mb-3">Service Événementiel</h3>
-                <p class="text-premium-dark/50 text-sm leading-relaxed">DJ, photographes, décorateurs et plus pour vos
-                    célébrations mémorables partout en CI.</p>
-            </div>
-            <!-- Service Card 4 -->
-            <div
-                class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group">
-                <div
-                    class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="text-premium-orange group-hover:text-white">
-                        <path
-                            d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-premium-dark mb-3">Services Alimentaires</h3>
-                <p class="text-premium-dark/50 text-sm leading-relaxed">Traiteurs, restaurants et pâtissiers pour
-                    régaler vos invités avec des saveurs locales.</p>
-            </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Service Card 1 -->
+        <div
+          class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group"
+        >
+          <div
+            class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange group-hover:text-white"
+            >
+              <path
+                d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-1.1 0-2 .9-2 2v7c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2z"
+              />
+              <circle cx="7" cy="17" r="2" />
+              <circle cx="15" cy="17" r="2" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-premium-dark mb-3">
+            Location de Véhicules
+          </h3>
+          <p class="text-premium-dark/50 text-sm leading-relaxed">
+            Voitures, SUV et navettes pour vos transferts aéroport, city tours
+            et escapades.
+          </p>
         </div>
+        <!-- Service Card 2 -->
+        <div
+          class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group"
+        >
+          <div
+            class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange group-hover:text-white"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-premium-dark mb-3">
+            Réservation de Résidences
+          </h3>
+          <p class="text-premium-dark/50 text-sm leading-relaxed">
+            Résidences, villas et maisons d'hôtes pour vos séjours à Abidjan,
+            Assinie et au-delà.
+          </p>
+        </div>
+        <!-- Service Card 3 -->
+        <div
+          class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group"
+        >
+          <div
+            class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange group-hover:text-white"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-premium-dark mb-3">
+            Service Événementiel
+          </h3>
+          <p class="text-premium-dark/50 text-sm leading-relaxed">
+            Guides, animations, DJ et organisateurs pour vos événements privés
+            ou professionnels.
+          </p>
+        </div>
+        <!-- Service Card 4 -->
+        <div
+          class="bg-white p-8 rounded-3xl shadow-sm border border-premium-dark/5 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group"
+        >
+          <div
+            class="w-14 h-14 bg-premium-orange/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-premium-orange group-hover:rotate-12 transition-all duration-500"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="text-premium-orange group-hover:text-white"
+            >
+              <path
+                d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+              />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-premium-dark mb-3">
+            Services Alimentaires
+          </h3>
+          <p class="text-premium-dark/50 text-sm leading-relaxed">
+            Traiteurs, restaurants et pâtissiers pour découvrir les saveurs
+            ivoiriennes et internationales.
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- HOW IT WORKS -->
     <section class="bg-premium-light py-32 overflow-hidden reveal">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center space-y-4 mb-24">
-                <h2 class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider">Comment ça marche ?</h2>
-                <p class="text-premium-dark/50 max-w-2xl mx-auto">UNEVIE simplifie votre quotidien en quelques étapes
-                    simples.</p>
-            </div>
-
-            <div class="relative">
-                <div class="absolute top-1/2 left-0 w-full h-0.5 bg-premium-orange/10 -translate-y-1/2 hidden lg:block">
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
-                    <div class="text-center space-y-6 group">
-                        <div
-                            class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-premium-orange">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                                <circle cx="9" cy="7" r="4" />
-                                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                            </svg>
-                            <div
-                                class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold">
-                                1</div>
-                        </div>
-                        <h4 class="font-bold text-premium-dark text-lg">Inscrivez-vous</h4>
-                        <p class="text-sm text-premium-dark/50">Créez votre compte gratuitement. Client ou prestataire,
-                            rejoignez la communauté.</p>
-                    </div>
-                    <div class="text-center space-y-6 group">
-                        <div
-                            class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-premium-orange">
-                                <circle cx="11" cy="11" r="8" />
-                                <path d="m21 21-4.3-4.3" />
-                            </svg>
-                            <div
-                                class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold">
-                                2</div>
-                        </div>
-                        <h4 class="font-bold text-premium-dark text-lg">Explorez</h4>
-                        <p class="text-sm text-premium-dark/50">Parcourez les services disponibles près de chez vous.
-                            Filtrez par catégorie.</p>
-                    </div>
-                    <div class="text-center space-y-6 group">
-                        <div
-                            class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-premium-orange">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                                <polyline points="22 4 12 14.01 9 11.01" />
-                            </svg>
-                            <div
-                                class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold">
-                                3</div>
-                        </div>
-                        <h4 class="font-bold text-premium-dark text-lg">Réservez</h4>
-                        <p class="text-sm text-premium-dark/50">Sélectionnez le service qui vous convient et réservez en
-                            toute sécurité.</p>
-                    </div>
-                    <div class="text-center space-y-6 group">
-                        <div
-                            class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="text-premium-orange">
-                                <polygon
-                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                            </svg>
-                            <div
-                                class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold">
-                                4</div>
-                        </div>
-                        <h4 class="font-bold text-premium-dark text-lg">Évaluez</h4>
-                        <p class="text-sm text-premium-dark/50">Partagez votre avis pour aider la communauté à faire les
-                            meilleurs choix.</p>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center space-y-4 mb-24">
+          <h2
+            class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider"
+          >
+            Comment ça marche ?
+          </h2>
+          <p class="text-premium-dark/50 max-w-2xl mx-auto">
+            UNEVIE simplifie la préparation de vos séjours en quelques étapes.
+          </p>
         </div>
+
+        <div class="relative">
+          <div
+            class="absolute top-1/2 left-0 w-full h-0.5 bg-premium-orange/10 -translate-y-1/2 hidden lg:block"
+          ></div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10"
+          >
+            <div class="text-center space-y-6 group">
+              <div
+                class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-premium-orange"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <div
+                  class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >
+                  1
+                </div>
+              </div>
+              <h4 class="font-bold text-premium-dark text-lg">
+                Inscrivez-vous
+              </h4>
+              <p class="text-sm text-premium-dark/50">
+                Créez votre compte gratuitement. Client ou prestataire,
+                rejoignez la communauté.
+              </p>
+            </div>
+            <div class="text-center space-y-6 group">
+              <div
+                class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-premium-orange"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+                <div
+                  class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >
+                  2
+                </div>
+              </div>
+              <h4 class="font-bold text-premium-dark text-lg">Explorez</h4>
+              <p class="text-sm text-premium-dark/50">
+                Parcourez les offres par destination, catégorie et budget.
+              </p>
+            </div>
+            <div class="text-center space-y-6 group">
+              <div
+                class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-premium-orange"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                <div
+                  class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >
+                  3
+                </div>
+              </div>
+              <h4 class="font-bold text-premium-dark text-lg">Réservez</h4>
+              <p class="text-sm text-premium-dark/50">
+                Choisissez le service qui vous convient et confirmez en toute
+                sécurité.
+              </p>
+            </div>
+            <div class="text-center space-y-6 group">
+              <div
+                class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto shadow-xl border-4 border-premium-light relative group-hover:scale-110 transition-transform duration-500"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-premium-orange"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  />
+                </svg>
+                <div
+                  class="absolute -top-2 -right-2 w-8 h-8 bg-premium-orange text-white rounded-full flex items-center justify-center text-xs font-bold"
+                >
+                  4
+                </div>
+              </div>
+              <h4 class="font-bold text-premium-dark text-lg">Évaluez</h4>
+              <p class="text-sm text-premium-dark/50">
+                Partagez votre avis pour aider la communauté à faire les
+                meilleurs choix.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- POPULAR SERVICES -->
     <section class="max-w-7xl mx-auto px-6 py-32 reveal">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div class="space-y-4">
-                <h2 class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider">Services Populaires</h2>
-                <p class="text-premium-dark/50">Découvrez les prestataires les mieux notés par notre communauté.</p>
+      <div
+        class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
+      >
+        <div class="space-y-4">
+          <h2
+            class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider"
+          >
+            Expériences Populaires
+          </h2>
+          <p class="text-premium-dark/50">
+            Découvrez les offres les mieux notées par les voyageurs et
+            résidents.
+          </p>
+        </div>
+        <a
+          href="#"
+          class="px-8 py-3 rounded-xl border border-premium-dark/10 font-bold hover:bg-premium-dark hover:text-white transition-all"
+          >Voir tout</a
+        >
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Dynamic Service Cards -->
+        <div
+          th:each="s : ${topServices}"
+          class="group bg-white rounded-3xl overflow-hidden border border-premium-dark/5 shadow-sm hover:shadow-2xl transition-all duration-500"
+        >
+          <div class="relative h-56 overflow-hidden">
+            <img
+              th:src="${s.imageUrl != null} ? @{/uploads/{img}(img=${s.imageUrl})} : @{/images/chantier.jpg}"
+              alt="Image du service"
+              th:alt="${'Image du service ' + s.nom}"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            />
+            <div
+              class="absolute top-4 left-4 bg-premium-orange text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest italic"
+              th:text="${s.secteur}"
+            >
+              Secteur
             </div>
-            <a href="#"
-                class="px-8 py-3 rounded-xl border border-premium-dark/10 font-bold hover:bg-premium-dark hover:text-white transition-all">Voir
-                tout</a>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="flex justify-between items-start">
+              <h4 class="font-bold text-premium-dark" th:text="${s.nom}">
+                Nom du Service
+              </h4>
+              <div
+                class="flex items-center gap-1 text-premium-accent font-bold text-sm"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                  />
+                </svg>
+                <span
+                  ><span
+                    th:text="${s.noteMoyenne != null ? #numbers.formatDecimal(s.noteMoyenne, 1, 1) : '0.0'}"
+                    >0.0</span
+                  >
+                  <span
+                    class="text-premium-dark/30 font-medium"
+                    th:text="'(' + ${s.nombreAvis} + ')'"
+                    >(0)</span
+                  ></span
+                >
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-premium-dark/40 text-xs">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span th:text="${s.fournisseur.ville}">Ville</span>
+            </div>
+            <div
+              class="flex items-center justify-between pt-4 border-t border-premium-dark/5"
+            >
+              <div class="text-premium-orange font-extrabold text-lg">
+                <span
+                  th:text="${#numbers.formatDecimal(s.prix, 0, 'COMMA', 0, 'POINT')}"
+                  >50,000</span
+                >
+                F
+                <span
+                  th:if="${s.secteur.name() == 'VOITURE'}"
+                  class="text-[10px] text-premium-dark/30 ml-1"
+                  >/Jour</span
+                >
+              </div>
+              <a
+                th:href="@{/reservation/service/{id}(id=${s.id})}"
+                class="bg-premium-dark/5 px-4 py-2 rounded-lg text-premium-dark font-bold text-xs hover:bg-premium-orange hover:text-white transition-all"
+                >Réserver</a
+              >
+            </div>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Dynamic Service Cards -->
-            <div th:each="s : ${topServices}"
-                class="group bg-white rounded-3xl overflow-hidden border border-premium-dark/5 shadow-sm hover:shadow-2xl transition-all duration-500">
-                <div class="relative h-56 overflow-hidden">
-                    <img th:src="${s.imageUrl != null} ? @{/uploads/{img}(img=${s.imageUrl})} : @{/images/chantier.jpg}"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-4 left-4 bg-premium-orange text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest italic"
-                        th:text="${s.secteur}">Secteur</div>
-                </div>
-                <div class="p-6 space-y-4">
-                    <div class="flex justify-between items-start">
-                        <h4 class="font-bold text-premium-dark" th:text="${s.nom}">Nom du Service</h4>
-                        <div class="flex items-center gap-1 text-premium-accent font-bold text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                                fill="currentColor">
-                                <polygon
-                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                            </svg>
-                            <span><span
-                                    th:text="${s.noteMoyenne != null ? #numbers.formatDecimal(s.noteMoyenne, 1, 1) : '0.0'}">0.0</span>
-                                <span class="text-premium-dark/30 font-medium"
-                                    th:text="'(' + ${s.nombreAvis} + ')'">(0)</span></span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 text-premium-dark/40 text-xs">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
-                        <span th:text="${s.fournisseur.ville}">Ville</span>
-                    </div>
-                    <div class="flex items-center justify-between pt-4 border-t border-premium-dark/5">
-                        <div class="text-premium-orange font-extrabold text-lg">
-                            <span th:text="${#numbers.formatDecimal(s.prix, 0, 'COMMA', 0, 'POINT')}">50,000</span> F
-                            <span th:if="${s.secteur.name() == 'VOITURE'}"
-                                class="text-[10px] text-premium-dark/30 ml-1">/Jour</span>
-                        </div>
-                        <a th:href="@{/reservation/service/{id}(id=${s.id})}"
-                            class="bg-premium-dark/5 px-4 py-2 rounded-lg text-premium-dark font-bold text-xs hover:bg-premium-orange hover:text-white transition-all">Réserver</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Fallback if no services -->
-            <div th:if="${#lists.isEmpty(topServices)}"
-                class="col-span-full py-12 text-center text-slate-400 font-bold italic bg-white rounded-3xl border border-dashed border-slate-200">
-                Découvrez nos services bientôt...
-            </div>
+        <!-- Fallback if no services -->
+        <div
+          th:if="${#lists.isEmpty(topServices)}"
+          class="col-span-full py-12 text-center text-slate-400 font-bold italic bg-white rounded-3xl border border-dashed border-slate-200"
+        >
+          Découvrez nos services bientôt...
         </div>
+      </div>
     </section>
 
     <!-- TESTIMONIALS -->
-    <section class="max-w-7xl mx-auto px-6 py-32 relative overflow-hidden reveal">
+    <section
+      class="max-w-7xl mx-auto px-6 py-32 relative overflow-hidden reveal"
+    >
+      <div
+        class="absolute -top-24 -right-24 w-96 h-96 bg-premium-orange/5 rounded-full blur-[120px] pointer-events-none"
+      ></div>
+
+      <div class="text-center space-y-4 mb-20 relative z-10">
         <div
-            class="absolute -top-24 -right-24 w-96 h-96 bg-premium-orange/5 rounded-full blur-[120px] pointer-events-none">
+          class="inline-block px-4 py-1.5 rounded-full bg-premium-orange/10 border border-premium-orange/20 text-premium-orange text-xs font-bold uppercase tracking-widest leading-none mb-4"
+        >
+          Avis Clients
         </div>
+        <h2
+          class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider"
+        >
+          Ce qu'ils disent de nous
+        </h2>
+        <p class="text-premium-dark/50 max-w-2xl mx-auto">
+          La satisfaction de nos utilisateurs est au cœur de chaque expérience.
+        </p>
+      </div>
 
-        <div class="text-center space-y-4 mb-20 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+        <!-- Testimonial 1 -->
+        <div
+          class="bg-white p-10 rounded-[3rem] shadow-sm border border-premium-dark/5 space-y-8 hover:shadow-2xl transition-all duration-500 group"
+        >
+          <div class="flex gap-1 text-premium-accent">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="text-premium-dark/60 italic leading-relaxed">
+            "Une expérience incroyable. J'ai loué une villa à Assinie en
+            quelques clics. Le service client est d'une réactivité exemplaire."
+          </p>
+          <div
+            class="flex items-center gap-4 pt-4 border-t border-premium-dark/5"
+          >
             <div
-                class="inline-block px-4 py-1.5 rounded-full bg-premium-orange/10 border border-premium-orange/20 text-premium-orange text-xs font-bold uppercase tracking-widest leading-none mb-4">
-                Avis Clients</div>
-            <h2 class="text-4xl font-extrabold text-premium-dark uppercase tracking-wider">Ce qu'ils disent de nous</h2>
-            <p class="text-premium-dark/50 max-w-2xl mx-auto">La satisfaction de nos utilisateurs est au cœur de notre
-                service.</p>
+              class="w-12 h-12 bg-premium-dark rounded-2xl flex items-center justify-center font-bold text-white group-hover:bg-premium-orange transition-colors"
+            >
+              AD
+            </div>
+            <div>
+              <h4 class="font-bold text-premium-dark text-sm">
+                Amadou Diakité
+              </h4>
+              <p
+                class="text-[10px] uppercase tracking-widest text-premium-dark/30 font-bold"
+              >
+                Client Fidèle
+              </p>
+            </div>
+          </div>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
-            <!-- Testimonial 1 -->
+        <!-- Testimonial 2 -->
+        <div
+          class="bg-white p-10 rounded-[3rem] shadow-sm border border-premium-dark/5 space-y-8 hover:shadow-2xl transition-all duration-500 group"
+        >
+          <div class="flex gap-1 text-premium-accent">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="text-premium-dark/60 italic leading-relaxed">
+            "En tant que prestataire, UNEVIE m'a permis de toucher plus de
+            visiteurs. La plateforme est intuitive et les paiements sont
+            sécurisés."
+          </p>
+          <div
+            class="flex items-center gap-4 pt-4 border-t border-premium-dark/5"
+          >
             <div
-                class="bg-white p-10 rounded-[3rem] shadow-sm border border-premium-dark/5 space-y-8 hover:shadow-2xl transition-all duration-500 group">
-                <div class="flex gap-1 text-premium-accent">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                        class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <p class="text-premium-dark/60 italic leading-relaxed">"Une expérience incroyable. J'ai loué une villa
-                    pour mon mariage en quelques clics. Le service client est d'une réactivité exemplaire."</p>
-                <div class="flex items-center gap-4 pt-4 border-t border-premium-dark/5">
-                    <div
-                        class="w-12 h-12 bg-premium-dark rounded-2xl flex items-center justify-center font-bold text-white group-hover:bg-premium-orange transition-colors">
-                        AD</div>
-                    <div>
-                        <h4 class="font-bold text-premium-dark text-sm">Amadou Diakité</h4>
-                        <p class="text-[10px] uppercase tracking-widest text-premium-dark/30 font-bold">Client Fidèle
-                        </p>
-                    </div>
-                </div>
+              class="w-12 h-12 bg-premium-dark rounded-2xl flex items-center justify-center font-bold text-white group-hover:bg-premium-orange transition-colors"
+            >
+              SK
             </div>
-            <!-- Testimonial 2 -->
-            <div
-                class="bg-white p-10 rounded-[3rem] shadow-sm border border-premium-dark/5 space-y-8 hover:shadow-2xl transition-all duration-500 group">
-                <div class="flex gap-1 text-premium-accent">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                        class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <p class="text-premium-dark/60 italic leading-relaxed">"En tant que prestataire, UNEVIE m'a permis de
-                    doubler mon chiffre d'affaires. La plateforme est intuitive et les paiements sont sécurisés."</p>
-                <div class="flex items-center gap-4 pt-4 border-t border-premium-dark/5">
-                    <div
-                        class="w-12 h-12 bg-premium-dark rounded-2xl flex items-center justify-center font-bold text-white group-hover:bg-premium-orange transition-colors">
-                        SK</div>
-                    <div>
-                        <h4 class="font-bold text-premium-dark text-sm">Sarah Koné</h4>
-                        <p class="text-[10px] uppercase tracking-widest text-premium-dark/30 font-bold">Prestataire
-                            Traiteur</p>
-                    </div>
-                </div>
+            <div>
+              <h4 class="font-bold text-premium-dark text-sm">Sarah Koné</h4>
+              <p
+                class="text-[10px] uppercase tracking-widest text-premium-dark/30 font-bold"
+              >
+                Prestataire Traiteur
+              </p>
             </div>
-            <!-- Testimonial 3 -->
-            <div
-                class="bg-white p-10 rounded-[3rem] shadow-sm border border-premium-dark/5 space-y-8 hover:shadow-2xl transition-all duration-500 group">
-                <div class="flex gap-1 text-premium-accent">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                        class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <p class="text-premium-dark/60 italic leading-relaxed">"La meilleure application de services en Côte
-                    d'Ivoire. Enfin une solution qui regroupe tout ce dont on a besoin en un seul endroit."</p>
-                <div class="flex items-center gap-4 pt-4 border-t border-premium-dark/5">
-                    <div
-                        class="w-12 h-12 bg-premium-dark rounded-2xl flex items-center justify-center font-bold text-white group-hover:bg-premium-orange transition-colors">
-                        ML</div>
-                    <div>
-                        <h4 class="font-bold text-premium-dark text-sm">Marc Loba</h4>
-                        <p class="text-[10px] uppercase tracking-widest text-premium-dark/30 font-bold">Voyageur</p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <!-- Testimonial 3 -->
+        <div
+          class="bg-white p-10 rounded-[3rem] shadow-sm border border-premium-dark/5 space-y-8 hover:shadow-2xl transition-all duration-500 group"
+        >
+          <div class="flex gap-1 text-premium-accent">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i><i class="fas fa-star"></i
+            ><i class="fas fa-star"></i>
+          </div>
+          <p class="text-premium-dark/60 italic leading-relaxed">
+            "La meilleure application de services en Côte d'Ivoire. Je prépare
+            mes week-ends sans stress et tout est au même endroit."
+          </p>
+          <div
+            class="flex items-center gap-4 pt-4 border-t border-premium-dark/5"
+          >
+            <div
+              class="w-12 h-12 bg-premium-dark rounded-2xl flex items-center justify-center font-bold text-white group-hover:bg-premium-orange transition-colors"
+            >
+              ML
+            </div>
+            <div>
+              <h4 class="font-bold text-premium-dark text-sm">Marc Loba</h4>
+              <p
+                class="text-[10px] uppercase tracking-widest text-premium-dark/30 font-bold"
+              >
+                Voyageur
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- BECOME A PROVIDER -->
     <section class="max-w-7xl mx-auto px-6 py-24 reveal">
+      <div
+        class="bg-premium-dark rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row gap-16 items-center"
+      >
+        <!-- Pattern -->
         <div
-            class="bg-premium-dark rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col lg:flex-row gap-16 items-center">
-            <!-- Pattern -->
-            <div class="absolute inset-0 opacity-10 mix-blend-soft-light"
-                style="background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png');"></div>
+          class="absolute inset-0 opacity-10 mix-blend-soft-light"
+          style="
+            background-image: url('https://www.transparenttextures.com/patterns/az-subtle.png');
+          "
+        ></div>
 
-            <div class="relative z-10 lg:w-1/2 space-y-8">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">Devenez prestataire sur <span
-                        class="text-premium-orange">UNEVIE</span></h2>
-                <p class="text-white/60 text-lg leading-relaxed">Rejoignez notre réseau de professionnels et développez
-                    votre activité. Accédez à une clientèle grandissante et gérez vos réservations en toute simplicité.
-                </p>
-                <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="#"
-                        class="bg-premium-orange text-white px-10 py-4 rounded-2xl font-bold hover:bg-premium-orange/90 transition-all flex items-center gap-2 group">
-                        Commencer maintenant
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="group-hover:translate-x-1 transition-transform">
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                        </svg>
-                    </a>
-                    <a href="#"
-                        class="bg-white/5 border border-white/10 text-white px-10 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all">En
-                        savoir plus</a>
-                </div>
-            </div>
-
-            <div class="relative z-10 lg:w-1/2 grid grid-cols-1 gap-4 w-full">
-                <div
-                    class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl flex items-center gap-6 group hover:bg-white/10 transition-all">
-                    <div
-                        class="w-12 h-12 bg-premium-orange/20 rounded-xl flex items-center justify-center text-premium-orange group-hover:scale-110 transition-transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold">Sécurisé</h4>
-                        <p class="text-white/40 text-sm">Paiements protégés et prestataires vérifiés.</p>
-                    </div>
-                </div>
-                <div
-                    class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl flex items-center gap-6 group hover:bg-white/10 transition-all">
-                    <div
-                        class="w-12 h-12 bg-premium-orange/20 rounded-xl flex items-center justify-center text-premium-orange group-hover:scale-110 transition-transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold">Rapide</h4>
-                        <p class="text-white/40 text-sm">Réservation instantanée 24h/24.</p>
-                    </div>
-                </div>
-                <div
-                    class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl flex items-center gap-6 group hover:bg-white/10 transition-all">
-                    <div
-                        class="w-12 h-12 bg-premium-orange/20 rounded-xl flex items-center justify-center text-premium-orange group-hover:scale-110 transition-transform">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h4 class="text-white font-bold">Local</h4>
-                        <p class="text-white/40 text-sm">Services adaptés à votre localisation.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="relative z-10 lg:w-1/2 space-y-8">
+          <h2
+            class="text-4xl md:text-5xl font-extrabold text-white leading-tight"
+          >
+            Devenez prestataire sur
+            <span class="text-premium-orange">UNEVIE</span>
+          </h2>
+          <p class="text-white/60 text-lg leading-relaxed">
+            Rejoignez notre réseau d'acteurs du tourisme ivoirien et développez
+            votre activité. Accédez à une clientèle grandissante et gérez vos
+            réservations en toute simplicité.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-4">
+            <a
+              href="#"
+              class="bg-premium-orange text-white px-10 py-4 rounded-2xl font-bold hover:bg-premium-orange/90 transition-all flex items-center gap-2 group"
+            >
+              Commencer maintenant
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="group-hover:translate-x-1 transition-transform"
+              >
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </a>
+            <a
+              href="#"
+              class="bg-white/5 border border-white/10 text-white px-10 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all"
+              >En savoir plus</a
+            >
+          </div>
         </div>
+
+        <div class="relative z-10 lg:w-1/2 grid grid-cols-1 gap-4 w-full">
+          <div
+            class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl flex items-center gap-6 group hover:bg-white/10 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-premium-orange/20 rounded-xl flex items-center justify-center text-premium-orange group-hover:scale-110 transition-transform"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-white font-bold">Sécurisé</h4>
+              <p class="text-white/40 text-sm">
+                Paiements protégés et prestataires vérifiés.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl flex items-center gap-6 group hover:bg-white/10 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-premium-orange/20 rounded-xl flex items-center justify-center text-premium-orange group-hover:scale-110 transition-transform"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-white font-bold">Rapide</h4>
+              <p class="text-white/40 text-sm">
+                Réservation instantanée 24h/24.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl flex items-center gap-6 group hover:bg-white/10 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-premium-orange/20 rounded-xl flex items-center justify-center text-premium-orange group-hover:scale-110 transition-transform"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-white font-bold">Local</h4>
+              <p class="text-white/40 text-sm">
+                Services adaptés à votre localisation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <div th:replace="~{fragments/footer :: footer}"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                threshold: 0.1
-            };
+      document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+          threshold: 0.1,
+        };
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, observerOptions);
 
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        });
+        document
+          .querySelectorAll('.reveal')
+          .forEach((el) => observer.observe(el));
+      });
     </script>
-</body>
-
+  </body>
 </html>

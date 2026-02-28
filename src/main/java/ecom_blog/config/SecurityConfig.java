@@ -45,7 +45,8 @@ public class SecurityConfig {
                                                                 "/", "/index", "/index.html",
                                                                 "/register", "/login", "/error", "/change-password",
                                                                 "/blog/**", "/projets", "/services", "/objectifs",
-                                                                "/propos", "/produits/**", "/contact",
+                                                                "/propos", "/contact",
+                                                                "/tourisme-categories", "/sejours",
                                                                 "/reservation/secteurs", "/reservation/voitures",
                                                                 "/reservation/loisirs", "/reservation/alimentaire",
                                                                 "/reservation/evenementiel",
@@ -55,8 +56,15 @@ public class SecurityConfig {
                                                                 "/css/**", "/js/**", "/images/**", "/uploads/**")
                                                 .permitAll()
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                                .requestMatchers("/livreur/**").hasRole("LIVREUR")
                                                 .requestMatchers("/fournisseur/**").hasRole("FOURNISSEUR")
+                                                .requestMatchers("/acteur/touriste").hasRole("USER")
+                                                .requestMatchers("/acteur/guide").hasRole("GUIDE")
+                                                .requestMatchers("/acteur/artisan").hasRole("ARTISAN")
+                                                .requestMatchers("/acteur/organisateur").hasRole("ORGANISATEUR")
+                                                .requestMatchers("/acteur/ministere").hasAnyRole("MINISTERE", "ADMIN")
+                                                .requestMatchers("/acteur/workflows/**").hasAnyRole(
+                                                                "USER", "GUIDE", "ARTISAN", "ORGANISATEUR",
+                                                                "MINISTERE", "ADMIN")
                                                 .requestMatchers("/reservation/reserver",
                                                                 "/reservation/mes-reservations",
                                                                 "/reservation/confirmation/**",

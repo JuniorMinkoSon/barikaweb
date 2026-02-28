@@ -95,11 +95,14 @@
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Je suis un</label>
-                    <select name="type" required
+                    <label for="typeActeur" class="text-xs font-bold uppercase tracking-widest text-white/40 ml-1">Je suis un</label>
+                    <select id="typeActeur" name="type" required
                         class="w-full bg-premium-dark border border-white/10 rounded-2xl px-6 py-4 text-white outline-none focus:ring-2 focus:ring-premium-orange/20 focus:border-premium-orange transition-all appearance-none cursor-pointer">
-                        <option value="USER">Client (Particulier)</option>
-                        <option value="LIVREUR">Prestataire (Professionnel)</option>
+                        <option value="USER">Touriste</option>
+                        <option value="GUIDE">Guide touristique</option>
+                        <option value="ARTISAN">Artisan / Acteur culturel</option>
+                        <option value="ORGANISATEUR">Organisateur d'événement</option>
+                        <option value="MINISTERE">Ministère du Tourisme / État</option>
                     </select>
                 </div>
 

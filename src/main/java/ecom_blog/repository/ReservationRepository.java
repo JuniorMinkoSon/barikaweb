@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -56,4 +57,18 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
         @Query("SELECT COUNT(r) FROM Reservation r WHERE r.fournisseur.id = :fournisseurId AND r.statut = :statut")
         long countByFournisseurIdAndStatut(Long fournisseurId, StatutReservation statut);
+
+                                @Query("""
+                                                                                                SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END
+                                                                                                FROM Reservation r
+                                                                                                WHERE r.service.id = :serviceId
+                                                                                                        AND r.statut IN ('EN_COURS', 'ACCEPTE')
+                                                                                                        AND r.dateService IS NOT NULL
+                                                                                                        AND (
+                                                                                                                                (r.dateFinService IS NULL AND r.dateService BETWEEN :dateDebut AND :dateFin)
+                                                                                                                                OR
+                                                                                                                                (r.dateFinService IS NOT NULL AND r.dateService <= :dateFin AND r.dateFinService >= :dateDebut)
+                                                                                                                        )
+                                                                                                """)
+                                boolean hasDateConflict(Long serviceId, LocalDate dateDebut, LocalDate dateFin);
 }

@@ -12,7 +12,11 @@ public class RedirectController {
     public String redirectAfterLogin(Authentication auth) {
         var roles = AuthorityUtils.authorityListToSet(auth.getAuthorities());
         if (roles.contains("ROLE_ADMIN")) return "redirect:/admin/dashboard";
-        if (roles.contains("ROLE_USER")) return "redirect:/";
+        if (roles.contains("ROLE_MINISTERE")) return "redirect:/acteur/ministere";
+        if (roles.contains("ROLE_GUIDE")) return "redirect:/acteur/guide";
+        if (roles.contains("ROLE_ARTISAN")) return "redirect:/acteur/artisan";
+        if (roles.contains("ROLE_ORGANISATEUR")) return "redirect:/acteur/organisateur";
+        if (roles.contains("ROLE_USER")) return "redirect:/acteur/touriste";
         return "redirect:/login?error";
     }
 }

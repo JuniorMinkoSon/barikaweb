@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-EcomBlogApplication<ecom-vente>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "ecom_blog.EcomBlogApplication",
+      "projectName": "ecom-vente",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

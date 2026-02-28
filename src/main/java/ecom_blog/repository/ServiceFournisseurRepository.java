@@ -5,6 +5,7 @@ import ecom_blog.model.Secteur;
 import ecom_blog.model.ServiceFournisseur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -38,4 +39,20 @@ public interface ServiceFournisseurRepository extends JpaRepository<ServiceFourn
 
     @Query("SELECT COUNT(s) FROM ServiceFournisseur s WHERE s.fournisseur.id = :fournisseurId")
     long countByFournisseurId(Long fournisseurId);
+
+        @Query("""
+            SELECT s FROM ServiceFournisseur s
+            JOIN s.fournisseur f
+            WHERE s.disponible = true
+              AND f.actif = true
+              AND (:secteur IS NULL OR s.secteur = :secteur)
+              AND (
+                :destination IS NULL OR :destination = ''
+                OR LOWER(f.ville) LIKE LOWER(CONCAT('%', :destination, '%'))
+                OR LOWER(f.adresse) LIKE LOWER(CONCAT('%', :destination, '%'))
+                OR LOWER(s.nom) LIKE LOWER(CONCAT('%', :destination, '%'))
+              )
+            """)
+        List<ServiceFournisseur> searchForSejours(@Param("destination") String destination,
+            @Param("secteur") Secteur secteur);
 }

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="fr" class="scroll-smooth" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Onglets Tourisme | UNEVIE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              premium: {
+                orange: '#f77f00',
+                dark: '#0f172a',
+                light: '#fff8ef',
+                accent: '#16a34a',
+              },
+            },
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body
+    class="bg-gradient-to-b from-premium-light to-white text-slate-800 font-sans"
+  >
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="max-w-7xl mx-auto px-6 py-12 space-y-10">
+      <section class="text-center space-y-4">
+        <span
+          class="inline-flex items-center rounded-full bg-premium-orange/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-premium-orange"
+          >Navigation rapide</span
+        >
+        <h1 class="text-4xl md:text-5xl font-extrabold text-premium-dark">
+          Onglets de la plateforme tourisme
+        </h1>
+        <p class="text-slate-600 max-w-3xl mx-auto">
+          Accédez directement aux modules clés pour un premier parcours en Côte
+          d'Ivoire.
+        </p>
+      </section>
+
+      <section
+        class="bg-white border border-slate-100 rounded-3xl p-5 md:p-6 shadow-sm"
+      >
+        <nav class="flex flex-wrap gap-3 text-sm font-bold">
+          <a
+            href="#cartes"
+            class="px-4 py-2 rounded-xl bg-premium-dark text-white"
+            >Cartes</a
+          >
+          <a
+            href="#evenements"
+            class="px-4 py-2 rounded-xl border border-slate-200 text-premium-dark hover:bg-slate-50"
+            >Événements</a
+          >
+          <a
+            href="#hebergement"
+            class="px-4 py-2 rounded-xl border border-slate-200 text-premium-dark hover:bg-slate-50"
+            >Hébergement</a
+          >
+          <a
+            href="#mobilite"
+            class="px-4 py-2 rounded-xl border border-slate-200 text-premium-dark hover:bg-slate-50"
+            >Mobilité</a
+          >
+          <a
+            href="#raccourci"
+            class="px-4 py-2 rounded-xl border border-slate-200 text-premium-dark hover:bg-slate-50"
+            >Raccourci</a
+          >
+          <a
+            href="#boutique"
+            class="px-4 py-2 rounded-xl border border-slate-200 text-premium-dark hover:bg-slate-50"
+            >Boutique</a
+          >
+        </nav>
+      </section>
+
+      <section
+        id="cartes"
+        class="scroll-mt-28 bg-white border border-slate-100 rounded-3xl p-8 shadow-sm space-y-5"
+      >
+        <h2 class="text-2xl font-extrabold text-premium-dark">
+          🗺️ Cartes (zones à risques data-driven)
+        </h2>
+        <p class="text-slate-600">
+          Vue synthétique de zones sensibles pour orienter les opérateurs et les
+          touristes.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div class="rounded-2xl border border-red-200 bg-red-50 p-4">
+            <p class="font-extrabold text-red-700">Zone lagunaire sud</p>
+            <p class="text-red-600 mt-1">Risque météo: Élevé</p>
+            <p class="text-red-600">Incidents récents: 12</p>
+          </div>
+          <div class="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+            <p class="font-extrabold text-amber-700">Corridor urbain Abidjan</p>
+            <p class="text-amber-600 mt-1">Congestion: Moyen</p>
+            <p class="text-amber-600">Retards mobilité: 27%</p>
+          </div>
+          <div class="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+            <p class="font-extrabold text-emerald-700">Grand-Bassam centre</p>
+            <p class="text-emerald-600 mt-1">Risque global: Faible</p>
+            <p class="text-emerald-600">Fréquentation stable</p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="evenements"
+        class="scroll-mt-28 bg-white border border-slate-100 rounded-3xl p-8 shadow-sm space-y-5"
+      >
+        <h2 class="text-2xl font-extrabold text-premium-dark">🎉 Événements</h2>
+        <p class="text-slate-600">
+          Agenda des activités urbaines et festivals.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            th:href="@{/sejours(destination='Abidjan',secteur='EVENEMENTIEL')}"
+            class="rounded-xl bg-premium-dark text-white px-4 py-2.5 text-sm font-bold hover:bg-premium-orange transition-colors"
+            >Voir événements Abidjan</a
+          >
+          <a
+            th:href="@{/acteur/workflows}"
+            class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-premium-dark hover:bg-slate-50"
+            >Billetterie (workflow)</a
+          >
+        </div>
+      </section>
+
+      <section
+        id="hebergement"
+        class="scroll-mt-28 bg-white border border-slate-100 rounded-3xl p-8 shadow-sm space-y-5"
+      >
+        <h2 class="text-2xl font-extrabold text-premium-dark">
+          🏨 Hébergement
+        </h2>
+        <p class="text-slate-600">
+          Séjours recommandés pour court et long séjour.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            th:href="@{/sejours(destination='Assinie')}"
+            class="rounded-xl bg-premium-dark text-white px-4 py-2.5 text-sm font-bold hover:bg-premium-orange transition-colors"
+            >Assinie</a
+          >
+          <a
+            th:href="@{/sejours(destination='Grand-Béréby')}"
+            class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-premium-dark hover:bg-slate-50"
+            >Grand-Béréby</a
+          >
+          <a
+            th:href="@{/sejours(destination='Abidjan')}"
+            class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-premium-dark hover:bg-slate-50"
+            >Abidjan</a
+          >
+        </div>
+      </section>
+
+      <section
+        id="mobilite"
+        class="scroll-mt-28 bg-white border border-slate-100 rounded-3xl p-8 shadow-sm space-y-5"
+      >
+        <h2 class="text-2xl font-extrabold text-premium-dark">🚖 Mobilité</h2>
+        <p class="text-slate-600">
+          Déplacements et solutions pratiques selon les zones.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            th:href="@{/sejours(secteur='VOITURE')}"
+            class="rounded-xl bg-premium-dark text-white px-4 py-2.5 text-sm font-bold hover:bg-premium-orange transition-colors"
+            >Options transport</a
+          >
+          <a
+            th:href="@{/reservation/recherche(q='mobilité')}"
+            class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-premium-dark hover:bg-slate-50"
+            >Prestataires mobilité</a
+          >
+        </div>
+      </section>
+
+      <section
+        id="raccourci"
+        class="scroll-mt-28 bg-white border border-slate-100 rounded-3xl p-8 shadow-sm space-y-5"
+      >
+        <h2 class="text-2xl font-extrabold text-premium-dark">
+          📱 Raccourci (APK utiles – 1er jour en CI)
+        </h2>
+        <ul
+          class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-700"
+        >
+          <li class="rounded-xl border border-slate-200 p-3">
+            Google Maps / Waze (navigation)
+          </li>
+          <li class="rounded-xl border border-slate-200 p-3">
+            Yango / inDrive (déplacements urbains)
+          </li>
+          <li class="rounded-xl border border-slate-200 p-3">
+            Wave / Orange Money (paiements rapides)
+          </li>
+          <li class="rounded-xl border border-slate-200 p-3">
+            WhatsApp (communication locale)
+          </li>
+        </ul>
+      </section>
+
+      <section
+        id="boutique"
+        class="scroll-mt-28 bg-white border border-slate-100 rounded-3xl p-8 shadow-sm space-y-5"
+      >
+        <h2 class="text-2xl font-extrabold text-premium-dark">
+          🛍️ Boutique (artisans & œuvres)
+        </h2>
+        <p class="text-slate-600">
+          Mise en avant des créations artisanales et expériences culturelles.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            th:href="@{/acteur/workflows}"
+            class="rounded-xl bg-premium-dark text-white px-4 py-2.5 text-sm font-bold hover:bg-premium-orange transition-colors"
+            >Espace artisans</a
+          >
+          <a
+            th:href="@{/reservation/recherche(q='artisanat')}"
+            class="rounded-xl border border-slate-200 px-4 py-2.5 text-sm font-bold text-premium-dark hover:bg-slate-50"
+            >Trouver des œuvres</a
+          >
+        </div>
+      </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

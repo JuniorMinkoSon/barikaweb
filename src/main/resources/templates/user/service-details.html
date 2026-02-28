@@ -46,7 +46,8 @@
                     <!-- Main Image -->
                     <div class="h-96 bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100">
                         <img id="mainImage" th:if="${service.imageUrl != null}"
-                            th:src="@{'/uploads/' + ${service.imageUrl}}"
+                            th:src="${#strings.startsWith(service.imageUrl, 'http://') or #strings.startsWith(service.imageUrl, 'https://') or #strings.startsWith(service.imageUrl, '/')} ? ${service.imageUrl} : @{/uploads/{img}(img=${service.imageUrl})}"
+                            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80';"
                             class="w-full h-full object-cover transition-all duration-500" alt="">
                         <div th:unless="${service.imageUrl != null}"
                             class="w-full h-full flex items-center justify-center">
@@ -59,8 +60,9 @@
                         class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                         <div th:each="imgUrl : ${service.imageUrls}"
                             class="w-20 h-20 rounded-xl overflow-hidden cursor-pointer border-2 border-transparent hover:border-premium-orange transition-all flex-shrink-0 shadow-md transform hover:scale-105">
-                            <img th:src="@{'/uploads/' + ${imgUrl}}" class="w-full h-full object-cover"
-                                th:onclick="'document.getElementById(\'mainImage\').src = \'/uploads/' + ${imgUrl} + '\''"
+                            <img th:src="${#strings.startsWith(imgUrl, 'http://') or #strings.startsWith(imgUrl, 'https://') or #strings.startsWith(imgUrl, '/')} ? ${imgUrl} : @{/uploads/{img}(img=${imgUrl})}"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80';"
+                                onclick="document.getElementById('mainImage').src = this.src"
                                 alt="">
                         </div>
                     </div>

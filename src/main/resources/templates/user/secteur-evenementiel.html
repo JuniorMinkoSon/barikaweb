@@ -1,153 +1,240 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:text="${secteur} + ' | UneVie'">Secteur | UneVie</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        premium: { orange: '#f97316', dark: '#1a1a1a', light: '#fdfcfb' }
-                    },
-                    fontFamily: { sans: ['Outfit', 'sans-serif'] }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              premium: { orange: '#f97316', dark: '#1a1a1a', light: '#fdfcfb' },
+            },
+            fontFamily: { sans: ['Outfit', 'sans-serif'] },
+          },
+        },
+      };
     </script>
     <style>
-        .service-card {
-            transition: all 0.3s ease;
-        }
+      .service-card {
+        transition: all 0.3s ease;
+      }
 
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
+      .service-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-gradient-to-br from-slate-50 via-orange-50/30 to-slate-100 min-h-screen font-sans">
-
+  <body
+    class="bg-gradient-to-br from-slate-50 via-orange-50/30 to-slate-100 min-h-screen font-sans"
+  >
     <div th:replace="~{fragments/header :: header}"></div>
 
     <!-- Hero -->
-    <section class="relative py-16 bg-gradient-to-r from-blue-600 to-blue-800 overflow-hidden" th:classappend="${secteurCode == 'LOISIRS'} ? 'from-emerald-600 to-emerald-800' : 
+    <section
+      class="relative py-16 bg-gradient-to-r from-blue-600 to-blue-800 overflow-hidden"
+      th:classappend="${secteurCode == 'LOISIRS'} ? 'from-emerald-600 to-emerald-800' : 
                             (${secteurCode == 'ALIMENTAIRE'} ? 'from-orange-500 to-amber-600' : 
-                            (${secteurCode == 'EVENEMENTIEL'} ? 'from-purple-600 to-purple-800' : ''))">
-        <div class="container mx-auto px-6">
-            <nav class="flex items-center gap-2 text-white/60 text-sm mb-6">
-                <a th:href="@{/}" class="hover:text-white">Accueil</a>
-                <i class="fa-solid fa-chevron-right text-xs"></i>
-                <a th:href="@{/reservation/secteurs}" class="hover:text-white">Secteurs</a>
-                <i class="fa-solid fa-chevron-right text-xs"></i>
-                <span class="text-white font-bold" th:text="${secteur}">Secteur</span>
-            </nav>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white" th:text="${secteur}">Secteur</h1>
-            <p class="text-xl text-white/70 mt-4">Découvrez les meilleurs prestataires</p>
-        </div>
+                            (${secteurCode == 'EVENEMENTIEL'} ? 'from-purple-600 to-purple-800' : ''))"
+    >
+      <div class="container mx-auto px-6">
+        <nav class="flex items-center gap-2 text-white/60 text-sm mb-6">
+          <a th:href="@{/}" class="hover:text-white">Accueil</a>
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+          <a th:href="@{/reservation/secteurs}" class="hover:text-white"
+            >Secteurs</a
+          >
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+          <span class="text-white font-bold" th:text="${secteur}">Secteur</span>
+        </nav>
+        <h1
+          class="text-4xl md:text-5xl font-extrabold text-white"
+          th:text="${secteur}"
+        >
+          Secteur
+        </h1>
+        <p class="text-xl text-white/70 mt-4">
+          Découvrez les meilleurs prestataires
+        </p>
+      </div>
     </section>
 
     <!-- Fournisseurs horizontaux -->
     <section class="py-12 bg-white border-b">
-        <div class="container mx-auto px-6">
-            <h2 class="text-2xl font-extrabold text-slate-800 mb-6">
-                <i class="fa-solid fa-building text-premium-orange mr-2"></i>
-                Nos Fournisseurs
-            </h2>
+      <div class="container mx-auto px-6">
+        <h2 class="text-2xl font-extrabold text-slate-800 mb-6">
+          <i class="fa-solid fa-building text-premium-orange mr-2"></i>
+          Nos Fournisseurs
+        </h2>
 
-            <div th:if="${fournisseurs.empty}" class="text-center py-8 text-slate-500">
-                Aucun fournisseur disponible pour le moment.
-            </div>
-
-            <div th:unless="${fournisseurs.empty}" class="flex gap-6 overflow-x-auto pb-4">
-                <a th:each="f : ${fournisseurs}" th:href="@{/reservation/fournisseur/{id}(id=${f.id})}"
-                    class="flex-shrink-0 w-64 bg-slate-50 rounded-2xl p-6 hover:bg-white hover:shadow-xl transition-all group">
-                    <div
-                        class="w-16 h-16 bg-gradient-to-br from-premium-orange to-amber-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-store text-white text-2xl"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-800 text-lg" th:text="${f.nomEntreprise}">Entreprise</h3>
-                    <p class="text-slate-500 text-sm mt-1" th:text="${f.ville}">Ville</p>
-                    <div class="flex items-center gap-2 mt-3 text-premium-orange text-sm font-bold">
-                        Voir les services <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </a>
-            </div>
+        <div
+          th:if="${fournisseurs.empty}"
+          class="text-center py-8 text-slate-500"
+        >
+          Aucun fournisseur disponible pour le moment.
         </div>
+
+        <div
+          th:unless="${fournisseurs.empty}"
+          class="flex gap-6 overflow-x-auto pb-4"
+        >
+          <a
+            th:each="f : ${fournisseurs}"
+            th:href="@{/reservation/fournisseur/{id}(id=${f.id})}"
+            class="flex-shrink-0 w-64 bg-slate-50 rounded-2xl p-6 hover:bg-white hover:shadow-xl transition-all group"
+          >
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-premium-orange to-amber-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+            >
+              <i class="fa-solid fa-store text-white text-2xl"></i>
+            </div>
+            <h3
+              class="font-bold text-slate-800 text-lg"
+              th:text="${f.nomEntreprise}"
+            >
+              Entreprise
+            </h3>
+            <p class="text-slate-500 text-sm mt-1" th:text="${f.ville}">
+              Ville
+            </p>
+            <div
+              class="flex items-center gap-2 mt-3 text-premium-orange text-sm font-bold"
+            >
+              Voir les services <i class="fa-solid fa-arrow-right"></i>
+            </div>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Services -->
     <section class="py-16">
-        <div class="container mx-auto px-6">
-            <h2 class="text-2xl font-extrabold text-slate-800 mb-8">
-                <i class="fa-solid fa-concierge-bell text-premium-orange mr-2"></i>
-                Services Populaires
-            </h2>
+      <div class="container mx-auto px-6">
+        <h2 class="text-2xl font-extrabold text-slate-800 mb-8">
+          <i class="fa-solid fa-concierge-bell text-premium-orange mr-2"></i>
+          Services Populaires
+        </h2>
 
-            <div th:if="${services.empty}" class="text-center py-12 bg-white rounded-2xl">
-                <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fa-solid fa-box-open text-slate-400 text-3xl"></i>
-                </div>
-                <p class="text-slate-500">Aucun service disponible</p>
-            </div>
-
-            <div th:unless="${services.empty}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a th:each="s : ${services}" th:href="@{/reservation/service/{id}(id=${s.id})}"
-                    class="service-card bg-white rounded-3xl overflow-hidden shadow-lg group">
-
-                    <div class="h-48 bg-gradient-to-br from-slate-200 to-slate-300 relative">
-                        <img th:if="${s.imageUrl != null}" th:src="${s.imageUrl}" class="w-full h-full object-cover"
-                            alt="">
-                        <div th:unless="${s.imageUrl != null}" class="w-full h-full flex items-center justify-center">
-                            <i class="fa-solid fa-image text-slate-400 text-4xl"></i>
-                        </div>
-                        <div
-                            class="absolute top-4 right-4 bg-premium-orange text-white px-3 py-1 rounded-full text-sm font-bold">
-                            <span th:text="${#numbers.formatDecimal(s.prix, 0, 'COMMA', 0, 'POINT')}">0</span> FCFA
-                        </div>
-                    </div>
-
-                    <div class="p-6">
-                        <p class="text-sm text-slate-400 font-medium" th:text="${s.fournisseur.nomEntreprise}">
-                            Fournisseur</p>
-                        <div class="flex items-center justify-between mt-1">
-                            <h3 class="text-xl font-bold text-slate-800" th:text="${s.nom}">Service</h3>
-                            <div class="flex items-center gap-1 text-amber-500 text-sm font-bold">
-                                <i class="fa-solid fa-star"></i>
-                                <span
-                                    th:text="${s.noteMoyenne != null ? #numbers.formatDecimal(s.noteMoyenne, 1, 1) : '0.0'}">0.0</span>
-                            </div>
-                        </div>
-                        <p class="text-slate-500 text-sm mt-2 line-clamp-2" th:text="${s.description}">Description</p>
-
-                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
-                            <div class="flex items-center gap-2 text-slate-400 text-sm">
-                                <i class="fa-solid fa-calendar-check"></i>
-                                <span th:text="${s.nombreReservations} + ' réservations'">0 réservations</span>
-                            </div>
-                            <div
-                                class="w-10 h-10 bg-premium-orange/10 rounded-xl flex items-center justify-center group-hover:bg-premium-orange transition-colors">
-                                <i
-                                    class="fa-solid fa-arrow-right text-premium-orange group-hover:text-white transition-colors"></i>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        <div
+          th:if="${services.empty}"
+          class="text-center py-12 bg-white rounded-2xl"
+        >
+          <div
+            class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <i class="fa-solid fa-box-open text-slate-400 text-3xl"></i>
+          </div>
+          <p class="text-slate-500">Aucun service disponible</p>
         </div>
+
+        <div
+          th:unless="${services.empty}"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <a
+            th:each="s : ${services}"
+            th:href="@{/reservation/service/{id}(id=${s.id})}"
+            class="service-card bg-white rounded-3xl overflow-hidden shadow-lg group"
+          >
+            <div
+              class="h-48 bg-gradient-to-br from-slate-200 to-slate-300 relative"
+            >
+              <img
+                th:if="${s.imageUrl != null}"
+                th:src="${s.imageUrl}"
+                class="w-full h-full object-cover"
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=80';
+                "
+                alt=""
+              />
+              <div
+                th:unless="${s.imageUrl != null}"
+                class="w-full h-full flex items-center justify-center"
+              >
+                <i class="fa-solid fa-image text-slate-400 text-4xl"></i>
+              </div>
+              <div
+                class="absolute top-4 right-4 bg-premium-orange text-white px-3 py-1 rounded-full text-sm font-bold"
+              >
+                <span
+                  th:text="${#numbers.formatDecimal(s.prix, 0, 'COMMA', 0, 'POINT')}"
+                  >0</span
+                >
+                FCFA
+              </div>
+            </div>
+
+            <div class="p-6">
+              <p
+                class="text-sm text-slate-400 font-medium"
+                th:text="${s.fournisseur.nomEntreprise}"
+              >
+                Fournisseur
+              </p>
+              <div class="flex items-center justify-between mt-1">
+                <h3 class="text-xl font-bold text-slate-800" th:text="${s.nom}">
+                  Service
+                </h3>
+                <div
+                  class="flex items-center gap-1 text-amber-500 text-sm font-bold"
+                >
+                  <i class="fa-solid fa-star"></i>
+                  <span
+                    th:text="${s.noteMoyenne != null ? #numbers.formatDecimal(s.noteMoyenne, 1, 1) : '0.0'}"
+                    >0.0</span
+                  >
+                </div>
+              </div>
+              <p
+                class="text-slate-500 text-sm mt-2 line-clamp-2"
+                th:text="${s.description}"
+              >
+                Description
+              </p>
+
+              <div
+                class="flex items-center justify-between mt-6 pt-4 border-t border-slate-100"
+              >
+                <div class="flex items-center gap-2 text-slate-400 text-sm">
+                  <i class="fa-solid fa-calendar-check"></i>
+                  <span th:text="${s.nombreReservations} + ' réservations'"
+                    >0 réservations</span
+                  >
+                </div>
+                <div
+                  class="w-10 h-10 bg-premium-orange/10 rounded-xl flex items-center justify-center group-hover:bg-premium-orange transition-colors"
+                >
+                  <i
+                    class="fa-solid fa-arrow-right text-premium-orange group-hover:text-white transition-colors"
+                  ></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </section>
 
     <div th:replace="~{fragments/footer :: footer}"></div>
-
-</body>
-
+  </body>
 </html>

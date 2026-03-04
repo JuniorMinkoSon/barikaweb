@@ -2,77 +2,80 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="sidebar">
     <!-- Overlay for mobile -->
-    <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" onclick="toggleSidebar()"></div>
+    <div id="sidebarOverlay" class="fixed inset-0 bg-zipa-darker/80 z-40 hidden md:hidden" onclick="toggleSidebar()">
+    </div>
 
     <!-- Sidebar -->
     <aside id="adminSidebar"
-        class="fixed top-0 left-0 h-full w-72 bg-noir-profond text-white z-50 transition-transform duration-300 -translate-x-full md:translate-x-0 shadow-2xl flex flex-col">
+        class="fixed top-0 left-0 h-full w-72 bg-zipa-darker text-zipa-light z-50 transition-transform duration-300 -translate-x-full md:translate-x-0 border-r border-white/5 flex flex-col">
         <!-- Logo -->
-        <div class="p-8 border-b border-white/10">
-            <a th:href="@{/}" class="flex items-center gap-3">
-                <img th:src="@{/images/logo_bar1.png}" alt="Logo" class="h-10 w-auto brightness-200">
+        <div class="p-10 border-b border-white/5">
+            <a th:href="@{/}" class="flex flex-col group">
+                <span
+                    class="text-2xl font-serif text-zipa-gold leading-none group-hover:scale-105 transition-transform">ZIPA</span>
+                <span
+                    class="text-[8px] font-sans font-bold tracking-[0.3em] text-zipa-text-muted uppercase leading-none mt-2">Peintre
+                    Officiel</span>
             </a>
-            <p class="text-or-royal text-xs font-bold tracking-widest uppercase mt-4 opacity-70">Administration</p>
+            <div class="mt-8 px-4 py-2 bg-zipa-gold/10 border border-zipa-gold/20 rounded-lg inline-block">
+                <p class="text-zipa-gold text-[9px] font-sans font-bold tracking-widest uppercase italic">Console Admin
+                </p>
+            </div>
         </div>
 
         <!-- Navigation -->
-        <nav class="flex-1 overflow-y-auto p-6 space-y-2">
+        <nav class="flex-1 overflow-y-auto p-8 space-y-4">
             <a th:href="@{/admin/dashboard}"
-                class="flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-white/5 group"
-                th:classappend="${currentUri == '/admin/dashboard' ? 'bg-or-royal text-noir-profond font-bold' : 'text-gray-400'}">
-                <i class="fa-solid fa-gauge-high text-lg"
-                    th:classappend="${currentUri == '/admin/dashboard' ? '' : 'group-hover:text-or-royal'}"></i>
-                <span>Tableau de bord</span>
+                class="flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group"
+                th:classappend="${currentUri == '/admin/dashboard' ? 'bg-zipa-gold text-zipa-dark font-bold shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : 'text-zipa-text-muted hover:bg-white/5 hover:text-zipa-light'}">
+                <i class="fa-solid fa-gauge-high text-xl"></i>
+                <span class="text-[11px] font-sans font-bold uppercase tracking-widest">Dashboard</span>
             </a>
 
             <a th:href="@{/admin/messages}"
-                class="flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-white/5 group"
-                th:classappend="${currentUri == '/admin/messages' ? 'bg-or-royal text-noir-profond font-bold' : 'text-gray-400'}">
-                <i class="fa-solid fa-envelope text-lg"
-                    th:classappend="${currentUri == '/admin/messages' ? '' : 'group-hover:text-or-royal'}"></i>
-                <span>Messages reçus</span>
+                class="flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group"
+                th:classappend="${currentUri == '/admin/messages' ? 'bg-zipa-gold text-zipa-dark font-bold shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : 'text-zipa-text-muted hover:bg-white/5 hover:text-zipa-light'}">
+                <i class="fa-solid fa-envelope text-xl"></i>
+                <span class="text-[11px] font-sans font-bold uppercase tracking-widest">Messages</span>
             </a>
 
             <a th:href="@{/admin/commandes}"
-                class="flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-white/5 group"
-                th:classappend="${currentUri == '/admin/commandes' ? 'bg-or-royal text-noir-profond font-bold' : 'text-gray-400'}">
-                <i class="fa-solid fa-box text-lg"
-                    th:classappend="${currentUri == '/admin/commandes' ? '' : 'group-hover:text-or-royal'}"></i>
-                <span>Commandes</span>
+                class="flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group"
+                th:classappend="${currentUri == '/admin/commandes' ? 'bg-zipa-gold text-zipa-dark font-bold shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : 'text-zipa-text-muted hover:bg-white/5 hover:text-zipa-light'}">
+                <i class="fa-solid fa-box-open text-xl"></i>
+                <span class="text-[11px] font-sans font-bold uppercase tracking-widest">Commandes</span>
             </a>
 
             <a th:href="@{/admin/produits}"
-                class="flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-white/5 group"
-                th:classappend="${currentUri != null && currentUri.startsWith('/admin/produits') ? 'bg-or-royal text-noir-profond font-bold' : 'text-gray-400'}">
-                <i class="fa-solid fa-cart-shopping text-lg"
-                    th:classappend="${currentUri != null && currentUri.startsWith('/admin/produits') ? '' : 'group-hover:text-or-royal'}"></i>
-                <span>Produits</span>
+                class="flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group"
+                th:classappend="${currentUri != null && currentUri.startsWith('/admin/produits') ? 'bg-zipa-gold text-zipa-dark font-bold shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : 'text-zipa-text-muted hover:bg-white/5 hover:text-zipa-light'}">
+                <i class="fa-solid fa-paintbrush text-xl"></i>
+                <span class="text-[11px] font-sans font-bold uppercase tracking-widest">Œuvres</span>
             </a>
 
             <a th:href="@{/admin/articles}"
-                class="flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-300 hover:bg-white/5 group"
-                th:classappend="${currentUri != null && currentUri.startsWith('/admin/articles') ? 'bg-or-royal text-noir-profond font-bold' : 'text-gray-400'}">
-                <i class="fa-solid fa-newspaper text-lg"
-                    th:classappend="${currentUri != null && currentUri.startsWith('/admin/articles') ? '' : 'group-hover:text-or-royal'}"></i>
-                <span>Blog / Articles</span>
+                class="flex items-center gap-4 px-6 py-4 rounded-2xl transition-all duration-300 group"
+                th:classappend="${currentUri != null && currentUri.startsWith('/admin/articles') ? 'bg-zipa-gold text-zipa-dark font-bold shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : 'text-zipa-text-muted hover:bg-white/5 hover:text-zipa-light'}">
+                <i class="fa-solid fa-newspaper text-xl"></i>
+                <span class="text-[11px] font-sans font-bold uppercase tracking-widest">Journal</span>
             </a>
         </nav>
 
         <!-- Profile / Logout -->
-        <div class="p-6 border-t border-white/10">
+        <div class="p-8 border-t border-white/5">
             <a th:href="@{/logout}"
-                class="flex items-center gap-4 px-4 py-3 rounded-xl text-red-400 hover:bg-red-400/10 transition-all duration-300">
-                <i class="fa-solid fa-right-from-bracket text-lg"></i>
-                <span>Déconnexion</span>
+                class="flex items-center gap-4 px-6 py-4 rounded-2xl text-zipa-gray hover:bg-white/5 transition-all duration-300 group hover:text-white">
+                <i class="fa-solid fa-power-off text-xl group-hover:rotate-90 transition-transform"></i>
+                <span class="text-[11px] font-sans font-bold uppercase tracking-widest">Quitter Admin</span>
             </a>
         </div>
     </aside>
 
     <!-- Mobile toggle button -->
     <button
-        class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-or-royal text-noir-profond rounded-full shadow-2xl z-50 flex items-center justify-center text-xl"
+        class="md:hidden fixed bottom-8 right-8 w-16 h-16 bg-zipa-gold text-zipa-dark rounded-2xl shadow-2xl z-50 flex items-center justify-center text-2xl"
         onclick="toggleSidebar()">
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars-staggered"></i>
     </button>
 
     <script>

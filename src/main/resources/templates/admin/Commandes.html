@@ -4,58 +4,65 @@
 
 <div id="commandesContent">
     <div class="mb-8">
-        <h3 class="text-2xl font-bold text-noir-profond font-playfair">Suivi des commandes</h3>
-        <p class="text-gray-500">Gérez le statut des commandes clients en temps réel.</p>
+        <h3 class="text-2xl font-serif text-zipa-light">Suivi des commandes</h3>
+        <p class="text-zipa-text-muted font-light mt-2">Gérez le statut des acquisitions en temps réel.</p>
     </div>
 
     <!-- Table Container -->
-    <div class="card-luxury overflow-hidden">
+    <div class="bg-zipa-darker border border-white/5 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-noir-profond text-white uppercase text-xs tracking-wider">
-                        <th class="px-6 py-4 font-bold">ID</th>
-                        <th class="px-6 py-4 font-bold">Client</th>
-                        <th class="px-6 py-4 font-bold">Date & Heure</th>
-                        <th class="px-6 py-4 font-bold">Total</th>
-                        <th class="px-6 py-4 font-bold">Statut</th>
-                        <th class="px-6 py-4 font-bold text-center">Mettre à jour</th>
+                    <tr
+                        class="bg-zipa-dark border-b border-white/10 text-zipa-light font-sans font-bold uppercase text-[10px] tracking-widest">
+                        <th class="px-6 py-4">ID</th>
+                        <th class="px-6 py-4">Collectionneur</th>
+                        <th class="px-6 py-4">Date & Heure</th>
+                        <th class="px-6 py-4">Total</th>
+                        <th class="px-6 py-4">Statut</th>
+                        <th class="px-6 py-4 text-center">Action</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
-                    <tr th:each="cmd : ${commandes}" class="hover:bg-creme-luxe/50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-noir-profond" th:text="'#' + ${cmd.id}">#1</td>
+                <tbody class="divide-y divide-white/5 text-sm text-zipa-light font-light">
+                    <tr th:each="cmd : ${commandes}" class="hover:bg-white/5 transition-colors">
+                        <td class="px-6 py-4 font-bold text-zipa-gold" th:text="'#' + ${cmd.id}">#1</td>
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center text-or-royal"
-                                    th:text="${cmd.user != null ? #strings.substring(cmd.user.username,0,1) : 'A'}">
-                                    U
+                                <div class="w-8 h-8 rounded-full bg-zipa-gold/10 flex items-center justify-center text-zipa-gold font-serif font-bold"
+                                    th:text="${cmd.user != null ? #strings.substring(cmd.user.nom,0,1) : 'A'}">
+                                    C
                                 </div>
-                                <span class="font-medium"
-                                    th:text="${cmd.user != null ? cmd.user.username : 'Anonyme'}">Client</span>
+                                <span class="font-medium font-sans"
+                                    th:text="${cmd.user != null ? cmd.user.nom : 'Anonyme'}">Client</span>
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <div class="text-sm text-noir-profond" th:text="${cmd.dateCommande}">01/01/2026</div>
+                            <div class="text-zipa-text-muted" th:text="${cmd.dateCommande}">01/01/2026</div>
                         </td>
-                        <td class="px-6 py-4 font-bold text-or-royal" th:text="${cmd.total} + ' FCFA'">0 FCFA</td>
+                        <td class="px-6 py-4 font-bold text-zipa-light"
+                            th:text="${#numbers.formatDecimal(cmd.total, 0, 'WHITESPACE', 0, 'POINT')} + ' CFA'">0 CFA
+                        </td>
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                                th:classappend="${cmd.statut == 'EN_ATTENTE' ? 'bg-orange/10 text-orange' : (cmd.statut == 'EN_COURS' ? 'bg-blue-500/10 text-blue-500' : 'bg-green-500/10 text-green-500')}"
+                            <!-- Adaptation des couleurs pour le thème sombre -->
+                            <span
+                                class="px-3 py-1 rounded-sm text-[10px] font-sans font-bold uppercase tracking-widest border"
+                                th:classappend="${cmd.statut == 'EN_ATTENTE' ? 'border-yellow-500/30 text-yellow-500 bg-yellow-500/10' : (cmd.statut == 'EN_COURS' ? 'border-blue-500/30 text-blue-500 bg-blue-500/10' : 'border-green-500/30 text-green-500 bg-green-500/10')}"
                                 th:text="${cmd.statut}">Statut</span>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <form th:action="@{'/admin/commandes/update/' + ${cmd.id}}" method="post"
                                 class="flex gap-2 items-center justify-center">
                                 <select name="statut"
-                                    class="px-3 py-1 text-xs rounded-lg border border-gray-200 focus:border-or-royal outline-none bg-white">
+                                    class="px-3 py-1.5 text-xs font-sans font-bold uppercase tracking-widest bg-zipa-dark border border-white/10 text-zipa-light focus:border-zipa-gold outline-none cursor-pointer">
                                     <option value="EN_ATTENTE" th:selected="${cmd.statut == 'EN_ATTENTE'}">ATTENTE
                                     </option>
-                                    <option value="EN_COURS" th:selected="${cmd.statut == 'EN_COURS'}">EN COURS</option>
-                                    <option value="LIVRÉ" th:selected="${cmd.statut == 'LIVRÉ'}">LIVRÉ</option>
+                                    <option value="EN_COURS" th:selected="${cmd.statut == 'EN_COURS'}">EN PREPARATION
+                                    </option>
+                                    <option value="LIVRÉ" th:selected="${cmd.statut == 'LIVRÉ'}">LIVRÉ / EXPÉDIÉ
+                                    </option>
                                 </select>
                                 <button type="submit"
-                                    class="w-8 h-8 rounded-lg bg-noir-profond text-white hover:bg-noir-elegant transition-colors flex items-center justify-center">
+                                    class="w-8 h-8 bg-zipa-gold text-zipa-dark hover:bg-white transition-colors flex items-center justify-center shadow-sm">
                                     <i class="fa-solid fa-check text-xs"></i>
                                 </button>
                             </form>
@@ -66,11 +73,11 @@
         </div>
 
         <!-- Empty State -->
-        <div th:if="${#lists.isEmpty(commandes)}" class="p-12 text-center">
-            <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
+        <div th:if="${#lists.isEmpty(commandes)}" class="p-16 text-center">
+            <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 text-zipa-gray">
                 <i class="fa-solid fa-box-open text-3xl"></i>
             </div>
-            <p class="text-gray-500">Aucune commande trouvée.</p>
+            <p class="text-zipa-text-muted font-light">Aucune commande n'a été enregistrée pour le moment.</p>
         </div>
     </div>
 </div>

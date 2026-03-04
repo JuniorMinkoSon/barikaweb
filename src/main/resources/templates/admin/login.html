@@ -1,111 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head (title='Connexion Admin - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head (title='Atelier - Peintre Zipa Officiel')}"></head>
 
-<body
-    class="bg-noir-profond min-h-screen flex items-center justify-center p-6 bg-[url('https://www.transparenttextures.com/patterns/dark-matter.png')]">
+<body class="bg-zipa-darker min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
 
-    <div class="w-full max-w-md">
+    <!-- Brand Background Decoration -->
+    <div class="absolute inset-0 opacity-20 pointer-events-none">
+        <div
+            class="absolute top-0 right-0 w-[50rem] h-[50rem] bg-zipa-gold/20 rounded-full blur-[10rem] -translate-y-1/2 translate-x-1/2">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[40rem] h-[40rem] bg-zipa-dark/50 rounded-full blur-[8rem] translate-y-1/2 -translate-x-1/2">
+        </div>
+    </div>
+
+    <div class="w-full max-w-md relative z-10">
         <!-- Logo -->
-        <div class="text-center mb-10">
-            <img th:src="@{/images/logo_bar1.png}" alt="Logo" class="h-20 mx-auto mb-6 brightness-200">
-            <h2 class="text-3xl font-bold text-white font-playfair mb-2">Espace <span class="text-or-royal">Admin</span>
-            </h2>
-            <p class="text-gray-400">Connectez-vous pour gérer la plateforme</p>
+        <div class="text-center mb-16 animate-fade-in">
+            <a th:href="@{/}" class="flex flex-col mb-10 group">
+                <span
+                    class="text-5xl font-serif text-zipa-gold leading-none group-hover:scale-105 transition-transform">ZIPA</span>
+                <span
+                    class="text-xs font-sans font-bold tracking-[0.3em] text-zipa-text-muted uppercase leading-none mt-2">Peintre
+                    Officiel</span>
+            </a>
+            <h2 class="text-2xl font-serif uppercase tracking-widest text-zipa-light mb-2">PORTES DE <span
+                    class="italic text-zipa-gold">l'Atelier</span></h2>
         </div>
 
         <!-- Login Card -->
-        <div class="glassmorphism p-10 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden group">
-            <!-- Decorative gradient -->
-            <div
-                class="absolute -top-10 -right-10 w-32 h-32 bg-or-royal/10 rounded-full blur-3xl group-hover:bg-or-royal/20 transition-all duration-700">
-            </div>
-
-            <form th:action="@{/login}" method="post" class="space-y-6 relative z-10">
+        <div class="bg-zipa-dark border border-white/10 p-12 md:p-16 shadow-2xl animate-slide-up relative">
+            <div class="absolute top-0 left-0 w-12 h-1 bg-zipa-gold"></div>
+            <form th:action="@{/login}" method="post" class="space-y-8">
                 <!-- Message d'erreur -->
                 <div th:if="${param.error}"
-                    class="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl text-sm flex items-center gap-3 animate-shake">
-                    <i class="fa-solid fa-circle-exclamation"></i>
-                    Identifiants incorrects.
+                    class="p-5 bg-red-500/10 border border-red-500/30 text-red-500 text-[10px] font-sans font-bold uppercase tracking-widest text-center animate-shake">
+                    <i class="fa-solid fa-circle-exclamation mr-3 text-sm"></i> Clé incorrecte
                 </div>
 
-                <div>
-                    <label class="block text-gray-400 text-sm font-medium mb-2">Adresse Email</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                <div class="space-y-3">
+                    <label
+                        class="text-[10px] uppercase font-sans font-bold tracking-[0.2em] text-zipa-text-muted block ml-1">Courriel
+                        de l'artiste</label>
+                    <div class="relative group">
+                        <i
+                            class="fa-regular fa-envelope absolute left-6 top-1/2 -translate-y-1/2 text-zipa-gray group-focus-within:text-zipa-gold transition-colors"></i>
                         <input type="email" name="email" required
-                            class="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white focus:border-or-royal focus:ring-1 focus:ring-or-royal/50 outline-none transition-all"
-                            placeholder="admin@unevie.ci">
+                            class="w-full bg-zipa-darker border border-white/5 py-5 pl-14 pr-6 focus:outline-none focus:border-zipa-gold outline-none transition-all text-zipa-light placeholder-zipa-gray/50 font-light"
+                            placeholder="artiste@zipa.art">
                     </div>
                 </div>
 
-                <div>
-                    <label class="block text-gray-400 text-sm font-medium mb-2">Mot de passe</label>
-                    <div class="relative">
-                        <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                <div class="space-y-3">
+                    <label
+                        class="text-[10px] uppercase font-sans font-bold tracking-[0.2em] text-zipa-text-muted block ml-1">Code
+                        Secret</label>
+                    <div class="relative group">
+                        <i
+                            class="fa-solid fa-lock absolute left-6 top-1/2 -translate-y-1/2 text-zipa-gray group-focus-within:text-zipa-gold transition-colors"></i>
                         <input type="password" name="password" required
-                            class="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white focus:border-or-royal focus:ring-1 focus:ring-or-royal/50 outline-none transition-all"
+                            class="w-full bg-zipa-darker border border-white/5 py-5 pl-14 pr-6 focus:outline-none focus:border-zipa-gold outline-none transition-all text-zipa-light placeholder-zipa-gray/50 font-light"
                             placeholder="••••••••">
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between text-sm">
-                    <label class="flex items-center gap-2 text-gray-400 cursor-pointer">
+                <div
+                    class="flex items-center justify-between text-[10px] font-sans font-bold uppercase tracking-widest text-zipa-text-muted px-2">
+                    <label class="flex items-center gap-3 cursor-pointer hover:text-zipa-light transition-colors">
                         <input type="checkbox"
-                            class="rounded border-white/10 bg-white/5 text-or-royal focus:ring-or-royal">
-                        Se souvenir de moi
+                            class="w-4 h-4 rounded-sm border-white/10 bg-zipa-darker checked:bg-zipa-gold focus:ring-zipa-gold cursor-pointer accent-zipa-gold">
+                        Rester connecté
                     </label>
-                    <a href="#" class="text-or-royal hover:text-or-clair transition-colors">Oublié ?</a>
                 </div>
 
                 <button type="submit"
-                    class="w-full btn-gold py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-2 group/btn">
-                    <span>Connexion</span>
-                    <i class="fa-solid fa-arrow-right group-hover/btn:translate-x-1 transition-transform"></i>
+                    class="w-full btn-zipa !bg-zipa-gold !text-zipa-dark !justify-center !py-6 !text-sm shadow-[0_10px_40px_rgba(212,175,55,0.2)] hover:!bg-white">
+                    ENTRER DANS L'ATELIER <i class="fa-solid fa-arrow-right ml-3"></i>
                 </button>
             </form>
         </div>
 
         <!-- Back Link -->
-        <div class="mt-8 text-center">
+        <div class="mt-12 text-center animate-fade-in delay-300">
             <a th:href="@{/}"
-                class="text-gray-500 hover:text-white transition-colors flex items-center justify-center gap-2">
-                <i class="fa-solid fa-arrow-left text-xs"></i>
-                Retour au site public
+                class="text-zipa-text-muted hover:text-zipa-gold transition-all flex items-center justify-center gap-4 group">
+                <i class="fa-solid fa-arrow-left text-xs group-hover:-translate-x-2 transition-transform"></i>
+                <span class="text-[10px] font-sans font-bold uppercase tracking-[0.3em]">Retourner à la Galerie</span>
             </a>
         </div>
     </div>
 
-    <style>
-        .animate-shake {
-            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
-        }
-
-        @keyframes shake {
-
-            10%,
-            90% {
-                transform: translate3d(-1px, 0, 0);
-            }
-
-            20%,
-            80% {
-                transform: translate3d(2px, 0, 0);
-            }
-
-            30%,
-            50%,
-            70% {
-                transform: translate3d(-4px, 0, 0);
-            }
-
-            40%,
-            60% {
-                transform: translate3d(4px, 0, 0);
-            }
-        }
-    </style>
 </body>
 
 </html>

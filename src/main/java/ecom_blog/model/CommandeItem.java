@@ -5,6 +5,7 @@ import lombok.*;
 
 @Entity
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommandeItem extends BaseEntity {

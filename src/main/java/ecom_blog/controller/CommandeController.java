@@ -16,6 +16,7 @@ import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/panier")
+@SuppressWarnings("unchecked")
 public class CommandeController {
 
     private final ProduitService produitService;

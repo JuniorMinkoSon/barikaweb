@@ -1,285 +1,209 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('À Propos - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('L\'Artiste - Peintre Zipa Officiel')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- HERO PAGE -->
-    <section class="relative py-24 md:py-32 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/90 to-noir-profond/70"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-or-royal/10 rounded-full blur-3xl"></div>
+    <!-- HERO CAROUSEL (same as homepage) -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-zipa-darker"
+        id="proposCarousel">
+        <div id="proposCarouselContainer" class="absolute inset-0 z-0 h-full w-full"></div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-playfair font-bold text-white mb-4">
-                À propos de <span class="text-or-royal">Baraka Synergie</span>
+        <div class="absolute inset-0 bg-gradient-to-t from-zipa-darker via-zipa-darker/50 to-transparent z-10"></div>
+
+        <div class="section-zipa relative z-20 text-center flex flex-col items-center">
+            <span class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
+                Identité &amp; Parcours
+            </span>
+            <h1 class="heading-primary text-zipa-light mb-8">
+                PEINTRE <span class="italic text-zipa-gold font-light">Zipa</span>
             </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Deux leaders – Une vision – L'excellence pour standard
+            <p
+                class="text-sm md:text-base text-zipa-light/70 max-w-2xl mx-auto font-sans uppercase tracking-[0.2em] leading-relaxed">
+                Une vie dédiée à l'expression chromatique et à la sublimation de la culture africaine contemporaine.
             </p>
+        </div>
+
+        <!-- Carousel Controls -->
+        <div class="absolute bottom-10 inset-x-0 z-20 flex justify-between items-center px-12 md:px-24 w-full">
+            <div class="flex gap-4">
+                <button onclick="proposPrev()"
+                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-zipa-dark transition-all duration-300 backdrop-blur-sm group">
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                </button>
+                <button onclick="proposNext()"
+                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-zipa-dark transition-all duration-300 backdrop-blur-sm group">
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+            <div class="text-white font-sans tracking-[0.3em] text-xs font-bold flex items-center gap-4">
+                <span id="proposCounter" class="min-w-[40px] text-right">01</span>
+                <div class="h-[1px] w-12 bg-white/30"></div>
+                <span class="text-white/50">32</span>
+            </div>
         </div>
     </section>
 
-    <!-- QUI SOMMES-NOUS -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <!-- BIOGRAPHY -->
+    <section class="py-32 bg-zipa-light">
+        <div class="section-zipa reveal-on-scroll">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
                 <!-- Texte -->
                 <div class="order-2 lg:order-1">
-                    <h2 class="text-3xl md:text-4xl font-playfair font-bold text-noir-profond mb-6">
-                        Qui <span class="text-or-royal">sommes-nous</span> ?
+                    <h2 class="heading-secondary">
+                        L'HOMME <span class="italic font-light text-zipa-gold">derrière la toile</span>
                     </h2>
-                    <div class="space-y-4 text-gray-600">
+                    <div class="space-y-6 text-zipa-text-muted text-lg leading-relaxed font-light">
                         <p>
-                            <strong class="text-noir-profond">Baraka Synergie</strong> est dirigée par deux hommes
-                            stratèges et déterminés, animés par une mission simple : garantir des <strong
-                                class="text-or-royal">finitions haut de gamme</strong>, un accompagnement foncier
-                            complet jusqu'à l'<strong>ACD</strong>, et une expertise unique dans le design, la peinture,
-                            les matériaux et l'optimisation immobilière.
+                            Figure montante de la scène artistique d'Abidjan, <strong
+                                class="text-zipa-dark font-sans">Peintre Zipa</strong> s'est imposé par un style unique
+                            où s'entremêlent abstraction lyrique et figuration contemporaine.
                         </p>
                         <p>
-                            Notre force réside dans notre exigence, notre transparence et notre capacité à transformer
-                            les projets les plus ambitieux en réalisations durables.
+                            Inspiré par l'effervescence de la métropole ivoirienne et par la richesse des traditions
+                            africaines, il utilise la toile comme un espace de dialogue intemporel. Sa maîtrise de la
+                            peinture à l'huile et de l'acrylique lui permet de sculpter la lumière avec une audace
+                            colorimétrique remarquable.
                         </p>
                         <p>
-                            Baraka Synergie ne construit pas seulement des espaces : elle crée de la valeur, de la
-                            confiance, et surtout, des résultats tangibles.
+                            "Chaque couleur est un mot, chaque coup de pinceau une intonation. Ma peinture n'est pas
+                            silencieuse, elle chante pour ceux qui prennent le temps de l'écouter."
+                        </p>
+                        <p
+                            class="font-sans text-sm uppercase tracking-widest text-zipa-dark pt-8 border-t border-zipa-gray">
+                            <i class="fa-solid fa-paintbrush text-zipa-gold mr-3"></i> Expositions Internationales
+                            <br><i class="fa-solid fa-medal text-zipa-gold mr-3 mt-4"></i> Prix de la Révélation 2024
                         </p>
                     </div>
                 </div>
 
                 <!-- Image -->
                 <div class="order-1 lg:order-2">
-                    <div class="relative">
-                        <img th:src="@{/images/i1.png}" alt="Baraka Synergie"
-                            class="rounded-2xl shadow-2xl w-full max-w-lg mx-auto transform hover:scale-105 transition-transform duration-500">
-                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-or-royal/20 rounded-full blur-2xl"></div>
+                    <div
+                        class="aspect-[3/4] overflow-hidden group border border-zipa-gray p-2 bg-white shadow-xl relative">
+                        <div
+                            class="absolute inset-0 bg-zipa-gold/10 mix-blend-multiply z-10 transition-opacity duration-500 group-hover:opacity-0">
+                        </div>
+                        <img th:src="@{/images/photo_56_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1518382473854-325db005b8a5?w=800'"
+                            alt="Peintre Zipa — Zoro Zipa Officiel"
+                            class="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-[1.03]">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NOTRE MISSION -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Image -->
-                <div>
-                    <div class="relative">
-                        <img th:src="@{/images/i2.png}" alt="Notre mission"
-                            class="rounded-2xl shadow-2xl w-full max-w-lg mx-auto transform hover:scale-105 transition-transform duration-500">
-                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-or-royal/20 rounded-full blur-2xl"></div>
-                    </div>
-                </div>
-
-                <!-- Texte -->
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-playfair font-bold text-noir-profond mb-6">
-                        Notre <span class="text-or-royal">Mission</span>
-                    </h2>
-                    <div class="space-y-4 text-gray-600">
-                        <p>
-                            Proposer un service premium et accessible, basé sur la qualité, la durabilité et le
-                            professionnalisme.
-                        </p>
-                        <p>
-                            De la finition intérieure à l'accompagnement foncier complet, nous garantissons un suivi
-                            rigoureux, des matériaux fiables et des résultats maîtrisés.
-                        </p>
-                    </div>
-
-                    <!-- Points clés -->
-                    <div class="mt-8 grid grid-cols-2 gap-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-or-royal/10 flex items-center justify-center">
-                                <i class="fa-solid fa-check text-or-royal"></i>
-                            </div>
-                            <span class="font-medium">Qualité Premium</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-or-royal/10 flex items-center justify-center">
-                                <i class="fa-solid fa-check text-or-royal"></i>
-                            </div>
-                            <span class="font-medium">Suivi Rigoureux</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-or-royal/10 flex items-center justify-center">
-                                <i class="fa-solid fa-check text-or-royal"></i>
-                            </div>
-                            <span class="font-medium">Matériaux Fiables</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-or-royal/10 flex items-center justify-center">
-                                <i class="fa-solid fa-check text-or-royal"></i>
-                            </div>
-                            <span class="font-medium">Résultats Garantis</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NOS VALEURS -->
-    <section class="py-20 bg-noir-profond text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold mb-4">
-                    Nos <span class="text-or-royal">Valeurs</span>
+    <!-- LA DÉMARCHE ARTISTIQUE -->
+    <section class="py-32 bg-zipa-dark text-zipa-light relative border-t border-white/5 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-zipa-gold/10 rounded-full blur-[100px]"></div>
+        <div class="section-zipa relative z-10 reveal-on-scroll">
+            <div class="text-center mb-24 flex flex-col items-center">
+                <span
+                    class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Philosophie</span>
+                <h2 class="heading-secondary text-zipa-light">
+                    DÉMARCHE <span class="italic font-light text-zipa-gold">Créative</span>
                 </h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Les principes qui guident chacune de nos actions
-                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Valeur 1 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Concept 1 -->
                 <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2 group">
+                    class="bg-zipa-darker border border-white/10 p-12 text-center group hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden">
                     <div
-                        class="w-20 h-20 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center group-hover:bg-or-royal/20 transition-colors">
-                        <i class="fa-solid fa-medal text-4xl text-or-royal"></i>
+                        class="absolute h-1 w-0 bg-zipa-gold top-0 left-0 transition-all duration-500 group-hover:w-full">
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Excellence</h3>
-                    <p class="text-gray-400">
-                        Des finitions impeccables, des normes strictes, un rendu premium.
+                    <div
+                        class="w-16 h-16 mx-auto mb-8 bg-white/5 rounded-full flex items-center justify-center group-hover:bg-zipa-gold transition-all duration-500">
+                        <i class="fa-solid fa-eye text-2xl text-zipa-gold group-hover:text-zipa-dark"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl text-zipa-light mb-4">Observation</h3>
+                    <p class="text-zipa-text-muted font-light leading-relaxed">
+                        Capter l'essence des scènes quotidiennes, l'énergie des marchés, la mélancolie des regards
+                        croisés au détour d'une ruelle d'Abidjan.
                     </p>
                 </div>
 
-                <!-- Valeur 2 -->
+                <!-- Concept 2 -->
                 <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2 group">
+                    class="bg-zipa-darker border border-zipa-gold/30 p-12 text-center group hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden">
+                    <div class="absolute h-1 w-full bg-zipa-gold top-0 left-0"></div>
                     <div
-                        class="w-20 h-20 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center group-hover:bg-or-royal/20 transition-colors">
-                        <i class="fa-solid fa-scale-balanced text-4xl text-or-royal"></i>
+                        class="w-16 h-16 mx-auto mb-8 bg-zipa-gold rounded-full flex items-center justify-center transition-all duration-500">
+                        <i class="fa-solid fa-fire text-2xl text-zipa-dark"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Intégrité</h3>
-                    <p class="text-gray-400">
-                        Transparence totale, respect des engagements, suivi sérieux.
+                    <h3 class="font-serif text-2xl text-zipa-light mb-4">Émotion</h3>
+                    <p class="text-zipa-text-muted font-light leading-relaxed">
+                        Transmuter la réalité brute en une symphonie de couleurs et de formes. L'œuvre doit vibrer avant
+                        même de communiquer.
                     </p>
                 </div>
 
-                <!-- Valeur 3 -->
+                <!-- Concept 3 -->
                 <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2 group">
+                    class="bg-zipa-darker border border-white/10 p-12 text-center group hover:-translate-y-2 transition-transform duration-500 relative overflow-hidden">
                     <div
-                        class="w-20 h-20 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center group-hover:bg-or-royal/20 transition-colors">
-                        <i class="fa-solid fa-lightbulb text-4xl text-or-royal"></i>
+                        class="absolute h-1 w-0 bg-zipa-gold top-0 left-0 transition-all duration-500 group-hover:w-full">
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Innovation</h3>
-                    <p class="text-gray-400">
-                        Design moderne, matériaux nouvelle génération, outils de précision.
-                    </p>
-                </div>
-
-                <!-- Valeur 4 -->
-                <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2 group">
                     <div
-                        class="w-20 h-20 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center group-hover:bg-or-royal/20 transition-colors">
-                        <i class="fa-solid fa-leaf text-4xl text-or-royal"></i>
+                        class="w-16 h-16 mx-auto mb-8 bg-white/5 rounded-full flex items-center justify-center group-hover:bg-zipa-gold transition-all duration-500">
+                        <i class="fa-solid fa-hands-bubbles text-2xl text-zipa-gold group-hover:text-zipa-dark"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Durabilité</h3>
-                    <p class="text-gray-400">
-                        Des pratiques responsables pour des résultats qui durent.
+                    <h3 class="font-serif text-2xl text-zipa-light mb-4">Matière</h3>
+                    <p class="text-zipa-text-muted font-light leading-relaxed">
+                        Travailler la toile en épaisseur, superposer les glacis, incorporer des éléments organiques pour
+                        donner du corps et de l'âme à l'image.
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- CE QUE NOUS OFFRONS -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Ce que nous <span class="text-or-royal">offrons</span>
-                </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    Des services complets pour répondre à tous vos besoins
-                </p>
+            <div class="mt-20 text-center">
+                <a th:href="@{/services}"
+                    class="btn-zipa !bg-zipa-gold !text-zipa-dark hover:!bg-white shadow-[0_10px_40px_rgba(212,175,55,0.4)]">
+                    EXPLORER LA GALERIE
+                </a>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/i3.png}" alt="Finitions"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Finitions haut de gamme
-                        </h3>
-                        <p class="text-gray-600">
-                            Peinture, carreaux, staff, décoration, rénovation complète.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/i4.png}" alt="ACD"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Accompagnement foncier
-                        </h3>
-                        <p class="text-gray-600">
-                            De la recherche de terrain à l'ACD : nous gérons tout.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/i5.png}" alt="Matériaux"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Matériaux & services
-                        </h3>
-                        <p class="text-gray-600">
-                            Fourniture, installation, équipes techniques expertes.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section
-        class="py-20 bg-gradient-to-br from-noir-profond via-noir-elegant to-noir-profond relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-or-royal/5 rounded-full blur-3xl"></div>
-
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-3xl md:text-5xl font-playfair font-bold text-white mb-6">
-                Prêt à travailler avec <span class="text-or-royal">nous</span> ?
-            </h2>
-            <p class="text-xl text-gray-300 mb-10">
-                Contactez-nous pour discuter de votre projet
-            </p>
-            <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                <i class="fa-solid fa-phone mr-2"></i> Nous contacter
-            </a>
         </div>
     </section>
 
     <!-- FOOTER -->
     <div th:replace="~{fragments/footer :: footer}"></div>
 
+    <script>
+        (function () {
+            const container = document.getElementById('proposCarouselContainer');
+            const counter = document.getElementById('proposCounter');
+            const total = 32;
+            let current = 0;
+            let timer;
+            let html = '';
+            for (let i = 1; i <= total; i++) {
+                const active = i === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0';
+                html += `<div class="carousel-slide-p absolute inset-0 transition-opacity duration-1000 ease-in-out ${active}">
+                    <img src="/images/photo_${i}_2026-03-04_10-55-27.jpg" class="w-full h-full object-cover" alt=""></div>`;
+            }
+            container.innerHTML = html;
+            const slides = container.querySelectorAll('.carousel-slide-p');
+            function goTo(i) {
+                slides.forEach((s, idx) => {
+                    s.classList.toggle('opacity-100', idx === i);
+                    s.classList.toggle('z-10', idx === i);
+                    s.classList.toggle('opacity-0', idx !== i);
+                    s.classList.toggle('z-0', idx !== i);
+                });
+                current = i;
+                counter.textContent = (i + 1).toString().padStart(2, '0');
+                clearInterval(timer); timer = setInterval(() => goTo((current + 1) % total), 5000);
+            }
+            window.proposNext = () => goTo((current + 1) % total);
+            window.proposPrev = () => goTo((current - 1 + total) % total);
+            timer = setInterval(() => goTo((current + 1) % total), 5000);
+        })();
+    </script>
 </body>
 
 </html>

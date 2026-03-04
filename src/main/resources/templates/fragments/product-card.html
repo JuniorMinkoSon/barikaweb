@@ -1,10 +1,11 @@
 <div class="card">
     <a th:href="@{/produits/{id}(id=${produit.id})}">
-        <img th:src="${produit.imageUrl} ?: @{/images/placeholder.png}" alt="Produit"/>
+        <img th:src="${produit.imageUrl} ?: @{/images/placeholder.png}" alt="Produit" />
     </a>
     <div class="meta">
         <div class="title" th:text="${produit.nom}">Nom produit</div>
-        <div class="price" th:text="${produit.prix} + ' FCFA'">0 FCFA</div>
+        <div class="price" th:text="${#numbers.formatDecimal(produit.prix, 0, 'WHITESPACE', 0, 'POINT')} + ' €'">0 €
+        </div>
     </div>
     <p th:text="${produit.localisation} ?: 'Localisation'" style="color:var(--muted);font-size:13px"></p>
     <div class="actions">

@@ -1,62 +1,69 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{layouts/admin-layout :: layout(pageTitle='Messages Reçus', content=~{::#messagesContent})}">
+    th:replace="~{layouts/admin-layout :: layout(pageTitle='Carnet de Contact', content=~{::#messagesContent})}">
 
 <div id="messagesContent">
     <div class="mb-8 flex justify-between items-center">
         <div>
-            <h3 class="text-2xl font-bold text-noir-profond">Messages de contact</h3>
-            <p class="text-gray-500">Consultez les demandes envoyées via le formulaire de contact.</p>
+            <h3 class="text-2xl font-serif text-zipa-light">Correspondances</h3>
+            <p class="text-zipa-text-muted font-light mt-2">Dossier des demandes d'acquisitions et d'expositions.</p>
         </div>
-        <div class="px-4 py-2 bg-or-royal/10 text-or-royal rounded-lg text-sm font-bold">
-            Total: <span th:text="${#lists.size(messages)}">0</span>
+        <div
+            class="px-4 py-2 border border-zipa-gold/30 bg-zipa-gold/10 text-zipa-gold font-sans font-bold text-[10px] uppercase tracking-widest">
+            Total en boîte: <span class="ml-2 font-serif text-sm" th:text="${#lists.size(messages)}">0</span>
         </div>
     </div>
 
     <!-- Table Container -->
-    <div class="card-luxury overflow-hidden">
+    <div class="bg-zipa-darker border border-white/5 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-noir-profond text-white uppercase text-xs tracking-wider">
-                        <th class="px-6 py-4 font-bold">Expéditeur</th>
-                        <th class="px-6 py-4 font-bold">Sujet / Message</th>
-                        <th class="px-6 py-4 font-bold">Date</th>
-                        <th class="px-6 py-4 font-bold text-center">Actions</th>
+                    <tr
+                        class="bg-zipa-dark border-b border-white/10 text-zipa-light font-sans font-bold uppercase text-[10px] tracking-widest">
+                        <th class="px-6 py-4">Expéditeur</th>
+                        <th class="px-6 py-4">Objet de la correspondance</th>
+                        <th class="px-6 py-4">Reçu le</th>
+                        <th class="px-6 py-4 text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
-                    <tr th:each="msg : ${messages}" class="hover:bg-creme-luxe/50 transition-colors">
+                <tbody class="divide-y divide-white/5 text-sm text-zipa-light font-light">
+                    <tr th:each="msg : ${messages}" class="hover:bg-white/5 transition-colors">
                         <td class="px-6 py-4">
-                            <div class="font-bold text-noir-profond" th:text="${msg.nom}">Nom</div>
-                            <div class="text-xs text-gray-400 flex items-center gap-1">
-                                <i class="fa-solid fa-envelope text-[10px]"></i>
+                            <div class="font-bold text-zipa-light font-sans mb-1" th:text="${msg.nom}">Nom</div>
+                            <div class="text-xs text-zipa-text-muted flex items-center gap-2">
+                                <i class="fa-regular fa-envelope text-[10px]"></i>
                                 <span th:text="${msg.email}">email@example.com</span>
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            <div class="font-semibold text-or-royal text-sm mb-1" th:text="${msg.sujet}">Sujet</div>
-                            <p class="text-sm text-gray-600 line-clamp-2 max-w-md" th:text="${msg.message}">Message
-                                content preview...</p>
+                            <div class="font-serif font-bold text-zipa-gold text-lg mb-2" th:text="${msg.sujet}">Sujet
+                            </div>
+                            <p class="text-sm text-zipa-text-muted line-clamp-2 max-w-md font-light leading-relaxed border-l-2 border-white/10 pl-3"
+                                th:text="${msg.message}">
+                                Message content preview...</p>
                         </td>
                         <td class="px-6 py-4">
-                            <div class="text-sm font-medium text-noir-profond"
+                            <div class="text-sm font-bold text-zipa-light tracking-wide mb-1"
                                 th:text="${#temporals.format(msg.dateEnvoi, 'dd MMM yyyy')}">Date</div>
-                            <div class="text-xs text-gray-400" th:text="${#temporals.format(msg.dateEnvoi, 'HH:mm')}">
+                            <div class="text-xs text-zipa-gray" th:text="${#temporals.format(msg.dateEnvoi, 'HH:mm')}">
                                 Heure</div>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-2">
-                                <button
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center text-or-royal hover:bg-or-royal/10 transition-colors"
-                                    title="Répondre">
-                                    <i class="fa-solid fa-reply"></i>
-                                </button>
-                                <button
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-50 transition-colors"
-                                    title="Supprimer">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
+                                <a th:href="@{'/admin/messages/' + ${msg.id}}"
+                                    class="w-10 h-10 flex items-center justify-center text-zipa-light hover:text-zipa-gold transition-colors"
+                                    title="Ouvrir">
+                                    <i class="fa-regular fa-eye text-lg"></i>
+                                </a>
+                                <form th:action="@{'/admin/messages/delete/' + ${msg.id}}" method="post"
+                                    onsubmit="return confirm('Supprimer ce message ?')">
+                                    <button type="submit"
+                                        class="w-10 h-10 flex items-center justify-center text-zipa-gray hover:text-red-500 transition-colors"
+                                        title="Supprimer">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -65,11 +72,11 @@
         </div>
 
         <!-- Empty State -->
-        <div th:if="${#lists.isEmpty(messages)}" class="p-12 text-center">
-            <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
-                <i class="fa-solid fa-inbox text-3xl"></i>
+        <div th:if="${#lists.isEmpty(messages)}" class="p-16 text-center">
+            <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 text-zipa-gray">
+                <i class="fa-regular fa-envelope-open text-3xl"></i>
             </div>
-            <p class="text-gray-500">Aucun message reçu pour le moment.</p>
+            <p class="text-zipa-text-muted font-light">La boîte de réception est vide.</p>
         </div>
     </div>
 </div>

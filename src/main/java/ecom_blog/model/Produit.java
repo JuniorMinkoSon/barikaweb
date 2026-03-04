@@ -3,12 +3,13 @@ package ecom_blog.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
 @Data
 @Entity
 @Table(name = "produit")
-public class Produit extends BaseEntity implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class Produit extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

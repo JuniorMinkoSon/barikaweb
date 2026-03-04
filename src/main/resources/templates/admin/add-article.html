@@ -1,71 +1,90 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{layouts/admin-layout :: layout(pageTitle='Ajouter un Article', content=~{::#addArticleContent})}">
+    th:replace="~{layouts/admin-layout :: layout(pageTitle='Rédiger un Article', content=~{::#addArticleContent})}">
 
 <div id="addArticleContent">
-    <div class="max-w-3xl mx-auto">
-        <div class="mb-8">
-            <a href="#" class="text-or-royal hover:text-or-clair transition-colors flex items-center gap-2 mb-4">
-                <i class="fa-solid fa-arrow-left"></i>
-                Retour au Blog
+    <div class="max-w-4xl mx-auto">
+        <div class="mb-12">
+            <a th:href="@{/admin/articles}"
+                class="text-zipa-gold hover:text-white transition-all flex items-center gap-4 mb-6 group">
+                <div
+                    class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-zipa-gold transition-colors text-white group-hover:text-zipa-gold">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+                <span
+                    class="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-zipa-light group-hover:text-zipa-gold transition-colors">Retour
+                    au Journal</span>
             </a>
-            <h3 class="text-3xl font-bold text-noir-profond font-playfair">Nouvel Article</h3>
-            <p class="text-gray-500">Rédigez un nouvel article pour le blog de UNEVIE.</p>
+            <h1 class="heading-secondary text-zipa-light">
+                NOUVELLE <span class="italic text-zipa-gold font-light">Chronique</span>
+            </h1>
+            <p class="text-zipa-text-muted font-sans font-bold uppercase tracking-widest text-xs mt-4">Partagez vos
+                réflexions ou annonces.</p>
         </div>
 
         <form th:action="@{/admin/articles/save}" th:object="${article}" method="post" enctype="multipart/form-data"
-            class="card-luxury p-8 space-y-6">
+            class="bg-zipa-darker border border-white/5 p-12 md:p-16 shadow-sm space-y-12 relative overflow-hidden">
+            <div class="absolute top-0 left-0 bg-zipa-gold w-full h-1"></div>
 
             <!-- Titre -->
-            <div>
-                <label class="block text-sm font-bold text-noir-profond mb-2">Titre de l'article</label>
+            <div class="space-y-4">
+                <label
+                    class="text-[10px] font-sans uppercase font-bold tracking-[0.2em] text-zipa-text-muted block ml-1">L'accroche
+                    (Titre)</label>
                 <input type="text" th:field="*{titre}" required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 outline-none transition-all"
-                    placeholder="Ex: Les avantages de l'immobilier à Abidjan">
+                    class="w-full bg-zipa-dark border border-white/5 py-4 px-6 focus:border-zipa-gold outline-none transition-all text-zipa-light text-xl font-serif"
+                    placeholder="Ex: Exposition au Palais de la Culture">
             </div>
 
-            <!-- Catégorie -->
-            <div>
-                <label class="block text-sm font-bold text-noir-profond mb-2">Catégorie</label>
-                <select th:field="*{categorie}" required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 outline-none transition-all bg-white">
-                    <option value="">Sélectionner</option>
-                    <option value="Immobilier">Immobilier</option>
-                    <option value="Travaux Publics">Travaux Publics</option>
-                    <option value="Conseils">Conseils</option>
-                    <option value="Actualités">Actualités</option>
-                </select>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Catégorie -->
+                <div class="space-y-4">
+                    <label
+                        class="text-[10px] font-sans uppercase font-bold tracking-[0.2em] text-zipa-text-muted block ml-1">Catégorie</label>
+                    <select th:field="*{categorie}" required
+                        class="w-full bg-zipa-dark border border-white/5 py-4 px-6 focus:border-zipa-gold outline-none transition-all text-zipa-light appearance-none cursor-pointer font-sans font-light">
+                        <option value="" class="bg-zipa-dark">Sélectionner</option>
+                        <option value="Inspiration" class="bg-zipa-dark">Inspiration</option>
+                        <option value="Exposition" class="bg-zipa-dark">Exposition</option>
+                        <option value="Technique" class="bg-zipa-dark">Technique</option>
+                        <option value="Actualités" class="bg-zipa-dark">Actualités</option>
+                    </select>
+                </div>
 
-            <!-- Contenu -->
-            <div>
-                <label class="block text-sm font-bold text-noir-profond mb-2">Contenu de l'article</label>
-                <textarea th:field="*{contenu}" rows="10"
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 outline-none transition-all"
-                    placeholder="Écrivez votre contenu ici..."></textarea>
-            </div>
-
-            <!-- Image -->
-            <div>
-                <label class="block text-sm font-bold text-noir-profond mb-2">Image de couverture</label>
-                <div class="relative group">
-                    <input type="file" name="image" required id="articleImageInput"
-                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                    <div
-                        class="border-2 border-dashed border-gray-200 group-hover:border-or-royal rounded-xl p-8 text-center transition-all bg-creme-luxe/30">
-                        <i
-                            class="fa-solid fa-image text-3xl text-gray-400 group-hover:text-or-royal mb-2 transition-colors"></i>
-                        <p class="text-sm text-gray-500" id="articleFileName">Cliquez ou glissez une image ici</p>
+                <!-- Image -->
+                <div class="space-y-4">
+                    <label
+                        class="text-[10px] font-sans uppercase font-bold tracking-[0.2em] text-zipa-text-muted block ml-1">Visuel
+                        de Couverture</label>
+                    <div class="relative group">
+                        <input type="file" name="image" required id="articleImageInput"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                        <div
+                            class="border border-white/5 group-hover:border-zipa-gold py-4 px-6 flex items-center justify-center gap-4 transition-all bg-zipa-dark">
+                            <i
+                                class="fa-solid fa-camera text-xl text-zipa-gray group-hover:text-zipa-gold transition-colors"></i>
+                            <p class="text-[9px] font-sans font-bold uppercase tracking-widest text-zipa-text-muted"
+                                id="articleFileName">Choisir un fichier</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Contenu -->
+            <div class="space-y-4">
+                <label
+                    class="text-[10px] font-sans uppercase font-bold tracking-[0.2em] text-zipa-text-muted block ml-1">Texte
+                    de l'article</label>
+                <textarea th:field="*{contenu}" rows="12"
+                    class="w-full bg-zipa-dark border border-white/5 py-8 px-8 focus:border-zipa-gold outline-none transition-all text-zipa-light leading-relaxed font-light"
+                    placeholder="Commencez à rédiger votre chronique..."></textarea>
+            </div>
+
             <!-- Submit -->
-            <div class="pt-4">
+            <div class="pt-8 text-center">
                 <button type="submit"
-                    class="w-full btn-gold py-4 rounded-xl flex items-center justify-center gap-2 text-lg">
-                    <i class="fa-solid fa-paper-plane"></i>
-                    Publier l'article
+                    class="btn-zipa !bg-zipa-gold !text-zipa-dark !justify-center !px-16 shadow-[0_10px_30px_rgba(212,175,55,0.2)] hover:!bg-white">
+                    PUBLIER LA CHRONIQUE
                 </button>
             </div>
         </form>
@@ -74,9 +93,10 @@
 
 <script th:inline="javascript">
     document.getElementById('articleImageInput').addEventListener('change', function (e) {
-        const fileName = e.target.files[0]?.name || 'Cliquez ou glissez une image ici';
+        const fileName = e.target.files[0]?.name || 'Choisir un fichier';
         document.getElementById('articleFileName').textContent = fileName;
-        document.getElementById('articleFileName').classList.add('text-or-royal', 'font-bold');
+        document.getElementById('articleFileName').classList.remove('text-zipa-text-muted');
+        document.getElementById('articleFileName').classList.add('text-zipa-gold');
     });
 </script>
 

@@ -1,86 +1,76 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Nos Produits - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Produits & Options - Grace Déménagement Service')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body class="font-poppins bg-noir-pur text-white">
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
     <!-- HERO PAGE -->
-    <section class="relative py-24 md:py-32 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/90 to-noir-profond/70"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-or-royal/10 rounded-full blur-3xl"></div>
-
+    <section class="relative py-32 bg-charbon overflow-hidden border-b border-white/5">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1595246140625-573b715d11dc?q=80&w=2070&auto=format&fit=crop"
+                class="w-full h-full object-cover opacity-20">
+        </div>
         <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-playfair font-bold text-white mb-4">
-                Nos <span class="text-or-royal">Produits</span>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6">
+                Produits & <span class="text-or-premium">Options</span>
             </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Découvrez notre sélection de produits et matériaux de qualité
+            <p class="text-lg text-white/50 max-w-2xl mx-auto uppercase tracking-widest font-bold">
+                Tout le matériel nécessaire pour un déménagement réussi
             </p>
         </div>
     </section>
 
-    <!-- POPUP SUCCÈS -->
-    <div id="popupSuccess"
-        class="fixed top-6 right-6 bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl z-50 hidden flex items-center gap-3">
-        <i class="fa-solid fa-circle-check text-xl"></i>
-        <span class="font-semibold">Produit ajouté au panier !</span>
-    </div>
-
-    <!-- LISTE DES PRODUITS -->
-    <section class="py-20 bg-creme-luxe">
+    <!-- SHOP SECTION -->
+    <section class="py-24 bg-noir-pur">
         <div class="max-w-7xl mx-auto px-6">
 
-            <!-- Message si aucun produit -->
-            <div th:if="${produits == null or #lists.isEmpty(produits)}"
-                class="bg-white rounded-2xl shadow-xl p-12 text-center max-w-2xl mx-auto">
-                <div class="w-24 h-24 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-box-open text-4xl text-or-royal"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-noir-profond mb-4">Aucun produit disponible</h2>
-                <p class="text-gray-600 mb-8">
-                    Nous préparons de nouveaux produits pour vous. Revenez bientôt !
-                </p>
-                <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                    <i class="fa-solid fa-phone mr-2"></i> Nous contacter
-                </a>
+            <!-- Filters / Categorization (Visual only for now) -->
+            <div class="flex flex-wrap gap-4 mb-16 justify-center">
+                <button
+                    class="px-6 py-2 bg-or-premium text-noir-pur font-bold rounded-full text-xs uppercase tracking-widest">Tous
+                    les produits</button>
+                <button
+                    class="px-6 py-2 glassmorphism border border-white/10 text-white/70 font-bold rounded-full text-xs uppercase tracking-widest hover:border-or-premium transition-all">Cartons</button>
+                <button
+                    class="px-6 py-2 glassmorphism border border-white/10 text-white/70 font-bold rounded-full text-xs uppercase tracking-widest hover:border-or-premium transition-all">Protection</button>
+                <button
+                    class="px-6 py-2 glassmorphism border border-white/10 text-white/70 font-bold rounded-full text-xs uppercase tracking-widest hover:border-or-premium transition-all">Kits
+                    Complets</button>
             </div>
 
-            <!-- Grille de produits -->
+            <!-- Grille de produits dynamique -->
             <div th:if="${produits != null and !#lists.isEmpty(produits)}"
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
 
-                <div th:each="p : ${produits}" class="card-luxury group">
+                <div th:each="p : ${produits}" class="card-premium group">
                     <!-- Image -->
-                    <div class="relative overflow-hidden">
-                        <img th:src="${p.imageUrl}" alt="Produit"
-                            class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="relative overflow-hidden h-64">
+                        <img th:src="${p.imageUrl != null && !p.imageUrl.isEmpty()} ? @{${p.imageUrl}} : 'https://images.unsplash.com/photo-1549194380-f20621671fb4?q=80&w=2069&auto=format&fit=crop'"
+                            alt="Produit"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
                         <div th:if="${p.disponible}"
-                            class="absolute top-4 left-4 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                            Disponible
-                        </div>
-                        <div th:unless="${p.disponible}"
-                            class="absolute top-4 left-4 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                            Épuisé
+                            class="absolute top-4 right-4 bg-or-premium text-noir-pur text-[10px] uppercase font-black px-3 py-1 rounded-full shadow-lg">
+                            En Stock
                         </div>
                     </div>
 
                     <!-- Contenu -->
                     <div class="p-6">
-                        <h3 class="text-lg font-bold text-noir-profond mb-2 group-hover:text-or-royal transition-colors"
+                        <h3 class="text-lg font-bold mb-2 group-hover:text-or-premium transition-colors uppercase tracking-tight"
                             th:text="${p.nom}">Nom du produit</h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2" th:text="${p.description}">Description</p>
+                        <p class="text-white/40 text-xs mb-6 line-clamp-2 leading-relaxed" th:text="${p.description}">
+                            Description</p>
 
-                        <div class="flex items-center justify-between">
-                            <span class="text-xl font-bold text-or-royal" th:text="${p.prix} + ' FCFA'">0 FCFA</span>
-                            <form th:action="@{'/panier/ajouter/' + ${p.id}}" method="post"
-                                onsubmit="return showPopup();">
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-xl font-black text-white" th:text="${p.prix} + ' €'">0 €</span>
+                            <form th:action="@{'/panier/ajouter/' + ${p.id}}" method="post">
                                 <button type="submit" th:disabled="${!p.disponible}"
-                                    class="w-10 h-10 rounded-full bg-or-royal text-noir-profond flex items-center justify-center hover:bg-or-clair transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    class="w-12 h-12 rounded-xl bg-or-premium text-noir-pur flex items-center justify-center hover:scale-110 transition-transform shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <i class="fa-solid fa-plus text-lg"></i>
                                 </button>
                             </form>
                         </div>
@@ -88,40 +78,107 @@
                 </div>
 
             </div>
-        </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="py-16 bg-noir-profond">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-2xl md:text-4xl font-playfair font-bold text-white mb-6">
-                Besoin d'un <span class="text-or-royal">devis personnalisé</span> ?
-            </h2>
-            <p class="text-gray-300 mb-8">
-                Contactez-nous pour des commandes spéciales ou des quantités importantes
-            </p>
-            <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                <i class="fa-solid fa-envelope mr-2"></i> Demander un devis
-            </a>
+            <!-- Static Fallback Items (If DB empty) -->
+            <div th:if="${produits == null or #lists.isEmpty(produits)}"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+                <!-- Carton Standard -->
+                <div class="card-premium group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1549194380-f20621671fb4?q=80&w=2069&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                        <span
+                            class="absolute top-4 right-4 bg-or-premium text-noir-pur text-[10px] uppercase font-black px-3 py-1 rounded-full">Populaire</span>
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-lg font-bold mb-2 uppercase tracking-tight group-hover:text-or-premium transition-colors">
+                            Carton Standard 55L</h3>
+                        <p class="text-white/40 text-xs mb-6">Idéal pour le linge, la vaisselle et les objets courants.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black">2.50 €</span>
+                            <button
+                                class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-or-premium hover:text-noir-pur transition-all">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kit T2 -->
+                <div class="card-premium group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1583030209503-68d76d40366c?q=80&w=2127&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                        <span
+                            class="absolute top-4 right-4 bg-or-premium text-noir-pur text-[10px] uppercase font-black px-3 py-1 rounded-full">Top
+                            Vente</span>
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-lg font-bold mb-2 uppercase tracking-tight group-hover:text-or-premium transition-colors">
+                            Pack Déménagement T2</h3>
+                        <p class="text-white/40 text-xs mb-6">20 cartons, 2 rubans, 10m de bulles. Prêt à l'emploi.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black">49.00 €</span>
+                            <button
+                                class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-or-premium hover:text-noir-pur transition-all">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Film Bulle -->
+                <div class="card-premium group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1579389083175-247ef70304c2?q=80&w=1974&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-lg font-bold mb-2 uppercase tracking-tight group-hover:text-or-premium transition-colors">
+                            Rouleau Papier Bulle</h3>
+                        <p class="text-white/40 text-xs mb-6">10 mètres de protection haute densité pour vos objets
+                            fragiles.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black">12.00 €</span>
+                            <button
+                                class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-or-premium hover:text-noir-pur transition-all">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ruban Adhésif -->
+                <div class="card-premium group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1595246140625-573b715d11dc?q=80&w=2070&auto=format&fit=crop"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3
+                            class="text-lg font-bold mb-2 uppercase tracking-tight group-hover:text-or-premium transition-colors">
+                            Adhésif Ultra-Fort</h3>
+                        <p class="text-white/40 text-xs mb-6">Ruban 50mm x 66m. Résiste aux charges lourdes.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xl font-black">3.50 €</span>
+                            <button
+                                class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-or-premium hover:text-noir-pur transition-all">
+                                <i class="fa-solid fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <div th:replace="~{fragments/footer :: footer}"></div>
-
-    <!-- SCRIPT POPUP -->
-    <script>
-        function showPopup() {
-            const popup = document.getElementById("popupSuccess");
-            popup.classList.remove("hidden");
-            popup.classList.add("flex");
-            setTimeout(() => {
-                popup.classList.add("hidden");
-                popup.classList.remove("flex");
-            }, 2500);
-            return true;
-        }
-    </script>
 
 </body>
 

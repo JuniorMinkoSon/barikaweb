@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(pageTitle, content)">
 
-<head th:replace="~{fragments/head :: head (title=${pageTitle ?: 'UNEVIE - Admin'})}">
+<head th:replace="~{fragments/head :: head (title=${pageTitle ?: 'Administration - Peintre Zipa'})}">
 </head>
 
-<body class="bg-creme-luxe font-poppins text-noir-profond min-h-screen">
+<body class="bg-zipa-dark font-sans text-zipa-light min-h-screen">
 
     <!-- SIDEBAR -->
     <div th:replace="~{fragments/admin/sidebar :: sidebar}"></div>
@@ -12,35 +12,36 @@
     <!-- MAIN CONTENT -->
     <main class="md:ml-72 min-h-screen transition-all duration-300">
         <!-- TOP HEADER -->
-        <header class="glassmorphism sticky top-0 z-40 px-6 py-4 flex justify-between items-center shadow-sm">
-            <h2 class="text-xl font-bold text-noir-profond" th:text="${pageTitle}">Dashboards</h2>
+        <header
+            class="bg-zipa-darker/80 backdrop-blur-md sticky top-0 z-40 px-8 py-5 flex justify-between items-center border-b border-white/5">
+            <h2 class="text-xl font-sans font-bold uppercase tracking-widest text-zipa-light" th:text="${pageTitle}">
+                DASHBOARD</h2>
 
-            <div class="flex items-center gap-6">
-                <!-- Notifications/Search could go here -->
-                <div class="flex items-center gap-3">
+            <div class="flex items-center gap-6 cursor-pointer group">
+                <div class="flex items-center gap-4">
                     <div
-                        class="w-10 h-10 rounded-full bg-or-royal/20 flex items-center justify-center text-or-royal font-bold">
-                        A
+                        class="w-10 h-10 rounded-full border border-zipa-gold flex items-center justify-center text-zipa-gold font-serif text-xl italic group-hover:bg-zipa-gold group-hover:text-zipa-dark transition-all">
+                        Z
                     </div>
-                    <span class="hidden sm:inline font-semibold">Admin</span>
+                    <span
+                        class="hidden sm:inline font-sans font-bold uppercase tracking-[0.2em] text-[10px] text-zipa-text-muted group-hover:text-zipa-light transition-colors">
+                        Atelier Admin
+                    </span>
                 </div>
             </div>
         </header>
 
         <!-- CONTENT AREA -->
-        <div class="p-6 md:p-10">
+        <div class="p-8 md:p-12">
             <div th:replace="${content}"></div>
         </div>
 
         <!-- FOOTER -->
-        <footer class="p-6 text-center text-gray-400 text-sm">
-            <p>&copy; 2026 UNEVIE. Admin Panel Luxury Edition.</p>
+        <footer class="p-8 text-center text-zipa-text-muted text-[10px] font-sans font-bold uppercase tracking-[0.2em]">
+            <p>&copy; 2026 PEINTRE ZIPA. TOUS DROITS RÉSERVÉS.</p>
         </footer>
     </main>
 
-    <script>
-        // Specific admin JS if needed
-    </script>
 </body>
 
 </html>

@@ -1,24 +1,19 @@
-
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /* === VARIABLES CSS === */
 :root {
-  --bleu-fonce: #1E3A8A;
-  --bleu-claire: rgb(123, 140, 188);
-  --or:rgb(228, 179, 19);
-  --vert : #34bc67;
-  --orange: #da8a27;
-  --orange-fonce:rgb(212, 82, 42);
-  --marron: #847062;
-  --gris-clair: #F5F5F5;
+  --gsd-blue: #003366;
+  --gsd-blue-dark: #001f3f;
+  --gsd-gold: #D4AF37;
+  --gsd-red: #E31E24;
   --blanc: #FFFFFF;
-  --noir:rgb(73, 73, 73);
-  --texte-gris: #333333;
-  --texte-leger: #666666;
-  --ombre: rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-  --border-gray: #e7e7e7;
+  --noir: #000814;
+  --texte-gris: #F8F9FA;
+  --texte-leger: rgba(248, 249, 250, 0.7);
+  --ombre: rgba(0, 0, 0, 0.3);
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-gray: rgba(255, 255, 255, 0.1);
 }
 
 /* === RESET ET BASE === */
@@ -108,7 +103,7 @@ nav a.active::after {
   width: 100%;
 }
 
-.contact-nav{
+.contact-nav {
   background-color: var(--orange);
   transition: var(--transition);
   border-radius: 0.5rem;
@@ -119,7 +114,7 @@ nav a.active::after {
 
 }
 
-.contact-nav:hover{
+.contact-nav:hover {
   background-color: var(--blanc);
   transition: var(--transition);
   border: 1px solid var(--orange-fonce);
@@ -145,7 +140,7 @@ nav a.active::after {
 /* === BANNIÈRE HERO === */
 .hero {
   background: linear-gradient(rgba(59, 76, 124, 0.8), rgba(30, 58, 138, 0.8)),
-              url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600') center/cover;
+    url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600') center/cover;
   color: var(--blanc);
   text-align: center;
   padding: 8rem 2rem;
@@ -186,15 +181,15 @@ nav a.active::after {
   background-color: #C4A037;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-} 
-
-.btn-hero{
-  display: flex;
-  gap: 1rem;
-  margin-left : 4rem
 }
 
-.btn-hero .prim1{
+.btn-hero {
+  display: flex;
+  gap: 1rem;
+  margin-left: 4rem
+}
+
+.btn-hero .prim1 {
   background-color: var(--orange);
   padding: 1rem 2.5rem;
   border-radius: 0.5rem;
@@ -207,7 +202,7 @@ nav a.active::after {
 }
 
 
-.btn-hero .prim2{
+.btn-hero .prim2 {
   border: 1px solid var(--blanc);
   color: var(--blanc);
   padding: 1rem 2.5rem;
@@ -218,19 +213,19 @@ nav a.active::after {
   cursor: pointer;
 }
 
-.btn-hero .prim1:hover{
-    background-color: var(--blanc);
-    border: 1px solid var(--orange);
-    color: var(--texte-leger);
+.btn-hero .prim1:hover {
+  background-color: var(--blanc);
+  border: 1px solid var(--orange);
+  color: var(--texte-leger);
 }
 
 
-.btn-hero .prim2:hover{
+.btn-hero .prim2:hover {
   background-color: var(--blanc);
   color: var(--bleu-fonce);
 }
 
-.btn-call .call{
+.btn-call .call {
   border: 1px solid var(--blanc);
   color: var(--blanc);
   padding: 1rem 2.5rem;
@@ -241,7 +236,7 @@ nav a.active::after {
   cursor: pointer;
 }
 
-.btn-call .call:hover{
+.btn-call .call:hover {
   background-color: var(--blanc);
   color: var(--bleu-fonce);
 }
@@ -296,7 +291,7 @@ nav a.active::after {
   padding: 0 2rem;
 }
 
-.all_projet a{
+.all_projet a {
   background-color: var(--orange);
   padding: 1rem 2.5rem;
   border-radius: 0.5rem;
@@ -308,10 +303,10 @@ nav a.active::after {
   color: var(--blanc);
 }
 
-.all_projet a:hover{
-    background-color: var(--blanc);
-    border: 1px solid var(--orange);
-    color: var(--texte-leger);
+.all_projet a:hover {
+  background-color: var(--blanc);
+  border: 1px solid var(--orange);
+  color: var(--texte-leger);
 }
 
 /* === GRILLE DE SERVICES === */
@@ -351,14 +346,13 @@ nav a.active::after {
   padding: 2rem;
 }
 
-.btn-svce{
+.btn-svce {
   color: var(--orange-fonce)
 }
 
-.btn-svce i{
+.btn-svce i {
   margin-left: 0.5rem;
   color: var(--orange-fonce)
-
 }
 
 .service-content h3,
@@ -415,12 +409,12 @@ nav a.active::after {
 .avantage-item {
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   text-align: center;
   padding: 2rem;
   background-color: var(--blanc);
   border-radius: 10px;
-  border: 1px solid var(--border-gray) ;
+  border: 1px solid var(--border-gray);
   /* box-shadow: 0 5px 15px var(--ombre); */
   transition: var(--transition);
 }
@@ -436,14 +430,14 @@ nav a.active::after {
   margin-bottom: 1rem;
 }
 
-.avantage-icon img{
-    width:4rem;
-  }
+.avantage-icon img {
+  width: 4rem;
+}
 
-  .icone_valeur i{
-    font-size: 2rem;
-    color: var(--orange);
-  }
+.icone_valeur i {
+  font-size: 2rem;
+  color: var(--orange);
+}
 
 .avantage-item h3 {
   color: var(--bleu-fonce);
@@ -665,13 +659,13 @@ footer {
   margin-bottom: 1rem;
 }
 
-.footer_icon{
-    display:flex;
-    align-items:center;
+.footer_icon {
+  display: flex;
+  align-items: center;
 }
 
-.footer_icon p{
-    padding-left:0.5rem;
+.footer_icon p {
+  padding-left: 0.5rem;
 }
 
 
@@ -742,7 +736,7 @@ footer {
 }
 
 .accordion-content {
-  flex: 1; 
+  flex: 1;
   margin-top: 6rem;
 }
 
@@ -760,9 +754,9 @@ footer {
 
 .accordion-item {
   margin-bottom: 0.8rem;
-  background-color: #fff; 
+  background-color: #fff;
   border-radius: 5px;
-  overflow: hidden; 
+  overflow: hidden;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
 
 }
@@ -806,15 +800,15 @@ footer {
 }
 
 .accordion-item.active .accordion-body {
-  max-height: 200px; 
-  padding: 1rem 1rem; 
+  max-height: 200px;
+  padding: 1rem 1rem;
 }
 
 .accordion-item.active .accordion-icon {
-  transform: rotate(45deg); 
+  transform: rotate(45deg);
 }
 
-.accordion-item.active{
+.accordion-item.active {
   border: 1px solid #ff8674;
 }
 
@@ -825,11 +819,11 @@ footer {
 
 .team-section {
   padding: 2rem 0 0 0;
-/*     background-color: #fbfbfb; */ 
- margin: 0 auto;
+  /*     background-color: #fbfbfb; */
+  margin: 0 auto;
 }
 
-.team-section_text{
+.team-section_text {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -837,19 +831,19 @@ footer {
   text-align: center;
 }
 
-.team-section_text h3{
+.team-section_text h3 {
   font-size: 3rem;
-  margin-top:2rem;
+  margin-top: 2rem;
   color: var(--orange);
 }
 
-.team-section_text h1{
+.team-section_text h1 {
   font-size: 1.5rem;
   margin-top: 2rem;
   color: var(--texte-gris);
 }
 
-.team-section_text p{
+.team-section_text p {
   font-size: 1rem;
   margin-top: 2rem;
   line-height: 2.5rem;
@@ -859,10 +853,10 @@ footer {
 }
 
 .team-grid {
-  margin:5rem 12rem 0 12rem;
+  margin: 5rem 12rem 0 12rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem; 
+  gap: 2rem;
   padding: 0 1rem;
   justify-content: center;
 }
@@ -881,7 +875,7 @@ footer {
   width: 100%;
   max-height: 40rem;
   height: auto;
-  aspect-ratio: 4/5; 
+  aspect-ratio: 4/5;
   object-fit: cover;
   display: block;
   border-radius: 10px 10px 0 0;
@@ -946,13 +940,13 @@ footer {
   height: 35px;
 }
 
-.contact-item-mobile{
-    display: none;
-  }
+.contact-item-mobile {
+  display: none;
+}
 
-  .contact-nav-mobile-link{
-    display: none;
-  }
+.contact-nav-mobile-link {
+  display: none;
+}
 
 /* === BOUTON SCROLL TO TOP === */
 .scroll-top-btn {
@@ -966,7 +960,8 @@ footer {
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  display: none; /* Caché par défaut */
+  display: none;
+  /* Caché par défaut */
   z-index: 998;
   border: 1px solid var(--border-gray);
   transition: var(--transition);
@@ -1003,6 +998,7 @@ footer {
 
 /* Tablettes et écrans moyens */
 @media (max-width: 1024px) {
+
   /* FAQ Section */
   .accordion-container {
     flex-direction: column;
@@ -1012,7 +1008,8 @@ footer {
   }
 
   .accordion-image {
-    order: -1; /* Image en premier sur tablette */
+    order: -1;
+    /* Image en premier sur tablette */
   }
 
   .accordion-image img {
@@ -1054,6 +1051,7 @@ footer {
 }
 
 @media (max-width: 768px) {
+
   /* Header mobile */
   nav {
     position: absolute;
@@ -1087,12 +1085,12 @@ footer {
     display: flex;
   }
 
-  .contact-nav{
+  .contact-nav {
     display: none;
   }
 
   .contact-item-mobile {
-    display: block; 
+    display: block;
     padding: 0;
     border-bottom: none;
   }
@@ -1104,11 +1102,11 @@ footer {
     padding: 0.8rem 1.5rem;
     border-radius: 0.5rem;
     text-align: center;
-    margin-top: 1rem; 
-    width: 50%; 
+    margin-top: 1rem;
+    width: 50%;
     transition: var(--transition);
   }
-      
+
   .contact-nav-mobile-link:hover {
     background-color: var(--);
     transform: scale(1.02);
@@ -1117,7 +1115,7 @@ footer {
   /* Hero mobile */
   .hero h1 {
     font-size: 2rem;
-    margin-left : 0;
+    margin-left: 0;
   }
 
   .hero p {
@@ -1125,28 +1123,30 @@ footer {
     margin-left: 0;
   }
 
-  .hero .section_index h1{
+  .hero .section_index h1 {
     font-size: 2rem;
     text-align: center;
-    margin-left : 0;
+    margin-left: 0;
   }
 
-  .hero .section_index p{
+  .hero .section_index p {
     font-size: 1rem;
-    margin-left : 0;
-    text-align:center;
+    margin-left: 0;
+    text-align: center;
   }
 
-  .btn-hero{
-    display:flex;
+  .btn-hero {
+    display: flex;
     flex-direction: column;
-    margin-left:0;
+    margin-left: 0;
   }
 
-  .btn-hero .prim1, .btn-hero .prim2{
+  .btn-hero .prim1,
+  .btn-hero .prim2 {
     font-size: 0.8rem;
-    margin-left:0;
+    margin-left: 0;
   }
+
   /* Grilles mobile */
   .services-grid,
   .projets-grid {
@@ -1246,7 +1246,8 @@ footer {
   }
 
   .accordion-item.active .accordion-body {
-    max-height: 250px; /* Plus d'espace pour mobile */
+    max-height: 250px;
+    /* Plus d'espace pour mobile */
     padding: 0.8rem;
   }
 
@@ -1309,11 +1310,11 @@ footer {
     padding: 5rem 1rem;
   }
 
-  .hero .section_index h1{
+  .hero .section_index h1 {
     font-size: 1rem;
   }
 
-  .hero .section_index p{
+  .hero .section_index p {
     font-size: 0.8rem;
   }
 
@@ -1330,9 +1331,9 @@ footer {
     font-size: 1.7rem;
   }
 
-  .mission h2{
-      margin: 0;
-      padding: 0;
+  .mission h2 {
+    margin: 0;
+    padding: 0;
   }
 
   .stats-grid {
@@ -1393,7 +1394,8 @@ footer {
 
   .team-grid {
     margin: 2rem 1rem 0 1rem;
-    grid-template-columns: 1fr; /* Une seule colonne sur très petits écrans */
+    grid-template-columns: 1fr;
+    /* Une seule colonne sur très petits écrans */
     gap: 1rem;
   }
 
@@ -1428,6 +1430,7 @@ footer {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1454,4 +1457,3 @@ footer {
 .bg-light {
   background-color: var(--gris-clair);
 }
-

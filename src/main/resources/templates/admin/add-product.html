@@ -1,81 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{layouts/admin-layout :: layout(pageTitle='Ajouter un Produit', content=~{::#addProductContent})}">
+    th:replace="~{layouts/admin-layout :: layout(pageTitle='Ajouter une Œuvre', content=~{::#addProductContent})}">
 
 <div id="addProductContent">
-    <div class="max-w-2xl mx-auto">
+    <div class="max-w-3xl mx-auto">
         <div class="mb-8">
             <a th:href="@{/admin/produits}"
-                class="text-or-royal hover:text-or-clair transition-colors flex items-center gap-2 mb-4">
-                <i class="fa-solid fa-arrow-left"></i>
-                Retour à la liste
+                class="text-zipa-gold hover:text-white transition-all flex items-center gap-4 mb-6 group">
+                <div
+                    class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-zipa-gold transition-colors text-white group-hover:text-zipa-gold">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+                <span
+                    class="text-[10px] font-sans font-bold uppercase tracking-[0.3em] text-zipa-light group-hover:text-zipa-gold transition-colors">Retour
+                    à la Galerie</span>
             </a>
-            <h3 class="text-3xl font-bold text-noir-profond font-playfair">Nouveau Produit</h3>
-            <p class="text-gray-500">Remplissez les informations pour ajouter un nouveau produit au catalogue.</p>
+            <h3 class="text-4xl font-serif text-zipa-light mb-2">Nouvelle Œuvre</h3>
+            <p class="text-zipa-text-muted font-light">Renseignez les détails pour l'ajout au catalogue officiel.</p>
         </div>
 
         <form th:action="@{/admin/produits/save}" th:object="${produit}" method="post" enctype="multipart/form-data"
-            class="card-luxury p-8 space-y-6">
+            class="bg-zipa-darker border border-white/5 p-8 md:p-12 shadow-sm space-y-8 relative overflow-hidden">
+            <div class="absolute top-0 left-0 bg-zipa-gold w-full h-1"></div>
 
             <!-- Nom -->
             <div>
-                <label class="block text-sm font-bold text-noir-profond mb-2">Nom du produit</label>
+                <label
+                    class="block text-[10px] font-sans font-bold uppercase tracking-widest text-zipa-text-muted mb-2">Titre
+                    de l'œuvre</label>
                 <input type="text" th:field="*{nom}" required
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 outline-none transition-all"
-                    placeholder="Ex: Terrain Bingerville">
+                    class="w-full px-4 py-3 bg-zipa-dark border border-white/5 focus:border-zipa-gold outline-none transition-all text-zipa-light font-serif text-xl"
+                    placeholder="Ex: Reflets d'Ébène">
             </div>
 
             <!-- Catégorie & Prix -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <label class="block text-sm font-bold text-noir-profond mb-2">Catégorie</label>
+                    <label
+                        class="block text-[10px] font-sans font-bold uppercase tracking-widest text-zipa-text-muted mb-2">Technique
+                        / Catégorie</label>
                     <select th:field="*{categorie}" required
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 outline-none transition-all bg-white">
-                        <option value="">Sélectionner</option>
-                        <option value="Terrain">Terrain</option>
-                        <option value="Matériaux">Matériaux</option>
-                        <option value="Service">Service</option>
-                        <option value="Immobilier">Immobilier</option>
+                        class="w-full px-4 py-4 bg-zipa-dark border border-white/5 focus:border-zipa-gold outline-none transition-all text-zipa-light font-light cursor-pointer appearance-none">
+                        <option value="" class="bg-zipa-dark">Sélectionner</option>
+                        <option value="Huile sur Toile" class="bg-zipa-dark">Huile sur Toile</option>
+                        <option value="Acrylique" class="bg-zipa-dark">Acrylique</option>
+                        <option value="Mixte" class="bg-zipa-dark">Technique Mixte</option>
+                        <option value="Aquarelle" class="bg-zipa-dark">Aquarelle</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-bold text-noir-profond mb-2">Prix (FCFA)</label>
+                    <label
+                        class="block text-[10px] font-sans font-bold uppercase tracking-widest text-zipa-text-muted mb-2">Valeur
+                        (CFA)</label>
                     <input type="number" th:field="*{prix}" required
-                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 outline-none transition-all"
+                        class="w-full px-4 py-4 bg-zipa-dark border border-white/5 focus:border-zipa-gold outline-none transition-all text-zipa-light font-bold"
                         placeholder="0">
                 </div>
             </div>
 
             <!-- Description -->
             <div>
-                <label class="block text-sm font-bold text-noir-profond mb-2">Description</label>
-                <textarea th:field="*{description}" rows="4"
-                    class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 outline-none transition-all"
-                    placeholder="Détails du produit..."></textarea>
+                <label
+                    class="block text-[10px] font-sans font-bold uppercase tracking-widest text-zipa-text-muted mb-2">Description
+                    / Histoire</label>
+                <textarea th:field="*{description}" rows="5"
+                    class="w-full px-4 py-4 bg-zipa-dark border border-white/5 focus:border-zipa-gold outline-none transition-all text-zipa-light font-light leading-relaxed"
+                    placeholder="Décrivez l'inspiration, les dimensions, etc..."></textarea>
             </div>
 
             <!-- Image -->
             <div>
-                <label class="block text-sm font-bold text-noir-profond mb-2">Image du produit</label>
+                <label
+                    class="block text-[10px] font-sans font-bold uppercase tracking-widest text-zipa-text-muted mb-2">Photographie
+                    de l'œuvre</label>
                 <div class="relative group">
                     <input type="file" name="image" required id="imageInput"
                         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                     <div
-                        class="border-2 border-dashed border-gray-200 group-hover:border-or-royal rounded-xl p-8 text-center transition-all bg-creme-luxe/30">
+                        class="border border-dashed border-white/20 group-hover:border-zipa-gold p-12 text-center transition-all bg-zipa-dark">
                         <i
-                            class="fa-solid fa-cloud-arrow-up text-3xl text-gray-400 group-hover:text-or-royal mb-2 transition-colors"></i>
-                        <p class="text-sm text-gray-500" id="fileName">Cliquez ou glissez une image ici</p>
-                        <p class="text-xs text-gray-400 mt-1">PNG, JPG ou WEBP (Max 5MB)</p>
+                            class="fa-regular fa-image text-3xl text-zipa-gray group-hover:text-zipa-gold mb-4 transition-colors"></i>
+                        <p class="text-sm font-sans font-bold text-zipa-text-muted" id="fileName">Téléverser une image
+                            de haute qualité</p>
+                        <p class="text-[10px] text-zipa-gray mt-2 uppercase tracking-widest">JPG, PNG, WEBP</p>
                     </div>
                 </div>
             </div>
 
             <!-- Submit -->
-            <div class="pt-4">
+            <div class="pt-6 text-center">
                 <button type="submit"
-                    class="w-full btn-gold py-4 rounded-xl flex items-center justify-center gap-2 text-lg">
-                    <i class="fa-solid fa-save"></i>
-                    Enregistrer le produit
+                    class="btn-zipa !bg-zipa-gold !text-zipa-dark !justify-center !px-16 shadow-[0_10px_30px_rgba(212,175,55,0.2)] hover:!bg-white">
+                    EXPOSER L'ŒUVRE
                 </button>
             </div>
         </form>
@@ -84,9 +100,10 @@
 
 <script th:inline="javascript">
     document.getElementById('imageInput').addEventListener('change', function (e) {
-        const fileName = e.target.files[0]?.name || 'Cliquez ou glissez une image ici';
+        const fileName = e.target.files[0]?.name || 'Téléverser une image de haute qualité';
         document.getElementById('fileName').textContent = fileName;
-        document.getElementById('fileName').classList.add('text-or-royal', 'font-bold');
+        document.getElementById('fileName').classList.remove('text-zipa-text-muted');
+        document.getElementById('fileName').classList.add('text-zipa-gold');
     });
 </script>
 

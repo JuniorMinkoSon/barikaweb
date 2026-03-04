@@ -1,239 +1,106 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Nos Objectifs - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Nos Missions - Grace Service Déménagement')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
     <!-- HERO PAGE -->
-    <section class="relative py-24 md:py-32 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/90 to-noir-profond/70"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-or-royal/10 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-playfair font-bold text-white mb-4">
-                Nos Objectifs & <span class="text-or-royal">Missions</span>
+    <section class="relative py-40 bg-gsd-blue-dark overflow-hidden border-b border-gsd-white/5">
+        <div class="absolute inset-0 opacity-20">
+            <img th:src="@{/images/demena3.jpg}" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="section-gsd relative z-10 text-center">
+            <span class="text-gsd-gold font-black uppercase tracking-[0.4em] text-[10px] mb-6 block">Notre
+                Engagement</span>
+            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
+                MISSIONS & <span class="text-gradient-gsd">OBJECTIFS</span>
             </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Notre vision pour un développement immobilier durable et accessible en Côte d'Ivoire
+            <p
+                class="text-sm md:text-base text-gsd-light/50 max-w-2xl mx-auto font-bold uppercase tracking-widest leading-relaxed">
+                Notre vision pour un service de déménagement d'exception en Île-de-France.
             </p>
         </div>
     </section>
 
-    <!-- OBJECTIFS -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Nos objectifs <span class="text-or-royal">stratégiques</span>
+    <!-- MISSIONS -->
+    <section class="py-32 bg-gsd-blue-dark">
+        <div class="section-gsd">
+            <div class="text-center mb-24">
+                <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">
+                    NOS ENGAGEMENTS <span class="text-gsd-gold">STRATÉGIQUES</span>
                 </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    Des ambitions claires pour accompagner durablement nos clients
-                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 <!-- Objectif 1 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/Immobilier-foncier-sécurisé-1.jpg}" alt="Sécurisation foncière"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="card-gsd group overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img th:src="@{/images/demena1.jpg}" alt="Logistique"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105">
                         <div
-                            class="absolute top-4 left-4 w-12 h-12 bg-or-royal rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-shield-halved text-noir-profond text-xl"></i>
+                            class="absolute top-6 left-6 w-14 h-14 bg-gsd-gold rounded-2xl flex items-center justify-center shadow-2xl">
+                            <i class="fa-solid fa-shield-halved text-gsd-blue-dark text-2xl"></i>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-10">
                         <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Sécuriser
+                            class="text-xl font-black uppercase tracking-widest text-gsd-white mb-6 group-hover:text-gsd-gold transition-colors">
+                            SÉCURISER
                         </h3>
-                        <p class="text-gray-600">
-                            Offrir des terrains et biens immobiliers 100% sécurisés avec titres fonciers authentiques.
-                            Une acquisition sans risque ni litige.
+                        <p class="text-gsd-light/50 font-medium leading-relaxed">
+                            Garantir une protection absolue de vos biens. Chaque carton, chaque meuble est traité avec
+                            une attention millimétrée et une assurance premium.
                         </p>
                     </div>
                 </div>
 
                 <!-- Objectif 2 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/chantier1.jpg}" alt="Accompagnement chantier"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="card-gsd group overflow-hidden active">
+                    <div class="relative h-64 overflow-hidden">
+                        <img th:src="@{/images/demena2.jpg}" alt="Equipe"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105">
                         <div
-                            class="absolute top-4 left-4 w-12 h-12 bg-or-royal rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-handshake text-noir-profond text-xl"></i>
+                            class="absolute top-6 left-6 w-14 h-14 bg-gsd-gold rounded-2xl flex items-center justify-center shadow-2xl">
+                            <i class="fa-solid fa-handshake text-gsd-blue-dark text-2xl"></i>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-10">
                         <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Accompagner
+                            class="text-xl font-black uppercase tracking-widest text-gsd-white mb-6 group-hover:text-gsd-gold transition-colors">
+                            ACCOMPAGNER
                         </h3>
-                        <p class="text-gray-600">
-                            Accompagner chaque client du choix du terrain jusqu'à la livraison de la maison. Un suivi
-                            complet, humain et professionnel.
+                        <p class="text-gsd-light/50 font-medium leading-relaxed">
+                            Être à vos côtés de la planification à l'installation finale. Un conseiller dédié pour
+                            chaque étape de votre transition résidentielle ou professionnelle.
                         </p>
                     </div>
                 </div>
 
                 <!-- Objectif 3 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/Immobilier-foncier-sécurisé-2.jpg}" alt="Accessibilité foncière"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="card-gsd group overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img th:src="@{/images/demena3.jpg}" alt="Temps"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105">
                         <div
-                            class="absolute top-4 left-4 w-12 h-12 bg-or-royal rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-key text-noir-profond text-xl"></i>
+                            class="absolute top-6 left-6 w-14 h-14 bg-gsd-gold rounded-2xl flex items-center justify-center shadow-2xl">
+                            <i class="fa-solid fa-clock text-gsd-blue-dark text-2xl"></i>
                         </div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-10">
                         <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Faciliter
+                            class="text-xl font-black uppercase tracking-widest text-gsd-white mb-6 group-hover:text-gsd-gold transition-colors">
+                            FACILITER
                         </h3>
-                        <p class="text-gray-600">
-                            Simplifier les démarches administratives et rendre la propriété accessible avec des
-                            solutions de paiement flexibles.
+                        <p class="text-gsd-light/50 font-medium leading-relaxed">
+                            Simplifier votre déménagement grâce à des services clés en main : emballage, démontage,
+                            remontage et nettoyage post-déménagement.
                         </p>
                     </div>
                 </div>
-
-                <!-- Objectif 4 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/Travaux-publics-génie-civil-1.jpg}" alt="Construction durable"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute top-4 left-4 w-12 h-12 bg-or-royal rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-building text-noir-profond text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Construire
-                        </h3>
-                        <p class="text-gray-600">
-                            Réaliser des infrastructures publiques et privées aux normes internationales, avec un
-                            contrôle qualité strict.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Objectif 5 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/Travaux-publics-génie-civil-2.jpg}" alt="Innovation BTP"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute top-4 left-4 w-12 h-12 bg-or-royal rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-lightbulb text-noir-profond text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Innover
-                        </h3>
-                        <p class="text-gray-600">
-                            Intégrer les meilleures technologies et pratiques dans les projets immobiliers et BTP.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Objectif 6 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/chantier.jpg}" alt="Protection environnement"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute top-4 left-4 w-12 h-12 bg-or-royal rounded-full flex items-center justify-center">
-                            <i class="fa-solid fa-leaf text-noir-profond text-xl"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Préserver
-                        </h3>
-                        <p class="text-gray-600">
-                            Intégrer le respect de l'environnement dans tous nos chantiers et plans d'aménagement.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NOTRE VISION -->
-    <section class="py-20 bg-noir-profond text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Texte -->
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-playfair font-bold mb-6">
-                        Notre <span class="text-or-royal">Vision</span>
-                    </h2>
-                    <h3 class="text-xl font-semibold text-or-royal mb-4">
-                        Devenir la référence incontournable
-                    </h3>
-                    <p class="text-gray-300 text-lg mb-8">
-                        Notre ambition : devenir l'entreprise la plus fiable en Côte d'Ivoire dans le BTP, l'immobilier
-                        et les finitions, avec une approche transparente et professionnelle.
-                    </p>
-
-                    <div class="space-y-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-or-royal/20 flex items-center justify-center">
-                                <i class="fa-solid fa-trophy text-or-royal text-xl"></i>
-                            </div>
-                            <span class="text-lg">Excellence dans chaque projet</span>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-or-royal/20 flex items-center justify-center">
-                                <i class="fa-solid fa-users text-or-royal text-xl"></i>
-                            </div>
-                            <span class="text-lg">Relation client privilégiée</span>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-or-royal/20 flex items-center justify-center">
-                                <i class="fa-solid fa-globe-africa text-or-royal text-xl"></i>
-                            </div>
-                            <span class="text-lg">Impact positif sur le développement</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Image -->
-                <div class="relative">
-                    <img th:src="@{/images/Immobilier-foncier-sécurisé-2.jpg}" alt="Vision stratégique"
-                        class="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500">
-                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-or-royal/20 rounded-full blur-2xl"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-6">
-                Partagez notre <span class="text-or-royal">vision</span>
-            </h2>
-            <p class="text-xl text-gray-600 mb-10">
-                Rejoignez-nous dans cette aventure et concrétisons ensemble vos projets
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                    <i class="fa-solid fa-phone mr-2"></i> Nous contacter
-                </a>
-                <a th:href="@{/propos}" class="btn-gold-outline inline-flex items-center">
-                    <i class="fa-solid fa-users mr-2"></i> En savoir plus
-                </a>
             </div>
         </div>
     </section>

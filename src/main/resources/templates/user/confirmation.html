@@ -1,54 +1,43 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Confirmation - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head (title='Confirmation - Grace Service Déménagement')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- CONTENU -->
-    <section class="min-h-[60vh] flex items-center justify-center py-20">
-        <div class="max-w-xl mx-auto px-6 text-center">
-            <div class="bg-white rounded-2xl shadow-xl p-12">
-                <!-- Icône de succès -->
-                <div
-                    class="w-24 h-24 mx-auto mb-8 bg-green-100 rounded-full flex items-center justify-center animate-bounce">
-                    <i class="fa-solid fa-check text-5xl text-green-500"></i>
-                </div>
+    <!-- MAIN CONTENT -->
+    <main class="min-h-screen flex items-center justify-center py-40 bg-gsd-blue-dark relative overflow-hidden">
 
-                <!-- Message principal -->
-                <h1 class="text-3xl font-playfair font-bold text-noir-profond mb-4">
-                    <span class="text-green-500">Succès !</span>
-                </h1>
-
-                <p th:if="${success}" class="text-xl text-gray-600 mb-8" th:text="${success}">
-                    Votre message a été envoyé avec succès.
-                </p>
-
-                <p th:unless="${success}" class="text-xl text-gray-600 mb-8">
-                    Votre commande a été validée avec succès. Nous vous contacterons bientôt !
-                </p>
-
-                <!-- Boutons -->
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a th:href="@{/}" class="btn-gold inline-flex items-center">
-                        <i class="fa-solid fa-home mr-2"></i> Retour à l'accueil
-                    </a>
-                    <a th:href="@{/contact}" class="btn-gold-outline inline-flex items-center">
-                        <i class="fa-solid fa-phone mr-2"></i> Nous contacter
-                    </a>
-                </div>
+        <div class="section-gsd relative z-10 text-center">
+            <div
+                class="w-32 h-32 mx-auto mb-12 bg-gsd-gold/10 rounded-[2.5rem] flex items-center justify-center border border-gsd-gold/20 shadow-[0_0_50px_rgba(212,175,55,0.1)]">
+                <i class="fa-solid fa-circle-check text-5xl text-gsd-gold"></i>
             </div>
 
-            <!-- Message additionnel -->
-            <p class="mt-8 text-gray-500">
-                <i class="fa-solid fa-clock mr-2"></i>
-                Nous vous répondrons dans les 24 heures.
+            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter text-gsd-white mb-8">
+                DEMANDE <span class="text-gsd-gold">CONFIRMÉE</span>
+            </h1>
+
+            <p
+                class="text-gsd-light/50 text-lg md:text-xl max-w-2xl mx-auto mb-16 font-bold uppercase tracking-widest leading-relaxed">
+                Votre demande a été traitée avec succès. Notre équipe vous contactera dans les plus brefs délais pour
+                finaliser les détails.
             </p>
+
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
+                <a th:href="@{/}" class="btn-gsd !px-12 !py-6 !text-lg shadow-[0_20px_60px_rgba(212,175,55,0.2)]">
+                    RETOUR À L'ACCUEIL <i class="fa-solid fa-house ml-3"></i>
+                </a>
+                <a th:href="@{/contact}"
+                    class="text-gsd-white hover:text-gsd-gold font-black uppercase tracking-[0.4em] text-xs transition-colors flex items-center gap-4">
+                    BESOIN D'URGENCE ? <i class="fa-solid fa-phone text-gsd-gold"></i>
+                </a>
+            </div>
         </div>
-    </section>
+    </main>
 
     <!-- FOOTER -->
     <div th:replace="~{fragments/footer :: footer}"></div>

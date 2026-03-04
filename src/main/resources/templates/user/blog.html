@@ -1,81 +1,73 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Blog - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Journal - Peintre Zipa Officiel')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- HERO PAGE -->
-    <section class="relative py-24 md:py-32 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600" alt="Construction"
-                class="w-full h-full object-cover opacity-30">
-            <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/80 to-noir-profond/60">
-            </div>
+    <!-- HERO PAGE (Blog) -->
+    <section class="relative py-40 bg-zipa-dark overflow-hidden border-b border-white/5">
+        <div class="absolute inset-0 opacity-20">
+            <img th:src="@{/images/blog_hero.jpg}"
+                onerror="this.src='https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600'"
+                alt="Atelier d'Artiste" class="w-full h-full object-cover">
         </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-playfair font-bold text-white mb-4">
-                Notre <span class="text-or-royal">Blog</span>
+        <div class="section-zipa relative z-10 text-center flex flex-col items-center">
+            <span class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block w-max">
+                Réflexions & Actualités
+            </span>
+            <h1 class="heading-primary text-zipa-light mb-8">
+                JOURNAL DE <span class="italic text-zipa-gold font-light">l'Artiste</span>
             </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Actualités, conseils et astuces pour vos projets immobiliers et de construction
+            <p
+                class="text-sm md:text-base text-zipa-light/70 max-w-2xl mx-auto font-sans uppercase tracking-[0.2em] leading-relaxed">
+                Plongez dans les coulisses de la création. Chroniques, inspirations et dernières nouvelles de l'atelier.
             </p>
         </div>
     </section>
 
     <!-- ARTICLES -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span
-                    class="inline-block bg-or-royal/10 text-or-royal font-semibold text-sm px-4 py-2 rounded-full mb-4">
-                    Articles
-                </span>
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Dernières <span class="text-or-royal">actualités</span>
-                </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    Restez informé des dernières tendances et conseils dans le domaine de l'immobilier et de la
-                    construction.
-                </p>
-            </div>
+    <section class="py-32 bg-zipa-light">
+        <div class="section-zipa">
 
             <!-- Grille d'articles -->
             <div th:if="${articles != null and !#lists.isEmpty(articles)}"
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
 
-                <article th:each="a : ${articles}" class="card-luxury group">
+                <!-- Iteration logic kept identical for backend compatibility -->
+                <article th:each="a : ${articles}"
+                    class="bg-white border border-zipa-gray group overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
                     <!-- Image -->
-                    <div class="relative overflow-hidden">
-                        <img th:src="${a.imageUrl != null and !#strings.isEmpty(a.imageUrl)} ? @{${a.imageUrl}} : @{/images/chantier.jpg}"
+                    <div class="relative aspect-video overflow-hidden">
+                        <img th:src="${a.imageUrl != null and !#strings.isEmpty(a.imageUrl)} ? @{${a.imageUrl}} : @{/images/art_placeholder1.jpg}"
                             th:alt="${a.titre}"
-                            class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-noir-profond/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-transform duration-1000 group-hover:scale-105">
 
                         <!-- Badge catégorie -->
                         <span
-                            class="absolute top-4 left-4 bg-or-royal text-noir-profond text-xs font-semibold px-3 py-1 rounded-full"
-                            th:text="${a.categorie}">Catégorie</span>
+                            class="absolute top-4 left-4 bg-zipa-dark text-zipa-gold text-[10px] font-sans font-bold uppercase tracking-widest px-4 py-2"
+                            th:text="${a.categorie}">INSPIRATION</span>
                     </div>
 
                     <!-- Contenu -->
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors line-clamp-2"
+                    <div class="p-8">
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="w-1.5 h-1.5 bg-zipa-gold rounded-full"></span>
+                            <span class="text-[10px] font-bold text-zipa-text-muted uppercase tracking-widest"
+                                th:text="${#temporals.format(a.dateCreation, 'dd MMMM yyyy')}">Date</span>
+                        </div>
+                        <h3 class="font-serif text-2xl text-zipa-dark mb-4 group-hover:text-zipa-gold transition-colors line-clamp-2"
                             th:text="${a.titre}">Titre de l'article</h3>
 
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3"
+                        <p class="text-zipa-text-muted font-light text-sm mb-8 line-clamp-3 leading-relaxed"
                             th:text="${#strings.abbreviate(a.contenu, 150)}">Extrait de l'article...</p>
 
                         <a th:href="@{/blog}"
-                            class="inline-flex items-center text-or-royal font-semibold hover:gap-3 transition-all duration-300">
-                            Lire l'article
-                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                            class="text-[10px] font-bold uppercase tracking-[0.2em] text-zipa-dark border-b border-zipa-dark pb-1 inline-flex items-center gap-3 hover:text-zipa-gold hover:border-zipa-gold transition-all">
+                            LIRE L'ARTICLE <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                 </article>
@@ -83,77 +75,22 @@
 
             <!-- État vide -->
             <div th:if="${articles == null or #lists.isEmpty(articles)}"
-                class="bg-white rounded-2xl shadow-xl p-12 text-center max-w-2xl mx-auto">
-                <div class="w-24 h-24 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-newspaper text-4xl text-or-royal"></i>
+                class="bg-white border md:border-t-4 border-zipa-gray md:border-t-zipa-gold p-20 text-center max-w-3xl mx-auto shadow-sm">
+                <div
+                    class="w-24 h-24 mx-auto mb-10 flex items-center justify-center rounded-full bg-zipa-gray/50 text-zipa-gold">
+                    <i class="fa-solid fa-paintbrush text-4xl"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-noir-profond mb-4">Aucun article disponible</h2>
-                <p class="text-gray-600 mb-8">
-                    Revenez bientôt pour découvrir nos dernières actualités !
+                <h2 class="font-serif text-3xl text-zipa-dark mb-6">TOILE <span
+                        class="italic text-zipa-gold">Vierge</span></h2>
+                <p class="text-zipa-text-muted font-light text-lg mb-12">
+                    L'artiste est actuellement concentré sur ses toiles. Les nouvelles chroniques de l'atelier seront
+                    publiées prochainement.
                 </p>
+                <a th:href="@{/}"
+                    class="btn-zipa !bg-zipa-dark !text-zipa-light hover:!bg-zipa-gold hover:!text-zipa-dark">RETOURNER
+                    À LA GALERIE</a>
             </div>
-        </div>
-    </section>
 
-    <!-- SECTION AUTEUR -->
-    <section class="py-20 bg-noir-profond text-white">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="bg-noir-elegant rounded-2xl p-8 md:p-12 border border-gray-800">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <!-- Info auteur -->
-                    <div>
-                        <h2 class="text-2xl font-playfair font-bold mb-4">
-                            À propos de l'<span class="text-or-royal">auteur</span>
-                        </h2>
-                        <div class="w-16 h-1 bg-or-royal mb-6"></div>
-
-                        <h3 class="text-xl font-bold text-or-royal mb-2">Zoro Zipa</h3>
-                        <p class="text-gray-300 mb-4">
-                            Président de <strong>Baraka Synergies Group</strong>
-                        </p>
-                        <p class="text-gray-400">
-                            Expert en immobilier et travaux publics avec plus de 15 ans d'expérience dans le secteur.
-                            Passionné par l'aménagement urbain durable et la sécurisation foncière.
-                        </p>
-                    </div>
-
-                    <!-- Contact -->
-                    <div>
-                        <h4 class="text-xl font-bold mb-6">Contact</h4>
-
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <div class="w-10 h-10 rounded-full bg-or-royal/20 flex items-center justify-center">
-                                    <i class="fa-solid fa-location-dot text-or-royal"></i>
-                                </div>
-                                <span>Abidjan, Cocody Angré-Bessikoi, Base CIE</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <div class="w-10 h-10 rounded-full bg-or-royal/20 flex items-center justify-center">
-                                    <i class="fa-solid fa-phone text-or-royal"></i>
-                                </div>
-                                <span>+225 07 68 18 93 40</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <div class="w-10 h-10 rounded-full bg-or-royal/20 flex items-center justify-center">
-                                    <i class="fa-brands fa-whatsapp text-or-royal"></i>
-                                </div>
-                                <span>+225 07 68 18 93 40</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-gray-300">
-                                <div class="w-10 h-10 rounded-full bg-or-royal/20 flex items-center justify-center">
-                                    <i class="fa-solid fa-envelope text-or-royal"></i>
-                                </div>
-                                <span>Contacts@barakasynergiesgroup.com</span>
-                            </li>
-                        </ul>
-
-                        <a th:href="@{/contact}" class="btn-gold inline-flex items-center mt-8">
-                            <i class="fa-solid fa-paper-plane mr-2"></i> Nous contacter
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 

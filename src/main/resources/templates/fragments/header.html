@@ -1,119 +1,82 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <div th:fragment="header">
-    <!-- Header Glassmorphism -->
-    <header class="fixed w-full top-0 z-50 glassmorphism shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- LOGO -->
-            <a th:href="@{/}" class="flex items-center">
-                <img th:src="@{/images/logo_bar1.png}" alt="Logo UNEVIE" class="h-14 w-auto">
+    <!-- Header Zipa - Elegant & Minimal -->
+    <header class="fixed w-full top-0 z-50 bg-zipa-light/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-[100rem] mx-auto px-6 py-5 flex justify-between items-center">
+            <!-- LOGO / BRANDING -->
+            <a th:href="@{/}" class="flex flex-col items-center">
+                <span class="text-3xl font-serif font-bold tracking-widest text-zipa-dark mb-1">ZIPA</span>
+                <span class="text-[10px] font-sans font-semibold tracking-[0.4em] text-zipa-gold uppercase">Artiste
+                    Peintre</span>
             </a>
 
             <!-- NAVIGATION -->
-            <nav class="hidden md:flex items-center gap-8">
-                <a th:href="@{/}" class="nav-link">
-                    Accueil
-                    <span class="nav-underline"></span>
-                </a>
-                <a th:href="@{/propos}" class="nav-link">
-                    À propos
-                    <span class="nav-underline"></span>
-                </a>
-                <a th:href="@{/services}" class="nav-link">
-                    Services
-                    <span class="nav-underline"></span>
-                </a>
-                <a th:href="@{/objectifs}" class="nav-link">
-                    Objectifs
-                    <span class="nav-underline"></span>
-                </a>
-                <a th:href="@{/produits}" class="nav-link">
-                    Produits
-                    <span class="nav-underline"></span>
-                </a>
+            <nav class="hidden lg:flex items-center gap-12">
+                <a th:href="@{/}" class="zipa-nav-link">Accueil</a>
+                <a th:href="@{/services}" class="zipa-nav-link">Galerie</a>
+                <a th:href="@{/propos}" class="zipa-nav-link">À propos</a>
+                <a th:href="@{/contact}" class="zipa-nav-link">Contact</a>
+
                 <a th:href="@{/panier}"
-                    class="relative text-noir-profond font-medium hover:text-or-royal transition-colors duration-300 group">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    class="relative text-zipa-dark hover:text-zipa-gold transition-colors duration-300 group ml-4 flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-xl"></i>
                     <span th:if="${cartCount > 0}"
-                        class="absolute -top-2 -right-3 bg-or-royal text-noir-profond text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-sm group-hover:bg-noir-profond group-hover:text-or-royal transition-colors"
+                        class="absolute -top-2 -right-3 bg-zipa-dark text-zipa-light text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-lg"
                         th:text="${cartCount}">0</span>
                 </a>
             </nav>
 
             <!-- BOUTONS ACTIONS -->
-            <div class="hidden md:flex items-center gap-4">
-                <!-- Connexion (Anonyme) -->
+            <div class="hidden lg:flex items-center gap-6">
+                <!-- Connexion -->
                 <a th:href="@{/login}" sec:authorize="isAnonymous()"
-                    class="text-noir-profond font-semibold hover:text-or-royal transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-user-circle text-xl"></i>
-                    <span>Connexion</span>
+                    class="text-zipa-dark/70 hover:text-zipa-gold transition-colors" aria-label="Connexion">
+                    <i class="fa-regular fa-user text-xl"></i>
                 </a>
 
-                <!-- Mon Compte (Authentifié) -->
+                <!-- Mon Compte -->
                 <div sec:authorize="isAuthenticated()" class="flex items-center gap-4">
-                    <a th:href="@{/logout}"
-                        class="text-red-500 hover:text-red-700 transition-colors text-sm font-bold uppercase tracking-tighter">
-                        <i class="fa-solid fa-sign-out-alt"></i>
+                    <a th:href="@{/logout}" class="text-zipa-dark/70 hover:text-zipa-gold transition-colors"
+                        aria-label="Déconnexion">
+                        <i class="fa-solid fa-arrow-right-from-bracket text-xl"></i>
                     </a>
                 </div>
 
-                <a th:href="@{/contact}" class="btn-gold">
-                    Nous contacter
+                <a th:href="@{/services}" class="btn-zipa !py-2 !px-6 text-xs">
+                    VOIR LES ŒUVRES
                 </a>
             </div>
 
             <!-- MENU BURGER MOBILE -->
-            <button class="md:hidden text-noir-profond text-2xl" onclick="toggleMobileMenu()">
+            <button class="lg:hidden text-zipa-dark text-2xl" onclick="toggleMobileMenu()" aria-label="Menu">
                 <i class="fa-solid fa-bars" id="menuIcon"></i>
             </button>
         </div>
 
         <!-- MENU MOBILE -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gris-perle">
-            <nav class="flex flex-col p-6 gap-4">
-                <a th:href="@{/}" class="text-noir-profond font-medium hover:text-or-royal py-2">Accueil</a>
-                <a th:href="@{/propos}" class="text-noir-profond font-medium hover:text-or-royal py-2">À propos</a>
-                <a th:href="@{/services}" class="text-noir-profond font-medium hover:text-or-royal py-2">Services</a>
-                <a th:href="@{/objectifs}" class="text-noir-profond font-medium hover:text-or-royal py-2">Objectifs</a>
-                <a th:href="@{/produits}" class="text-noir-profond font-medium hover:text-or-royal py-2">Produits</a>
-                <a th:href="@{/panier}" class="text-noir-profond font-medium hover:text-or-royal py-2">
-                    <i class="fa-solid fa-cart-shopping mr-2"></i> Panier
-                </a>
+        <div id="mobileMenu"
+            class="hidden lg:hidden bg-zipa-light border-t border-zipa-gray animate-fade-in shadow-lg absolute w-full left-0">
+            <nav class="flex flex-col p-8 gap-6">
+                <a th:href="@{/}" class="text-2xl font-serif text-zipa-dark hover:text-zipa-gold">Accueil</a>
+                <a th:href="@{/services}" class="text-2xl font-serif text-zipa-dark hover:text-zipa-gold">Galerie</a>
+                <a th:href="@{/propos}" class="text-2xl font-serif text-zipa-dark hover:text-zipa-gold">À propos</a>
+                <a th:href="@{/contact}" class="text-2xl font-serif text-zipa-dark hover:text-zipa-gold">Contact</a>
 
-                <div class="h-px bg-gray-100 my-2"></div>
+                <div class="h-px bg-zipa-gray my-2"></div>
 
-                <!-- Login/Logout Mobile -->
-                <a th:href="@{/login}" sec:authorize="isAnonymous()"
-                    class="text-noir-profond font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-user-circle text-or-royal"></i> Connexion
-                </a>
-                <a th:href="@{/logout}" sec:authorize="isAuthenticated()"
-                    class="text-red-500 font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-sign-out-alt"></i> Déconnexion
-                </a>
+                <div class="flex items-center justify-between">
+                    <a href="tel:+2250102030405" class="text-lg font-sans text-zipa-gold">+225 01 02 03 04 05</a>
+                    <a th:href="@{/login}" class="text-zipa-dark text-2xl"><i class="fa-regular fa-user"></i></a>
+                </div>
 
-                <a th:href="@{/contact}" class="btn-gold text-center mt-4">Nous contacter</a>
+                <a th:href="@{/services}" class="btn-zipa text-center mt-4">Découvrir les œuvres</a>
             </nav>
         </div>
     </header>
 
     <!-- Spacer pour le header fixe -->
-    <div class="h-20"></div>
-
-    <style>
-        .nav-link {
-            @apply text-noir-profond font-medium hover:text-or-royal transition-colors duration-300 relative;
-        }
-
-        .nav-underline {
-            @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-or-royal transition-all duration-300;
-        }
-
-        .nav-link:hover .nav-underline,
-        .nav-link.active .nav-underline {
-            @apply w-full;
-        }
-    </style>
+    <div class="h-[90px]"></div>
 
     <script>
         function toggleMobileMenu() {
@@ -122,27 +85,13 @@
             mobileMenu.classList.toggle('hidden');
 
             if (mobileMenu.classList.contains('hidden')) {
-                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.remove('fa-xmark');
                 menuIcon.classList.add('fa-bars');
             } else {
                 menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
+                menuIcon.classList.add('fa-xmark');
             }
         }
-
-        // Highlight active link
-        document.addEventListener('DOMContentLoaded', function () {
-            const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-link');
-
-            navLinks.forEach(link => {
-                const linkPath = link.getAttribute('href');
-                if (currentPath === linkPath || (linkPath !== '/' && currentPath.startsWith(linkPath))) {
-                    link.classList.add('text-or-royal');
-                    link.querySelector('.nav-underline')?.classList.add('w-full');
-                }
-            });
-        });
     </script>
 </div>
 

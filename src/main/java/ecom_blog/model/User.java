@@ -1,11 +1,10 @@
 package ecom_blog.model;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "app_user")
-public class User extends BaseEntity implements Serializable {
+public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L; // ✅ Bonnes pratiques
 

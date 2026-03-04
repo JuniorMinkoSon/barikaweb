@@ -6,35 +6,35 @@
     <!-- Quick Stats -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
         <!-- Messages -->
-        <div class="card-luxury p-8 flex items-start justify-between">
+        <div class="bg-zipa-darker border border-white/5 p-8 flex items-start justify-between shadow-sm">
             <div>
-                <p class="text-gray-500 font-semibold mb-2">Messages</p>
-                <h3 class="text-4xl font-bold text-noir-profond" th:text="${stats['messages']}">0</h3>
+                <p class="text-zipa-text-muted font-sans text-sm uppercase tracking-widest mb-2 font-bold">Messages</p>
+                <h3 class="text-4xl font-serif text-zipa-light" th:text="${stats['messages']}">0</h3>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-                <i class="fa-solid fa-envelope text-2xl"></i>
+            <div class="w-12 h-12 rounded-xl bg-zipa-gray/10 flex items-center justify-center text-zipa-light">
+                <i class="fa-regular fa-envelope text-2xl"></i>
             </div>
         </div>
 
         <!-- Commandes -->
-        <div class="card-luxury p-8 flex items-start justify-between">
+        <div class="bg-zipa-darker border border-white/5 p-8 flex items-start justify-between shadow-sm">
             <div>
-                <p class="text-gray-500 font-semibold mb-2">Commandes</p>
-                <h3 class="text-4xl font-bold text-noir-profond" th:text="${stats['commandes']}">0</h3>
+                <p class="text-zipa-text-muted font-sans text-sm uppercase tracking-widest mb-2 font-bold">Commandes</p>
+                <h3 class="text-4xl font-serif text-zipa-light" th:text="${stats['commandes']}">0</h3>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+            <div class="w-12 h-12 rounded-xl bg-zipa-gold/10 flex items-center justify-center text-zipa-gold">
                 <i class="fa-solid fa-box text-2xl"></i>
             </div>
         </div>
 
         <!-- Produits -->
-        <div class="card-luxury p-8 flex items-start justify-between">
+        <div class="bg-zipa-darker border border-white/5 p-8 flex items-start justify-between shadow-sm">
             <div>
-                <p class="text-gray-500 font-semibold mb-2">Produits</p>
-                <h3 class="text-4xl font-bold text-noir-profond" th:text="${stats['produits']}">0</h3>
+                <p class="text-zipa-text-muted font-sans text-sm uppercase tracking-widest mb-2 font-bold">Œuvres</p>
+                <h3 class="text-4xl font-serif text-zipa-light" th:text="${stats['produits']}">0</h3>
             </div>
-            <div class="w-12 h-12 rounded-xl bg-or-royal/10 flex items-center justify-center text-or-royal">
-                <i class="fa-solid fa-cart-shopping text-2xl"></i>
+            <div class="w-12 h-12 rounded-xl bg-zipa-gold/10 flex items-center justify-center text-zipa-gold">
+                <i class="fa-solid fa-paintbrush text-2xl"></i>
             </div>
         </div>
     </div>
@@ -42,36 +42,37 @@
     <!-- Recent Activity & Overview -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Recent Messages -->
-        <div class="card-luxury p-8">
-            <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
-                <i class="fa-solid fa-envelope text-or-royal"></i>
+        <div class="bg-zipa-darker border border-white/5 p-8 shadow-sm">
+            <h4 class="text-xl font-serif text-zipa-light mb-6 flex items-center gap-3">
+                <i class="fa-solid fa-envelope text-zipa-gold"></i>
                 Derniers Messages
             </h4>
             <div class="space-y-4">
                 <div th:each="msg : ${messages}"
-                    class="flex items-start gap-4 p-4 rounded-xl hover:bg-creme-luxe/50 transition-colors border border-transparent hover:border-gray-100">
+                    class="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
                     <div
-                        class="w-10 h-10 rounded-full bg-or-royal/10 flex items-center justify-center text-or-royal flex-shrink-0">
+                        class="w-10 h-10 rounded-full bg-zipa-gold/10 flex items-center justify-center text-zipa-gold flex-shrink-0">
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-center mb-1">
-                            <p class="font-bold text-noir-profond truncate" th:text="${msg.nom}">Nom</p>
-                            <span class="text-[10px] text-gray-400"
+                            <p class="font-bold text-zipa-light font-sans text-sm truncate" th:text="${msg.nom}">Nom</p>
+                            <span class="text-[10px] text-zipa-text-muted"
                                 th:text="${#temporals.format(msg.dateEnvoi, 'dd/MM HH:mm')}">Date</span>
                         </div>
-                        <p class="text-xs text-or-royal font-semibold mb-1" th:text="${msg.sujet}">Sujet</p>
-                        <p class="text-xs text-gray-500 line-clamp-1" th:text="${msg.message}">Message preview...</p>
+                        <p class="text-xs text-zipa-gold font-semibold mb-1" th:text="${msg.sujet}">Sujet</p>
+                        <p class="text-xs text-zipa-text-muted font-light line-clamp-1" th:text="${msg.message}">Message
+                            preview...</p>
                     </div>
                 </div>
 
-                <div th:if="${#lists.isEmpty(messages)}" class="py-10 text-center text-gray-400">
+                <div th:if="${#lists.isEmpty(messages)}" class="py-10 text-center text-zipa-text-muted font-light">
                     <p>Aucun message récent.</p>
                 </div>
             </div>
-            <div class="mt-6 pt-6 border-t border-gray-100">
+            <div class="mt-6 pt-6 border-t border-white/5">
                 <a th:href="@{/admin/messages}"
-                    class="text-or-royal text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all">
+                    class="text-zipa-gold text-sm font-bold flex items-center gap-2 hover:gap-3 transition-all">
                     Voir tous les messages
                     <i class="fa-solid fa-arrow-right"></i>
                 </a>
@@ -80,47 +81,52 @@
 
         <!-- Shortcut Actions / Quick Links -->
         <div class="space-y-8">
-            <div class="card-luxury p-8">
-                <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
-                    <i class="fa-solid fa-bolt text-or-royal"></i>
+            <div class="bg-zipa-darker border border-white/5 p-8 shadow-sm">
+                <h4 class="text-xl font-serif text-zipa-light mb-6 flex items-center gap-3">
+                    <i class="fa-solid fa-bolt text-zipa-gold"></i>
                     Actions rapides
                 </h4>
                 <div class="grid grid-cols-2 gap-4">
                     <a th:href="@{/admin/produits/add}"
-                        class="group p-6 rounded-2xl bg-noir-profond hover:bg-noir-elegant transition-all text-center">
+                        class="group p-6 rounded-2xl bg-zipa-dark border border-white/5 hover:border-zipa-gold/30 transition-all text-center">
                         <div
-                            class="w-12 h-12 rounded-xl bg-or-royal/20 flex items-center justify-center text-or-royal mx-auto mb-3 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-plus-circle text-xl"></i>
+                            class="w-12 h-12 rounded-xl bg-zipa-gold/20 flex items-center justify-center text-zipa-gold mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-plus text-xl"></i>
                         </div>
-                        <span class="text-white font-semibold text-sm">Produit</span>
+                        <span class="text-zipa-light font-sans font-bold text-sm tracking-widest uppercase">Nouvelle
+                            Œuvre</span>
                     </a>
                     <a th:href="@{/admin/commandes}"
-                        class="group p-6 rounded-2xl border border-gray-100 hover:border-or-royal/30 hover:bg-creme-luxe transition-all text-center">
+                        class="group p-6 rounded-2xl border border-white/5 bg-zipa-dark hover:border-zipa-gold/30 transition-all text-center">
                         <div
-                            class="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center text-orange mx-auto mb-3 group-hover:scale-110 transition-transform">
-                            <i class="fa-solid fa-truck text-xl"></i>
+                            class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-zipa-light mx-auto mb-3 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-box text-xl"></i>
                         </div>
-                        <span class="text-noir-profond font-semibold text-sm">Commandes</span>
+                        <span
+                            class="text-zipa-light font-sans font-bold text-sm tracking-widest uppercase">Commandes</span>
                     </a>
                 </div>
             </div>
 
             <!-- Articles Overview (if any) -->
-            <div class="card-luxury p-8">
-                <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
-                    <i class="fa-solid fa-newspaper text-or-royal"></i>
-                    Mes Articles
+            <div class="bg-zipa-darker border border-white/5 p-8 shadow-sm">
+                <h4 class="text-xl font-serif text-zipa-light mb-6 flex items-center gap-3">
+                    <i class="fa-solid fa-newspaper text-zipa-gold"></i>
+                    Journal
                 </h4>
                 <div class="space-y-3">
                     <div th:each="art : ${articles}"
-                        class="flex items-center justify-between p-3 rounded-xl bg-gray-50">
-                        <span class="text-sm font-medium truncate pr-4" th:text="${art.titre}">Titre de l'article</span>
-                        <span class="text-[10px] px-2 py-1 bg-noir-profond text-white rounded"
+                        class="flex items-center justify-between p-3 rounded-xl bg-zipa-dark border border-white/5">
+                        <span class="text-sm font-light text-zipa-light truncate pr-4" th:text="${art.titre}">Titre de
+                            l'article</span>
+                        <span class="text-[10px] px-2 py-1 bg-zipa-gold text-zipa-dark font-bold rounded"
                             th:text="${art.categorie}">Cat</span>
                     </div>
                 </div>
                 <div class="mt-6">
-                    <a href="#" class="btn-gold-outline w-full text-center py-3 rounded-xl text-sm">Gérer le blog</a>
+                    <a th:href="@{/admin/articles}"
+                        class="btn-zipa-outline w-full text-center block !py-3 rounded-xl text-sm !border-zipa-gray !text-zipa-text-muted hover:!border-zipa-gold hover:!text-zipa-gold">Gérer
+                        le journal</a>
                 </div>
             </div>
         </div>

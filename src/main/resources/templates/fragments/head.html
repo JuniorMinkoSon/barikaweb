@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Entreprise ivoirienne spécialisée en travaux publics, génie civil, immobilier et finitions">
+        content="Peintre Zipa Officiel - Artiste Peintre à Abidjan. Découvrez et achetez ses œuvres originales, explorez son univers artistique.">
 
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,40 +14,38 @@
             theme: {
                 extend: {
                     colors: {
-                        // Palette Luxueuse
-                        'noir-profond': '#0A0A0A',
-                        'noir-elegant': '#1A1A1A',
-                        'or-royal': '#C9A227',
-                        'or-clair': '#E8D48B',
-                        'creme-luxe': '#F5F0E8',
-                        'gris-perle': '#E5E5E5',
-                        // Couleurs existantes
-                        'bleu-fonce': '#1E3A8A',
-                        'orange': '#da8a27',
-                        'marron': '#847062',
+                        // Palette Peintre Zipa Officiel
+                        'zipa-dark': '#0a0a0a',     /* Deep Noir/Charcoal */
+                        'zipa-darker': '#000000',
+                        'zipa-light': '#FDFBF7',    /* Warm Off-White / Gallery wall */
+                        'zipa-gray': '#EAE5DF',     /* Soft gray for borders */
+                        'zipa-gold': '#C6A87C',     /* Elegant Gold / Copper accent */
+                        'zipa-gold-hover': '#b5976b',
+                        'zipa-text-light': '#ffffff',
+                        'zipa-text-muted': '#9ca3af',
                     },
                     fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif'],
-                        'playfair': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['"Playfair Display"', 'serif'],
                     },
                     animation: {
-                        'fade-in': 'fadeIn 0.8s ease-out forwards',
-                        'slide-up': 'slideUp 0.6s ease-out forwards',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'slow-zoom': 'slowZoom 20s ease-in-out infinite alternate',
                     },
                     keyframes: {
                         fadeIn: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px rgba(201, 162, 39, 0.5)' },
-                            '100%': { boxShadow: '0 0 20px rgba(201, 162, 39, 0.8)' },
-                        },
+                        slowZoom: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.1)' },
+                        }
                     },
                 }
             }
@@ -58,8 +56,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
+
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -67,40 +66,78 @@
     <!-- Favicon -->
     <link rel="shortcut icon" th:href="@{/images/favicon-256x256.png}" type="image/x-icon">
 
-    <!-- Custom CSS (conservé pour compatibilité) -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 
     <!-- Titre dynamique -->
-    <title th:text="${title}">UNEVIE</title>
+    <title th:text="${title}">Peintre Zipa Officiel</title>
 
     <!-- Styles Tailwind personnalisés -->
     <style type="text/tailwindcss">
         @layer utilities {
-            .text-gradient-gold {
-                @apply bg-gradient-to-r from-or-royal via-or-clair to-or-royal bg-clip-text text-transparent;
+            .btn-zipa {
+                @apply bg-zipa-gold text-zipa-dark font-semibold py-3 px-8 rounded-none tracking-widest uppercase text-sm
+                       transition-all duration-300 hover:bg-zipa-gold-hover hover:scale-105 inline-flex items-center justify-center gap-3;
             }
-            .btn-gold {
-                @apply bg-or-royal text-noir-profond font-semibold py-3 px-8 rounded-lg 
-                       transition-all duration-300 hover:bg-or-clair hover:shadow-lg 
-                       hover:shadow-or-royal/30 hover:-translate-y-1;
+            .btn-zipa-outline {
+                @apply border border-zipa-gold text-zipa-gold font-semibold py-3 px-8 rounded-none tracking-widest uppercase text-sm
+                       transition-all duration-300 hover:bg-zipa-gold hover:text-zipa-dark inline-flex items-center justify-center gap-3;
             }
-            .btn-gold-outline {
-                @apply border-2 border-or-royal text-or-royal font-semibold py-3 px-8 rounded-lg 
-                       transition-all duration-300 hover:bg-or-royal hover:text-noir-profond;
+            .btn-zipa-dark {
+                @apply bg-zipa-dark text-zipa-light font-semibold py-3 px-8 rounded-none tracking-widest uppercase text-sm border border-zipa-dark
+                       transition-all duration-300 hover:bg-zipa-light hover:text-zipa-dark inline-flex items-center justify-center gap-3;
             }
-            .card-luxury {
-                @apply bg-white rounded-xl overflow-hidden shadow-lg 
-                       transition-all duration-500 hover:shadow-2xl hover:-translate-y-2
-                       border border-gris-perle hover:border-or-royal/50;
+            .section-zipa {
+                @apply py-24 px-6 md:px-12 lg:px-24 max-w-[100rem] mx-auto;
             }
-            .glassmorphism {
-                @apply backdrop-blur-md bg-white/80 border border-white/20;
+            .heading-primary {
+                @apply font-serif text-5xl md:text-7xl lg:text-8xl text-zipa-dark tracking-tight leading-tight;
             }
-            .glass-dark {
-                @apply backdrop-blur-xl bg-noir-profond/70 border border-white/10;
+            .heading-secondary {
+                @apply font-serif text-3xl md:text-5xl text-zipa-dark tracking-tight mb-8;
+            }
+            .glass-panel {
+                @apply bg-zipa-dark/80 backdrop-blur-lg border border-white/10 p-8;
+            }
+            .zipa-nav-link {
+                @apply text-xs font-sans font-semibold uppercase tracking-[0.2em] text-zipa-dark/80 hover:text-zipa-dark transition-all duration-300 relative pb-1;
+            }
+            .zipa-nav-link::after {
+                content: '';
+                @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[1px] bg-zipa-gold transition-all duration-300;
+            }
+            .zipa-nav-link:hover::after {
+                @apply w-full;
+            }
+            .reveal-on-scroll {
+                @apply opacity-0 translate-y-10 transition-all duration-[1500ms] ease-out;
+            }
+            .reveal-on-scroll.is-revealed {
+                @apply opacity-100 translate-y-0;
+            }
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;  /* IE and Edge */
+                scrollbar-width: none;  /* Firefox */
+            }
+        }
+        
+        @layer base {
+            body {
+                @apply bg-zipa-light text-zipa-dark selection:bg-zipa-gold selection:text-zipa-dark font-sans;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                @apply font-serif;
+            }
+            p {
+                @apply text-zipa-dark/80 leading-relaxed font-light;
             }
         }
     </style>
 </head>
+
+</html>
 
 </html>

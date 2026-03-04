@@ -48,4 +48,8 @@ public class ProduitService {
     public long count() {
         return repo.count();
     }
+
+    public void deleteById(Long id) {
+        repo.deleteById(id);
+    }
 }

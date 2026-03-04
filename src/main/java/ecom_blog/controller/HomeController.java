@@ -53,4 +53,9 @@ public class HomeController {
     public String objectifs() {
         return "user/objectifs";
     }
+
+    @GetMapping("/devis")
+    public String devis() {
+        return "user/devis";
+    }
 }

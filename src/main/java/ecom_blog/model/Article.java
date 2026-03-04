@@ -1,7 +1,6 @@
 package ecom_blog.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "article")

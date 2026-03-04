@@ -1,389 +1,363 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Accueil - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Peintre Zipa Officiel - Galerie d\'Art à Abidjan')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- ================= HEADER ================= -->
     <div th:replace="~{fragments/header :: header}"></div>
 
+    <!-- ========== HERO CAROUSEL ========== -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-zipa-darker"
+        id="heroCarousel">
 
-    <!-- ========== NOS SERVICES ========== -->
-    <!-- ... (rest of the sections) ... -->
-    <!-- (I will only replace header and footer for now) -->
-
-    <!-- ========== BANNIÈRE HERO ========== -->
-    <section class="relative min-h-screen flex items-center bg-noir-profond overflow-hidden">
-        <!-- Background avec overlay -->
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600" alt="Construction"
-                class="w-full h-full object-cover opacity-40">
-            <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/80 to-transparent"></div>
+        <!-- Slides Container (JS will populate this) -->
+        <div id="heroCarouselContainer" class="absolute inset-0 z-0 h-full w-full">
         </div>
 
-        <!-- Contenu Hero -->
-        <div class="relative z-10 max-w-7xl mx-auto px-6 py-32 md:py-40">
-            <div class="max-w-3xl">
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-playfair font-bold text-white mb-6 animate-fade-in">
-                    Construisons ensemble
-                    <span class="text-gradient-gold">votre patrimoine</span>
-                    en toute confiance
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300 mb-10 animate-slide-up" style="animation-delay: 0.2s;">
-                    Votre partenaire de confiance pour vos projets de construction, d'immobilier et d'aménagement en
-                    Côte d'Ivoire
-                </p>
-                <div class="flex flex-wrap gap-4 animate-slide-up" style="animation-delay: 0.4s;">
-                    <a th:href="@{/projets}" class="btn-gold">
-                        <i class="fa-solid fa-eye mr-2"></i> Voir nos réalisations
-                    </a>
-                    <a th:href="@{/contact}" class="btn-gold-outline">
-                        <i class="fa-solid fa-rocket mr-2"></i> Démarrer un projet
-                    </a>
-                </div>
+        <!-- Carousel Content -->
+        <div
+            class="section-zipa relative z-10 text-center flex flex-col items-center justify-center h-full w-full mx-auto pt-20">
+            <span
+                class="inline-block px-5 py-2 border border-zipa-gold/30 text-zipa-gold text-xs font-sans tracking-[0.4em] uppercase mb-8 animate-fade-in-up">
+                Artiste Peintre Ivoirien
+            </span>
+            <h1 class="heading-primary text-zipa-light mb-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+                L'ÉMOTIVITÉ <span class="italic text-zipa-gold font-light">en</span> COULEURS
+            </h1>
+            <p class="text-lg md:text-xl text-zipa-light/80 mb-12 animate-fade-in-up max-w-3xl font-light"
+                style="animation-delay: 0.4s;">
+                Découvrez des œuvres uniques et originales qui transmettent la passion, la culture et la vision de
+                l'artiste Peintre Zipa.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 animate-fade-in-up" style="animation-delay: 0.6s;">
+                <a th:href="@{/services}" class="btn-zipa">
+                    DÉCOUVRIR LES ŒUVRES <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a th:href="@{/propos}"
+                    class="btn-zipa-outline !border-white !text-white hover:!bg-white hover:!text-zipa-dark">
+                    L'ARTISTE
+                </a>
             </div>
         </div>
 
-        <!-- Élément décoratif -->
-    </section>
-
-    <!-- ========== NOS SERVICES ========== -->
-    <section class="py-20 md:py-28 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <!-- Titre de section -->
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Nos <span class="text-or-royal">domaines d'expertise</span>
-                </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    Des solutions complètes pour tous vos besoins en construction et immobilier
-                </p>
+        <!-- Carousel Controls -->
+        <div class="absolute bottom-10 inset-x-0 z-20 flex justify-between items-center px-12 md:px-24 w-full">
+            <div class="flex gap-4">
+                <button onclick="prevSlide()"
+                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-zipa-dark transition-all duration-300 backdrop-blur-sm group">
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                </button>
+                <button onclick="nextSlide()"
+                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-zipa-dark transition-all duration-300 backdrop-blur-sm group">
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
             </div>
-
-            <!-- Grille de services -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/bat4.jpg}" alt="Travaux publics et génie civil"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-noir-profond/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Travaux publics & Génie Civil
-                        </h3>
-                        <p class="text-gray-600 mb-4">
-                            Construction de routes, ponts, ouvrages d'art et infrastructures publiques. Nous assurons la
-                            réalisation de vos grands projets.
-                        </p>
-                        <a th:href="@{/services}"
-                            class="inline-flex items-center text-or-royal font-semibold hover:gap-3 transition-all duration-300">
-                            En savoir plus <i class="fa-solid fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/imo2.png}" alt="Immobilier et foncier"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-noir-profond/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Immobilier & Foncier
-                        </h3>
-                        <p class="text-gray-600 mb-4">
-                            Vente de terrains titrés, accompagnement dans vos acquisitions foncières et sécurisation
-                            juridique.
-                        </p>
-                        <a th:href="@{/services}"
-                            class="inline-flex items-center text-or-royal font-semibold hover:gap-3 transition-all duration-300">
-                            En savoir plus <i class="fa-solid fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/imo3.jpg}" alt="Finitions et aménagements"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-noir-profond/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-noir-profond mb-3 group-hover:text-or-royal transition-colors">
-                            Finitions & Aménagements
-                        </h3>
-                        <p class="text-gray-600 mb-4">
-                            Décoration intérieure, menuiserie, plomberie, électricité et tous travaux de finition pour
-                            sublimer vos espaces.
-                        </p>
-                        <a th:href="@{/services}"
-                            class="inline-flex items-center text-or-royal font-semibold hover:gap-3 transition-all duration-300">
-                            En savoir plus <i class="fa-solid fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
+            <div class="text-white font-sans tracking-[0.3em] text-xs font-bold flex items-center gap-4">
+                <span id="carouselCounter" class="min-w-[40px] text-right">01</span>
+                <div class="h-[1px] w-12 bg-white/30"></div>
+                <span class="text-white/50">32</span>
             </div>
         </div>
     </section>
 
-    <!-- ========== NOS RÉALISATIONS ========== -->
-    <section class="py-20 md:py-28 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Nos <span class="text-marron">réalisations</span> récentes
-                </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    Découvrez quelques-uns de nos projets réalisés avec succès
-                </p>
+    <!-- ========== SECTION GALERIE (Featured Artworks) ========== -->
+    <section class="py-32 bg-zipa-light relative">
+        <div class="section-zipa reveal-on-scroll">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                <div>
+                    <h2 class="heading-secondary mb-4">
+                        Dernières <span class="italic font-light text-zipa-gold">Créations</span>
+                    </h2>
+                    <p class="text-zipa-text-muted max-w-xl font-sans">
+                        Parcourez une sélection d'œuvres récemment terminées. Des pièces uniques prêtes à intégrer votre
+                        espace ou votre collection privée.
+                    </p>
+                </div>
+                <a th:href="@{/services}"
+                    class="text-zipa-dark font-sans font-semibold uppercase tracking-[0.2em] text-xs border-b border-zipa-dark pb-2 hover:text-zipa-gold hover:border-zipa-gold transition-all flex items-center">
+                    Parcourir toute la galerie <i class="fa-solid fa-arrow-right ml-3"></i>
+                </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Projet 1 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/bat2.jpg}" alt="Villa moderne"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+            <!-- Previews Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Card 1 -->
+                <div class="group cursor-pointer">
+                    <div
+                        class="relative overflow-hidden bg-zipa-gray aspect-[4/5] mb-6 shadow-md hover:shadow-2xl transition-all duration-500">
+                        <img th:src="@{/images/photo_14_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?w=800'"
+                            alt="Oeuvre 1"
+                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                         <div
-                            class="absolute top-4 left-4 bg-or-royal text-noir-profond text-sm font-semibold px-3 py-1 rounded-full">
-                            Construction
+                            class="absolute inset-0 bg-zipa-darker/0 group-hover:bg-zipa-darker/30 transition-all duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex justify-center opacity-0 group-hover:opacity-100">
+                            <a th:href="@{/devis}"
+                                class="btn-zipa !bg-zipa-light !text-zipa-dark hover:!bg-zipa-gold shadow-xl">Demander
+                                le Prix</a>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-noir-profond mb-2">Villa moderne - Cocody</h3>
-                        <p class="text-gray-600">
-                            Villa de standing avec finitions haut de gamme, piscine et jardin paysager sur 500m².
-                        </p>
+                    <div class="text-center">
+                        <h3 class="font-serif text-2xl text-zipa-dark mb-2">Éclats de Joie</h3>
+                        <p class="text-zipa-text-muted font-sans text-sm uppercase tracking-widest">Huile sur toile •
+                            120x80cm</p>
                     </div>
                 </div>
 
-                <!-- Projet 2 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/bat1.jpg}" alt="Centre commercial"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                <!-- Card 2 -->
+                <div class="group cursor-pointer">
+                    <div
+                        class="relative overflow-hidden bg-zipa-gray aspect-[4/5] mb-6 shadow-md hover:shadow-2xl transition-all duration-500">
+                        <img th:src="@{/images/photo_15_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?w=800'"
+                            alt="Oeuvre 2"
+                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                         <div
-                            class="absolute top-4 left-4 bg-or-royal text-noir-profond text-sm font-semibold px-3 py-1 rounded-full">
-                            Commercial
+                            class="absolute inset-0 bg-zipa-darker/0 group-hover:bg-zipa-darker/30 transition-all duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex justify-center opacity-0 group-hover:opacity-100">
+                            <a th:href="@{/devis}"
+                                class="btn-zipa !bg-zipa-light !text-zipa-dark hover:!bg-zipa-gold shadow-xl">Demander
+                                le Prix</a>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-noir-profond mb-2">Centre commercial - Plateau</h3>
-                        <p class="text-gray-600">
-                            Immeuble R+4 avec espaces commerciaux et bureaux, livré en 18 mois.
-                        </p>
+                    <div class="text-center">
+                        <h3 class="font-serif text-2xl text-zipa-dark mb-2">Nuits d'Abidjan</h3>
+                        <p class="text-zipa-text-muted font-sans text-sm uppercase tracking-widest">Acrylique •
+                            100x100cm</p>
                     </div>
                 </div>
 
-                <!-- Projet 3 -->
-                <div class="card-luxury group">
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{/images/lot1.png}" alt="Lotissement"
-                            class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110">
+                <!-- Card 3 -->
+                <div class="group cursor-pointer">
+                    <div
+                        class="relative overflow-hidden bg-zipa-gray aspect-[4/5] mb-6 shadow-md hover:shadow-2xl transition-all duration-500">
+                        <img th:src="@{/images/photo_16_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1578301978693-85fa9c026f19?w=800'"
+                            alt="Oeuvre 3"
+                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                         <div
-                            class="absolute top-4 left-4 bg-or-royal text-noir-profond text-sm font-semibold px-3 py-1 rounded-full">
-                            Foncier
+                            class="absolute inset-0 bg-zipa-darker/0 group-hover:bg-zipa-darker/30 transition-all duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 flex justify-center opacity-0 group-hover:opacity-100">
+                            <a th:href="@{/devis}"
+                                class="btn-zipa !bg-zipa-light !text-zipa-dark hover:!bg-zipa-gold shadow-xl">Demander
+                                le Prix</a>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-noir-profond mb-2">Lotissement sécurisé - Bingerville</h3>
-                        <p class="text-gray-600">
-                            120 parcelles viabilisées avec titres fonciers, voirie et réseaux complets.
-                        </p>
+                    <div class="text-center">
+                        <h3 class="font-serif text-2xl text-zipa-dark mb-2">Regard Lointain</h3>
+                        <p class="text-zipa-text-muted font-sans text-sm uppercase tracking-widest">Technique Mixte •
+                            80x60cm</p>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="text-center mt-12">
-                <a th:href="@{/projets}" class="btn-gold">
-                    <i class="fa-solid fa-images mr-2"></i> Voir tous nos projets
+    <!-- ========== ABOUT THE ARTIST ========== -->
+    <section class="py-32 bg-zipa-dark text-zipa-light relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-zipa-gold/5 blur-[120px] rounded-full"></div>
+        <div class="section-zipa relative z-10 reveal-on-scroll">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="relative">
+                    <div class="aspect-[3/4] overflow-hidden rounded-sm relative border border-white/5">
+                        <img th:src="@{/images/photo_8_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1517409201509-cfa20216b251?w=800'"
+                            alt="Peintre Zipa"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000">
+                    </div>
+                    <div
+                        class="absolute -bottom-8 -right-8 w-48 h-48 bg-zipa-gold border-[8px] border-zipa-dark rounded-full flex items-center justify-center -rotate-12 animate-slow-zoom">
+                        <span class="font-serif italic text-3xl font-bold text-zipa-dark text-center leading-none">
+                            100%<br><span class="text-base font-sans tracking-widest uppercase">Original</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="font-serif text-5xl md:text-6xl text-zipa-light mb-8">
+                        L'Univers de <br><span class="italic text-zipa-gold">Peintre Zipa</span>
+                    </h2>
+                    <p class="text-zipa-light/80 text-lg mb-8 font-light leading-relaxed">
+                        Basé au cœur d'Abidjan, Peintre Zipa captive par ses coups de pinceau hardis et ses palettes
+                        chromatiques émotionnelles. Ses œuvres reflètent l'âme contemporaine, un mélange de tradition
+                        profondément ancrée et de modernité vibrante.
+                    </p>
+                    <p class="text-zipa-light/80 text-lg mb-12 font-light leading-relaxed">
+                        Chaque peinture raconte une histoire, chaque trait invite au voyage. Conçues pour apporter vie
+                        et caractère à vos intérieurs, ses toiles s'adressent directement au cœur de l'observateur.
+                    </p>
+
+                    <a th:href="@{/propos}"
+                        class="btn-zipa-outline !border-zipa-gold !text-zipa-gold hover:!bg-zipa-gold hover:!text-zipa-dark">
+                        LIRE LA BIOGRAPHIE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LATEST ARTICLES / BLOG ========== -->
+    <section class="py-32 bg-zipa-gray/20 relative">
+        <div class="section-zipa reveal-on-scroll">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+                <div>
+                    <h2 class="heading-secondary mb-4">
+                        Au Cœur de <span class="italic font-light text-zipa-gold">l'Atelier</span>
+                    </h2>
+                    <p class="text-zipa-text-muted max-w-xl font-sans">
+                        Découvrez les réflexions, les techniques et les actualités de Peintre Zipa à travers nos
+                        derniers articles de blog.
+                    </p>
+                </div>
+                <a th:href="@{/blog}"
+                    class="text-zipa-dark font-sans font-semibold uppercase tracking-[0.2em] text-xs border-b border-zipa-dark pb-2 hover:text-zipa-gold hover:border-zipa-gold transition-all flex items-center">
+                    Lire le journal <i class="fa-solid fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Article 1 -->
+                <a th:href="@{/blog}"
+                    class="group block bg-white border border-zipa-gray hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                    <div class="aspect-video overflow-hidden">
+                        <img th:src="@{/images/photo_20_2026-03-04_10-55-27.jpg}" alt="Article"
+                            class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0">
+                    </div>
+                    <div class="p-8">
+                        <span
+                            class="text-zipa-gold text-xs font-sans font-bold uppercase tracking-widest mb-4 block">Processus
+                            Créatif</span>
+                        <h3
+                            class="font-serif text-2xl text-zipa-dark mb-4 group-hover:text-zipa-gold transition-colors">
+                            La Genèse d'une Œuvre Mixte</h3>
+                        <p class="text-zipa-text-muted font-light text-sm line-clamp-3">Plongée au sein de l'atelier
+                            pour comprendre comment les textures et les pigments se rencontrent sur la toile...</p>
+                    </div>
+                </a>
+                <!-- Article 2 -->
+                <a th:href="@{/blog}"
+                    class="group block bg-white border border-zipa-gray hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                    <div class="aspect-video overflow-hidden">
+                        <img th:src="@{/images/photo_25_2026-03-04_10-55-27.jpg}" alt="Article"
+                            class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0">
+                    </div>
+                    <div class="p-8">
+                        <span
+                            class="text-zipa-gold text-xs font-sans font-bold uppercase tracking-widest mb-4 block">Exposition</span>
+                        <h3
+                            class="font-serif text-2xl text-zipa-dark mb-4 group-hover:text-zipa-gold transition-colors">
+                            Retour sur la Biennale d'Abidjan</h3>
+                        <p class="text-zipa-text-muted font-light text-sm line-clamp-3">Un événement majeur où Zipa a
+                            présenté sa nouvelle collection "Racines" face à un public international...</p>
+                    </div>
+                </a>
+                <!-- Article 3 -->
+                <a th:href="@{/blog}"
+                    class="group block bg-white border border-zipa-gray hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                    <div class="aspect-video overflow-hidden">
+                        <img th:src="@{/images/photo_30_2026-03-04_10-55-27.jpg}" alt="Article"
+                            class="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:scale-110 group-hover:grayscale-0">
+                    </div>
+                    <div class="p-8">
+                        <span
+                            class="text-zipa-gold text-xs font-sans font-bold uppercase tracking-widest mb-4 block">Inspiration</span>
+                        <h3
+                            class="font-serif text-2xl text-zipa-dark mb-4 group-hover:text-zipa-gold transition-colors">
+                            Symbologie des Couleurs du Sud</h3>
+                        <p class="text-zipa-text-muted font-light text-sm line-clamp-3">Pourquoi l'ocre et le bleu de
+                            prusse dominent-ils la palette de cette saison ? Une analyse chromatique vibrante.</p>
+                    </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- ========== POURQUOI NOUS CHOISIR ========== -->
-    <section class="py-20 md:py-28 bg-noir-profond text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold mb-4">
-                    Pourquoi <span class="text-or-royal">nous choisir</span> ?
-                </h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Les garanties qui font notre différence
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Avantage 1 -->
-                <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2">
-                    <div class="w-16 h-16 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center">
-                        <i class="fa-solid fa-award text-3xl text-or-royal"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Expertise locale</h3>
-                    <p class="text-gray-400">
-                        Plus de 10 ans d'expérience sur le marché ivoirien avec une parfaite connaissance des
-                        réglementations.
-                    </p>
-                </div>
-
-                <!-- Avantage 2 -->
-                <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2">
-                    <div class="w-16 h-16 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center">
-                        <i class="fa-solid fa-shield-halved text-3xl text-or-royal"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Sécurité juridique</h3>
-                    <p class="text-gray-400">
-                        Tous nos terrains sont titrés (ACD) et nos projets respectent les normes de construction en
-                        vigueur.
-                    </p>
-                </div>
-
-                <!-- Avantage 3 -->
-                <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2">
-                    <div class="w-16 h-16 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center">
-                        <i class="fa-solid fa-gem text-3xl text-or-royal"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Qualité garantie</h3>
-                    <p class="text-gray-400">
-                        Matériaux de première qualité, artisans qualifiés et suivi rigoureux pour une satisfaction
-                        totale.
-                    </p>
-                </div>
-
-                <!-- Avantage 4 -->
-                <div
-                    class="text-center p-8 rounded-2xl bg-noir-elegant border border-gray-800 hover:border-or-royal/50 transition-all duration-500 hover:-translate-y-2">
-                    <div class="w-16 h-16 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center">
-                        <i class="fa-solid fa-handshake text-3xl text-or-royal"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Accompagnement complet</h3>
-                    <p class="text-gray-400">
-                        De la conception à la livraison, nous vous accompagnons à chaque étape de votre projet.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== TÉMOIGNAGES ========== -->
-    <section class="py-20 md:py-28 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Ce que disent <span class="text-or-royal">nos clients</span>
-                </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    La satisfaction client au cœur de nos priorités
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Témoignage 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg relative">
-                    <div class="absolute -top-4 left-8 text-6xl text-or-royal/20 font-playfair">"</div>
-                    <p class="text-gray-600 mb-6 relative z-10">
-                        J'ai acheté mon terrain par leur intermédiaire et ils m'ont accompagné jusqu'à l'obtention du
-                        titre foncier. Service impeccable et très professionnel. Je recommande vivement !
-                    </p>
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-or-royal/10 border-2 border-or-royal flex items-center justify-center font-bold text-or-royal">
-                            KM
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-noir-profond">Kouassi Marcel</h4>
-                            <p class="text-sm text-gray-500">Propriétaire, Bingerville</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Témoignage 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg relative">
-                    <div class="absolute -top-4 left-8 text-6xl text-or-royal/20 font-playfair">"</div>
-                    <p class="text-gray-600 mb-6 relative z-10">
-                        Excellente entreprise ! Ils ont rénové mon appartement en respectant les délais et le budget. Le
-                        résultat dépasse mes attentes. Équipe sérieuse et à l'écoute.
-                    </p>
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-or-royal/10 border-2 border-or-royal flex items-center justify-center font-bold text-or-royal">
-                            AD
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-noir-profond">Aya Diallo</h4>
-                            <p class="text-sm text-gray-500">Cliente, Cocody</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Témoignage 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg relative">
-                    <div class="absolute -top-4 left-8 text-6xl text-or-royal/20 font-playfair">"</div>
-                    <p class="text-gray-600 mb-6 relative z-10">
-                        Pour la construction de notre siège social, nous avons fait confiance à BTP CI. Résultat
-                        exceptionnel ! Professionnalisme, respect des normes et finitions soignées.
-                    </p>
-                    <div class="flex items-center gap-4">
-                        <div
-                            class="w-12 h-12 rounded-full bg-or-royal/10 border-2 border-or-royal flex items-center justify-center font-bold text-or-royal">
-                            JB
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-noir-profond">Jean-Baptiste N.</h4>
-                            <p class="text-sm text-gray-500">Directeur, Plateau</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== APPEL À L'ACTION ========== -->
-    <section
-        class="py-20 md:py-28 bg-gradient-to-br from-noir-profond via-noir-elegant to-noir-profond relative overflow-hidden">
-        <!-- Éléments décoratifs -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-or-royal/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-72 h-72 bg-or-royal/5 rounded-full blur-3xl"></div>
-
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-3xl md:text-5xl font-playfair font-bold text-white mb-6">
-                Prêt à démarrer <span class="text-or-royal">votre projet</span> ?
-            </h2>
-            <p class="text-xl text-gray-300 mb-10">
-                Contactez-nous dès aujourd'hui pour une consultation gratuite
+    <!-- ========== NEWSLETTER CTA ========== -->
+    <section class="py-32 bg-zipa-light text-center border-t border-zipa-gray relative">
+        <div class="section-zipa relative z-10 max-w-4xl mx-auto reveal-on-scroll">
+            <h2 class="heading-secondary mb-6">Restez Inspiré</h2>
+            <p class="text-zipa-text-muted text-lg mb-10 max-w-2xl mx-auto">
+                Inscrivez-vous pour être informé des nouvelles créations, des expositions à venir et recevoir un accès
+                exclusif aux œuvres privées.
             </p>
-            <a th:href="@{/contact}" class="btn-gold inline-flex items-center animate-glow">
-                <i class="fa-solid fa-phone mr-2"></i> Nous contacter
-            </a>
+            <form action="#" class="flex flex-col sm:flex-row max-w-xl mx-auto border-b border-zipa-dark pb-2">
+                <input type="email" placeholder="Votre adresse email"
+                    class="bg-transparent border-none outline-none flex-grow py-3 px-4 text-zipa-dark placeholder:text-zipa-text-muted font-sans"
+                    required>
+                <button type="submit"
+                    class="font-sans font-bold uppercase tracking-[0.2em] text-sm text-zipa-dark hover:text-zipa-gold transition-colors px-6 py-3">S'inscrire</button>
+            </form>
         </div>
     </section>
 
     <!-- ================= FOOTER ================= -->
     <div th:replace="~{fragments/footer :: footer}"></div>
 
-</body>
+    <!-- CAROUSEL SCRIPT FOR 30+ IMAGES -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('heroCarouselContainer');
+            const counterElement = document.getElementById('carouselCounter');
+            let currentSlide = 0;
+            let slideInterval;
 
-</html>
+            // Generate 32 images for the hero carousel
+            const totalSlides = 32;
+            let slidesHtml = '';
 
+            for (let i = 1; i <= totalSlides; i++) {
+                const isActive = i === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0';
+                slidesHtml += `
+                <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 ease-in-out ${isActive}">
+                    <img src="/images/photo_${i}_2026-03-04_10-55-27.jpg"
+                        alt="Artwork ${i}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-zipa-darker via-zipa-darker/60 to-transparent"></div>
+                </div>
+                `;
+            }
+            container.innerHTML = slidesHtml;
+            const slides = document.querySelectorAll('.carousel-slide');
+
+            window.changeSlide = function (index) {
+                slides.forEach((slide, i) => {
+                    if (i === index) {
+                        slide.classList.remove('opacity-0', 'z-0');
+                        slide.classList.add('opacity-100', 'z-10');
+                    } else {
+                        slide.classList.add('opacity-0', 'z-0');
+                        slide.classList.remove('opacity-100', 'z-10');
+                    }
+                });
+                currentSlide = index;
+                // Update counter (format as 01, 02, etc.)
+                counterElement.textContent = (currentSlide + 1).toString().padStart(2, '0');
+                resetInterval();
+            };
+
+            window.nextSlide = function () {
+                changeSlide((currentSlide + 1) % totalSlides);
+            };
+
+            window.prevSlide = function () {
+                changeSlide((currentSlide - 1 + totalSlides) % totalSlides);
+            };
+
+            function resetInterval() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000); // 5 seconds
+            }
+
+            resetInterval();
+        });
+    </script>
 </body>
 
 </html>

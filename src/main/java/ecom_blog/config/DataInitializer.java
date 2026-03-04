@@ -19,14 +19,14 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        String adminEmail = "admin@barikaweb.com";
+        String adminEmail = "admin@gsd-moving.com";
 
         if (userService.findByEmail(adminEmail) == null) {
             log.info("Creating admin account: {}", adminEmail);
             UserDto adminDto = UserDto.builder()
                     .email(adminEmail)
-                    .nom("Admin")
-                    .password("admin123")
+                    .nom("Admin GSD")
+                    .password("graceservicedd2026")
                     .role(Role.ROLE_ADMIN)
                     .build();
 

@@ -1,272 +1,265 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Nos Services - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Galerie d\'Art - Peintre Zipa Officiel')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- HERO PAGE -->
-    <section class="relative py-24 md:py-32 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/90 to-noir-profond/70"></div>
-        <div class="absolute top-0 left-0 w-96 h-96 bg-or-royal/10 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-playfair font-bold text-white mb-4">
-                Nos <span class="text-or-royal">Services</span>
+    <!-- HERO PAGE (Gallery) -->
+    <section class="relative py-40 bg-zipa-dark overflow-hidden border-b border-white/5">
+        <div class="absolute inset-0 opacity-20">
+            <img th:src="@{/images/photo_9_2026-03-04_10-55-27.jpg}"
+                onerror="this.src='https://images.unsplash.com/photo-1579762593175-20226054cad0?w=1600'" alt="Galerie"
+                class="w-full h-full object-cover">
+        </div>
+        <div class="section-zipa relative z-10 text-center flex flex-col items-center reveal-on-scroll">
+            <span class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block w-max">
+                Exposition Permanente
+            </span>
+            <h1 class="heading-primary text-zipa-light mb-8">
+                LA <span class="italic text-zipa-gold font-light">Galerie</span>
             </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Des solutions professionnelles au service du développement
+            <p
+                class="text-sm md:text-base text-zipa-light/70 max-w-2xl mx-auto font-sans uppercase tracking-[0.2em] leading-relaxed">
+                Explorez des collections d'œuvres poignantes. De l'huile à l'acrylique, chaque pièce est une fenêtre
+                vers l'âme.
             </p>
         </div>
     </section>
 
-    <!-- INTRO -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-playfair font-bold text-noir-profond mb-6">
-                <span class="text-or-royal">Baraka Synergie</span>
-            </h2>
-            <p class="text-lg text-gray-600 leading-relaxed">
-                Baraka Synergie est un pôle opérationnel regroupant nos expertises en
-                <strong class="text-noir-profond">Travaux Publics</strong>, <strong
-                    class="text-noir-profond">Immobilier</strong> et <strong
-                    class="text-noir-profond">Finitions</strong>.
-                Notre objectif est simple : fournir des solutions fiables, sécurisées et durables
-                pour transformer vos projets en réalisations concrètes.
-            </p>
-        </div>
-    </section>
+    <!-- ARTWORKS FEATURED – Original Pro Design -->
+    <section class="py-32 bg-zipa-light">
+        <div class="section-zipa reveal-on-scroll">
+            <div class="space-y-40">
 
-    <!-- SERVICE 1 : TRAVAUX PUBLICS -->
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Image -->
-                <div class="relative">
-                    <img th:src="@{/images/Travaux-publics-génie-civil-2.jpg}" alt="Travaux Publics"
-                        class="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500">
-                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-or-royal/20 rounded-full blur-2xl"></div>
+                <!-- 1. Huile sur Toile -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                    <div class="aspect-[4/5] overflow-hidden group border border-zipa-gray p-2 bg-white shadow-sm">
+                        <img th:src="@{/images/photo_10_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1549887552-cb1071d3e5e4?w=800'"
+                            alt="Huile sur Toile"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-[1.03]">
+                    </div>
+                    <div>
+                        <div class="text-zipa-gold font-serif text-8xl opacity-10 mb-4 italic tracking-tighter">I</div>
+                        <h2 class="heading-secondary">Collection <span
+                                class="italic font-light text-zipa-gold">Huile</span></h2>
+                        <p class="text-zipa-text-muted mb-10 leading-relaxed text-lg font-light">
+                            La peinture à l'huile offre une profondeur et une richesse de couleurs inégalées. Cette
+                            collection explore la lumière et la texture, avec des sujets allant du portrait contemporain
+                            aux scènes de vie vibrantes d'Abidjan.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                            <div
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-paintbrush text-zipa-gold"></i> Pigments Purs
+                            </div>
+                            <div
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-palette text-zipa-gold"></i> Superposition
+                            </div>
+                            <div
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-certificate text-zipa-gold"></i> Toile de Lin
+                            </div>
+                            <div
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-medal text-zipa-gold"></i> Certificat inclus
+                            </div>
+                        </div>
+                        <a th:href="@{/devis}"
+                            class="btn-zipa !bg-zipa-dark !text-zipa-light hover:!bg-zipa-gold hover:!text-zipa-dark">Commander</a>
+                    </div>
                 </div>
 
-                <!-- Contenu -->
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-playfair font-bold text-noir-profond mb-6">
-                        Travaux Publics & <span class="text-or-royal">Génie Civil</span>
-                    </h2>
-                    <p class="text-gray-600 mb-8">
-                        Nous réalisons des infrastructures essentielles pour le développement du pays : routes, ouvrages
-                        d'art, assainissement, bâtiments publics.
-                    </p>
-
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
+                <!-- 2. Acrylique -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                    <div class="order-2 lg:order-1">
+                        <div class="text-zipa-gold font-serif text-8xl opacity-10 mb-4 italic tracking-tighter">II</div>
+                        <h2 class="heading-secondary">Acryliques <span
+                                class="italic font-light text-zipa-gold">Vibrantes</span></h2>
+                        <p class="text-zipa-text-muted mb-10 leading-relaxed text-lg font-light">
+                            L'énergie brute encapsulée dans des toiles dynamiques. Les œuvres acryliques de Zipa se
+                            distinguent par leur mouvement, leurs aplats francs et leur capacité à capturer
+                            l'immédiateté de l'émotion.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                             <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-bolt text-zipa-gold"></i> Couleurs Vives
                             </div>
-                            <span>Construction de routes & voiries</span>
-                        </li>
-                        <li class="flex items-center gap-3">
                             <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-wind text-zipa-gold"></i> Spontanéité
                             </div>
-                            <span>Ouvrages d'art (ponts, passerelles)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
                             <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-layer-group text-zipa-gold"></i> Empâtements
                             </div>
-                            <span>Réseaux d'assainissement & drainage</span>
-                        </li>
-                        <li class="flex items-center gap-3">
                             <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
+                                class="flex items-center gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-crop text-zipa-gold"></i> Grands Formats
                             </div>
-                            <span>Terrassement & VRD</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Maintenance & réhabilitation</span>
-                        </li>
-                    </ul>
-
-                    <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                        <i class="fa-solid fa-file-invoice mr-2"></i> Demander un devis
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICE 2 : IMMOBILIER -->
-    <section class="py-20 bg-noir-profond text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Contenu -->
-                <div class="order-2 lg:order-1">
-                    <h2 class="text-3xl md:text-4xl font-playfair font-bold mb-6">
-                        Immobilier & <span class="text-or-royal">Foncier Sécurisé</span> (ACD)
-                    </h2>
-                    <p class="text-gray-300 mb-8">
-                        Nous garantissons des acquisitions immobilières sans risque grâce à des terrains titrés et des
-                        démarches juridiques maîtrisées.
-                    </p>
-
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/20 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Vente de terrains titrés (ACD)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/20 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Lotissements sécurisés</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/20 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Viabilisation (eau, électricité, voirie)</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/20 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Accompagnement juridique</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/20 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Promotion et construction immobilière</span>
-                        </li>
-                    </ul>
-
-                    <a th:href="@{/projets}" class="btn-gold inline-flex items-center">
-                        <i class="fa-solid fa-map-location-dot mr-2"></i> Voir nos terrains
-                    </a>
+                        </div>
+                        <a th:href="@{/contact}" class="btn-zipa-outline">Demander un Catalogue</a>
+                    </div>
+                    <div
+                        class="aspect-[4/5] overflow-hidden group border border-zipa-gray p-2 bg-white shadow-sm order-1 lg:order-2">
+                        <img th:src="@{/images/photo_11_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=800'"
+                            alt="Acrylique"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-[1.03]">
+                    </div>
                 </div>
 
-                <!-- Image -->
-                <div class="order-1 lg:order-2 relative">
-                    <img th:src="@{/images/Immobilier-foncier-sécurisé-1.jpg}" alt="Immobilier"
-                        class="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500">
-                    <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-or-royal/20 rounded-full blur-2xl"></div>
+                <!-- 3. Techniques Mixtes -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                    <div class="aspect-[4/5] overflow-hidden group border border-zipa-gray p-2 bg-white shadow-sm">
+                        <img th:src="@{/images/photo_12_2026-03-04_10-55-27.jpg}"
+                            onerror="this.src='https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=800'"
+                            alt="Mixte"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-[1.03]">
+                    </div>
+                    <div>
+                        <div class="text-zipa-gold font-serif text-8xl opacity-10 mb-4 italic tracking-tighter">III
+                        </div>
+                        <h2 class="heading-secondary">Techniques <span
+                                class="italic font-light text-zipa-gold">Mixtes</span></h2>
+                        <p class="text-zipa-text-muted mb-10 leading-relaxed text-lg font-light">
+                            L'innovation sans limites. L'intégration de matières (tissus locaux, sables, encres) pour
+                            créer des œuvres texturées racontant l'héritage culturel ivoirien d'une manière résolument
+                            contemporaine.
+                        </p>
+                        <ul class="space-y-6 mb-12">
+                            <li
+                                class="flex items-start gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-scissors text-zipa-gold mt-1"></i> Texture &amp; Relief
+                            </li>
+                            <li
+                                class="flex items-start gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-leaf text-zipa-gold mt-1"></i> Matériaux Locaux (Bogolans, pagnes
+                                tissés)
+                            </li>
+                            <li
+                                class="flex items-start gap-4 text-xs font-sans font-bold uppercase tracking-widest text-zipa-dark">
+                                <i class="fa-solid fa-gem text-zipa-gold mt-1"></i> Pièces Uniques Conceptuelles
+                            </li>
+                        </ul>
+                        <a th:href="@{/devis}"
+                            class="btn-zipa !bg-zipa-dark !text-zipa-light hover:!bg-zipa-gold hover:!text-zipa-dark">
+                            Acquérir une Pièce
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SERVICE 3 : FINITIONS -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Image -->
-                <div class="relative">
-                    <img th:src="@{/images/bat-moderne-1.jpg}" alt="Finitions"
-                        class="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500">
-                    <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-or-royal/20 rounded-full blur-2xl"></div>
-                </div>
+    <!-- ========== FULL GALLERY – ALL IMAGES ========== -->
+    <section class="py-24" style="background-color: #1a120b;">
+        <div class="section-zipa reveal-on-scroll">
+            <div class="text-center mb-16">
+                <span class="font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block"
+                    style="color:#a0785a;">Exposition Complète</span>
+                <h2 class="heading-secondary" style="color:#f0e6d3;">Toutes les <span class="italic font-light"
+                        style="color:#c8956c;">Œuvres</span></h2>
+                <p class="max-w-xl mx-auto font-light" style="color:#9e8272;">
+                    L'intégralité de la collection de Peintre Zipa. Cliquez sur une œuvre pour l'agrandir ou la
+                    commander.
+                </p>
+            </div>
 
-                <!-- Contenu -->
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-playfair font-bold text-noir-profond mb-6">
-                        Finitions & <span class="text-or-royal">Aménagements</span>
-                    </h2>
-                    <p class="text-gray-600 mb-8">
-                        Nous créons des espaces intérieurs élégants, modernes et sur mesure avec des matériaux de haute
-                        qualité.
-                    </p>
-
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Peinture & décoration</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Menuiserie & dressing</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Plomberie & sanitaires</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Électricité & climatisation</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <div
-                                class="w-8 h-8 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-check text-or-royal text-sm"></i>
-                            </div>
-                            <span>Aménagements extérieurs</span>
-                        </li>
-                    </ul>
-
-                    <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                        <i class="fa-solid fa-file-invoice mr-2"></i> Demander un devis gratuit
-                    </a>
-                </div>
+            <!-- Gallery Grid -->
+            <div id="fullGallery" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2">
+                <!-- JS populates this -->
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section
-        class="py-20 bg-gradient-to-br from-noir-profond via-noir-elegant to-noir-profond relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-or-royal/5 rounded-full blur-3xl"></div>
-
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-3xl md:text-5xl font-playfair font-bold text-white mb-6">
-                Un projet en tête <span class="text-or-royal">?</span>
-            </h2>
-            <p class="text-xl text-gray-300 mb-10">
-                Discutons ensemble de vos besoins et trouvons la meilleure solution
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                    <i class="fa-solid fa-phone mr-2"></i> Nous contacter
-                </a>
-                <a th:href="@{/projets}" class="btn-gold-outline inline-flex items-center">
-                    <i class="fa-solid fa-images mr-2"></i> Voir nos réalisations
-                </a>
-            </div>
-        </div>
-    </section>
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 z-[200] bg-black/90 hidden items-center justify-center"
+        style="display:none;">
+        <button onclick="closeLightbox()"
+            class="absolute top-6 right-8 text-white text-4xl hover:text-zipa-gold transition-colors z-[210] leading-none">&times;</button>
+        <button onclick="lightboxNav(-1)"
+            class="absolute left-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-zipa-gold transition-colors z-[210]">&#8249;</button>
+        <img id="lightboxImg" src="" class="max-h-[88vh] max-w-[88vw] object-contain shadow-2xl" alt="Zoom">
+        <button onclick="lightboxNav(1)"
+            class="absolute right-6 top-1/2 -translate-y-1/2 text-white text-4xl hover:text-zipa-gold transition-colors z-[210]">&#8250;</button>
+        <a id="lightboxOrder" href="/devis"
+            class="absolute bottom-8 left-1/2 -translate-x-1/2 btn-zipa !bg-zipa-gold !text-zipa-dark hover:!bg-white">
+            Commander cette œuvre
+        </a>
+    </div>
 
     <!-- FOOTER -->
     <div th:replace="~{fragments/footer :: footer}"></div>
 
+    <script>
+        // --- BUILD FULL GALLERY ---
+        const TOTAL_IMAGES = 58;
+        let currentLightboxIndex = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const gallery = document.getElementById('fullGallery');
+            let html = '';
+
+            for (let i = 1; i <= TOTAL_IMAGES; i++) {
+                html += `
+                <div class="group relative cursor-pointer overflow-hidden" style="height:220px; background:#150e08;" onclick="openLightbox(${i - 1})">
+                    <img src="/images/photo_${i}_2026-03-04_10-55-27.jpg"
+                         alt="Œuvre Zipa #${i}"
+                         class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                         loading="lazy">
+                    <!-- Number badge always visible -->
+                    <div class="absolute top-2 left-2 px-2 py-1 text-[10px] font-bold font-sans" style="background:rgba(26,18,11,0.75); color:#c8956c; letter-spacing:0.12em;">
+                        #${i.toString().padStart(2, '0')}
+                    </div>
+                    <!-- Hover overlay -->
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4" style="background: linear-gradient(to top, rgba(26,18,11,0.85) 0%, transparent 60%);">
+                        <span class="font-serif text-sm" style="color:#f0e6d3;">Collection Zipa</span>
+                    </div>
+                </div>`;
+            }
+            gallery.innerHTML = html;
+        });
+
+        // --- LIGHTBOX ---
+        const modal = document.getElementById('lightboxModal');
+        const lightboxImg = document.getElementById('lightboxImg');
+
+        window.openLightbox = function (index) {
+            currentLightboxIndex = index;
+            lightboxImg.src = `/images/photo_${index + 1}_2026-03-04_10-55-27.jpg`;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeLightbox = function () {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        };
+
+        window.lightboxNav = function (dir) {
+            currentLightboxIndex = (currentLightboxIndex + dir + TOTAL_IMAGES) % TOTAL_IMAGES;
+            lightboxImg.src = `/images/photo_${currentLightboxIndex + 1}_2026-03-04_10-55-27.jpg`;
+        };
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeLightbox();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowRight') lightboxNav(1);
+                else if (e.key === 'ArrowLeft') lightboxNav(-1);
+                else if (e.key === 'Escape') closeLightbox();
+            }
+        });
+    </script>
 </body>
 
 </html>

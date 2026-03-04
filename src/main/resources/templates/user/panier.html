@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Votre Panier - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Votre Sélection - Grace Service Déménagement')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond min-h-screen">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- HERO PAGE (Luxury Black) -->
-    <section class="relative py-20 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/95 to-noir-profond/80"></div>
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-or-royal/10 rounded-full blur-3xl opacity-50"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-5xl font-playfair font-bold text-white mb-4">
-                Votre <span class="text-or-royal">Sélection</span> Luxe
+    <!-- HERO PAGE -->
+    <section class="relative py-40 bg-gsd-blue-dark overflow-hidden border-b border-gsd-white/5">
+        <div class="absolute inset-0 opacity-10">
+            <img th:src="@{/images/demena4.jpg}" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="section-gsd relative z-10 text-center">
+            <span class="text-gsd-gold font-black uppercase tracking-[0.4em] text-[10px] mb-6 block">Logistique
+                Premium</span>
+            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-4 leading-none">
+                VOTRE <span class="text-gradient-gsd">SÉLECTION</span>
             </h1>
-            <p class="text-gray-400 font-medium tracking-widest uppercase text-xs">Finalisez votre commande premium</p>
+            <p class="text-sm md:text-base text-gsd-light/50 max-w-2xl mx-auto font-bold uppercase tracking-widest">
+                Finalisez votre demande de services premium.</p>
         </div>
     </section>
 
     <!-- CONTENU PANIER -->
-    <section class="py-16">
-        <div class="max-w-5xl mx-auto px-6">
-            <!-- Message d'erreur -->
+    <section class="py-32 bg-gsd-blue-dark">
+        <div class="section-gsd">
+            <!-- Messages -->
             <div th:if="${param.error}"
-                class="mb-8 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 animate-fade-in shadow-lg rounded-r-xl">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-circle-exclamation text-xl"></i>
-                    <span th:if="${param.error[0] == 'produit_absent'}" class="font-semibold">Un ou plusieurs articles
-                        ne sont
-                        plus disponibles. Veuillez rafraîchir ou vider votre panier.</span>
-                    <span th:if="${param.error[0] == 'vide'}" class="font-semibold">Votre panier est vide.</span>
-                </div>
+                class="mb-12 p-8 glass-gsd border-gsd-red/30 rounded-[2rem] text-gsd-red text-[10px] font-black uppercase tracking-widest text-center animate-shake">
+                <i class="fa-solid fa-circle-exclamation mr-4 text-sm"></i>
+                <span th:if="${param.error[0] == 'produit_absent'}">Certains articles ne sont plus disponibles.</span>
+                <span th:if="${param.error[0] == 'vide'}">Votre sélection est actuellement vide.</span>
             </div>
 
             <!-- Panier vide -->
             <div th:if="${panier == null or #lists.isEmpty(panier)}"
-                class="card-luxury p-16 text-center animate-fade-in shadow-2xl">
-                <div class="w-24 h-24 mx-auto mb-8 bg-or-royal/10 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-cart-shopping text-4xl text-or-royal animate-pulse"></i>
+                class="glass-gsd p-24 text-center max-w-3xl mx-auto rounded-[4rem] animate-fade-in">
+                <div
+                    class="w-32 h-32 mx-auto mb-10 bg-gsd-gold/10 rounded-[2.5rem] flex items-center justify-center border border-gsd-gold/20">
+                    <i class="fa-solid fa-cart-shopping text-5xl text-gsd-gold animate-pulse"></i>
                 </div>
-                <h2 class="text-3xl font-playfair font-bold text-noir-profond mb-4">Votre panier est vide</h2>
-                <p class="text-gray-500 mb-10 max-w-md mx-auto">
-                    Explorez nos terrains d'exception et services premium pour commencer votre projet.
+                <h2 class="text-3xl font-black uppercase tracking-tighter text-gsd-white mb-6">SÉLECTION VIDE</h2>
+                <p class="text-gsd-light/40 font-bold uppercase tracking-widest text-sm mb-12 leading-relaxed">
+                    Découvrez nos solutions d'emballage et services de transport pour commencer votre projet.
                 </p>
-                <a th:href="@{/produits}" class="btn-gold inline-flex items-center px-10 py-4">
-                    <i class="fa-solid fa-arrow-left mr-3"></i> Découvrir nos offres
-                </a>
+                <a th:href="@{/projets}" class="btn-gsd">DÉCOUVRIR NOS OFFRES</a>
             </div>
 
             <!-- Panier rempli -->
-            <div th:if="${panier != null and !#lists.isEmpty(panier)}" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div th:if="${panier != null and !#lists.isEmpty(panier)}" class="grid grid-cols-1 lg:grid-cols-3 gap-16">
 
-                <!-- Liste des produits (Left Column) -->
-                <div class="lg:col-span-2 space-y-6">
+                <!-- Liste des produits -->
+                <div class="lg:col-span-2 space-y-8">
                     <div th:each="item : ${panier}"
-                        class="card-luxury p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 hover:translate-y-[-4px] transition-all duration-300">
+                        class="card-gsd p-6 md:p-8 flex flex-col md:flex-row items-center gap-10 hover:translate-y-[-8px] transition-all duration-500">
 
                         <!-- Image -->
                         <div
-                            class="w-full md:w-32 h-32 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0 border border-white/20">
-                            <img th:src="@{${item.produit.imageUrl}}" alt="Produit" class="w-full h-full object-cover">
+                            class="w-full md:w-40 h-40 rounded-[2rem] overflow-hidden bg-gsd-white/5 flex-shrink-0 border border-gsd-white/10">
+                            <img th:src="${item.produit.imageUrl != null and !#strings.isEmpty(item.produit.imageUrl)} ? @{${item.produit.imageUrl}} : @{/images/demena1.jpg}"
+                                alt="Produit" class="w-full h-full object-cover">
                         </div>
 
                         <!-- Info -->
                         <div class="flex-1 text-center md:text-left">
-                            <h3 class="text-lg font-bold text-noir-profond mb-1" th:text="${item.produit.nom}">Nom du
-                                produit</h3>
-                            <p class="text-or-royal font-semibold text-sm mb-3" th:text="${item.produit.categorie}">
-                                Catégorie</p>
+                            <h3 class="text-2xl font-black uppercase tracking-tighter text-gsd-white mb-2"
+                                th:text="${item.produit.nom}">Nom</h3>
+                            <p class="text-gsd-gold font-black uppercase tracking-[0.2em] text-[10px] mb-8"
+                                th:text="${item.produit.categorie}">CATÉGORIE</p>
 
                             <!-- Quantity Control -->
-                            <div class="inline-flex items-center bg-gray-100 rounded-lg p-1 border border-gray-200">
+                            <div
+                                class="inline-flex items-center bg-gsd-white/5 rounded-2xl p-2 border border-gsd-white/10">
                                 <form th:action="@{'/panier/modifier/' + ${item.produit.id}}" method="post">
                                     <input type="hidden" name="action" value="-1">
                                     <button type="submit"
-                                        class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-md transition-colors text-gray-500">
+                                        class="w-10 h-10 flex items-center justify-center hover:bg-gsd-red hover:text-gsd-white rounded-xl transition-all text-gsd-white/40">
                                         <i class="fa-solid fa-minus text-xs"></i>
                                     </button>
                                 </form>
-                                <span class="px-4 font-bold text-noir-profond" th:text="${item.quantite}">1</span>
+                                <span class="px-8 font-black text-gsd-white text-lg" th:text="${item.quantite}">1</span>
                                 <form th:action="@{'/panier/modifier/' + ${item.produit.id}}" method="post">
                                     <input type="hidden" name="action" value="1">
                                     <button type="submit"
-                                        class="w-8 h-8 flex items-center justify-center hover:bg-white rounded-md transition-colors text-or-royal">
+                                        class="w-10 h-10 flex items-center justify-center hover:bg-gsd-gold hover:text-gsd-blue-dark rounded-xl transition-all text-gsd-white/40">
                                         <i class="fa-solid fa-plus text-xs"></i>
                                     </button>
                                 </form>
@@ -93,87 +93,76 @@
                         </div>
 
                         <!-- Price & Action -->
-                        <div class="flex flex-col items-center md:items-end gap-4 min-w-[120px]">
+                        <div class="flex flex-col items-center md:items-end gap-6 min-w-[180px]">
                             <div class="text-right">
-                                <p class="text-xs text-gray-400 font-medium">Prix Total</p>
-                                <span class="text-xl font-bold text-noir-profond"
-                                    th:text="${#numbers.formatDecimal(item.getTotal(), 0, 'WHITESPACE', 0, 'POINT')} + ' FCFA'">0
-                                    FCFA</span>
+                                <p class="text-[10px] font-black uppercase tracking-widest text-gsd-white/20 mb-2">Total
+                                    Ligne</p>
+                                <span class="text-3xl font-black text-gsd-gold"
+                                    th:text="${#numbers.formatDecimal(item.getTotal(), 0, 'WHITESPACE', 0, 'POINT')} + ' €'">0
+                                    €</span>
                             </div>
 
                             <form th:action="@{'/panier/supprimer/' + ${item.produit.id}}" method="post">
                                 <button type="submit"
-                                    class="text-red-400 hover:text-red-600 transition-colors flex items-center gap-2 text-sm font-semibold uppercase tracking-wider">
-                                    <i class="fa-solid fa-trash-can"></i> Retirer
+                                    class="text-gsd-red/50 hover:text-gsd-red transition-all flex items-center gap-3 text-[10px] font-black uppercase tracking-widest">
+                                    <i class="fa-solid fa-trash-can"></i> RETIRER
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
 
-                <!-- Résumé (Right Column) -->
+                <!-- Résumé -->
                 <div class="lg:col-span-1">
-                    <div class="card-luxury p-8 sticky top-28 shadow-2xl bg-white/80 backdrop-blur-md">
+                    <div class="card-gsd p-10 md:p-12 sticky top-40 animate-slide-up">
                         <h3
-                            class="text-2xl font-playfair font-bold text-noir-profond mb-8 border-b border-gray-100 pb-4">
-                            Résumé</h3>
+                            class="text-2xl font-black uppercase tracking-tighter text-gsd-white mb-10 border-b border-gsd-white/5 pb-6">
+                            RÉSUMÉ</h3>
 
-                        <div class="space-y-5 mb-8">
-                            <div class="flex justify-between text-gray-600">
-                                <span class="font-medium">Sous-total</span>
-                                <span class="font-bold text-noir-profond"
-                                    th:text="${#numbers.formatDecimal(total, 0, 'WHITESPACE', 0, 'POINT')} + ' FCFA'">0
-                                    FCFA</span>
+                        <div class="space-y-6 mb-12 font-bold">
+                            <div class="flex justify-between text-gsd-light/50">
+                                <span class="uppercase tracking-widest text-[10px]">Sous-total</span>
+                                <span class="text-gsd-white"
+                                    th:text="${#numbers.formatDecimal(total, 0, 'WHITESPACE', 0, 'POINT')} + ' €'">0
+                                    €</span>
                             </div>
-                            <div class="flex justify-between text-gray-600">
-                                <span class="font-medium">Service & Gestion</span>
-                                <span class="text-green-600 font-bold uppercase text-xs tracking-widest">Offert</span>
+                            <div class="flex justify-between">
+                                <span class="uppercase tracking-widest text-[10px] text-gsd-light/50">Service GSD</span>
+                                <span class="text-gsd-gold uppercase text-[10px] tracking-widest">Inclus</span>
                             </div>
-                            <div class="pt-5 border-t border-noir-profond/5 flex justify-between items-end">
+                            <div class="pt-8 border-t border-gsd-white/5 flex justify-between items-end">
                                 <div>
-                                    <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mb-1">Total à
-                                        régler</p>
-                                    <span class="text-noir-profond text-3xl font-bold"
+                                    <p class="text-[9px] font-black uppercase tracking-[0.3em] text-gsd-gold mb-3">Total
+                                        Estimé</p>
+                                    <span class="text-gsd-white text-4xl font-black tracking-tighter"
                                         th:text="${#numbers.formatDecimal(total, 0, 'WHITESPACE', 0, 'POINT')}">0</span>
                                 </div>
-                                <span class="text-or-royal font-bold text-xl mb-1 ml-2">FCFA</span>
+                                <span class="text-gsd-gold font-black text-2xl mb-1 ml-4">€</span>
                             </div>
                         </div>
 
-                        <!-- Mode de paiement -->
-                        <form th:action="@{/panier/valider}" method="post" class="space-y-6">
+                        <!-- Form -->
+                        <form th:action="@{/panier/valider}" method="post" class="space-y-10">
                             <div>
-                                <h4 class="font-bold text-noir-profond mb-4 text-sm uppercase tracking-wider">Mode de
-                                    règlement</h4>
-                                <div class="space-y-3">
-                                    <label class="payment-option group">
+                                <h4 class="text-[10px] font-black uppercase tracking-widest text-gsd-white/40 mb-6">MODE
+                                    DE RÈGLEMENT</h4>
+                                <div class="space-y-4">
+                                    <label class="block cursor-pointer group">
                                         <input type="radio" name="modePaiement" value="ESPECES" checked
                                             class="hidden peer">
                                         <div
-                                            class="flex items-center gap-4 p-4 rounded-xl border-2 border-gray-100 peer-checked:border-or-royal peer-checked:bg-or-royal/5 transition-all cursor-pointer">
+                                            class="p-5 border border-gsd-white/10 rounded-2xl flex items-center gap-5 peer-checked:border-gsd-gold peer-checked:bg-gsd-gold/5 transition-all">
                                             <div
-                                                class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 peer-checked:text-or-royal">
+                                                class="w-12 h-12 rounded-xl bg-gsd-white/5 flex items-center justify-center text-gsd-white/20 peer-checked:text-gsd-gold">
                                                 <i class="fa-solid fa-hand-holding-dollar text-xl"></i>
                                             </div>
                                             <div>
-                                                <p class="font-bold text-noir-profond">Espèces</p>
-                                                <p class="text-xs text-gray-400">Paiement à la livraison</p>
-                                            </div>
-                                        </div>
-                                    </label>
-
-                                    <label class="payment-option group">
-                                        <input type="radio" name="modePaiement" value="MOBILE_MONEY"
-                                            class="hidden peer">
-                                        <div
-                                            class="flex items-center gap-4 p-4 rounded-xl border-2 border-gray-100 peer-checked:border-or-royal peer-checked:bg-or-royal/5 transition-all cursor-pointer">
-                                            <div
-                                                class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 peer-checked:text-or-royal">
-                                                <i class="fa-solid fa-mobile-screen-button text-xl"></i>
-                                            </div>
-                                            <div>
-                                                <p class="font-bold text-noir-profond">Mobile Money</p>
-                                                <p class="text-xs text-gray-400">Orange, MTN, Wave</p>
+                                                <p
+                                                    class="font-black text-[11px] uppercase tracking-widest text-gsd-white">
+                                                    ESPÈCES / VIREMENT</p>
+                                                <p
+                                                    class="text-[9px] font-bold text-gsd-light/30 uppercase tracking-widest">
+                                                    À la prestation</p>
                                             </div>
                                         </div>
                                     </label>
@@ -181,25 +170,17 @@
                             </div>
 
                             <button type="submit"
-                                class="w-full btn-gold py-5 text-center text-lg font-bold shadow-xl shadow-or-royal/20 active:scale-95 transition-transform">
-                                <i class="fa-solid fa-shield-check mr-2"></i> Confirmer la commande
+                                class="w-full btn-gsd !py-6 !text-lg shadow-[0_20px_60px_rgba(212,175,55,0.2)]">
+                                CONFIRMER <i class="fa-solid fa-shield-check ml-3"></i>
                             </button>
                         </form>
 
-                        <div class="mt-4">
-                            <a th:href="@{/produits}"
-                                class="w-full inline-flex items-center justify-center gap-2 py-4 text-noir-profond font-semibold hover:text-or-royal transition-colors border-2 border-transparent hover:border-or-royal/30 rounded-xl">
-                                <i class="fa-solid fa-arrow-left text-sm"></i> Continuer mes achats
-                            </a>
-                        </div>
-
-                        <p class="text-center mt-6 text-[10px] text-gray-400 uppercase tracking-widest font-bold">
-                            <i class="fa-solid fa-lock mr-1"></i> Transaction 100% sécurisée
+                        <p class="text-center mt-10 text-[9px] font-black uppercase tracking-[0.3em] text-gsd-white/20">
+                            <i class="fa-solid fa-lock mr-2 text-gsd-gold"></i> Transaction Sécurisée
                         </p>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 

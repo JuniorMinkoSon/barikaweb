@@ -1,79 +1,75 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Nos Projets - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Nos Solutions - Grace Service Déménagement')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
     <!-- HERO PAGE -->
-    <section class="relative py-24 md:py-32 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/90 to-noir-profond/70"></div>
-        <div class="absolute top-0 right-0 w-96 h-96 bg-or-royal/10 rounded-full blur-3xl"></div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-playfair font-bold text-white mb-4">
-                Nos Projets & <span class="text-or-royal">Réalisations</span>
+    <section class="relative py-40 bg-gsd-blue-dark overflow-hidden border-b border-gsd-white/5">
+        <div class="absolute inset-0 opacity-20">
+            <img th:src="@{/images/demena4.jpg}" alt="" class="w-full h-full object-cover">
+        </div>
+        <div class="section-gsd relative z-10 text-center">
+            <span class="text-gsd-gold font-black uppercase tracking-[0.4em] text-[10px] mb-6 block">Nos Offres</span>
+            <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
+                SOLUTIONS <span class="text-gradient-gsd">PREMIUM</span>
             </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Découvrez nos terrains, projets et services disponibles
+            <p
+                class="text-sm md:text-base text-gsd-light/50 max-w-2xl mx-auto font-bold uppercase tracking-widest leading-relaxed">
+                Matériel d'emballage et services de transport sur mesure.
             </p>
         </div>
     </section>
 
     <!-- POPUP SUCCÈS -->
     <div id="popupSuccess"
-        class="fixed top-6 right-6 bg-green-500 text-white px-6 py-4 rounded-xl shadow-2xl z-50 hidden flex items-center gap-3">
-        <i class="fa-solid fa-circle-check text-xl"></i>
-        <span class="font-semibold">Produit ajouté au panier !</span>
+        class="fixed top-12 right-12 bg-gsd-gold text-gsd-blue-dark px-8 py-6 rounded-3xl shadow-[0_20px_60px_rgba(212,175,55,0.4)] z-50 hidden items-center gap-4 animate-slide-up border border-gsd-white/20">
+        <div class="w-10 h-10 rounded-full bg-gsd-blue-dark/10 flex items-center justify-center">
+            <i class="fa-solid fa-circle-check text-xl"></i>
+        </div>
+        <span class="font-black uppercase tracking-widest text-xs">Ajouté au panier !</span>
     </div>
 
     <!-- PRODUITS DISPONIBLES -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Nos Produits <span class="text-or-royal">Disponibles</span>
-                </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    Terrains, matériaux et services de qualité premium
-                </p>
-            </div>
+    <section class="py-32 bg-gsd-blue-dark">
+        <div class="section-gsd">
 
             <!-- Grille de produits -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div th:each="prod : ${produits}" class="card-luxury group">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <div th:each="prod : ${produits}" class="card-gsd group overflow-hidden">
                     <!-- Image -->
-                    <div class="relative overflow-hidden">
-                        <img th:src="@{${prod.imageUrl}}" alt="Produit"
-                            class="w-full h-60 object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-noir-profond/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
+                    <div class="relative h-64 overflow-hidden">
+                        <img th:src="${prod.imageUrl != null and !#strings.isEmpty(prod.imageUrl)} ? @{${prod.imageUrl}} : @{/images/demena1.jpg}"
+                            alt="Produit"
+                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105">
 
                         <!-- Badge catégorie -->
-                        <div class="absolute top-4 left-4 bg-or-royal text-noir-profond text-xs font-semibold px-3 py-1 rounded-full"
-                            th:text="${prod.categorie}">Catégorie</div>
+                        <div class="absolute top-6 left-6 bg-gsd-gold text-gsd-blue-dark text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-2xl"
+                            th:text="${prod.categorie}">LOGISTIQUE</div>
                     </div>
 
                     <!-- Contenu -->
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-noir-profond mb-2 group-hover:text-or-royal transition-colors"
+                    <div class="p-10">
+                        <h3 class="text-2xl font-black uppercase tracking-tighter text-gsd-white mb-4 group-hover:text-gsd-gold transition-colors"
                             th:text="${prod.nom}">Nom du produit</h3>
 
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-3" th:text="${prod.description}">Description</p>
+                        <p class="text-gsd-light/50 text-sm mb-8 line-clamp-2 font-medium"
+                            th:text="${prod.description}">Description</p>
 
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold text-or-royal" th:text="${prod.prix} + ' FCFA'">0
-                                FCFA</span>
+                        <div class="flex items-center justify-between mb-10">
+                            <span class="text-3xl font-black text-gsd-gold"
+                                th:text="${#numbers.formatDecimal(prod.prix, 0, 'WHITESPACE', 0, 'POINT')} + ' €'">0
+                                €</span>
                         </div>
 
                         <form th:action="@{'/panier/ajouter/' + ${prod.id}}" method="post"
                             onsubmit="return showPopup();">
-                            <button type="submit" class="w-full btn-gold text-center">
-                                <i class="fa-solid fa-cart-plus mr-2"></i> Ajouter au panier
+                            <button type="submit" class="w-full btn-gsd !justify-center shadow-2xl">
+                                <i class="fa-solid fa-cart-plus mr-3"></i> COMMANDER
                             </button>
                         </form>
                     </div>
@@ -82,67 +78,17 @@
 
             <!-- Message si aucun produit -->
             <div th:if="${produits == null or #lists.isEmpty(produits)}"
-                class="bg-white rounded-2xl shadow-xl p-12 text-center max-w-2xl mx-auto">
-                <div class="w-24 h-24 mx-auto mb-6 bg-or-royal/10 rounded-full flex items-center justify-center">
-                    <i class="fa-solid fa-folder-open text-4xl text-or-royal"></i>
+                class="glass-gsd p-20 text-center max-w-3xl mx-auto rounded-[3rem]">
+                <div
+                    class="w-32 h-32 mx-auto mb-10 bg-gsd-gold/10 rounded-[2.5rem] flex items-center justify-center border border-gsd-gold/20">
+                    <i class="fa-solid fa-box-open text-5xl text-gsd-gold"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-noir-profond mb-4">Aucun produit disponible</h2>
-                <p class="text-gray-600 mb-8">
-                    Nous mettons à jour notre catalogue. Revenez bientôt !
+                <h2 class="text-3xl font-black uppercase tracking-tighter text-gsd-white mb-6">SERVICES SUR MESURE</h2>
+                <p class="text-gsd-light/40 font-bold uppercase tracking-widest text-sm mb-12 leading-relaxed">
+                    Nous personnalisons chaque offre en fonction de vos besoins spécifiques. Contactez nos experts pour
+                    une étude personnalisée.
                 </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ÉTUDE DE CAS -->
-    <section class="py-20 bg-noir-profond text-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold mb-4">
-                    Étude de <span class="text-or-royal">cas</span>
-                </h2>
-            </div>
-
-            <div class="max-w-4xl mx-auto bg-noir-elegant rounded-2xl p-8 md:p-12 border border-gray-800">
-                <div class="flex items-start gap-6">
-                    <div class="w-16 h-16 rounded-full bg-or-royal/20 flex items-center justify-center flex-shrink-0">
-                        <i class="fa-solid fa-quote-left text-2xl text-or-royal"></i>
-                    </div>
-                    <div>
-                        <p class="text-lg text-gray-300 mb-6">
-                            Une famille de la diaspora a sécurisé un terrain grâce à notre accompagnement (ACD), puis a
-                            lancé la construction d'une maison durable dans les délais. Du début à la fin, nous avons
-                            assuré un suivi personnalisé et transparent.
-                        </p>
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 rounded-full bg-or-royal/20 flex items-center justify-center font-bold text-or-royal">
-                                FM
-                            </div>
-                            <div>
-                                <p class="font-bold">Famille Mensah</p>
-                                <p class="text-sm text-gray-400">Projet réalisé à Bingerville</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="py-16 bg-creme-luxe">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-2xl md:text-4xl font-playfair font-bold text-noir-profond mb-6">
-                Prêt à lancer <span class="text-or-royal">votre projet</span> ?
-            </h2>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a th:href="@{/contact}" class="btn-gold inline-flex items-center">
-                    <i class="fa-solid fa-phone mr-2"></i> Nous contacter
-                </a>
-                <a th:href="@{/services}" class="btn-gold-outline inline-flex items-center">
-                    <i class="fa-solid fa-cogs mr-2"></i> Voir nos services
-                </a>
+                <a th:href="@{/contact}" class="btn-gsd">NOUS CONTACTER</a>
             </div>
         </div>
     </section>
@@ -159,7 +105,7 @@
             setTimeout(() => {
                 popup.classList.add("hidden");
                 popup.classList.remove("flex");
-            }, 2500);
+            }, 3000);
             return true;
         }
     </script>

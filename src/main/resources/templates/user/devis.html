@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Commander une Œuvre - Peintre Zipa Officiel')}"></head>
+
+<body>
+
+    <!-- HEADER -->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <!-- HERO -->
+    <section class="relative py-40 bg-zipa-dark overflow-hidden border-b border-white/5">
+        <div class="absolute inset-0 opacity-15">
+            <img th:src="@{/images/photo_3_2026-03-04_10-55-27.jpg}"
+                onerror="this.src='https://images.unsplash.com/photo-1579762593175-20226054cad0?w=1600'" alt=""
+                class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-zipa-dark to-transparent"></div>
+        <div class="section-zipa relative z-10 text-center flex flex-col items-center">
+            <span
+                class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">Acquisition
+                & Commandes</span>
+            <h1 class="heading-primary text-zipa-light mb-6">
+                Commander une <span class="italic text-zipa-gold font-light">Œuvre</span>
+            </h1>
+            <p class="text-sm text-zipa-light/60 max-w-xl mx-auto font-sans uppercase tracking-[0.2em] leading-relaxed">
+                Toile originale, reproduction signée ou commande sur-mesure — chaque demande reçoit une réponse
+                personnalisée sous 24h.
+            </p>
+        </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section class="py-24 bg-zipa-light">
+        <div class="max-w-4xl mx-auto px-6">
+
+            <!-- Success / Error -->
+            <div th:if="${param.success}"
+                class="mb-12 border border-zipa-gold/30 bg-zipa-gold/5 p-6 text-zipa-dark text-xs font-bold uppercase tracking-widest flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-zipa-gold text-lg"></i>
+                Votre demande a bien été transmise — nous vous répondrons sous 24h.
+            </div>
+            <div th:if="${param.error}"
+                class="mb-12 border border-red-400/30 bg-red-400/5 p-6 text-red-700 text-xs font-bold uppercase tracking-widest flex items-center gap-3">
+                <i class="fa-solid fa-circle-exclamation text-red-500 text-lg"></i>
+                Erreur lors de l'envoi. Veuillez réessayer ou nous contacter directement.
+            </div>
+
+            <form id="devisForm" th:action="@{/devis/envoyer}" method="post" class="space-y-16">
+
+                <!-- 01. Vos Coordonnées -->
+                <div class="relative pl-8 border-l-2 border-zipa-gold">
+                    <h2 class="font-serif text-3xl text-zipa-dark mb-2">
+                        <span class="text-zipa-gold text-2xl italic mr-3 font-light">01.</span>
+                        Vos Coordonnées
+                    </h2>
+                    <p class="text-zipa-text-muted text-sm font-light mb-10">Pour vous recontacter et confirmer votre
+                        commande.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-dark/50 block">Nom
+                                Complet *</label>
+                            <input type="text" name="nomComplet" required placeholder="Ex: Konan Yao"
+                                class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans placeholder:text-zipa-gray text-sm">
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-dark/50 block">Téléphone
+                                / WhatsApp *</label>
+                            <input type="tel" name="telephone" required placeholder="+226 00 00 00 00"
+                                class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans placeholder:text-zipa-gray text-sm">
+                        </div>
+                        <div class="md:col-span-2 space-y-2">
+                            <label
+                                class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-dark/50 block">Adresse
+                                E-mail *</label>
+                            <input type="email" name="email" required placeholder="votre@email.com"
+                                class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans placeholder:text-zipa-gray text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 02. Détails de la Commande -->
+                <div class="relative pl-8 border-l-2 border-zipa-gold">
+                    <h2 class="font-serif text-3xl text-zipa-dark mb-2">
+                        <span class="text-zipa-gold text-2xl italic mr-3 font-light">02.</span>
+                        Votre Commande
+                    </h2>
+                    <p class="text-zipa-text-muted text-sm font-light mb-10">Précisez le type d'œuvre souhaitée et vos
+                        préférences.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-dark/50 block">Type
+                                de Commande *</label>
+                            <select name="villeDepart"
+                                class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans text-sm appearance-none cursor-pointer">
+                                <option value="Toile Originale">Toile Originale (unique)</option>
+                                <option value="Commande sur-mesure">Commande sur-mesure (portrait, sujet spécifique)
+                                </option>
+                                <option value="Reproduction signée">Reproduction signée par l'artiste</option>
+                                <option value="Autre">Autre / Renseignement</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-dark/50 block">Format
+                                / Dimensions</label>
+                            <select name="villeArrivee"
+                                class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans text-sm appearance-none cursor-pointer">
+                                <option value="Petit (≤ 40cm)">Petit format (≤ 40 cm)</option>
+                                <option value="Moyen (40-80cm)">Moyen format (40–80 cm)</option>
+                                <option value="Grand (> 80cm)">Grand format (> 80 cm)</option>
+                                <option value="À discuter">À discuter avec l'artiste</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-dark/50 block">Budget
+                                Approximatif</label>
+                            <select name="volumeEstime"
+                                class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans text-sm appearance-none cursor-pointer">
+                                <option value="- de 100 000 FCFA">Moins de 100 000 FCFA</option>
+                                <option value="100 000 - 300 000 FCFA">100 000 – 300 000 FCFA</option>
+                                <option value="300 000 - 600 000 FCFA">300 000 – 600 000 FCFA</option>
+                                <option value="+ de 600 000 FCFA">Plus de 600 000 FCFA</option>
+                                <option value="Budget libre">Budget libre / à négocier</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-dark/50 block">Délai
+                                Souhaité</label>
+                            <input type="date" name="datePrevue"
+                                class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 03. Description & Vision -->
+                <div class="relative pl-8 border-l-2 border-zipa-gold">
+                    <h2 class="font-serif text-3xl text-zipa-dark mb-2">
+                        <span class="text-zipa-gold text-2xl italic mr-3 font-light">03.</span>
+                        Votre Vision
+                    </h2>
+                    <p class="text-zipa-text-muted text-sm font-light mb-10">Décrivez votre projet ou l'œuvre qui vous
+                        intéresse — couleurs, thème, ambiance, référence...</p>
+                    <textarea name="message" rows="6"
+                        placeholder="Ex : Je souhaite une toile acrylique représentant un coucher de soleil sur la savane, en tons chauds (ocre, rouge, orange), format 60x80cm pour un salon moderne..."
+                        class="w-full bg-transparent border-b border-zipa-gray py-3 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans placeholder:text-zipa-gray text-sm resize-none"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <div class="flex flex-col sm:flex-row items-center gap-6">
+                    <button type="submit"
+                        class="btn-zipa w-full sm:w-auto !bg-zipa-dark !text-zipa-light hover:!bg-zipa-gold hover:!text-zipa-dark shadow-[0_10px_40px_rgba(0,0,0,0.15)]">
+                        ENVOYER MA DEMANDE <i class="fa-solid fa-paper-plane ml-3"></i>
+                    </button>
+                    <a href="https://wa.me/22664935871" target="_blank"
+                        class="btn-zipa-outline !border-[#25D366] !text-[#25D366] hover:!bg-[#25D366] hover:!text-white w-full sm:w-auto">
+                        <i class="fa-brands fa-whatsapp mr-2"></i> Discuter sur WhatsApp
+                    </a>
+                </div>
+            </form>
+
+            <!-- Contact rapide -->
+            <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 pt-16 border-t border-zipa-gray">
+                <div class="flex items-center gap-5">
+                    <div class="w-12 h-12 flex-shrink-0 bg-zipa-dark flex items-center justify-center">
+                        <i class="fa-solid fa-phone text-zipa-gold"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold tracking-widest text-zipa-dark/40 mb-1">Téléphone</p>
+                        <a href="tel:+22664935871"
+                            class="text-zipa-dark font-bold text-sm hover:text-zipa-gold transition-colors">+226 64 93
+                            58 71</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-5">
+                    <div class="w-12 h-12 flex-shrink-0 bg-[#25D366] flex items-center justify-center">
+                        <i class="fa-brands fa-whatsapp text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold tracking-widest text-zipa-dark/40 mb-1">WhatsApp</p>
+                        <a href="https://wa.me/22664935871" target="_blank"
+                            class="text-zipa-dark font-bold text-sm hover:text-zipa-gold transition-colors">+226 64 93
+                            58 71</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-5">
+                    <div class="w-12 h-12 flex-shrink-0 bg-zipa-gold flex items-center justify-center">
+                        <i class="fa-solid fa-envelope text-zipa-dark text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold tracking-widest text-zipa-dark/40 mb-1">E-mail</p>
+                        <a href="mailto:contact@zipaofficiel.com"
+                            class="text-zipa-dark font-bold text-sm hover:text-zipa-gold transition-colors">contact@zipaofficiel.com</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+
+</html>

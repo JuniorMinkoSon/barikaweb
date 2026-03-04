@@ -1,101 +1,141 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="footer">
-    <!-- Footer -->
-    <footer class="bg-noir-profond text-white py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <!-- Logo et description -->
-                <div class="md:col-span-1">
-                    <img th:src="@{/images/logo_bar1.png}" alt="Logo UNEVIE" class="h-16 mb-4">
-                    <p class="text-gray-400">
-                        Votre partenaire de confiance pour la construction et l'immobilier en Côte d'Ivoire.
+    <!-- Footer Zipa -->
+    <footer class="bg-zipa-dark border-t border-white/5 py-24 relative overflow-hidden">
+        <div class="max-w-[100rem] mx-auto px-6 md:px-12 lg:px-24 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+                <!-- Brand Info -->
+                <div class="flex flex-col">
+                    <a th:href="@{/}" class="flex flex-col mb-8">
+                        <span class="text-3xl font-serif font-bold tracking-widest text-zipa-light mb-1">ZIPA</span>
+                        <span
+                            class="text-[10px] font-sans font-semibold tracking-[0.4em] text-zipa-gold uppercase">Artiste
+                            Peintre</span>
+                    </a>
+                    <p class="text-zipa-text-muted text-sm leading-relaxed mb-8">
+                        L'art au cœur d'Abidjan. Découvrez des œuvres uniques, vibrantes et inspirées, créées par
+                        Peintre Zipa avec passion.
                     </p>
+                    <div class="flex gap-4">
+                        <a href="https://facebook.com" target="_blank"
+                            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zipa-text-light hover:border-zipa-gold hover:text-zipa-gold transition-all duration-300">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank"
+                            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zipa-text-light hover:border-zipa-gold hover:text-zipa-gold transition-all duration-300">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/22664935871" target="_blank"
+                            class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-zipa-text-light hover:border-zipa-gold hover:text-zipa-gold transition-all duration-300">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Liens rapides -->
+                <!-- Navigation -->
                 <div>
-                    <h4 class="text-lg font-bold mb-4 text-or-royal">Liens rapides</h4>
-                    <nav class="flex flex-col gap-2">
-                        <a th:href="@{/}" class="text-gray-400 hover:text-or-royal transition-colors">Accueil</a>
-                        <a th:href="@{/propos}" class="text-gray-400 hover:text-or-royal transition-colors">À propos</a>
+                    <h4 class="text-zipa-light font-sans font-bold uppercase tracking-[0.2em] text-xs mb-8">Recherche
+                        Rapide</h4>
+                    <nav class="flex flex-col gap-4">
+                        <a th:href="@{/}"
+                            class="text-zipa-text-muted hover:text-zipa-gold transition-colors text-sm">Accueil</a>
                         <a th:href="@{/services}"
-                            class="text-gray-400 hover:text-or-royal transition-colors">Services</a>
-                        <a th:href="@{/projets}" class="text-gray-400 hover:text-or-royal transition-colors">Projets</a>
-                    </nav>
-                </div>
-
-                <!-- Services -->
-                <div>
-                    <h4 class="text-lg font-bold mb-4 text-or-royal">Nos services</h4>
-                    <nav class="flex flex-col gap-2">
-                        <span class="text-gray-400">Travaux publics</span>
-                        <span class="text-gray-400">Génie civil</span>
-                        <span class="text-gray-400">Immobilier</span>
-                        <span class="text-gray-400">Finitions</span>
+                            class="text-zipa-text-muted hover:text-zipa-gold transition-colors text-sm">Galerie
+                            d'Art</a>
+                        <a th:href="@{/propos}"
+                            class="text-zipa-text-muted hover:text-zipa-gold transition-colors text-sm">Biographie</a>
+                        <a th:href="@{/blog}"
+                            class="text-zipa-text-muted hover:text-zipa-gold transition-colors text-sm">Journal de
+                            l'Artiste</a>
                     </nav>
                 </div>
 
                 <!-- Contact -->
                 <div>
-                    <h4 class="text-lg font-bold mb-4 text-or-royal">Contact</h4>
-                    <div class="flex flex-col gap-3 text-gray-400">
-                        <p><i class="fa-solid fa-location-dot text-or-royal mr-2"></i> Abidjan, Côte d'Ivoire</p>
-                        <p><i class="fa-solid fa-phone text-or-royal mr-2"></i> +225 07 68 18 93 40</p>
-                        <p><i class="fa-solid fa-envelope text-or-royal mr-2"></i> contact@unevie.ci</p>
+                    <h4 class="text-zipa-light font-sans font-bold uppercase tracking-[0.2em] text-xs mb-8">L'Atelier
+                    </h4>
+                    <div class="space-y-6">
+                        <a href="tel:+2250102030405" class="group flex items-start gap-4">
+                            <i class="fa-solid fa-phone text-zipa-gold text-lg mt-1"></i>
+                            <div>
+                                <span
+                                    class="block text-[10px] font-bold text-zipa-text-muted uppercase">Téléphone</span>
+                                <span class="text-zipa-light group-hover:text-zipa-gold text-sm transition-colors">+226
+                                    64 93 58 71</span>
+                            </div>
+                        </a>
+                        <a href="mailto:contact@zipaofficiel.com" class="group flex items-start gap-4">
+                            <i class="fa-solid fa-envelope text-zipa-gold text-lg mt-1"></i>
+                            <div>
+                                <span class="block text-[10px] font-bold text-zipa-text-muted uppercase">Email</span>
+                                <span
+                                    class="text-zipa-light group-hover:text-zipa-gold text-sm transition-colors">contact@zipaofficiel.com</span>
+                            </div>
+                        </a>
+                        <div class="flex items-start gap-4">
+                            <i class="fa-solid fa-location-dot text-zipa-gold text-lg mt-1"></i>
+                            <div>
+                                <span class="block text-[10px] font-bold text-zipa-text-muted uppercase">Studio</span>
+                                <span class="text-zipa-light text-sm">Cocody, Abidjan<br>Côte d'Ivoire</span>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Réseaux sociaux -->
-                    <div class="flex gap-4 mt-6">
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-noir-elegant border border-gray-700 flex items-center justify-center hover:border-or-royal hover:text-or-royal transition-all">
-                            <i class="fa-brands fa-facebook-f"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-noir-elegant border border-gray-700 flex items-center justify-center hover:border-or-royal hover:text-or-royal transition-all">
-                            <i class="fa-brands fa-instagram"></i>
-                        </a>
-                        <a href="#"
-                            class="w-10 h-10 rounded-full bg-noir-elegant border border-gray-700 flex items-center justify-center hover:border-or-royal hover:text-or-royal transition-all">
-                            <i class="fa-brands fa-linkedin-in"></i>
-                        </a>
-                    </div>
+                </div>
+
+                <!-- Newsletter / CTA -->
+                <div>
+                    <h4 class="text-zipa-light font-sans font-bold uppercase tracking-[0.2em] text-xs mb-8">Restez
+                        Inspiré</h4>
+                    <p class="text-zipa-text-muted text-sm leading-relaxed mb-6">
+                        Inscrivez-vous pour recevoir des nouvelles sur les prochaines expositions et les nouvelles
+                        œuvres.
+                    </p>
+                    <a th:href="@{/contact}"
+                        class="btn-zipa-outline w-full !text-zipa-gold !border-zipa-gold hover:!bg-zipa-gold hover:!text-zipa-dark">
+                        S'INSCRIRE
+                    </a>
                 </div>
             </div>
 
             <!-- Copyright -->
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500">
-                <p>&copy; 2026 UNEVIE. Tous droits réservés.</p>
+            <div class="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-zipa-text-muted text-[10px] font-bold uppercase tracking-[0.2em]">
+                    &copy; 2026 PEINTRE ZIPA OFFICIEL. TOUS DROITS RÉSERVÉS.
+                </p>
+                <div class="flex gap-8">
+                    <a href="#"
+                        class="text-zipa-text-muted hover:text-zipa-gold text-[10px] font-bold uppercase tracking-[0.2em] transition-colors">Conditions
+                        de Vente</a>
+                    <a href="#"
+                        class="text-zipa-text-muted hover:text-zipa-gold text-[10px] font-bold uppercase tracking-[0.2em] transition-colors">Confidentialité</a>
+                </div>
             </div>
         </div>
+
+        <!-- WhatsApp Floating Action -->
+        <a href="https://wa.me/22664935871"
+            class="fixed bottom-8 right-8 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all duration-300 z-[100] group"
+            target="_blank" aria-label="Contactez-nous sur WhatsApp">
+            <i class="fa-brands fa-whatsapp text-2xl relative z-10"></i>
+        </a>
     </footer>
 
-    <!-- Bouton WhatsApp Flottant -->
-    <a href="https://wa.me/2250768189340"
-        class="fixed bottom-6 right-6 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 hover:scale-110 transition-all duration-300 z-50"
-        target="_blank" aria-label="Contactez-nous sur WhatsApp">
-        <i class="fa-brands fa-whatsapp text-white text-2xl"></i>
-    </a>
-
-    <!-- Bouton Scroll to Top -->
-    <button id="scrollTopBtn"
-        class="fixed bottom-6 left-6 w-12 h-12 bg-or-royal text-noir-profond rounded-full hidden items-center justify-center shadow-lg hover:bg-or-clair hover:scale-110 transition-all duration-300 z-50"
-        aria-label="Remonter en haut" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
-
+    <!-- Scrolling Animations Script -->
     <script>
-        // Scroll to Top Button
-        window.addEventListener('scroll', () => {
-            const scrollBtn = document.getElementById('scrollTopBtn');
-            if (scrollBtn) {
-                if (window.scrollY > 300) {
-                    scrollBtn.classList.remove('hidden');
-                    scrollBtn.classList.add('flex');
-                } else {
-                    scrollBtn.classList.add('hidden');
-                    scrollBtn.classList.remove('flex');
-                }
-            }
+        document.addEventListener("DOMContentLoaded", function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+                observer.observe(el);
+            });
         });
     </script>
 </div>

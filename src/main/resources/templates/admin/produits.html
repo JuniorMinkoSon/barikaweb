@@ -1,57 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org"
-    th:replace="~{layouts/admin-layout :: layout(pageTitle='Gestion des Produits', content=~{::#produitsContent})}">
+    th:replace="~{layouts/admin-layout :: layout(pageTitle='Mes Œuvres', content=~{::#produitsContent})}">
 
 <div id="produitsContent">
     <div class="flex justify-between items-center mb-8">
-        <h3 class="text-2xl font-bold text-noir-profond">Tous les produits</h3>
-        <a th:href="@{/admin/produits/add}" class="btn-gold">
-            <i class="fa-solid fa-plus-circle mr-2"></i> Ajouter un produit
+        <h3 class="text-2xl font-serif text-zipa-light">Collection du Studio</h3>
+        <a th:href="@{/admin/produits/add}"
+            class="btn-zipa-outline !border-zipa-gold !text-zipa-gold hover:!bg-zipa-gold hover:!text-zipa-dark">
+            <i class="fa-solid fa-paintbrush mr-2"></i> Ajouter une œuvre
         </a>
     </div>
 
     <!-- Table Container -->
-    <div class="card-luxury overflow-hidden">
+    <div class="bg-zipa-darker border border-white/5 shadow-sm overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-noir-profond text-white uppercase text-xs tracking-wider">
-                        <th class="px-6 py-4 font-bold">Image</th>
-                        <th class="px-6 py-4 font-bold">Produit</th>
-                        <th class="px-6 py-4 font-bold">Catégorie</th>
-                        <th class="px-6 py-4 font-bold text-right">Prix</th>
-                        <th class="px-6 py-4 font-bold text-center">Actions</th>
+                    <tr
+                        class="bg-zipa-dark border-b border-white/10 text-zipa-light font-sans font-bold uppercase text-[10px] tracking-widest">
+                        <th class="px-6 py-4">Aperçu</th>
+                        <th class="px-6 py-4">Titre de l'œuvre</th>
+                        <th class="px-6 py-4">Catégorie</th>
+                        <th class="px-6 py-4 text-right">Valeur</th>
+                        <th class="px-6 py-4 text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-100">
-                    <tr th:each="p : ${produits}" class="hover:bg-creme-luxe/50 transition-colors">
+                <tbody class="divide-y divide-white/5 text-sm text-zipa-light font-light">
+                    <tr th:each="p : ${produits}" class="hover:bg-white/5 transition-colors">
                         <td class="px-6 py-4">
                             <img th:src="@{${p.imageUrl}}"
-                                class="w-16 h-16 object-cover rounded-xl shadow-sm border border-gray-100">
+                                class="w-16 h-16 object-cover aspect-square shadow-sm border border-white/10 bg-zipa-dark">
                         </td>
                         <td class="px-6 py-4">
-                            <div class="font-bold text-noir-profond" th:text="${p.nom}">Nom</div>
-                            <div class="text-xs text-gray-400" th:text="'ID: #' + ${p.id}">#1</div>
+                            <div class="font-serif font-bold text-zipa-light text-lg" th:text="${p.nom}">Nom</div>
+                            <div class="text-xs text-zipa-text-muted font-sans" th:text="'ID: #' + ${p.id}">#1</div>
                         </td>
                         <td class="px-6 py-4">
-                            <span class="px-3 py-1 rounded-full bg-or-royal/10 text-or-royal text-xs font-bold"
+                            <span
+                                class="px-3 py-1 bg-zipa-gold/10 border border-zipa-gold/20 text-zipa-gold text-[10px] font-sans font-bold uppercase tracking-widest"
                                 th:text="${p.categorie}">Catégorie</span>
                         </td>
-                        <td class="px-6 py-4 text-right font-bold text-noir-profond" th:text="${p.prix} + ' FCFA'">
-                            0 FCFA
+                        <td class="px-6 py-4 text-right font-bold text-zipa-gold"
+                            th:text="${#numbers.formatDecimal(p.prix, 0, 'WHITESPACE', 0, 'POINT')} + ' CFA'">
+                            0 CFA
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex justify-center gap-2">
-                                <a href="#"
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center text-blue-500 hover:bg-blue-50 transition-colors"
-                                    title="Modifier">
+                                <a th:href="@{'/admin/produits/edit/' + ${p.id}}"
+                                    class="w-8 h-8 flex items-center justify-center text-zipa-light hover:text-zipa-gold transition-colors"
+                                    title="Modifier la fiche">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
-                                <a href="#"
-                                    class="w-10 h-10 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-50 transition-colors"
-                                    title="Supprimer">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
+                                <form th:action="@{'/admin/produits/delete/' + ${p.id}}" method="post"
+                                    onsubmit="return confirm('Supprimer cette œuvre ?')">
+                                    <button type="submit"
+                                        class="w-8 h-8 flex items-center justify-center text-zipa-gray hover:text-red-500 transition-colors"
+                                        title="Retirer l\'œuvre">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -60,11 +67,11 @@
         </div>
 
         <!-- Empty State -->
-        <div th:if="${#lists.isEmpty(produits)}" class="p-12 text-center">
-            <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-300">
-                <i class="fa-solid fa-folder-open text-3xl"></i>
+        <div th:if="${#lists.isEmpty(produits)}" class="p-16 text-center">
+            <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 text-zipa-gray">
+                <i class="fa-solid fa-palette text-3xl"></i>
             </div>
-            <p class="text-gray-500">Aucun produit enregistré pour le moment.</p>
+            <p class="text-zipa-text-muted font-light">L'atelier est vide. Ajoutez votre première toile.</p>
         </div>
     </div>
 </div>

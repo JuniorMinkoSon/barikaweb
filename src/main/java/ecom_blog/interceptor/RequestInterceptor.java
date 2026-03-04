@@ -13,6 +13,7 @@ import java.util.List;
 @Component
 public class RequestInterceptor implements HandlerInterceptor {
 
+    @SuppressWarnings("unchecked")
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) {

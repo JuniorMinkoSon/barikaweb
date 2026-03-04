@@ -1,107 +1,145 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head (title='Inscription - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Inscription - Peintre Zipa Officiel')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body class="bg-zipa-darker overflow-hidden">
 
-    <!-- MAIN CONTENT -->
-    <main
-        class="min-h-screen flex items-center justify-center py-10 bg-[url('https://images.unsplash.com/photo-1448630360428-65456885c650?w=1600')] bg-cover bg-fixed bg-center relative">
-        <!-- Overlay plus sombre pour meilleur contraste -->
-        <div class="absolute inset-0 bg-noir-profond/80 backdrop-blur-sm"></div>
+    <div class="min-h-screen flex">
 
-        <!-- Bouton Retour Accueil -->
-        <a th:href="@{/}"
-            class="absolute top-8 left-8 z-20 text-white/70 hover:text-white flex items-center gap-2 transition-colors">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span>Retour à l'accueil</span>
-        </a>
+        <!-- LEFT: Carousel artwork panel -->
+        <div class="hidden lg:block lg:w-1/2 relative overflow-hidden">
+            <div id="regCarouselContainer" class="absolute inset-0"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-zipa-darker/80 to-transparent z-10"></div>
+            <div class="absolute inset-0 z-20 flex flex-col justify-end p-16">
+                <a th:href="@{/}" class="flex flex-col mb-6">
+                    <span class="text-5xl font-serif font-bold tracking-widest text-zipa-light leading-none">ZIPA</span>
+                    <span class="text-[10px] font-sans font-bold tracking-[0.4em] text-zipa-gold uppercase mt-1">Artiste
+                        Peintre Officiel</span>
+                </a>
+                <p class="text-zipa-light/60 font-light text-sm max-w-xs leading-relaxed">
+                    Rejoignez notre cercle de collectionneurs et recevez un accès exclusif aux nouvelles créations avant
+                    leur mise en vente publique.
+                </p>
+            </div>
+        </div>
 
-        <div class="relative z-10 w-full max-w-lg px-6">
-            <div class="glass-dark p-8 md:p-10 rounded-3xl shadow-2xl border border-white/10 animate-fade-in">
-                <!-- Header Form -->
-                <div class="text-center mb-10">
-                    <img th:src="@{/images/logo_bar1.png}" alt="Logo" class="h-12 mx-auto mb-6">
-                    <h1 class="text-3xl font-playfair font-bold text-white mb-2">Rejoignez-nous</h1>
-                    <p class="text-gray-300">Créez votre compte <span class="text-or-royal font-bold">UNEVIE</span> en
-                        quelques
-                        instants</p>
+        <!-- RIGHT: Register form -->
+        <div
+            class="w-full lg:w-1/2 flex flex-col items-center justify-center px-8 md:px-16 xl:px-24 min-h-screen relative bg-zipa-darker">
+
+            <!-- Back button -->
+            <a th:href="@{/}"
+                class="absolute top-10 left-10 text-zipa-text-muted hover:text-zipa-gold flex items-center gap-3 transition-all group">
+                <div
+                    class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center group-hover:border-zipa-gold transition-colors">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-[0.3em]">Accueil</span>
+            </a>
+
+            <div class="w-full max-w-sm">
+                <!-- Mobile brand -->
+                <div class="lg:hidden mb-12 text-center">
+                    <span class="text-4xl font-serif font-bold tracking-widest text-zipa-light">ZIPA</span>
+                    <p class="text-[10px] font-bold tracking-[0.4em] text-zipa-gold uppercase mt-1">Artiste Peintre</p>
                 </div>
 
-                <!-- Form -->
-                <form th:action="@{/register}" method="post" th:object="${user}" class="space-y-5">
+                <div class="mb-10">
+                    <span
+                        class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-3 block">Rejoindre
+                        le Cercle</span>
+                    <h1 class="font-serif text-4xl text-zipa-light">Créer un <span
+                            class="italic font-light text-zipa-gold">Compte</span></h1>
+                </div>
 
+                <form th:action="@{/register}" method="post" class="space-y-5">
+
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-text-muted block">Nom
+                            Complet</label>
+                        <div class="relative group">
+                            <i
+                                class="fa-regular fa-user absolute left-5 top-1/2 -translate-y-1/2 text-zipa-text-muted group-focus-within:text-zipa-gold transition-colors text-sm"></i>
+                            <input type="text" name="nomComplet" required
+                                class="w-full bg-white/5 border border-white/10 py-4 pl-12 pr-5 focus:outline-none focus:border-zipa-gold transition-all text-zipa-light placeholder:text-white/20 font-sans text-sm"
+                                placeholder="Votre Nom">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label
+                            class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-text-muted block">Adresse
+                            Email</label>
+                        <div class="relative group">
+                            <i
+                                class="fa-regular fa-envelope absolute left-5 top-1/2 -translate-y-1/2 text-zipa-text-muted group-focus-within:text-zipa-gold transition-colors text-sm"></i>
+                            <input type="email" name="email" required
+                                class="w-full bg-white/5 border border-white/10 py-4 pl-12 pr-5 focus:outline-none focus:border-zipa-gold transition-all text-zipa-light placeholder:text-white/20 font-sans text-sm"
+                                placeholder="votre@email.com">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-text-muted block">Mot
+                            de Passe</label>
+                        <div class="relative group">
+                            <i
+                                class="fa-solid fa-lock absolute left-5 top-1/2 -translate-y-1/2 text-zipa-text-muted group-focus-within:text-zipa-gold transition-colors text-sm"></i>
+                            <input type="password" name="password" required
+                                class="w-full bg-white/5 border border-white/10 py-4 pl-12 pr-5 focus:outline-none focus:border-zipa-gold transition-all text-zipa-light placeholder:text-white/20 font-sans text-sm"
+                                placeholder="••••••••">
+                        </div>
+                    </div>
+
+                    <!-- Error/success message -->
                     <div th:if="${error}"
-                        class="p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-200 text-sm text-center animate-shake">
-                        <i class="fa-solid fa-triangle-exclamation mr-2"></i> <span th:text="${error}"></span>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Nom Complet</label>
-                            <div class="relative group">
-                                <span
-                                    class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400 group-focus-within:text-or-royal transition-colors">
-                                    <i class="fa-solid fa-user"></i>
-                                </span>
-                                <input type="text" th:field="*{nom}" required
-                                    class="w-full bg-noir-profond/50 border border-gray-700 text-white rounded-xl py-3 pl-11 pr-4 focus:outline-none focus:border-or-royal focus:ring-1 focus:ring-or-royal transition-all placeholder-gray-500"
-                                    placeholder="Ex: Jean Kouassi">
-                            </div>
-                        </div>
-
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Adresse Email</label>
-                            <div class="relative group">
-                                <span
-                                    class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400 group-focus-within:text-or-royal transition-colors">
-                                    <i class="fa-solid fa-envelope"></i>
-                                </span>
-                                <input type="email" th:field="*{email}" required
-                                    class="w-full bg-noir-profond/50 border border-gray-700 text-white rounded-xl py-3 pl-11 pr-4 focus:outline-none focus:border-or-royal focus:ring-1 focus:ring-or-royal transition-all placeholder-gray-500"
-                                    placeholder="votre@email.com">
-                            </div>
-                        </div>
-
-                        <div class="md:col-span-2">
-                            <label class="block text-sm font-medium text-gray-300 mb-2">Mot de passe</label>
-                            <div class="relative group">
-                                <span
-                                    class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400 group-focus-within:text-or-royal transition-colors">
-                                    <i class="fa-solid fa-lock"></i>
-                                </span>
-                                <input type="password" th:field="*{password}" required
-                                    class="w-full bg-noir-profond/50 border border-gray-700 text-white rounded-xl py-3 pl-11 pr-4 focus:outline-none focus:border-or-royal focus:ring-1 focus:ring-or-royal transition-all placeholder-gray-500"
-                                    placeholder="••••••••">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center gap-2 py-2">
-                        <input type="checkbox" id="terms" required
-                            class="w-4 h-4 rounded border-gray-700 bg-noir-profond/50 text-or-royal focus:ring-or-royal">
-                        <label for="terms" class="text-xs text-gray-400">J'accepte les <a href="#"
-                                class="text-or-royal hover:underline">conditions d'utilisation</a></label>
+                        class="flex items-center gap-3 border border-red-500/30 bg-red-500/10 p-4 text-red-400 text-xs font-bold uppercase tracking-widest">
+                        <i class="fa-solid fa-circle-exclamation"></i> <span th:text="${error}">Erreur</span>
                     </div>
 
                     <button type="submit"
-                        class="btn-gold w-full py-4 text-lg font-bold shadow-lg shadow-or-royal/20 active:scale-[0.98] transition-transform">
-                        S'inscrire
+                        class="w-full bg-zipa-gold text-zipa-dark font-bold py-5 uppercase tracking-widest text-sm hover:bg-white transition-colors duration-300 flex items-center justify-center gap-3 mt-2">
+                        CRÉER MON COMPTE <i class="fa-solid fa-user-plus"></i>
                     </button>
                 </form>
 
-                <!-- Footer Form -->
-                <div class="mt-10 pt-8 border-t border-white/10 text-center">
-                    <p class="text-gray-400">
-                        Déjà inscrit ?
-                        <a th:href="@{/login}"
-                            class="text-white font-bold hover:text-or-royal transition-colors ml-2">Se connecter</a>
+                <div class="mt-8 pt-8 border-t border-white/5 text-center">
+                    <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-zipa-text-muted">
+                        Déjà Collectionneur ?
+                        <a th:href="@{/login}" class="text-zipa-gold hover:text-white transition-colors ml-3">Se
+                            connecter</a>
                     </p>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+
+    <script>
+        (function () {
+            const container = document.getElementById('regCarouselContainer');
+            if (!container) return;
+            const total = 20;
+            let cur = 10, timer; // Start from middle to differ from login page
+            let html = '';
+            for (let i = 1; i <= total; i++) {
+                const num = ((i + 9) % total) + 1; // offset start
+                html += `<div class="reg-slide absolute inset-0 transition-opacity duration-1500 ease-in-out ${i === 1 ? 'opacity-100' : 'opacity-0'}">
+                    <img src="/images/photo_${20 + i}_2026-03-04_10-55-27.jpg" class="w-full h-full object-cover" alt=""></div>`;
+            }
+            container.innerHTML = html;
+            const slides = container.querySelectorAll('.reg-slide');
+            function goTo(i) {
+                slides.forEach((s, idx) => {
+                    s.classList.toggle('opacity-100', idx === i);
+                    s.classList.toggle('opacity-0', idx !== i);
+                });
+                cur = i;
+                clearInterval(timer); timer = setInterval(() => goTo((cur + 1) % total), 4500);
+            }
+            timer = setInterval(() => goTo((cur + 1) % total), 4500);
+        })();
+    </script>
 
 </body>
 

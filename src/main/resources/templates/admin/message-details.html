@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+    th:replace="~{layouts/admin-layout :: layout(pageTitle='Détail du Message', content=~{::#msgDetailContent})}">
+
+<div id="msgDetailContent">
+    <!-- Back -->
+    <div class="mb-8">
+        <a th:href="@{/admin/messages}"
+            class="inline-flex items-center gap-2 text-zipa-text-muted hover:text-zipa-gold transition-colors text-xs font-bold uppercase tracking-widest">
+            <i class="fa-solid fa-arrow-left"></i> Retour aux messages
+        </a>
+    </div>
+
+    <div class="bg-zipa-darker border border-white/5 p-10 max-w-3xl">
+        <!-- Header -->
+        <div class="flex items-start justify-between mb-10 pb-8 border-b border-white/5">
+            <div>
+                <span
+                    class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-2 block">Message
+                    Reçu</span>
+                <h2 class="font-serif text-3xl text-zipa-light" th:text="${message.sujet}">Sujet</h2>
+            </div>
+            <div class="text-right">
+                <p class="text-xs text-zipa-text-muted font-bold uppercase tracking-widest"
+                    th:text="${#temporals.format(message.dateEnvoi, 'dd MMM yyyy')}">Date</p>
+                <p class="text-xs text-zipa-gray mt-1" th:text="${#temporals.format(message.dateEnvoi, 'HH:mm')}">Heure
+                </p>
+            </div>
+        </div>
+
+        <!-- Sender Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div>
+                <p class="text-[10px] uppercase font-bold tracking-widest text-zipa-text-muted mb-1">Expéditeur</p>
+                <p class="text-zipa-light font-serif text-lg" th:text="${message.nom}">Nom</p>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase font-bold tracking-widest text-zipa-text-muted mb-1">Email</p>
+                <a th:href="'mailto:' + ${message.email}"
+                    class="text-zipa-gold hover:text-white transition-colors text-sm"
+                    th:text="${message.email}">email@example.com</a>
+            </div>
+            <div>
+                <p class="text-[10px] uppercase font-bold tracking-widest text-zipa-text-muted mb-1">Téléphone</p>
+                <a th:href="'tel:' + ${message.telephone}" class="text-zipa-light text-sm"
+                    th:text="${message.telephone != null ? message.telephone : '—'}">—</a>
+            </div>
+        </div>
+
+        <!-- Message Body -->
+        <div class="border-l-2 border-zipa-gold pl-8 mb-10">
+            <p class="text-[10px] uppercase font-bold tracking-widest text-zipa-text-muted mb-4">Message</p>
+            <p class="text-zipa-text-muted leading-relaxed text-base font-light" th:text="${message.message}">Contenu du
+                message...</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-4 flex-wrap">
+            <a th:href="'mailto:' + ${message.email}"
+                class="btn-zipa !bg-zipa-gold !text-zipa-dark hover:!bg-white text-xs">
+                <i class="fa-solid fa-reply mr-2"></i> Répondre par email
+            </a>
+            <a th:href="'https://wa.me/' + ${message.telephone != null ? message.telephone : ''}" target="_blank"
+                class="btn-zipa-outline !border-[#25D366] !text-[#25D366] hover:!bg-[#25D366] hover:!text-white text-xs">
+                <i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp
+            </a>
+            <form th:action="@{'/admin/messages/delete/' + ${message.id}}" method="post"
+                onsubmit="return confirm('Supprimer définitivement ce message ?')">
+                <button type="submit"
+                    class="btn-zipa !bg-red-600/10 !text-red-500 border border-red-500/30 hover:!bg-red-600 hover:!text-white text-xs">
+                    <i class="fa-solid fa-trash mr-2"></i> Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</html>

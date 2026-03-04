@@ -1,197 +1,211 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{fragments/head :: head('Contact - UNEVIE')}"></head>
+<head th:replace="~{fragments/head :: head('Contact - Peintre Zipa Officiel')}"></head>
 
-<body class="font-poppins bg-creme-luxe text-noir-profond">
+<body>
 
     <!-- HEADER -->
     <div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- HERO PAGE -->
-    <section class="relative py-24 md:py-32 bg-noir-profond overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-noir-profond via-noir-profond/90 to-noir-profond/70"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-or-royal/10 rounded-full blur-3xl"></div>
+    <!-- HERO CAROUSEL (same as homepage) -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden bg-zipa-darker"
+        id="contactCarousel">
+        <div id="contactCarouselContainer" class="absolute inset-0 z-0 h-full w-full"></div>
 
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-6xl font-playfair font-bold text-white mb-4">
-                Contactez-<span class="text-or-royal">Nous</span>
+        <div class="absolute inset-0 bg-gradient-to-t from-zipa-darker via-zipa-darker/50 to-transparent z-10"></div>
+
+        <div class="section-zipa relative z-20 text-center flex flex-col items-center">
+            <span class="text-zipa-gold font-sans font-bold uppercase tracking-[0.4em] text-[10px] mb-6 block">
+                Studio &amp; Acquisitions
+            </span>
+            <h1 class="heading-primary text-zipa-light mb-8">
+                PRENDRE <span class="italic text-zipa-gold font-light">Contact</span>
             </h1>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                Nous sommes à votre écoute pour concrétiser vos projets
+            <p
+                class="text-sm md:text-base text-zipa-light/70 max-w-2xl mx-auto font-sans uppercase tracking-[0.2em] leading-relaxed">
+                Pour une acquisition, une commande sur-mesure ou une information sur nos expositions privées.
             </p>
         </div>
-    </section>
 
-    <!-- SECTION CONTACT -->
-    <section class="py-20 bg-creme-luxe">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-5xl font-playfair font-bold text-noir-profond mb-4">
-                    Parlons de Votre <span class="text-or-royal">Projet</span>
-                </h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                    Remplissez le formulaire ci-dessous ou utilisez nos coordonnées pour nous joindre
-                </p>
+        <!-- Carousel Controls -->
+        <div class="absolute bottom-10 inset-x-0 z-20 flex justify-between items-center px-12 md:px-24 w-full">
+            <div class="flex gap-4">
+                <button onclick="contactPrev()"
+                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-zipa-dark transition-all duration-300 backdrop-blur-sm group">
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                </button>
+                <button onclick="contactNext()"
+                    class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-zipa-dark transition-all duration-300 backdrop-blur-sm group">
+                    <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
             </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- FORMULAIRE -->
-                <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl">
-                    <h3 class="text-2xl font-bold text-noir-profond mb-6">
-                        <i class="fa-solid fa-paper-plane text-or-royal mr-2"></i>
-                        Envoyez-nous un Message
-                    </h3>
-
-                    <form th:action="@{/contact/send}" method="post" class="space-y-6">
-                        <div>
-                            <label for="nom" class="block text-sm font-medium text-gray-700 mb-2">Nom Complet *</label>
-                            <input type="text" id="nom" name="nom" required placeholder="Votre nom et prénom"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 transition-all outline-none">
-                        </div>
-
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Adresse Email
-                                *</label>
-                            <input type="email" id="email" name="email" required placeholder="votre.email@exemple.com"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 transition-all outline-none">
-                        </div>
-
-                        <div>
-                            <label for="telephone" class="block text-sm font-medium text-gray-700 mb-2">Téléphone
-                                *</label>
-                            <input type="tel" id="telephone" name="telephone" required placeholder="+225 07 68 18 93 40"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 transition-all outline-none">
-                        </div>
-
-                        <div>
-                            <label for="sujet" class="block text-sm font-medium text-gray-700 mb-2">Sujet *</label>
-                            <input type="text" id="sujet" name="sujet" required placeholder="Recherche d'appartement"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 transition-all outline-none">
-                        </div>
-
-                        <div>
-                            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Votre Message
-                                *</label>
-                            <textarea id="message" name="message" required rows="5"
-                                placeholder="Décrivez-nous votre projet en détail..."
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-or-royal focus:ring-2 focus:ring-or-royal/20 transition-all outline-none resize-none"></textarea>
-                        </div>
-
-                        <button type="submit" class="w-full btn-gold text-center">
-                            <i class="fa-solid fa-paper-plane mr-2"></i> Envoyer le Message
-                        </button>
-                    </form>
-
-                    <p class="mt-4 text-sm text-gray-500 text-center">
-                        * Champs obligatoires. Nous vous répondrons dans les 24h.
-                    </p>
-                </div>
-
-                <!-- INFORMATIONS DE CONTACT -->
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-bold text-noir-profond mb-6">
-                        <i class="fa-solid fa-address-card text-or-royal mr-2"></i>
-                        Nos Coordonnées
-                    </h3>
-
-                    <!-- Adresse -->
-                    <div
-                        class="bg-white p-6 rounded-xl shadow-lg flex items-start gap-4 hover:shadow-xl transition-shadow">
-                        <div
-                            class="w-12 h-12 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                            <i class="fa-solid fa-location-dot text-or-royal text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-noir-profond mb-1">Notre Adresse</h4>
-                            <p class="text-gray-600">Cocody Angré Bessikoi, Base CIE</p>
-                            <p class="text-gray-600">Abidjan, Côte d'Ivoire</p>
-                        </div>
-                    </div>
-
-                    <!-- Téléphone -->
-                    <div
-                        class="bg-white p-6 rounded-xl shadow-lg flex items-start gap-4 hover:shadow-xl transition-shadow">
-                        <div
-                            class="w-12 h-12 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                            <i class="fa-solid fa-phone text-or-royal text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-noir-profond mb-1">Téléphone</h4>
-                            <p class="text-gray-600">+225 07 681 893 40</p>
-                            <p class="text-gray-600">+225 07 488 188 16</p>
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div
-                        class="bg-white p-6 rounded-xl shadow-lg flex items-start gap-4 hover:shadow-xl transition-shadow">
-                        <div
-                            class="w-12 h-12 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                            <i class="fa-solid fa-envelope text-or-royal text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-noir-profond mb-1">Email</h4>
-                            <p class="text-gray-600">contacts@barakasynergiesgroup.com</p>
-                        </div>
-                    </div>
-
-                    <!-- Horaires -->
-                    <div
-                        class="bg-white p-6 rounded-xl shadow-lg flex items-start gap-4 hover:shadow-xl transition-shadow">
-                        <div
-                            class="w-12 h-12 rounded-full bg-or-royal/10 flex items-center justify-center flex-shrink-0">
-                            <i class="fa-solid fa-clock text-or-royal text-xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-noir-profond mb-1">Horaires d'Ouverture</h4>
-                            <p class="text-gray-600">Lundi - Vendredi : 8h00 - 18h00</p>
-                            <p class="text-gray-600">Samedi : 9h00 - 14h00</p>
-                            <p class="text-gray-500">Dimanche : Fermé</p>
-                        </div>
-                    </div>
-
-                    <!-- Réseaux sociaux -->
-                    <div class="bg-noir-profond p-6 rounded-xl">
-                        <h4 class="font-bold text-white mb-4">Suivez-nous</h4>
-                        <div class="flex gap-4">
-                            <a href="#"
-                                class="w-12 h-12 rounded-full bg-noir-elegant border border-gray-700 flex items-center justify-center text-white hover:border-or-royal hover:text-or-royal transition-all">
-                                <i class="fa-brands fa-facebook-f text-xl"></i>
-                            </a>
-                            <a href="#"
-                                class="w-12 h-12 rounded-full bg-noir-elegant border border-gray-700 flex items-center justify-center text-white hover:border-or-royal hover:text-or-royal transition-all">
-                                <i class="fa-brands fa-instagram text-xl"></i>
-                            </a>
-                            <a href="#"
-                                class="w-12 h-12 rounded-full bg-noir-elegant border border-gray-700 flex items-center justify-center text-white hover:border-or-royal hover:text-or-royal transition-all">
-                                <i class="fa-brands fa-linkedin-in text-xl"></i>
-                            </a>
-                            <a href="https://wa.me/2250768189340" target="_blank"
-                                class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-white hover:bg-green-600 transition-all">
-                                <i class="fa-brands fa-whatsapp text-xl"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-white font-sans tracking-[0.3em] text-xs font-bold flex items-center gap-4">
+                <span id="contactCounter" class="min-w-[40px] text-right">01</span>
+                <div class="h-[1px] w-12 bg-white/30"></div>
+                <span class="text-white/50">32</span>
             </div>
         </div>
     </section>
 
-    <!-- GOOGLE MAPS -->
-    <section class="py-0">
-        <div class="w-full h-96 md:h-[450px]">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.3647448128896!2d-3.9820987!3d5.373481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjInMjQuNSJOIDPCsDU4JzU1LjYiVw!5e0!3m2!1sfr!2sci!4v1234567890123!5m2!1sfr!2sci"
-                width="100%" height="100%" style="border:0;" allowfullscreen loading="lazy"
-                class="grayscale hover:grayscale-0 transition-all duration-500">
-            </iframe>
+    <!-- CONTACT SECTION -->
+    <section class="py-32 bg-zipa-light relative">
+        <div class="section-zipa reveal-on-scroll">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24">
+
+                <!-- Info Column -->
+                <div class="space-y-16">
+                    <div>
+                        <h2 class="heading-secondary">
+                            L'<span class="italic text-zipa-gold">Atelier</span>
+                        </h2>
+                        <p class="text-zipa-text-muted leading-relaxed text-lg mb-10 font-light">
+                            Situé au cœur vibrant d'Abidjan, l'atelier est le sanctuaire de la création. Pour les
+                            collectionneurs et les amateurs d'art, toute visite se fait exclusivement sur rendez-vous.
+                        </p>
+                    </div>
+
+                    <div class="space-y-10 border-t border-zipa-gray pt-10">
+                        <!-- Phone -->
+                        <div class="flex gap-8 items-start group">
+                            <div class="w-12 h-12 flex items-center justify-center">
+                                <i
+                                    class="fa-solid fa-phone text-2xl text-zipa-dark group-hover:text-zipa-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-zipa-text-muted tracking-[0.2em] mb-2">
+                                    Téléphone</p>
+                                <p
+                                    class="text-2xl font-serif text-zipa-dark group-hover:text-zipa-gold transition-colors">
+                                    +225 01 02 03 04 05</p>
+                            </div>
+                        </div>
+
+                        <!-- WhatsApp -->
+                        <div class="flex gap-8 items-start group">
+                            <div class="w-12 h-12 flex items-center justify-center">
+                                <i
+                                    class="fa-brands fa-whatsapp text-2xl text-zipa-dark group-hover:text-[#25D366] transition-colors"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-zipa-text-muted tracking-[0.2em] mb-2">
+                                    WhatsApp</p>
+                                <p
+                                    class="text-2xl font-serif text-zipa-dark group-hover:text-[#25D366] transition-colors">
+                                    Message Privé</p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex gap-8 items-start group">
+                            <div class="w-12 h-12 flex items-center justify-center">
+                                <i
+                                    class="fa-regular fa-envelope text-2xl text-zipa-dark group-hover:text-zipa-gold transition-colors"></i>
+                            </div>
+                            <div>
+                                <p class="text-[10px] uppercase font-bold text-zipa-text-muted tracking-[0.2em] mb-2">
+                                    Email Galeries</p>
+                                <p
+                                    class="text-2xl font-serif text-zipa-dark group-hover:text-zipa-gold transition-colors">
+                                    contact@zipaofficiel.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Note -->
+                    <div class="bg-zipa-gray/30 p-10 mt-16 group border-l-4 border-zipa-gold">
+                        <div class="flex items-start gap-6">
+                            <i class="fa-solid fa-location-dot text-zipa-gold text-xl mt-1"></i>
+                            <div>
+                                <h4 class="text-lg font-sans font-bold uppercase tracking-widest text-zipa-dark mb-2">
+                                    Abidjan, Côte d'Ivoire</h4>
+                                <p class="text-sm text-zipa-text-muted font-light leading-relaxed">Les visites de
+                                    l'atelier sont réservées aux acheteurs munis d'un rendez-vous confirmé.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Column -->
+                <div class="bg-white border border-zipa-gray p-8 md:p-16 shadow-xl relative top-[-80px]">
+                    <h3 class="font-serif text-4xl text-zipa-dark mb-10">
+                        MESSAGE <span class="italic text-zipa-gold">Direct</span>
+                    </h3>
+
+                    <form th:action="@{/contact/send}" method="post" class="space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label
+                                    class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-text-muted block">Nom
+                                    / Organisation</label>
+                                <input type="text" name="nom" required placeholder="Musée de..."
+                                    class="w-full bg-transparent border-b border-zipa-gray py-4 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans placeholder:text-zipa-gray">
+                            </div>
+                            <div class="space-y-2">
+                                <label
+                                    class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-text-muted block">E-mail</label>
+                                <input type="email" name="email" required placeholder="contact@domaine.com"
+                                    class="w-full bg-transparent border-b border-zipa-gray py-4 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans placeholder:text-zipa-gray">
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-text-muted block">Sujet</label>
+                            <input type="text" name="sujet" required placeholder="Acquisition de tableau..."
+                                class="w-full bg-transparent border-b border-zipa-gray py-4 focus:border-zipa-gold outline-none transition-all text-zipa-dark font-sans placeholder:text-zipa-gray">
+                        </div>
+                        <div class="space-y-2">
+                            <label
+                                class="text-[10px] uppercase font-bold tracking-[0.2em] text-zipa-text-muted block">Votre
+                                Message</label>
+                            <textarea name="message" required rows="6" placeholder="Spécifications..."
+                                class="w-full bg-transparent border-b border-zipa-gray py-4 focus:border-zipa-gold outline-none transition-all resize-none text-zipa-dark font-sans placeholder:text-zipa-gray"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="btn-zipa w-full !bg-zipa-dark !text-zipa-light hover:!bg-zipa-gold hover:!text-zipa-dark mt-6">
+                            ENVOYER
+                        </button>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <div th:replace="~{fragments/footer :: footer}"></div>
 
+    <script>
+        (function () {
+            const container = document.getElementById('contactCarouselContainer');
+            const counter = document.getElementById('contactCounter');
+            const total = 32;
+            let current = 0;
+            let timer;
+            let html = '';
+            for (let i = 1; i <= total; i++) {
+                const active = i === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0';
+                html += `<div class="carousel-slide-c absolute inset-0 transition-opacity duration-1000 ease-in-out ${active}">
+                    <img src="/images/photo_${i}_2026-03-04_10-55-27.jpg" class="w-full h-full object-cover" alt=""></div>`;
+            }
+            container.innerHTML = html;
+            const slides = container.querySelectorAll('.carousel-slide-c');
+            function goTo(i) {
+                slides.forEach((s, idx) => {
+                    s.classList.toggle('opacity-100', idx === i);
+                    s.classList.toggle('z-10', idx === i);
+                    s.classList.toggle('opacity-0', idx !== i);
+                    s.classList.toggle('z-0', idx !== i);
+                });
+                current = i;
+                counter.textContent = (i + 1).toString().padStart(2, '0');
+                clearInterval(timer); timer = setInterval(() => goTo((current + 1) % total), 5000);
+            }
+            window.contactNext = () => goTo((current + 1) % total);
+            window.contactPrev = () => goTo((current - 1 + total) % total);
+            timer = setInterval(() => goTo((current + 1) % total), 5000);
+        })();
+    </script>
 </body>
 
 </html>

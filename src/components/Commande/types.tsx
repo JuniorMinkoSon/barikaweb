@@ -1,28 +1,28 @@
-export type OrderStatus = 'en_attente' | 'approuve' | 'livre' | 'annule';
-
-export interface OrderDetails {
-  startDate: string;
-  endDate: string;
-  duration: string;
-  pricePerDay?: number;
-  price?: number;
-  description: string;
-  location: string;
-  seller: string;
-}
+export type OrderStatus = 
+  | 'EN_COURS'     // Client request
+  | 'PROPOSITION'  // Provider counter-offer
+  | 'ACCEPTE'      // Client accepted, waiting payment
+  | 'PAYE'         // Money in escrow
+  | 'DEMARRE'      // Service in progress
+  | 'TERMINE'      // Finished
+  | 'ANNULE'       // Cancelled
+  | 'LITIGE';      // Ongoing dispute
 
 export interface Order {
   id: string;
-  date: string;
+  listingId: string;
+  listing_title: string;
+  image_url: string;
   status: OrderStatus;
-  total: number;
-  productName: string;
-  image: string;
-  location: string;
-  details: OrderDetails;
-  validationCode?: string;
-  rating: number | null;
-  comment: string | null;
+  base_price: number;
+  negotiated_price?: number;
+  check_in: string;
+  check_out: string;
+  zone: string;
+  otp_code: string;
+  provider_name?: string;
+  provider_phone?: string;
+  created_at: string;
 }
 
 export interface StatusConfig {

@@ -1,0 +1,24 @@
+{
+  "common": {
+    "welcome": "Connect to the essential.",
+    "subtitle": "One app for all your needs in Côte d'Ivoire. Secure payment.",
+    "search": "What are you looking for?",
+    "categories": "Our Worlds",
+    "see_all": "See all",
+    "express_delivery": "Express Delivery",
+    "why_locaconnecte": "Why LocaConnecté?",
+    "become_provider": "Become a Provider"
+  },
+  "univers": {
+    "residences": "Residences",
+    "chauffeurs": "Chauffeurs",
+    "cars": "Cars",
+    "restaurants": "Restaurants",
+    "clothes": "Clothes",
+    "lingerie": "Lingerie",
+    "cleaners": "Housekeepers",
+    "energy": "LocaEnergy",
+    "repairs": "Laundry / Repairs",
+    "delivery": "Express Delivery"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "common": {
+    "welcome": "连接核心生活。",
+    "subtitle": "象牙海岸一站式生活服务。安全支付。",
+    "search": "您在找什么？",
+    "categories": "我们的领域",
+    "see_all": "查看全部",
+    "express_delivery": "极速送达",
+    "why_locaconnecte": "为什么选择 LocaConnecté？",
+    "become_provider": "成为服务商"
+  },
+  "univers": {
+    "residences": "精品住宅",
+    "chauffeurs": "私人司机",
+    "cars": "车辆租赁",
+    "restaurants": "餐饮美食",
+    "clothes": "精品服装",
+    "lingerie": "美体内衣",
+    "cleaners": "家政服务",
+    "energy": "当地能源",
+    "repairs": "洗衣加修",
+    "delivery": "极速快递"
+  }
+}

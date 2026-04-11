@@ -1,0 +1,24 @@
+{
+  "common": {
+    "welcome": "Connectez-vous à l'essentiel.",
+    "subtitle": "Une seule app pour tous vos besoins en Côte d'Ivoire. Paiement sécurisé.",
+    "search": "Que recherchez-vous ?",
+    "categories": "Nos Univers",
+    "see_all": "Voir tout",
+    "express_delivery": "Livraison Express",
+    "why_locaconnecte": "Pourquoi LocaConnecté ?",
+    "become_provider": "Devenir Prestataire"
+  },
+  "univers": {
+    "residences": "Résidences",
+    "chauffeurs": "Chauffeurs",
+    "cars": "Voitures",
+    "restaurants": "Restaurants",
+    "clothes": "Vêtements",
+    "lingerie": "Lingerie",
+    "cleaners": "Ménagères",
+    "energy": "LocaEnergy",
+    "repairs": "Pressing / Réparations",
+    "delivery": "Livraison Express"
+  }
+}

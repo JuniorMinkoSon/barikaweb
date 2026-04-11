@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --orange-vif: #ea580c; /* Tailwind orange-600 */
+  --noir-premium: #000000;
+}
+
+body {
+  background-color: var(--noir-premium);
+  color: white;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -9,4 +19,33 @@
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Masonry Grid Custom Styles */
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if using modern browser */
+  display: -ms-flexbox; /* Not needed if using modern browser */
+  display: flex;
+  margin-left: -16px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 16px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style for individual masonry items */
+.my-masonry-grid_column > div {
+  margin-bottom: 16px;
+}
+
+.glass-premium {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.orange-glow {
+  box-shadow: 0 0 30px rgba(234, 88, 12, 0.2);
 }

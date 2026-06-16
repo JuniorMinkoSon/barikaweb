@@ -13,6 +13,9 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 
 from .routers import catalog, engines
+from .routers.providers import router as providers_router
+from .routers.marketplace import router as marketplace_router
+from .routers.escrow import router as escrow_router
 from backend.auth.router import router as auth_router
 from backend.db.session import Base, engine
 
@@ -50,6 +53,9 @@ app.add_middleware(SecurityHeadersMiddleware)
 app.include_router(auth_router)
 app.include_router(catalog.router)
 app.include_router(engines.router)
+app.include_router(providers_router)
+app.include_router(marketplace_router)
+app.include_router(escrow_router)
 
 
 @app.on_event("startup")

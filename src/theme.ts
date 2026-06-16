@@ -46,3 +46,5 @@ export const theme = {
     '2xl': '4rem',
   }
 };
+
+export type Theme = typeof theme;

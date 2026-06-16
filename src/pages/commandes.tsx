@@ -42,7 +42,7 @@ const initialOrders: Order[] = [
       startDate: '15 Avril 2026, 15:00',
       endDate: '18 Avril 2026, 11:00',
       duration: '3 nuits',
-      pricePerNight: 40000,
+      price: 40000,
       description: 'Villa moderne avec piscine privée, 3 chambres avec salle de bain attitrée.',
       location: 'Bingerville, Abidjan',
       seller: 'ImmoLuxe',
@@ -53,7 +53,7 @@ const initialOrders: Order[] = [
 ];
 
 export default function Orders() {
-  const [activeTab, setActiveTab] = useState<OrderStatus | 'history'>('active');
+  const [activeTab, setActiveTab] = useState<'active' | 'history'>('active');
   const [orders, setOrders] = useState<Order[]>(initialOrders);
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -125,7 +125,7 @@ export default function Orders() {
         ].map(tab => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as 'active' | 'history')}
             style={{
               flex: 1,
               padding: `${theme.spacing.xs} ${theme.spacing.sm}`,

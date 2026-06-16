@@ -4,7 +4,23 @@ import { theme } from '../theme';
 import Suggest from '../components/suggest';
 import Checkout from '../components/checkout';
 
-const initialCart = [
+interface CartItem {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  details: string;
+  image: string;
+  location: string;
+  description: string;
+  dateDebut: string;
+  dateFin: string;
+  personnes: number;
+  options: Record<string, boolean>;
+  notes: string;
+}
+
+const initialCart: CartItem[] = [
   {
     id: 1,
     name: 'Toyota Corolla 2022',
@@ -16,6 +32,7 @@ const initialCart = [
     description: 'Berline confortable, climatisée, idéale pour vos déplacements en ville.',
     dateDebut: '2024-04-12',
     dateFin: '2024-04-14',
+    personnes: 1,
     options: { gps: true, chauffeur: false, siegeBebe: false },
     notes: '',
   },
@@ -31,7 +48,7 @@ const initialCart = [
     dateDebut: '2024-04-15',
     dateFin: '2024-04-18',
     personnes: 2,
-    options: { petitDejeuner: false, menage: true, piscine: true },
+    options: { petitDejeuner: false, menage: true, piscine: true } as Record<string, boolean>,
     notes: '',
   },
   {
@@ -45,6 +62,7 @@ const initialCart = [
     description: 'Berline de prestige avec intérieur cuir, parfaite pour vos événements VIP.',
     dateDebut: '2024-04-20',
     dateFin: '2024-04-21',
+    personnes: 1,
     options: { gps: true, chauffeur: true, siegeBebe: false },
     notes: 'Besoin du chauffeur en tenue formelle.',
   },
@@ -58,12 +76,12 @@ function diffDays(a: string, b: string) {
 // Bottom nav height + safe area
 const BOTTOM_NAV_HEIGHT = 90;
 
-function EditModal({ item, onClose, onSave }: { item: any; onClose: () => void; onSave: (updated: any) => void }) {
+function EditModal({ item, onClose, onSave }: { item: CartItem; onClose: () => void; onSave: (updated: CartItem) => void }) {
   const [form, setForm] = useState({ ...item });
   const days = diffDays(form.dateDebut, form.dateFin);
 
   const toggleOpt = (key: string) =>
-    setForm((f: any) => ({ ...f, options: { ...f.options, [key]: !f.options[key] } }));
+    setForm((f) => ({ ...f, options: { ...f.options, [key]: !f.options[key] } }));
 
   const voitureOptions = [
     { key: 'gps', label: 'GPS intégré' },
@@ -136,7 +154,7 @@ function EditModal({ item, onClose, onSave }: { item: any; onClose: () => void; 
                 <input
                   type="date"
                   value={form.dateDebut}
-                  onChange={e => setForm((f: any) => ({ ...f, dateDebut: e.target.value }))}
+                  onChange={e => setForm((f) => ({ ...f, dateDebut: e.target.value }))}
                   className="w-full px-4 py-3 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-orange-400 outline-none text-sm font-semibold"
                 />
               </div>
@@ -147,7 +165,7 @@ function EditModal({ item, onClose, onSave }: { item: any; onClose: () => void; 
                 <input
                   type="date"
                   value={form.dateFin}
-                  onChange={e => setForm((f: any) => ({ ...f, dateFin: e.target.value }))}
+                  onChange={e => setForm((f) => ({ ...f, dateFin: e.target.value }))}
                   className="w-full px-4 py-3 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-orange-400 outline-none text-sm font-semibold"
                 />
               </div>
@@ -166,12 +184,12 @@ function EditModal({ item, onClose, onSave }: { item: any; onClose: () => void; 
               <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 mb-3">Nombre de personnes</p>
               <div className="flex items-center gap-4">
                 <button
-                  onClick={() => setForm((f: any) => ({ ...f, personnes: Math.max(1, f.personnes - 1) }))}
+                  onClick={() => setForm((f) => ({ ...f, personnes: Math.max(1, f.personnes - 1) }))}
                   className="w-10 h-10 rounded-2xl bg-gray-100 font-bold text-xl flex items-center justify-center"
                 >−</button>
                 <span className="text-2xl font-black" style={{ color: theme.colors.secondary }}>{form.personnes}</span>
                 <button
-                  onClick={() => setForm((f: any) => ({ ...f, personnes: f.personnes + 1 }))}
+                  onClick={() => setForm((f) => ({ ...f, personnes: f.personnes + 1 }))}
                   className="w-10 h-10 rounded-2xl font-bold text-xl flex items-center justify-center text-white"
                   style={{ backgroundColor: accentColor }}
                 >+</button>
@@ -213,7 +231,7 @@ function EditModal({ item, onClose, onSave }: { item: any; onClose: () => void; 
             <textarea
               rows={3}
               value={form.notes}
-              onChange={e => setForm((f: any) => ({ ...f, notes: e.target.value }))}
+              onChange={e => setForm((f) => ({ ...f, notes: e.target.value }))}
               placeholder="Ex : arrivée tardive, allergie, préférences..."
               className="w-full px-5 py-4 rounded-2xl bg-gray-50 border-2 border-transparent focus:border-orange-400 outline-none text-sm font-medium resize-none"
             />
@@ -241,7 +259,7 @@ function EditModal({ item, onClose, onSave }: { item: any; onClose: () => void; 
 export default function Cart() {
   const [view, setView] = useState<'cart' | 'checkout'>('cart');
   const [items, setItems] = useState(initialCart);
-  const [editItem, setEditItem] = useState<any | null>(null);
+  const [editItem, setEditItem] = useState<CartItem | null>(null);
 
   const total = items.reduce((acc, item) => acc + item.price, 0);
   const serviceFee = 2500;

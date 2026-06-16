@@ -1,5 +1,6 @@
 import { Order } from './types';
-import { X, Star, MapPin, Package, Clock, CheckCircle2, XCircle } from 'lucide-react';
+import type { Theme } from '../../theme';
+import { X, Star, MapPin } from 'lucide-react';
 
 interface OrderDetailsPopupProps {
   order: Order;
@@ -9,7 +10,7 @@ interface OrderDetailsPopupProps {
   onSubmitReview: () => void;
   onRatingChange: (rating: number) => void;
   onCommentChange: (comment: string) => void;
-  theme: any;
+  theme: Theme;
 }
 
 export const OrderDetailsPopup = ({
@@ -22,23 +23,6 @@ export const OrderDetailsPopup = ({
   onCommentChange,
   theme
 }: OrderDetailsPopupProps) => {
-  const getStatusConfig = (status: string) => {
-    switch(status) {
-      case 'en_attente':
-        return { label: 'Attente', color: theme.colors.primary, bg: theme.colors.primaryLight, icon: <Clock size={16} /> };
-      case 'approuve':
-        return { label: 'Approuvé', color: theme.colors.success, bg: theme.colors.successLight, icon: <CheckCircle2 size={16} /> };
-      case 'livre':
-        return { label: 'Livré', color: theme.colors.info, bg: theme.colors.infoLight, icon: <Package size={16} /> };
-      case 'annule':
-        return { label: 'Annulé', color: theme.colors.gray[500], bg: theme.colors.gray[100], icon: <XCircle size={16} /> };
-      default:
-        return { label: status, color: theme.colors.gray[500], bg: theme.colors.gray[100], icon: null };
-    }
-  };
-
-  const statusConfig = getStatusConfig(order.status);
-
   return (
     <div style={{
       position: 'fixed',

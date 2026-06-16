@@ -1,4 +1,98 @@
 {
+  "families": [
+    {
+      "key": "logement",
+      "label": "Logement",
+      "emoji": "🏠",
+      "icon": "home",
+      "sectors": [
+        "location_villa",
+        "location_appartement"
+      ]
+    },
+    {
+      "key": "transport_demenagement",
+      "label": "Transport & Déménagement",
+      "emoji": "🚚",
+      "icon": "truck",
+      "sectors": [
+        "demenagement"
+      ]
+    },
+    {
+      "key": "travaux_btp",
+      "label": "Travaux & BTP",
+      "emoji": "🛠️",
+      "icon": "hammer",
+      "sectors": [
+        "location_caterpillar",
+        "materiaux_btp",
+        "plomberie",
+        "electricite",
+        "climatisation"
+      ]
+    },
+    {
+      "key": "agriculture_elevage",
+      "label": "Agriculture & Élevage",
+      "emoji": "🐔",
+      "icon": "wheat",
+      "sectors": [
+        "livraison_poulets"
+      ]
+    },
+    {
+      "key": "evenementiel",
+      "label": "Événementiel",
+      "emoji": "🎉",
+      "icon": "party-popper",
+      "sectors": [
+        "fleuriste",
+        "traiteur",
+        "dj_sono",
+        "photographe"
+      ]
+    },
+    {
+      "key": "vehicules_chauffeurs",
+      "label": "Véhicules & Chauffeurs",
+      "emoji": "🚗",
+      "icon": "car",
+      "sectors": [
+        "chauffeur_prive",
+        "mecanique_auto"
+      ]
+    },
+    {
+      "key": "livraison",
+      "label": "Livraison",
+      "emoji": "📦",
+      "icon": "package",
+      "sectors": [
+        "livraison_express"
+      ]
+    },
+    {
+      "key": "services_domicile",
+      "label": "Services à domicile",
+      "emoji": "🧹",
+      "icon": "house-plus",
+      "sectors": [
+        "aide_menagere",
+        "garde_enfants",
+        "sante_domicile"
+      ]
+    },
+    {
+      "key": "services_pro",
+      "label": "Services professionnels",
+      "emoji": "💼",
+      "icon": "briefcase",
+      "sectors": [
+        "securite_privee"
+      ]
+    }
+  ],
   "sectors": [
     {
       "key": "demenagement",
@@ -253,7 +347,8 @@
           "feature": true,
           "feature_role": "availability"
         }
-      ]
+      ],
+      "family": "transport_demenagement"
     },
     {
       "key": "livraison_poulets",
@@ -425,7 +520,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "agriculture_elevage"
     },
     {
       "key": "fleuriste",
@@ -582,7 +678,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "evenementiel"
     },
     {
       "key": "chauffeur_prive",
@@ -730,7 +827,8 @@
           "feature": true,
           "feature_role": "availability"
         }
-      ]
+      ],
+      "family": "vehicules_chauffeurs"
     },
     {
       "key": "location_villa",
@@ -864,7 +962,8 @@
           "label": "Prix saisonnier (FCFA/jour)",
           "type": "currency"
         }
-      ]
+      ],
+      "family": "logement"
     },
     {
       "key": "location_appartement",
@@ -986,7 +1085,8 @@
           "feature": true,
           "feature_role": "availability"
         }
-      ]
+      ],
+      "family": "logement"
     },
     {
       "key": "location_caterpillar",
@@ -1099,7 +1199,8 @@
           "type": "number",
           "unit": "L/h"
         }
-      ]
+      ],
+      "family": "travaux_btp"
     },
     {
       "key": "materiaux_btp",
@@ -1233,7 +1334,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "travaux_btp"
     },
     {
       "key": "plomberie",
@@ -1365,7 +1467,8 @@
           "feature": true,
           "feature_role": "quality"
         }
-      ]
+      ],
+      "family": "travaux_btp"
     },
     {
       "key": "electricite",
@@ -1488,7 +1591,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "travaux_btp"
     },
     {
       "key": "climatisation",
@@ -1618,7 +1722,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "travaux_btp"
     },
     {
       "key": "mecanique_auto",
@@ -1725,7 +1830,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "vehicules_chauffeurs"
     },
     {
       "key": "livraison_express",
@@ -1875,7 +1981,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "livraison"
     },
     {
       "key": "traiteur",
@@ -1987,7 +2094,8 @@
           "feature": true,
           "feature_role": "availability"
         }
-      ]
+      ],
+      "family": "evenementiel"
     },
     {
       "key": "dj_sono",
@@ -2114,7 +2222,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "evenementiel"
     },
     {
       "key": "photographe",
@@ -2228,7 +2337,8 @@
           "feature": true,
           "feature_role": "availability"
         }
-      ]
+      ],
+      "family": "evenementiel"
     },
     {
       "key": "securite_privee",
@@ -2362,7 +2472,8 @@
           "feature": true,
           "feature_role": "location"
         }
-      ]
+      ],
+      "family": "services_pro"
     },
     {
       "key": "aide_menagere",
@@ -2453,7 +2564,8 @@
           "feature": true,
           "feature_role": "quality"
         }
-      ]
+      ],
+      "family": "services_domicile"
     },
     {
       "key": "garde_enfants",
@@ -2545,7 +2657,8 @@
           "feature": true,
           "feature_role": "availability"
         }
-      ]
+      ],
+      "family": "services_domicile"
     },
     {
       "key": "sante_domicile",
@@ -2679,7 +2792,8 @@
           "feature": true,
           "feature_role": "availability"
         }
-      ]
+      ],
+      "family": "services_domicile"
     }
   ],
   "geo": {

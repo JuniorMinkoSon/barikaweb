@@ -11,6 +11,7 @@ pour alimenter les formulaires dynamiques du frontend React.
 """
 from .fields import Field, FieldType
 from .sectors import SECTORS, get_sector, sector_keys
+from .families import FAMILIES, family_of, family_keys
 from .geo import CITIES, COMMUNES, find_commune, city_keys, commune_keys
 from .ai_features import AI_FEATURES, features_for_model
 
@@ -20,6 +21,9 @@ __all__ = [
     "SECTORS",
     "get_sector",
     "sector_keys",
+    "FAMILIES",
+    "family_of",
+    "family_keys",
     "CITIES",
     "COMMUNES",
     "find_commune",

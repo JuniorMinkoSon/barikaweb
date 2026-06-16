@@ -10,12 +10,13 @@ import json
 import sys
 from pathlib import Path
 
-from . import SECTORS, CITIES, COMMUNES, AI_FEATURES
+from . import SECTORS, CITIES, COMMUNES, AI_FEATURES, FAMILIES, family_of
 
 
 def build_payload() -> dict:
     return {
-        "sectors": [s.to_dict() for s in SECTORS],
+        "families": [f.to_dict() for f in FAMILIES],
+        "sectors": [{**s.to_dict(), "family": family_of(s.key)} for s in SECTORS],
         "geo": {
             "cities": [c.to_dict() for c in CITIES],
             "communes": [c.to_dict() for c in COMMUNES],

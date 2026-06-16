@@ -1,0 +1,3133 @@
+{
+  "sectors": [
+    {
+      "key": "demenagement",
+      "label": "Déménagement",
+      "icon": "truck",
+      "pricing_model": "quote",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "commune_depart",
+          "label": "Commune départ",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "quartier_depart",
+          "label": "Quartier départ",
+          "type": "quartier",
+          "depends_on": "commune_depart",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "commune_arrivee",
+          "label": "Commune arrivée",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "quartier_arrivee",
+          "label": "Quartier arrivée",
+          "type": "quartier",
+          "depends_on": "commune_arrivee",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "type_logement_depart",
+          "label": "Type logement départ",
+          "type": "select",
+          "options": [
+            "studio",
+            "appartement",
+            "villa",
+            "bureau",
+            "magasin"
+          ]
+        },
+        {
+          "key": "type_logement_arrivee",
+          "label": "Type logement arrivée",
+          "type": "select",
+          "options": [
+            "studio",
+            "appartement",
+            "villa",
+            "bureau",
+            "magasin"
+          ]
+        },
+        {
+          "key": "etage_depart",
+          "label": "Étage départ",
+          "type": "integer"
+        },
+        {
+          "key": "etage_arrivee",
+          "label": "Étage arrivée",
+          "type": "integer"
+        },
+        {
+          "key": "ascenseur",
+          "label": "Ascenseur disponible",
+          "type": "boolean"
+        },
+        {
+          "key": "nb_pieces",
+          "label": "Nombre de pièces",
+          "type": "integer",
+          "min": 1,
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "nb_cartons",
+          "label": "Nombre de cartons",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "meubles_lourds",
+          "label": "Meubles lourds",
+          "type": "boolean"
+        },
+        {
+          "key": "electromenager",
+          "label": "Électroménager",
+          "type": "boolean"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "photos",
+          "label": "Photos",
+          "type": "photos"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "taille_camion",
+          "label": "Taille camion",
+          "type": "select",
+          "options": [
+            "3m³",
+            "8m³",
+            "12m³",
+            "20m³",
+            "30m³"
+          ],
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "nb_demenageurs",
+          "label": "Nombre de déménageurs",
+          "type": "integer",
+          "min": 1,
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "prix_km",
+          "label": "Prix / km (FCFA)",
+          "type": "currency"
+        },
+        {
+          "key": "prix_minimum",
+          "label": "Prix minimum (FCFA)",
+          "type": "currency"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        }
+      ]
+    },
+    {
+      "key": "livraison_poulets",
+      "label": "Livraison de poulets",
+      "icon": "drumstick",
+      "pricing_model": "per_unit",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "type_produit",
+          "label": "Type produit",
+          "type": "select",
+          "required": true,
+          "options": [
+            "poulet vivant",
+            "poulet abattu"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "quantite",
+          "label": "Quantité",
+          "type": "integer",
+          "required": true,
+          "min": 1,
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "poids_kg",
+          "label": "Poids (kg)",
+          "type": "number",
+          "unit": "kg",
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "livraison_immediate",
+          "label": "Livraison immédiate",
+          "type": "boolean",
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "commune_depart",
+          "label": "Adresse départ",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "commune_arrivee",
+          "label": "Adresse arrivée",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "capacite_journaliere",
+          "label": "Capacité journalière",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "stock_disponible",
+          "label": "Stock disponible",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "type_vehicule",
+          "label": "Type de véhicule",
+          "type": "select",
+          "options": [
+            "moto",
+            "tricycle",
+            "voiture",
+            "camionnette réfrigérée"
+          ]
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "fleuriste",
+      "label": "Fleuriste événementiel",
+      "icon": "flower",
+      "pricing_model": "quote",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "type_evenement",
+          "label": "Type d'événement",
+          "type": "select",
+          "required": true,
+          "options": [
+            "mariage",
+            "funérailles",
+            "anniversaire",
+            "baptême",
+            "conférence"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "nb_invites",
+          "label": "Nombre d'invités",
+          "type": "integer",
+          "min": 1,
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "budget",
+          "label": "Budget (FCFA)",
+          "type": "currency",
+          "feature": true,
+          "feature_role": "budget"
+        },
+        {
+          "key": "couleurs",
+          "label": "Couleurs souhaitées",
+          "type": "text"
+        },
+        {
+          "key": "commune",
+          "label": "Lieu",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "photos",
+          "label": "Photos",
+          "type": "photos"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "types_fleurs",
+          "label": "Types de fleurs",
+          "type": "multiselect",
+          "options": [
+            "roses",
+            "orchidées",
+            "tournesols",
+            "lys",
+            "tropicales",
+            "artificielles"
+          ]
+        },
+        {
+          "key": "stock",
+          "label": "Stock",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "livraison",
+          "label": "Livraison",
+          "type": "boolean"
+        },
+        {
+          "key": "decoration_sur_site",
+          "label": "Décoration sur site",
+          "type": "boolean"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "chauffeur_prive",
+      "label": "Chauffeur privé",
+      "icon": "car-front",
+      "pricing_model": "per_hour",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "motif",
+          "label": "Motif",
+          "type": "select",
+          "required": true,
+          "options": [
+            "aéroport",
+            "mariage",
+            "tourisme",
+            "mission entreprise",
+            "VIP"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "nb_passagers",
+          "label": "Nombre de passagers",
+          "type": "integer",
+          "min": 1,
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "bagages",
+          "label": "Bagages",
+          "type": "integer"
+        },
+        {
+          "key": "duree_heures",
+          "label": "Durée (heures)",
+          "type": "number",
+          "unit": "h",
+          "feature": true,
+          "feature_role": "duration"
+        },
+        {
+          "key": "commune",
+          "label": "Zone",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "langues",
+          "label": "Langues",
+          "type": "multiselect",
+          "options": [
+            "français",
+            "anglais",
+            "espagnol",
+            "arabe",
+            "dioula",
+            "baoulé"
+          ]
+        },
+        {
+          "key": "type_vehicule",
+          "label": "Type véhicule",
+          "type": "select",
+          "options": [
+            "berline",
+            "SUV",
+            "van",
+            "minibus",
+            "luxe"
+          ],
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "climatisation",
+          "label": "Climatisation",
+          "type": "boolean"
+        },
+        {
+          "key": "wifi",
+          "label": "Wifi",
+          "type": "boolean"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        }
+      ]
+    },
+    {
+      "key": "location_villa",
+      "label": "Location villa",
+      "icon": "home",
+      "pricing_model": "per_day",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "commune",
+          "label": "Commune",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "quartier",
+          "label": "Quartier",
+          "type": "quartier",
+          "depends_on": "commune",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "budget",
+          "label": "Budget (FCFA)",
+          "type": "currency",
+          "feature": true,
+          "feature_role": "budget"
+        },
+        {
+          "key": "piscine",
+          "label": "Piscine",
+          "type": "boolean"
+        },
+        {
+          "key": "wifi",
+          "label": "Wifi",
+          "type": "boolean"
+        },
+        {
+          "key": "generateur",
+          "label": "Générateur",
+          "type": "boolean"
+        },
+        {
+          "key": "nb_personnes",
+          "label": "Nombre de personnes",
+          "type": "integer",
+          "min": 1,
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "duree_jours",
+          "label": "Durée (jours)",
+          "type": "integer",
+          "min": 1,
+          "feature": true,
+          "feature_role": "duration"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "capacite",
+          "label": "Capacité (personnes)",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "equipements",
+          "label": "Équipements",
+          "type": "multiselect",
+          "options": [
+            "piscine",
+            "wifi",
+            "générateur",
+            "climatisation",
+            "parking",
+            "sécurité"
+          ]
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "prix_saisonnier",
+          "label": "Prix saisonnier (FCFA/jour)",
+          "type": "currency"
+        }
+      ]
+    },
+    {
+      "key": "location_appartement",
+      "label": "Location appartement",
+      "icon": "building",
+      "pricing_model": "per_day",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "type",
+          "label": "Type",
+          "type": "select",
+          "required": true,
+          "options": [
+            "studio",
+            "meublé",
+            "non meublé"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "sejour",
+          "label": "Durée séjour",
+          "type": "select",
+          "options": [
+            "court séjour",
+            "long séjour"
+          ],
+          "feature": true,
+          "feature_role": "duration"
+        },
+        {
+          "key": "commune",
+          "label": "Commune",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "quartier",
+          "label": "Quartier",
+          "type": "quartier",
+          "depends_on": "commune",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "budget",
+          "label": "Budget (FCFA)",
+          "type": "currency",
+          "feature": true,
+          "feature_role": "budget"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "charges_incluses",
+          "label": "Charges incluses",
+          "type": "boolean"
+        },
+        {
+          "key": "parking",
+          "label": "Parking",
+          "type": "boolean"
+        },
+        {
+          "key": "securite",
+          "label": "Sécurité",
+          "type": "boolean"
+        },
+        {
+          "key": "internet",
+          "label": "Internet",
+          "type": "boolean"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        }
+      ]
+    },
+    {
+      "key": "location_caterpillar",
+      "label": "Location Caterpillar (engins BTP)",
+      "icon": "construction",
+      "pricing_model": "per_day",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "type_engin",
+          "label": "Type engin",
+          "type": "select",
+          "required": true,
+          "options": [
+            "pelle",
+            "chargeuse",
+            "bulldozer",
+            "niveleuse",
+            "compacteur",
+            "grue"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "chantier",
+          "label": "Type de chantier",
+          "type": "text"
+        },
+        {
+          "key": "region",
+          "label": "Région",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "duree_jours",
+          "label": "Durée (jours)",
+          "type": "integer",
+          "min": 1,
+          "feature": true,
+          "feature_role": "duration"
+        },
+        {
+          "key": "avec_operateur",
+          "label": "Avec opérateur",
+          "type": "boolean"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "modele",
+          "label": "Modèle",
+          "type": "text"
+        },
+        {
+          "key": "annee",
+          "label": "Année",
+          "type": "integer"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "consommation_carburant",
+          "label": "Consommation carburant (L/h)",
+          "type": "number",
+          "unit": "L/h"
+        }
+      ]
+    },
+    {
+      "key": "materiaux_btp",
+      "label": "Livraison matériaux BTP",
+      "icon": "package",
+      "pricing_model": "per_unit",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "materiaux",
+          "label": "Matériaux",
+          "type": "multiselect",
+          "required": true,
+          "options": [
+            "ciment",
+            "sable",
+            "gravier",
+            "fer"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "quantite",
+          "label": "Quantité",
+          "type": "number",
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "commune",
+          "label": "Zone de livraison",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "stock",
+          "label": "Stock",
+          "type": "number",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "camions",
+          "label": "Nombre de camions",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "plomberie",
+      "label": "Plomberie",
+      "icon": "wrench",
+      "pricing_model": "quote",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "intervention",
+          "label": "Intervention",
+          "type": "select",
+          "required": true,
+          "options": [
+            "fuite",
+            "installation",
+            "débouchage"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "commune",
+          "label": "Zone",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "quartier",
+          "label": "Quartier",
+          "type": "quartier",
+          "depends_on": "commune",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "photos",
+          "label": "Photos",
+          "type": "photos"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "temps_intervention",
+          "label": "Temps d'intervention (min)",
+          "type": "integer",
+          "unit": "min",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "certification",
+          "label": "Certification",
+          "type": "text",
+          "feature": true,
+          "feature_role": "quality"
+        }
+      ]
+    },
+    {
+      "key": "electricite",
+      "label": "Électricité",
+      "icon": "zap",
+      "pricing_model": "quote",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "intervention",
+          "label": "Intervention",
+          "type": "select",
+          "required": true,
+          "options": [
+            "panne",
+            "installation",
+            "groupe électrogène"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "commune",
+          "label": "Zone",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "photos",
+          "label": "Photos",
+          "type": "photos"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "habilitations",
+          "label": "Habilitations",
+          "type": "text",
+          "feature": true,
+          "feature_role": "quality"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "climatisation",
+      "label": "Climatisation",
+      "icon": "snowflake",
+      "pricing_model": "quote",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "intervention",
+          "label": "Intervention",
+          "type": "select",
+          "required": true,
+          "options": [
+            "installation",
+            "réparation",
+            "entretien"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "commune",
+          "label": "Zone",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "photos",
+          "label": "Photos",
+          "type": "photos"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "marques",
+          "label": "Marques maîtrisées",
+          "type": "multiselect",
+          "options": [
+            "LG",
+            "Samsung",
+            "Daikin",
+            "Midea",
+            "Hisense",
+            "autres"
+          ]
+        },
+        {
+          "key": "delai",
+          "label": "Délai d'intervention (h)",
+          "type": "integer",
+          "unit": "h",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "mecanique_auto",
+      "label": "Mécanique automobile",
+      "icon": "car",
+      "pricing_model": "quote",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "panne",
+          "label": "Type de panne",
+          "type": "select",
+          "required": true,
+          "options": [
+            "moteur",
+            "freins",
+            "batterie",
+            "pneus",
+            "diagnostic",
+            "autre"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "marque",
+          "label": "Marque",
+          "type": "text"
+        },
+        {
+          "key": "modele",
+          "label": "Modèle",
+          "type": "text"
+        },
+        {
+          "key": "position_gps",
+          "label": "Localisation GPS",
+          "type": "gps",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "photos",
+          "label": "Photos",
+          "type": "photos"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "garage_mobile",
+          "label": "Garage mobile",
+          "type": "boolean"
+        },
+        {
+          "key": "depannage",
+          "label": "Dépannage",
+          "type": "boolean"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "livraison_express",
+      "label": "Livraison express",
+      "icon": "send",
+      "pricing_model": "per_km",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "type_colis",
+          "label": "Type",
+          "type": "select",
+          "required": true,
+          "options": [
+            "document",
+            "colis",
+            "médicament",
+            "alimentaire"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "commune_depart",
+          "label": "Adresse départ",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "commune_arrivee",
+          "label": "Adresse arrivée",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "vehicule",
+          "label": "Véhicule",
+          "type": "select",
+          "required": true,
+          "options": [
+            "moto",
+            "voiture",
+            "camion"
+          ],
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "traiteur",
+      "label": "Traiteur",
+      "icon": "utensils",
+      "pricing_model": "per_unit",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "nb_invites",
+          "label": "Nombre d'invités",
+          "type": "integer",
+          "required": true,
+          "min": 1,
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "type_evenement",
+          "label": "Type événement",
+          "type": "select",
+          "options": [
+            "mariage",
+            "anniversaire",
+            "conférence",
+            "funérailles",
+            "entreprise"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "budget",
+          "label": "Budget (FCFA)",
+          "type": "currency",
+          "feature": true,
+          "feature_role": "budget"
+        },
+        {
+          "key": "commune",
+          "label": "Lieu",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "menus",
+          "label": "Menus",
+          "type": "multiselect",
+          "options": [
+            "ivoirien",
+            "international",
+            "halal",
+            "végétarien",
+            "cocktail"
+          ]
+        },
+        {
+          "key": "capacite",
+          "label": "Capacité (couverts)",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        }
+      ]
+    },
+    {
+      "key": "dj_sono",
+      "label": "DJ / Sonorisation",
+      "icon": "music",
+      "pricing_model": "quote",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "type_evenement",
+          "label": "Type événement",
+          "type": "select",
+          "required": true,
+          "options": [
+            "mariage",
+            "concert",
+            "conférence"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "nb_invites",
+          "label": "Nombre d'invités",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "volume"
+        },
+        {
+          "key": "commune",
+          "label": "Lieu",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "budget",
+          "label": "Budget (FCFA)",
+          "type": "currency",
+          "feature": true,
+          "feature_role": "budget"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "puissance_materiel",
+          "label": "Puissance matériel (W)",
+          "type": "integer",
+          "unit": "W",
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "deplacement",
+          "label": "Déplacement inclus",
+          "type": "boolean"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "photographe",
+      "label": "Photographe / Vidéaste",
+      "icon": "camera",
+      "pricing_model": "quote",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "prestations",
+          "label": "Prestations",
+          "type": "multiselect",
+          "required": true,
+          "options": [
+            "photos",
+            "vidéo",
+            "drone"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "type_evenement",
+          "label": "Événement",
+          "type": "select",
+          "options": [
+            "mariage",
+            "anniversaire",
+            "corporate",
+            "produit",
+            "autre"
+          ]
+        },
+        {
+          "key": "commune",
+          "label": "Lieu",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "budget",
+          "label": "Budget (FCFA)",
+          "type": "currency",
+          "feature": true,
+          "feature_role": "budget"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "portfolio_url",
+          "label": "Portfolio (URL)",
+          "type": "text",
+          "feature": true,
+          "feature_role": "quality"
+        },
+        {
+          "key": "materiel",
+          "label": "Matériel",
+          "type": "multiselect",
+          "options": [
+            "reflex",
+            "hybride",
+            "drone",
+            "stabilisateur",
+            "éclairage studio"
+          ]
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        }
+      ]
+    },
+    {
+      "key": "securite_privee",
+      "label": "Sécurité privée",
+      "icon": "shield",
+      "pricing_model": "per_hour",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "nb_agents",
+          "label": "Nombre d'agents",
+          "type": "integer",
+          "required": true,
+          "min": 1,
+          "feature": true,
+          "feature_role": "capacity"
+        },
+        {
+          "key": "duree_mission_h",
+          "label": "Durée mission (heures)",
+          "type": "number",
+          "unit": "h",
+          "feature": true,
+          "feature_role": "duration"
+        },
+        {
+          "key": "commune",
+          "label": "Lieu",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "agents_certifies",
+          "label": "Agents certifiés",
+          "type": "boolean",
+          "feature": true,
+          "feature_role": "quality"
+        },
+        {
+          "key": "armement",
+          "label": "Armement",
+          "type": "select",
+          "options": [
+            "non armés",
+            "armés"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        }
+      ]
+    },
+    {
+      "key": "aide_menagere",
+      "label": "Aide ménagère",
+      "icon": "sparkles",
+      "pricing_model": "per_hour",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "frequence",
+          "label": "Fréquence",
+          "type": "select",
+          "required": true,
+          "options": [
+            "ponctuel",
+            "hebdomadaire",
+            "mensuel"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "commune",
+          "label": "Zone",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "quartier",
+          "label": "Quartier",
+          "type": "quartier",
+          "depends_on": "commune",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "experience_annees",
+          "label": "Expérience (années)",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "quality"
+        }
+      ]
+    },
+    {
+      "key": "garde_enfants",
+      "label": "Garde d'enfants",
+      "icon": "baby",
+      "pricing_model": "per_hour",
+      "urgency_enabled": false,
+      "client_fields": [
+        {
+          "key": "age_enfant",
+          "label": "Âge de l'enfant",
+          "type": "integer",
+          "required": true,
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "horaires",
+          "label": "Horaires",
+          "type": "text",
+          "feature": true,
+          "feature_role": "availability"
+        },
+        {
+          "key": "commune",
+          "label": "Zone",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "diplomes",
+          "label": "Diplômes",
+          "type": "text",
+          "feature": true,
+          "feature_role": "quality"
+        },
+        {
+          "key": "experience_annees",
+          "label": "Expérience (années)",
+          "type": "integer",
+          "feature": true,
+          "feature_role": "quality"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        }
+      ]
+    },
+    {
+      "key": "sante_domicile",
+      "label": "Santé à domicile",
+      "icon": "heart-pulse",
+      "pricing_model": "quote",
+      "urgency_enabled": true,
+      "client_fields": [
+        {
+          "key": "besoin",
+          "label": "Besoin",
+          "type": "select",
+          "required": true,
+          "options": [
+            "infirmier",
+            "kiné",
+            "médecin"
+          ],
+          "feature": true,
+          "feature_role": "category"
+        },
+        {
+          "key": "commune",
+          "label": "Zone",
+          "type": "commune",
+          "required": true,
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "quartier",
+          "label": "Quartier",
+          "type": "quartier",
+          "depends_on": "commune",
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "urgence",
+          "label": "Urgence",
+          "type": "select",
+          "options": [
+            "normale",
+            "prioritaire",
+            "immédiate"
+          ],
+          "feature": true,
+          "feature_role": "urgency"
+        },
+        {
+          "key": "date_souhaitee",
+          "label": "Date souhaitée",
+          "type": "date",
+          "required": true,
+          "feature": true,
+          "feature_role": "date"
+        },
+        {
+          "key": "notes",
+          "label": "Précisions",
+          "type": "textarea"
+        }
+      ],
+      "provider_fields": [
+        {
+          "key": "specialite",
+          "label": "Spécialité",
+          "type": "text",
+          "feature": true,
+          "feature_role": "quality"
+        },
+        {
+          "key": "zones_couvertes",
+          "label": "Zones couvertes",
+          "type": "multiselect",
+          "options": [
+            "Cocody",
+            "Plateau",
+            "Marcory",
+            "Treichville",
+            "Yopougon",
+            "Adjamé",
+            "Abobo",
+            "Bingerville",
+            "Anyama",
+            "Port-Bouët",
+            "Attécoubé",
+            "Koumassi",
+            "Bouaké",
+            "Yamoussoukro",
+            "San-Pédro",
+            "Daloa",
+            "Korhogo",
+            "Man",
+            "Gagnoa",
+            "Abengourou",
+            "Bondoukou",
+            "Odienné"
+          ],
+          "feature": true,
+          "feature_role": "location"
+        },
+        {
+          "key": "disponibilites",
+          "label": "Disponibilités",
+          "type": "textarea",
+          "feature": true,
+          "feature_role": "availability"
+        }
+      ]
+    }
+  ],
+  "geo": {
+    "cities": [
+      {
+        "key": "abidjan",
+        "name": "Abidjan",
+        "is_metro": true
+      },
+      {
+        "key": "bouake",
+        "name": "Bouaké",
+        "is_metro": false
+      },
+      {
+        "key": "yamoussoukro",
+        "name": "Yamoussoukro",
+        "is_metro": false
+      },
+      {
+        "key": "san-pedro",
+        "name": "San-Pédro",
+        "is_metro": false
+      },
+      {
+        "key": "daloa",
+        "name": "Daloa",
+        "is_metro": false
+      },
+      {
+        "key": "korhogo",
+        "name": "Korhogo",
+        "is_metro": false
+      },
+      {
+        "key": "man",
+        "name": "Man",
+        "is_metro": false
+      },
+      {
+        "key": "gagnoa",
+        "name": "Gagnoa",
+        "is_metro": false
+      },
+      {
+        "key": "abengourou",
+        "name": "Abengourou",
+        "is_metro": false
+      },
+      {
+        "key": "bondoukou",
+        "name": "Bondoukou",
+        "is_metro": false
+      },
+      {
+        "key": "odienne",
+        "name": "Odienné",
+        "is_metro": false
+      }
+    ],
+    "communes": [
+      {
+        "key": "cocody",
+        "name": "Cocody",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "plateau",
+        "name": "Plateau",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "marcory",
+        "name": "Marcory",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "treichville",
+        "name": "Treichville",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "yopougon",
+        "name": "Yopougon",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "adjame",
+        "name": "Adjamé",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "abobo",
+        "name": "Abobo",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "bingerville",
+        "name": "Bingerville",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "anyama",
+        "name": "Anyama",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "port-bouet",
+        "name": "Port-Bouët",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "attecoube",
+        "name": "Attécoubé",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "koumassi",
+        "name": "Koumassi",
+        "city_key": "abidjan",
+        "is_district": true
+      },
+      {
+        "key": "bouake",
+        "name": "Bouaké",
+        "city_key": "bouake",
+        "is_district": false
+      },
+      {
+        "key": "yamoussoukro",
+        "name": "Yamoussoukro",
+        "city_key": "yamoussoukro",
+        "is_district": false
+      },
+      {
+        "key": "san-pedro",
+        "name": "San-Pédro",
+        "city_key": "san-pedro",
+        "is_district": false
+      },
+      {
+        "key": "daloa",
+        "name": "Daloa",
+        "city_key": "daloa",
+        "is_district": false
+      },
+      {
+        "key": "korhogo",
+        "name": "Korhogo",
+        "city_key": "korhogo",
+        "is_district": false
+      },
+      {
+        "key": "man",
+        "name": "Man",
+        "city_key": "man",
+        "is_district": false
+      },
+      {
+        "key": "gagnoa",
+        "name": "Gagnoa",
+        "city_key": "gagnoa",
+        "is_district": false
+      },
+      {
+        "key": "abengourou",
+        "name": "Abengourou",
+        "city_key": "abengourou",
+        "is_district": false
+      },
+      {
+        "key": "bondoukou",
+        "name": "Bondoukou",
+        "city_key": "bondoukou",
+        "is_district": false
+      },
+      {
+        "key": "odienne",
+        "name": "Odienné",
+        "city_key": "odienne",
+        "is_district": false
+      }
+    ]
+  },
+  "ai_features": [
+    {
+      "name": "commune",
+      "dtype": "categorical",
+      "source": "request",
+      "used_by": [
+        "recommendation",
+        "matching",
+        "pricing",
+        "eta",
+        "dispatch"
+      ],
+      "description": "Commune normalisée (référentiel géo)."
+    },
+    {
+      "name": "quartier",
+      "dtype": "categorical",
+      "source": "request",
+      "used_by": [
+        "matching",
+        "eta",
+        "dispatch"
+      ],
+      "description": "Quartier normalisé."
+    },
+    {
+      "name": "secteur",
+      "dtype": "categorical",
+      "source": "request",
+      "used_by": [
+        "recommendation",
+        "matching",
+        "pricing",
+        "conversion"
+      ],
+      "description": "Secteur d'activité."
+    },
+    {
+      "name": "sous_secteur",
+      "dtype": "categorical",
+      "source": "request",
+      "used_by": [
+        "recommendation",
+        "matching",
+        "pricing"
+      ],
+      "description": "Type/variante au sein du secteur."
+    },
+    {
+      "name": "budget",
+      "dtype": "numeric",
+      "source": "request",
+      "used_by": [
+        "matching",
+        "pricing",
+        "conversion",
+        "fraud"
+      ],
+      "description": "Budget annoncé (FCFA)."
+    },
+    {
+      "name": "distance_km",
+      "dtype": "numeric",
+      "source": "derived",
+      "used_by": [
+        "pricing",
+        "eta",
+        "dispatch",
+        "matching"
+      ],
+      "description": "Distance départ→arrivée/fournisseur."
+    },
+    {
+      "name": "urgence",
+      "dtype": "categorical",
+      "source": "request",
+      "used_by": [
+        "pricing",
+        "dispatch",
+        "conversion"
+      ],
+      "description": "normale | prioritaire | immédiate."
+    },
+    {
+      "name": "date",
+      "dtype": "datetime",
+      "source": "request",
+      "used_by": [
+        "pricing",
+        "conversion",
+        "eta"
+      ],
+      "description": "Date souhaitée."
+    },
+    {
+      "name": "saison",
+      "dtype": "categorical",
+      "source": "derived",
+      "used_by": [
+        "pricing",
+        "conversion"
+      ],
+      "description": "Saison dérivée de la date."
+    },
+    {
+      "name": "heure",
+      "dtype": "numeric",
+      "source": "context",
+      "used_by": [
+        "eta",
+        "dispatch",
+        "pricing"
+      ],
+      "description": "Heure de la demande."
+    },
+    {
+      "name": "jour_ferie",
+      "dtype": "boolean",
+      "source": "derived",
+      "used_by": [
+        "pricing",
+        "conversion",
+        "eta"
+      ],
+      "description": "Jour férié / événement local."
+    },
+    {
+      "name": "meteo",
+      "dtype": "categorical",
+      "source": "context",
+      "used_by": [
+        "eta",
+        "dispatch",
+        "conversion"
+      ],
+      "description": "Conditions météo."
+    },
+    {
+      "name": "volume",
+      "dtype": "numeric",
+      "source": "request",
+      "used_by": [
+        "pricing",
+        "matching",
+        "eta"
+      ],
+      "description": "Volume/quantité/taille du projet."
+    },
+    {
+      "name": "historique_client",
+      "dtype": "numeric",
+      "source": "client_profile",
+      "used_by": [
+        "recommendation",
+        "conversion",
+        "fraud"
+      ],
+      "description": "Nb commandes passées du client."
+    },
+    {
+      "name": "clv",
+      "dtype": "numeric",
+      "source": "client_profile",
+      "used_by": [
+        "recommendation",
+        "conversion"
+      ],
+      "description": "Valeur vie client estimée."
+    },
+    {
+      "name": "frequence_commandes",
+      "dtype": "numeric",
+      "source": "client_profile",
+      "used_by": [
+        "recommendation",
+        "conversion",
+        "fraud"
+      ],
+      "description": "Fréquence de commande."
+    },
+    {
+      "name": "historique_fournisseur",
+      "dtype": "numeric",
+      "source": "provider_profile",
+      "used_by": [
+        "matching",
+        "quality_score"
+      ],
+      "description": "Volume traité par le fournisseur."
+    },
+    {
+      "name": "taux_acceptation_fournisseur",
+      "dtype": "numeric",
+      "source": "provider_profile",
+      "used_by": [
+        "matching",
+        "dispatch",
+        "quality_score"
+      ],
+      "description": "Taux d'acceptation des demandes."
+    },
+    {
+      "name": "temps_moyen_reponse",
+      "dtype": "numeric",
+      "source": "provider_profile",
+      "used_by": [
+        "matching",
+        "dispatch",
+        "quality_score",
+        "eta"
+      ],
+      "description": "Temps de réponse moyen."
+    },
+    {
+      "name": "note_fournisseur",
+      "dtype": "numeric",
+      "source": "provider_profile",
+      "used_by": [
+        "matching",
+        "recommendation",
+        "quality_score"
+      ],
+      "description": "Note moyenne (avis)."
+    },
+    {
+      "name": "nombre_avis",
+      "dtype": "numeric",
+      "source": "provider_profile",
+      "used_by": [
+        "matching",
+        "quality_score"
+      ],
+      "description": "Nombre d'avis."
+    },
+    {
+      "name": "disponibilite",
+      "dtype": "boolean",
+      "source": "provider_profile",
+      "used_by": [
+        "matching",
+        "dispatch"
+      ],
+      "description": "Disponibilité au moment de la demande."
+    },
+    {
+      "name": "revenu_estime_transaction",
+      "dtype": "numeric",
+      "source": "derived",
+      "used_by": [
+        "pricing",
+        "dispatch"
+      ],
+      "description": "Revenu estimé de la transaction."
+    }
+  ]
+}

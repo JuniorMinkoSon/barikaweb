@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass, asdict
 from typing import Optional
 
+from .business_model import BusinessModel
 from .fields import Field, select, multiselect
 from .geo import commune_options
 
@@ -28,6 +29,10 @@ class Sector:
     urgency_enabled: bool
     client_fields: list[Field]
     provider_fields: list[Field]
+    business_model: BusinessModel = BusinessModel.QUOTE
+    commission_rate: float = 0.10
+    escrow_required: bool = True
+    v1_priority: bool = False  # True = focus V1
 
     def to_dict(self) -> dict:
         return {
@@ -36,6 +41,10 @@ class Sector:
             "icon": self.icon,
             "pricing_model": self.pricing_model,
             "urgency_enabled": self.urgency_enabled,
+            "business_model": self.business_model.value,
+            "commission_rate": self.commission_rate,
+            "escrow_required": self.escrow_required,
+            "v1_priority": self.v1_priority,
             "client_fields": [f.to_dict() for f in self.client_fields],
             "provider_fields": [f.to_dict() for f in self.provider_fields],
         }
@@ -72,6 +81,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="demenagement", label="Déménagement", icon="truck",
         pricing_model="quote", urgency_enabled=True,
+        business_model=BusinessModel.QUOTE, commission_rate=0.12, escrow_required=True, v1_priority=True,
         client_fields=[
             commune("commune_depart", "Commune départ", required=True),
             quartier("quartier_depart", "Quartier départ", "commune_depart"),
@@ -108,6 +118,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="livraison_poulets", label="Livraison de poulets", icon="drumstick",
         pricing_model="per_unit", urgency_enabled=True,
+        business_model=BusinessModel.CATALOG, commission_rate=0.10, escrow_required=True, v1_priority=False,
         client_fields=[
             select("type_produit", "Type produit",
                    ["poulet vivant", "poulet abattu"], required=True,
@@ -136,6 +147,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="fleuriste", label="Fleuriste événementiel", icon="flower",
         pricing_model="quote", urgency_enabled=False,
+        business_model=BusinessModel.CATALOG, commission_rate=0.10, escrow_required=True, v1_priority=False,
         client_fields=[
             select("type_evenement", "Type d'événement",
                    ["mariage", "funérailles", "anniversaire", "baptême", "conférence"],
@@ -161,6 +173,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="chauffeur_prive", label="Chauffeur privé", icon="car-front",
         pricing_model="per_hour", urgency_enabled=True,
+        business_model=BusinessModel.TIME_BASED, commission_rate=0.15, escrow_required=True, v1_priority=True,
         client_fields=[
             select("motif", "Motif",
                    ["aéroport", "mariage", "tourisme", "mission entreprise", "VIP"],
@@ -188,6 +201,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="location_villa", label="Location villa", icon="home",
         pricing_model="per_day", urgency_enabled=False,
+        business_model=BusinessModel.CATALOG, commission_rate=0.10, escrow_required=True, v1_priority=True,
         client_fields=[
             commune("commune", "Commune", required=True),
             quartier("quartier", "Quartier", "commune"),
@@ -214,6 +228,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="location_appartement", label="Location appartement", icon="building",
         pricing_model="per_day", urgency_enabled=False,
+        business_model=BusinessModel.CATALOG, commission_rate=0.10, escrow_required=True, v1_priority=True,
         client_fields=[
             select("type", "Type",
                    ["studio", "meublé", "non meublé"], required=True,
@@ -236,6 +251,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="location_caterpillar", label="Location Caterpillar (engins BTP)",
         icon="construction", pricing_model="per_day", urgency_enabled=True,
+        business_model=BusinessModel.CATALOG, commission_rate=0.12, escrow_required=True, v1_priority=True,
         client_fields=[
             select("type_engin", "Type engin",
                    ["pelle", "chargeuse", "bulldozer", "niveleuse", "compacteur", "grue"],
@@ -259,6 +275,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="materiaux_btp", label="Livraison matériaux BTP", icon="package",
         pricing_model="per_unit", urgency_enabled=True,
+        business_model=BusinessModel.CATALOG, commission_rate=0.08, escrow_required=True, v1_priority=False,
         client_fields=[
             multiselect("materiaux", "Matériaux",
                         ["ciment", "sable", "gravier", "fer"], required=True,
@@ -280,6 +297,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="plomberie", label="Plomberie", icon="wrench",
         pricing_model="quote", urgency_enabled=True,
+        business_model=BusinessModel.QUOTE, commission_rate=0.12, escrow_required=True, v1_priority=False,
         client_fields=[
             select("intervention", "Intervention",
                    ["fuite", "installation", "débouchage"], required=True,
@@ -301,6 +319,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="electricite", label="Électricité", icon="zap",
         pricing_model="quote", urgency_enabled=True,
+        business_model=BusinessModel.QUOTE, commission_rate=0.12, escrow_required=True, v1_priority=False,
         client_fields=[
             select("intervention", "Intervention",
                    ["panne", "installation", "groupe électrogène"], required=True,
@@ -320,6 +339,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="climatisation", label="Climatisation", icon="snowflake",
         pricing_model="quote", urgency_enabled=True,
+        business_model=BusinessModel.QUOTE, commission_rate=0.12, escrow_required=True, v1_priority=False,
         client_fields=[
             select("intervention", "Intervention",
                    ["installation", "réparation", "entretien"], required=True,
@@ -339,6 +359,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="mecanique_auto", label="Mécanique automobile", icon="car",
         pricing_model="quote", urgency_enabled=True,
+        business_model=BusinessModel.QUOTE, commission_rate=0.12, escrow_required=True, v1_priority=False,
         client_fields=[
             select("panne", "Type de panne",
                    ["moteur", "freins", "batterie", "pneus", "diagnostic", "autre"],
@@ -359,6 +380,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="livraison_express", label="Livraison express", icon="send",
         pricing_model="per_km", urgency_enabled=True,
+        business_model=BusinessModel.CATALOG, commission_rate=0.10, escrow_required=True, v1_priority=False,
         client_fields=[
             select("type_colis", "Type",
                    ["document", "colis", "médicament", "alimentaire"], required=True,
@@ -378,6 +400,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="traiteur", label="Traiteur", icon="utensils",
         pricing_model="per_unit", urgency_enabled=False,
+        business_model=BusinessModel.QUOTE, commission_rate=0.12, escrow_required=True, v1_priority=False,
         client_fields=[
             Field(key="nb_invites", label="Nombre d'invités", type="integer", min=1,
                   required=True, feature=True, feature_role="volume"),
@@ -400,6 +423,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="dj_sono", label="DJ / Sonorisation", icon="music",
         pricing_model="quote", urgency_enabled=False,
+        business_model=BusinessModel.CATALOG, commission_rate=0.10, escrow_required=True, v1_priority=False,
         client_fields=[
             select("type_evenement", "Type événement",
                    ["mariage", "concert", "conférence"], required=True,
@@ -420,6 +444,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="photographe", label="Photographe / Vidéaste", icon="camera",
         pricing_model="quote", urgency_enabled=False,
+        business_model=BusinessModel.CATALOG, commission_rate=0.10, escrow_required=True, v1_priority=False,
         client_fields=[
             multiselect("prestations", "Prestations",
                         ["photos", "vidéo", "drone"], required=True, feature=True,
@@ -441,6 +466,7 @@ SECTORS: list[Sector] = [
     Sector(
         key="securite_privee", label="Sécurité privée", icon="shield",
         pricing_model="per_hour", urgency_enabled=True,
+        business_model=BusinessModel.TIME_BASED, commission_rate=0.15, escrow_required=True, v1_priority=False,
         client_fields=[
             Field(key="nb_agents", label="Nombre d'agents", type="integer", min=1,
                   required=True, feature=True, feature_role="capacity"),
@@ -457,63 +483,9 @@ SECTORS: list[Sector] = [
             F_ZONES,
         ],
     ),
-    # 18 ---------------------------------------------------------------------
-    Sector(
-        key="aide_menagere", label="Aide ménagère", icon="sparkles",
-        pricing_model="per_hour", urgency_enabled=False,
-        client_fields=[
-            select("frequence", "Fréquence",
-                   ["ponctuel", "hebdomadaire", "mensuel"], required=True,
-                   feature=True, feature_role="category"),
-            commune("commune", "Zone", required=True),
-            quartier("quartier", "Quartier", "commune"),
-            F_DATE, F_NOTES,
-        ],
-        provider_fields=[
-            F_AVAIL,
-            Field(key="experience_annees", label="Expérience (années)", type="integer",
-                  feature=True, feature_role="quality"),
-        ],
-    ),
-    # 19 ---------------------------------------------------------------------
-    Sector(
-        key="garde_enfants", label="Garde d'enfants", icon="baby",
-        pricing_model="per_hour", urgency_enabled=False,
-        client_fields=[
-            Field(key="age_enfant", label="Âge de l'enfant", type="integer", min=0,
-                  required=True, feature=True, feature_role="category"),
-            Field(key="horaires", label="Horaires", type="text",
-                  feature=True, feature_role="availability"),
-            commune("commune", "Zone", required=True),
-            F_DATE, F_NOTES,
-        ],
-        provider_fields=[
-            Field(key="diplomes", label="Diplômes", type="text",
-                  feature=True, feature_role="quality"),
-            Field(key="experience_annees", label="Expérience (années)", type="integer",
-                  feature=True, feature_role="quality"),
-            F_AVAIL,
-        ],
-    ),
-    # 20 ---------------------------------------------------------------------
-    Sector(
-        key="sante_domicile", label="Santé à domicile", icon="heart-pulse",
-        pricing_model="quote", urgency_enabled=True,
-        client_fields=[
-            select("besoin", "Besoin",
-                   ["infirmier", "kiné", "médecin"], required=True,
-                   feature=True, feature_role="category"),
-            commune("commune", "Zone", required=True),
-            quartier("quartier", "Quartier", "commune"),
-            F_URGENCE, F_DATE, F_NOTES,
-        ],
-        provider_fields=[
-            Field(key="specialite", label="Spécialité", type="text",
-                  feature=True, feature_role="quality"),
-            F_ZONES,
-            F_AVAIL,
-        ],
-    ),
+    # NOTE V1 : Santé à domicile, Garde d'enfants et Aide ménagère sont
+    # exclus du lancement (réglementation, assurance, responsabilité civile,
+    # vérifications professionnelles). À réintroduire en V2 si pertinent.
 ]
 
 _BY_KEY = {s.key: s for s in SECTORS}

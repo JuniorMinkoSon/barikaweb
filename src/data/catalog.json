@@ -73,17 +73,6 @@
       ]
     },
     {
-      "key": "services_domicile",
-      "label": "Services à domicile",
-      "emoji": "🧹",
-      "icon": "house-plus",
-      "sectors": [
-        "aide_menagere",
-        "garde_enfants",
-        "sante_domicile"
-      ]
-    },
-    {
       "key": "services_pro",
       "label": "Services professionnels",
       "emoji": "💼",
@@ -100,6 +89,10 @@
       "icon": "truck",
       "pricing_model": "quote",
       "urgency_enabled": true,
+      "business_model": "quote",
+      "commission_rate": 0.12,
+      "escrow_required": true,
+      "v1_priority": true,
       "client_fields": [
         {
           "key": "commune_depart",
@@ -356,6 +349,10 @@
       "icon": "drumstick",
       "pricing_model": "per_unit",
       "urgency_enabled": true,
+      "business_model": "catalog",
+      "commission_rate": 0.1,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "type_produit",
@@ -529,6 +526,10 @@
       "icon": "flower",
       "pricing_model": "quote",
       "urgency_enabled": false,
+      "business_model": "catalog",
+      "commission_rate": 0.1,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "type_evenement",
@@ -687,6 +688,10 @@
       "icon": "car-front",
       "pricing_model": "per_hour",
       "urgency_enabled": true,
+      "business_model": "time_based",
+      "commission_rate": 0.15,
+      "escrow_required": true,
+      "v1_priority": true,
       "client_fields": [
         {
           "key": "motif",
@@ -836,6 +841,10 @@
       "icon": "home",
       "pricing_model": "per_day",
       "urgency_enabled": false,
+      "business_model": "catalog",
+      "commission_rate": 0.1,
+      "escrow_required": true,
+      "v1_priority": true,
       "client_fields": [
         {
           "key": "commune",
@@ -971,6 +980,10 @@
       "icon": "building",
       "pricing_model": "per_day",
       "urgency_enabled": false,
+      "business_model": "catalog",
+      "commission_rate": 0.1,
+      "escrow_required": true,
+      "v1_priority": true,
       "client_fields": [
         {
           "key": "type",
@@ -1094,6 +1107,10 @@
       "icon": "construction",
       "pricing_model": "per_day",
       "urgency_enabled": true,
+      "business_model": "catalog",
+      "commission_rate": 0.12,
+      "escrow_required": true,
+      "v1_priority": true,
       "client_fields": [
         {
           "key": "type_engin",
@@ -1208,6 +1225,10 @@
       "icon": "package",
       "pricing_model": "per_unit",
       "urgency_enabled": true,
+      "business_model": "catalog",
+      "commission_rate": 0.08,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "materiaux",
@@ -1343,6 +1364,10 @@
       "icon": "wrench",
       "pricing_model": "quote",
       "urgency_enabled": true,
+      "business_model": "quote",
+      "commission_rate": 0.12,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "intervention",
@@ -1476,6 +1501,10 @@
       "icon": "zap",
       "pricing_model": "quote",
       "urgency_enabled": true,
+      "business_model": "quote",
+      "commission_rate": 0.12,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "intervention",
@@ -1600,6 +1629,10 @@
       "icon": "snowflake",
       "pricing_model": "quote",
       "urgency_enabled": true,
+      "business_model": "quote",
+      "commission_rate": 0.12,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "intervention",
@@ -1731,6 +1764,10 @@
       "icon": "car",
       "pricing_model": "quote",
       "urgency_enabled": true,
+      "business_model": "quote",
+      "commission_rate": 0.12,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "panne",
@@ -1839,6 +1876,10 @@
       "icon": "send",
       "pricing_model": "per_km",
       "urgency_enabled": true,
+      "business_model": "catalog",
+      "commission_rate": 0.1,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "type_colis",
@@ -1990,6 +2031,10 @@
       "icon": "utensils",
       "pricing_model": "per_unit",
       "urgency_enabled": false,
+      "business_model": "quote",
+      "commission_rate": 0.12,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "nb_invites",
@@ -2103,6 +2148,10 @@
       "icon": "music",
       "pricing_model": "quote",
       "urgency_enabled": false,
+      "business_model": "catalog",
+      "commission_rate": 0.1,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "type_evenement",
@@ -2231,6 +2280,10 @@
       "icon": "camera",
       "pricing_model": "quote",
       "urgency_enabled": false,
+      "business_model": "catalog",
+      "commission_rate": 0.1,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "prestations",
@@ -2346,6 +2399,10 @@
       "icon": "shield",
       "pricing_model": "per_hour",
       "urgency_enabled": true,
+      "business_model": "time_based",
+      "commission_rate": 0.15,
+      "escrow_required": true,
+      "v1_priority": false,
       "client_fields": [
         {
           "key": "nb_agents",
@@ -2474,326 +2531,6 @@
         }
       ],
       "family": "services_pro"
-    },
-    {
-      "key": "aide_menagere",
-      "label": "Aide ménagère",
-      "icon": "sparkles",
-      "pricing_model": "per_hour",
-      "urgency_enabled": false,
-      "client_fields": [
-        {
-          "key": "frequence",
-          "label": "Fréquence",
-          "type": "select",
-          "required": true,
-          "options": [
-            "ponctuel",
-            "hebdomadaire",
-            "mensuel"
-          ],
-          "feature": true,
-          "feature_role": "category"
-        },
-        {
-          "key": "commune",
-          "label": "Zone",
-          "type": "commune",
-          "required": true,
-          "options": [
-            "Cocody",
-            "Plateau",
-            "Marcory",
-            "Treichville",
-            "Yopougon",
-            "Adjamé",
-            "Abobo",
-            "Bingerville",
-            "Anyama",
-            "Port-Bouët",
-            "Attécoubé",
-            "Koumassi",
-            "Bouaké",
-            "Yamoussoukro",
-            "San-Pédro",
-            "Daloa",
-            "Korhogo",
-            "Man",
-            "Gagnoa",
-            "Abengourou",
-            "Bondoukou",
-            "Odienné"
-          ],
-          "feature": true,
-          "feature_role": "location"
-        },
-        {
-          "key": "quartier",
-          "label": "Quartier",
-          "type": "quartier",
-          "depends_on": "commune",
-          "feature": true,
-          "feature_role": "location"
-        },
-        {
-          "key": "date_souhaitee",
-          "label": "Date souhaitée",
-          "type": "date",
-          "required": true,
-          "feature": true,
-          "feature_role": "date"
-        },
-        {
-          "key": "notes",
-          "label": "Précisions",
-          "type": "textarea"
-        }
-      ],
-      "provider_fields": [
-        {
-          "key": "disponibilites",
-          "label": "Disponibilités",
-          "type": "textarea",
-          "feature": true,
-          "feature_role": "availability"
-        },
-        {
-          "key": "experience_annees",
-          "label": "Expérience (années)",
-          "type": "integer",
-          "feature": true,
-          "feature_role": "quality"
-        }
-      ],
-      "family": "services_domicile"
-    },
-    {
-      "key": "garde_enfants",
-      "label": "Garde d'enfants",
-      "icon": "baby",
-      "pricing_model": "per_hour",
-      "urgency_enabled": false,
-      "client_fields": [
-        {
-          "key": "age_enfant",
-          "label": "Âge de l'enfant",
-          "type": "integer",
-          "required": true,
-          "feature": true,
-          "feature_role": "category"
-        },
-        {
-          "key": "horaires",
-          "label": "Horaires",
-          "type": "text",
-          "feature": true,
-          "feature_role": "availability"
-        },
-        {
-          "key": "commune",
-          "label": "Zone",
-          "type": "commune",
-          "required": true,
-          "options": [
-            "Cocody",
-            "Plateau",
-            "Marcory",
-            "Treichville",
-            "Yopougon",
-            "Adjamé",
-            "Abobo",
-            "Bingerville",
-            "Anyama",
-            "Port-Bouët",
-            "Attécoubé",
-            "Koumassi",
-            "Bouaké",
-            "Yamoussoukro",
-            "San-Pédro",
-            "Daloa",
-            "Korhogo",
-            "Man",
-            "Gagnoa",
-            "Abengourou",
-            "Bondoukou",
-            "Odienné"
-          ],
-          "feature": true,
-          "feature_role": "location"
-        },
-        {
-          "key": "date_souhaitee",
-          "label": "Date souhaitée",
-          "type": "date",
-          "required": true,
-          "feature": true,
-          "feature_role": "date"
-        },
-        {
-          "key": "notes",
-          "label": "Précisions",
-          "type": "textarea"
-        }
-      ],
-      "provider_fields": [
-        {
-          "key": "diplomes",
-          "label": "Diplômes",
-          "type": "text",
-          "feature": true,
-          "feature_role": "quality"
-        },
-        {
-          "key": "experience_annees",
-          "label": "Expérience (années)",
-          "type": "integer",
-          "feature": true,
-          "feature_role": "quality"
-        },
-        {
-          "key": "disponibilites",
-          "label": "Disponibilités",
-          "type": "textarea",
-          "feature": true,
-          "feature_role": "availability"
-        }
-      ],
-      "family": "services_domicile"
-    },
-    {
-      "key": "sante_domicile",
-      "label": "Santé à domicile",
-      "icon": "heart-pulse",
-      "pricing_model": "quote",
-      "urgency_enabled": true,
-      "client_fields": [
-        {
-          "key": "besoin",
-          "label": "Besoin",
-          "type": "select",
-          "required": true,
-          "options": [
-            "infirmier",
-            "kiné",
-            "médecin"
-          ],
-          "feature": true,
-          "feature_role": "category"
-        },
-        {
-          "key": "commune",
-          "label": "Zone",
-          "type": "commune",
-          "required": true,
-          "options": [
-            "Cocody",
-            "Plateau",
-            "Marcory",
-            "Treichville",
-            "Yopougon",
-            "Adjamé",
-            "Abobo",
-            "Bingerville",
-            "Anyama",
-            "Port-Bouët",
-            "Attécoubé",
-            "Koumassi",
-            "Bouaké",
-            "Yamoussoukro",
-            "San-Pédro",
-            "Daloa",
-            "Korhogo",
-            "Man",
-            "Gagnoa",
-            "Abengourou",
-            "Bondoukou",
-            "Odienné"
-          ],
-          "feature": true,
-          "feature_role": "location"
-        },
-        {
-          "key": "quartier",
-          "label": "Quartier",
-          "type": "quartier",
-          "depends_on": "commune",
-          "feature": true,
-          "feature_role": "location"
-        },
-        {
-          "key": "urgence",
-          "label": "Urgence",
-          "type": "select",
-          "options": [
-            "normale",
-            "prioritaire",
-            "immédiate"
-          ],
-          "feature": true,
-          "feature_role": "urgency"
-        },
-        {
-          "key": "date_souhaitee",
-          "label": "Date souhaitée",
-          "type": "date",
-          "required": true,
-          "feature": true,
-          "feature_role": "date"
-        },
-        {
-          "key": "notes",
-          "label": "Précisions",
-          "type": "textarea"
-        }
-      ],
-      "provider_fields": [
-        {
-          "key": "specialite",
-          "label": "Spécialité",
-          "type": "text",
-          "feature": true,
-          "feature_role": "quality"
-        },
-        {
-          "key": "zones_couvertes",
-          "label": "Zones couvertes",
-          "type": "multiselect",
-          "options": [
-            "Cocody",
-            "Plateau",
-            "Marcory",
-            "Treichville",
-            "Yopougon",
-            "Adjamé",
-            "Abobo",
-            "Bingerville",
-            "Anyama",
-            "Port-Bouët",
-            "Attécoubé",
-            "Koumassi",
-            "Bouaké",
-            "Yamoussoukro",
-            "San-Pédro",
-            "Daloa",
-            "Korhogo",
-            "Man",
-            "Gagnoa",
-            "Abengourou",
-            "Bondoukou",
-            "Odienné"
-          ],
-          "feature": true,
-          "feature_role": "location"
-        },
-        {
-          "key": "disponibilites",
-          "label": "Disponibilités",
-          "type": "textarea",
-          "feature": true,
-          "feature_role": "availability"
-        }
-      ],
-      "family": "services_domicile"
     }
   ],
   "geo": {

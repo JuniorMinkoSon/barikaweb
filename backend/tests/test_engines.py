@@ -8,8 +8,8 @@ from backend.engines.matching import Provider, rank_providers, comparator
 
 
 def test_catalog_integrity():
-    assert len(SECTORS) == 20
-    assert len(FAMILIES) == 9
+    assert len(SECTORS) == 17  # V1: 3 exclus (santé, garde, ménage)
+    assert len(FAMILIES) == 8  # services_domicile supprimé
     covered = [s for f in FAMILIES for s in f.sectors]
     assert sorted(covered) == sorted(sector_keys())
     assert len(covered) == len(set(covered))  # un secteur = une famille

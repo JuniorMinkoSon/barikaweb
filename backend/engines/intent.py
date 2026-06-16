@@ -35,9 +35,6 @@ _KEYWORDS: dict[str, list[str]] = {
     "dj_sono": ["dj", "sono", "sonorisation", "musique", "son", "animation"],
     "photographe": ["photographe", "photo", "video", "videaste", "drone", "shooting"],
     "securite_privee": ["securite", "agent de securite", "garde du corps", "vigile", "gardiennage"],
-    "aide_menagere": ["menagere", "menage", "femme de menage", "nettoyage", "aide menagere"],
-    "garde_enfants": ["nounou", "garde enfant", "baby sitter", "babysitter", "garderie"],
-    "sante_domicile": ["infirmier", "infirmiere", "kine", "kinesitherapeute", "medecin", "soins a domicile"],
 }
 
 _URGENCE_WORDS = ["urgent", "urgence", "immediat", "tout de suite", "maintenant", "asap"]

@@ -37,8 +37,6 @@ FAMILIES: list[Family] = [
            ("chauffeur_prive", "mecanique_auto")),
     Family("livraison", "Livraison", "📦", "package",
            ("livraison_express",)),
-    Family("services_domicile", "Services à domicile", "🧹", "house-plus",
-           ("aide_menagere", "garde_enfants", "sante_domicile")),
     Family("services_pro", "Services professionnels", "💼", "briefcase",
            ("securite_privee",)),
 ]

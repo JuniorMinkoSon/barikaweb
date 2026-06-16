@@ -12,7 +12,7 @@ def test_health():
 
 
 def test_families_and_sectors():
-    assert len(client.get("/api/catalog/families").json()) == 9
+    assert len(client.get("/api/catalog/families").json()) == 8  # V1: services_domicile exclu
     logement = client.get("/api/catalog/sectors", params={"family": "logement"}).json()
     assert {s["key"] for s in logement} == {"location_villa", "location_appartement"}
 

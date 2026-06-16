@@ -16,15 +16,14 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field as dc_field
 from typing import Optional
 
-# Poids par défaut du score (somme = 1.0)
+# Score V1 — poids définis par le métier (somme = 1.0).
+# Distance et prix sont des dimensions de filtre/comparaison, pas du score intrinsèque.
 DEFAULT_WEIGHTS: dict[str, float] = {
-    "distance": 0.20,
-    "price": 0.20,
-    "note": 0.20,
-    "response": 0.10,
-    "acceptance": 0.10,
-    "history": 0.10,
-    "availability": 0.10,
+    "availability": 0.30,
+    "rating": 0.25,
+    "acceptance": 0.20,
+    "experience": 0.15,
+    "response_speed": 0.10,
 }
 
 
@@ -69,27 +68,29 @@ class Ranker(ABC):
 
 
 class HeuristicRanker(Ranker):
-    """Score pondéré transparent. Sert aussi de baseline / fallback ML."""
+    """Score V1 pondéré transparent.
+
+    score = 0.30*availability + 0.25*rating + 0.20*acceptance + 0.15*experience + 0.10*response_speed
+
+    Distance et prix restent disponibles en breakdown pour le comparateur
+    mais ne font PAS partie du score intrinsèque.
+    """
 
     def rank(self, providers: list[Provider], weights: Optional[dict] = None) -> list[ProviderScore]:
         if not providers:
             return []
         w = {**DEFAULT_WEIGHTS, **(weights or {})}
-        prices = [p.price for p in providers if p.price > 0]
-        plo, phi = (min(prices), max(prices)) if prices else (0.0, 0.0)
 
         scored: list[ProviderScore] = []
         for p in providers:
             sub = {
-                "distance": _clamp01(1.0 / (1.0 + p.distance_km / 5.0)),
-                "price": _minmax_inverse(p.price, plo, phi) if p.price > 0 else 0.5,
-                "note": _clamp01(p.note / 5.0),
-                "response": _clamp01(1.0 / (1.0 + p.temps_moyen_reponse_min / 30.0)),
-                "acceptance": _clamp01(p.taux_acceptation),
-                "history": _clamp01(math.log1p(max(p.historique, 0)) / math.log1p(100)),
                 "availability": 1.0 if p.disponibilite else 0.0,
+                "rating": _clamp01(p.note / 5.0),
+                "acceptance": _clamp01(p.taux_acceptation),
+                "experience": _clamp01(math.log1p(max(p.historique, 0)) / math.log1p(100)),
+                "response_speed": _clamp01(1.0 / (1.0 + p.temps_moyen_reponse_min / 30.0)),
             }
-            score = sum(w[k] * sub[k] for k in w)
+            score = sum(w.get(k, 0) * sub[k] for k in sub)
             scored.append(ProviderScore(
                 provider_id=p.provider_id,
                 score=round(score, 4),

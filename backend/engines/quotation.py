@@ -129,8 +129,6 @@ _DAY_PRICE = {
 _HOUR_PRICE = {
     "chauffeur_prive": 8000,
     "securite_privee": 3000,
-    "aide_menagere": 2500,
-    "garde_enfants": 2000,
 }
 
 

@@ -30,23 +30,85 @@ class User(Base):
 
 
 class Provider(Base):
-    """Prestataire inscrit sur la plateforme."""
+    """Prestataire (entreprise/personne). Peut offrir plusieurs services."""
     __tablename__ = "providers"
 
     id: Mapped[str] = mapped_column(String(32), primary_key=True, default=_uuid)
     user_id: Mapped[str] = mapped_column(String(32), index=True, nullable=False)
-    sector: Mapped[str] = mapped_column(String(60), index=True, nullable=False)
     name: Mapped[str] = mapped_column(String(200), nullable=False)
     commune: Mapped[str] = mapped_column(String(60), nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Géo : stockée, distance calculée à la demande (jamais stockée).
+    latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    longitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    # Scoring
+    average_rating: Mapped[float] = mapped_column(Float, default=0.0)
+    review_count: Mapped[int] = mapped_column(Integer, default=0)
+    response_time_min: Mapped[float] = mapped_column(Float, default=60.0)
+    acceptance_rate: Mapped[float] = mapped_column(Float, default=0.5)
+    completed_jobs: Mapped[int] = mapped_column(Integer, default=0)
+    cancellation_rate: Mapped[float] = mapped_column(Float, default=0.0)
+    availability_score: Mapped[float] = mapped_column(Float, default=1.0)
+    verification_level: Mapped[int] = mapped_column(Integer, default=0)  # 0=non vérifié, 1=email, 2=CNI, 3=pro
+    premium_provider: Mapped[bool] = mapped_column(Boolean, default=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+
+
+class ProviderService(Base):
+    """Un service qu'un prestataire offre dans un secteur donné.
+
+    Un même Provider peut avoir plusieurs ProviderService
+    (ex: Villa→catalog, Chauffeur→time_based, Déménagement→quote).
+    """
+    __tablename__ = "provider_services"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=_uuid)
+    provider_id: Mapped[str] = mapped_column(String(32), index=True, nullable=False)
+    sector: Mapped[str] = mapped_column(String(60), index=True, nullable=False)
+    business_model: Mapped[str] = mapped_column(String(20), nullable=False)  # catalog|quote|time_based
+    # Tarifs selon le modèle (per_day, per_hour, base quote…)
+    base_price: Mapped[float | None] = mapped_column(Float, nullable=True)
     price_min: Mapped[float | None] = mapped_column(Float, nullable=True)
     price_max: Mapped[float | None] = mapped_column(Float, nullable=True)
-    note: Mapped[float] = mapped_column(Float, default=0.0)
-    nombre_avis: Mapped[int] = mapped_column(Integer, default=0)
-    temps_moyen_reponse_min: Mapped[float] = mapped_column(Float, default=60.0)
-    taux_acceptation: Mapped[float] = mapped_column(Float, default=0.5)
-    historique: Mapped[int] = mapped_column(Integer, default=0)
-    disponible: Mapped[bool] = mapped_column(Boolean, default=True)
+    active: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+
+
+class Listing(Base):
+    """Une offre concrète d'un service CATALOG (ex: 'Villa Assinie A').
+
+    Une agence (ProviderService catalog) peut avoir plusieurs Listings.
+    Le matching CATALOG se fait souvent au niveau Listing, pas Provider.
+    """
+    __tablename__ = "listings"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=_uuid)
+    provider_service_id: Mapped[str] = mapped_column(String(32), index=True, nullable=False)
+    title: Mapped[str] = mapped_column(String(300), nullable=False)
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    commune: Mapped[str] = mapped_column(String(60), index=True, nullable=False)
+    latitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    longitude: Mapped[float | None] = mapped_column(Float, nullable=True)
+    price: Mapped[float] = mapped_column(Float, nullable=False)
+    price_unit: Mapped[str] = mapped_column(String(20), default="jour")  # jour|nuit|heure|unité
+    attributes: Mapped[str | None] = mapped_column(Text, nullable=True)  # JSON (piscine, wifi…)
+    photos: Mapped[str | None] = mapped_column(Text, nullable=True)  # JSON list d'URLs
+    available: Mapped[bool] = mapped_column(Boolean, default=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
+
+
+class MatchingResult(Base):
+    """Trace d'un résultat de matching — dataset futur pour XGBoost."""
+    __tablename__ = "matching_results"
+
+    id: Mapped[str] = mapped_column(String(32), primary_key=True, default=_uuid)
+    request_id: Mapped[str | None] = mapped_column(String(32), index=True, nullable=True)
+    sector: Mapped[str] = mapped_column(String(60), nullable=False)
+    provider_id: Mapped[str] = mapped_column(String(32), index=True, nullable=False)
+    listing_id: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    score: Mapped[float] = mapped_column(Float, nullable=False)
+    reason: Mapped[str | None] = mapped_column(Text, nullable=True)  # JSON sous-scores
+    rank: Mapped[int] = mapped_column(Integer, default=0)
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
 

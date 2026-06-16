@@ -29,5 +29,5 @@ export interface StatusConfig {
   label: string;
   color: string;
   bg: string;
-  icon: JSX.Element;
+  icon: JSX.Element | null;
 }

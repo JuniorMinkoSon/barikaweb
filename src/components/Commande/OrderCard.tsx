@@ -1,4 +1,5 @@
 import { Order, StatusConfig } from './types';
+import type { Theme } from '../../theme';
 import { MapPin, Car, Home, Trash2, Star } from 'lucide-react';
 
 interface OrderCardProps {
@@ -6,7 +7,7 @@ interface OrderCardProps {
   statusConfig: StatusConfig;
   onCancel: (id: string) => void;
   onDetails: (order: Order) => void;
-  theme: any;
+  theme: Theme;
 }
 
 export const OrderCard = ({ order, statusConfig, onCancel, onDetails, theme }: OrderCardProps) => {

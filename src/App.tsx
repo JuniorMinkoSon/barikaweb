@@ -1,85 +1,31 @@
 import { useState } from 'react';
 import Navbar from './components/Navbar';
-import Stories from './components/Stories';
-import Categories from './components/Categories';
-import Products from './components/Providers';
 import BottomNav from './components/BottomNav';
 import Hero from './components/Hero';
 import Favorites from './pages/favoris';
 import Orders from './pages/commandes';
 import Cart from './pages/panier';
 import Profile from './pages/profil';
-import ProductDetailPage from './pages/detail';
-import SellerProfilePage from './pages/Sellerprofilepage';
 import { theme } from './theme';
-import type { Product } from './productTypes';
-import type { Seller } from './pages/Sellerprofilepage';
 import FloatingChat from './components/FloatingChat';
+import SearchExperience from './features/search/SearchExperience';
+import { AuthProvider, useAuth } from './lib/auth-context';
+import AuthPage from './features/auth/AuthPage';
 
-// ── Vendeur mock — remplace par ta vraie source de données ───────────────────
-const MOCK_SELLER: Seller = {
-  id: 'seller-1',
-  name: 'Aminata Diallo',
-  avatar: 'https://i.pravatar.cc/150?img=47',
-  tagline: 'Spécialiste mode & lifestyle africain · Abidjan',
-  verified: true,
-  rating: 4.8,
-  reviews: 312,
-  totalSales: 1840,
-  responseTime: '< 1h',
-  bio: "Passionnée de mode et de créations artisanales, je propose des produits soigneusement sélectionnés pour allier authenticité et qualité. Basée à Abidjan, je livre partout en Côte d'Ivoire.",
-  badges: ['Top vendeur 2024', 'Livraison express', 'Satisfaction garantie'],
-  location: '',
-  memberSince: '',
-  responseRate: 0,
-  categories: []
-};
-
-// ── Utilitaire : retrouve le vendeur lié à un produit ────────────────────────
-// Remplace cette logique par ton vrai store/API quand il sera prêt
-function getSellerForProduct(_product: Product): Seller {
-  return MOCK_SELLER;
-}
-
-function App() {
+function AppContent() {
+  const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('home');
-  const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
-  const [currentSeller, setCurrentSeller] = useState<Seller | null>(null);
 
-  const openDetail = (product: Product) => {
-    setCurrentProduct(product);
-    setCurrentSeller(null);
-  };
-
-  const closeDetail = () => setCurrentProduct(null);
-
-  const openSellerProfile = (seller: Seller) => setCurrentSeller(seller);
-
-  // ── Page profil vendeur complète ─────────────────────────────────────────
-  if (currentSeller) {
+  if (loading) {
     return (
-      <SellerProfilePage
-        seller={currentSeller}
-        onBack={() => setCurrentSeller(null)} products={[]} onProductClick={function (product: Product): void {
-          throw new Error('Function not implemented.');
-        } }      />
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: theme.colors.white }}>
+        <p className="text-sm text-slate-400 font-['DM_Sans']">Chargement…</p>
+      </div>
     );
   }
 
-  // ── Page détail produit ───────────────────────────────────────────────────
-  if (currentProduct) {
-    const seller = getSellerForProduct(currentProduct);
-    return (
-      <ProductDetailPage
-        product={currentProduct}
-        seller={seller}
-        onBack={closeDetail}
-        onSellerClick={() => openSellerProfile(seller)}
-      />
-    );
-  }
+  if (!user) return <AuthPage />;
 
-  // ── App principale ────────────────────────────────────────────────────────
   return (
     <div
       style={{
@@ -103,9 +49,7 @@ function App() {
         {activeTab === 'home' ? (
           <>
             <Hero />
-            <Stories />
-            <Categories />
-            <Products onOpenDetail={openDetail} />
+            <SearchExperience />
           </>
         ) : activeTab === 'favorites' ? (
           <Favorites />
@@ -125,6 +69,14 @@ function App() {
       <BottomNav active={activeTab} setActive={setActiveTab} />
       <FloatingChat />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

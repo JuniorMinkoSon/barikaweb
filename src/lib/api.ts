@@ -134,6 +134,22 @@ export interface MatchResult {
   premium: ProviderScore | null;
 }
 
+export interface TokenPair {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+}
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  name: string;
+  phone: string | null;
+  commune: string | null;
+  role: string;
+  verified: boolean;
+}
+
 // ---- Endpoints --------------------------------------------------------------
 export const api = {
   health: () => request<{ status: string }>('/api/health'),
@@ -167,4 +183,31 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ providers, weights: weights ?? null }),
     }),
+
+  // Auth
+  register: (data: { email: string; password: string; name: string; phone?: string; commune?: string; role?: string }) =>
+    request<TokenPair>('/api/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  login: (email: string, password: string) =>
+    request<TokenPair>('/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+    }),
+
+  refresh: (refreshToken: string) =>
+    request<TokenPair>('/api/auth/refresh', {
+      method: 'POST',
+      body: JSON.stringify({ refresh_token: refreshToken }),
+    }),
+
+  me: () => {
+    const token = localStorage.getItem('access_token');
+    if (!token) return Promise.reject(new ApiError(401, 'Non connecté'));
+    return request<UserProfile>('/api/auth/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  },
 };

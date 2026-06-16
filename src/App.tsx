@@ -9,9 +9,22 @@ import Profile from './pages/profil';
 import { theme } from './theme';
 import FloatingChat from './components/FloatingChat';
 import SearchExperience from './features/search/SearchExperience';
+import { AuthProvider, useAuth } from './lib/auth-context';
+import AuthPage from './features/auth/AuthPage';
 
-function App() {
+function AppContent() {
+  const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState('home');
+
+  if (loading) {
+    return (
+      <div className="flex h-screen items-center justify-center" style={{ backgroundColor: theme.colors.white }}>
+        <p className="text-sm text-slate-400 font-['DM_Sans']">Chargement…</p>
+      </div>
+    );
+  }
+
+  if (!user) return <AuthPage />;
 
   return (
     <div
@@ -56,6 +69,14 @@ function App() {
       <BottomNav active={activeTab} setActive={setActiveTab} />
       <FloatingChat />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 

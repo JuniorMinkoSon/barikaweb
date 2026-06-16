@@ -13,6 +13,8 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 
 from .routers import catalog, engines
+from backend.auth.router import router as auth_router
+from backend.db.session import Base, engine
 
 app = FastAPI(title="LocaConnecté API", version="0.1.0")
 
@@ -45,8 +47,15 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
 
 app.add_middleware(SecurityHeadersMiddleware)
 
+app.include_router(auth_router)
 app.include_router(catalog.router)
 app.include_router(engines.router)
+
+
+@app.on_event("startup")
+async def _create_tables():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
 @app.get("/api/health", tags=["health"])

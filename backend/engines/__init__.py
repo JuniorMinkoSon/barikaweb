@@ -13,6 +13,7 @@ from .forms import get_form, validate_submission, FormError
 from .intent import detect_intent, IntentResult
 from .quotation import estimate_quote, Quote
 from .matching import rank_providers, ProviderScore, Ranker, HeuristicRanker
+from .availability import month_availability, capacity_type, default_capacity
 
 __all__ = [
     "get_form",
@@ -22,6 +23,9 @@ __all__ = [
     "IntentResult",
     "estimate_quote",
     "Quote",
+    "month_availability",
+    "capacity_type",
+    "default_capacity",
     "rank_providers",
     "ProviderScore",
     "Ranker",

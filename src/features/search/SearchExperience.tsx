@@ -1,11 +1,12 @@
 // Expérience de recherche unique : « Que recherchez-vous ? »
 // query -> détection d'intention -> formulaire dynamique -> devis instantané.
 // Tout est connecté au backend (zéro mock).
-import { useEffect, useState } from 'react';
-import { Search, ArrowLeft, Sparkles, Loader2 } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { Search, ArrowLeft, Sparkles, Loader2, ShieldCheck } from 'lucide-react';
 import {
   api,
   ApiError,
+  type Financials,
   type FormSchema,
   type IntentResult,
   type Quote,
@@ -13,8 +14,58 @@ import {
 } from '../../lib/api';
 import { theme } from '../../theme';
 import DynamicForm, { type FormValues } from './DynamicForm';
+import ReservationCalendar, { type DateRange } from './ReservationCalendar';
 
 type Step = 'search' | 'form' | 'quote';
+
+const DATE_START_KEYS = ['date_arrivee', 'date_souhaitee', 'date_livraison'];
+const DATE_END_KEYS = ['date_depart', 'date_fin'];
+
+function fmt(n: number): string {
+  return Math.round(n).toLocaleString('fr-FR');
+}
+
+function nights(start: string, end: string): number {
+  return Math.max(0, Math.round((new Date(end).getTime() - new Date(start).getTime()) / 86_400_000));
+}
+
+function FinancialSummary({ f }: { f: Financials }) {
+  const Row = ({ label, value, strong }: { label: string; value: string; strong?: boolean }) => (
+    <div className={`flex items-center justify-between ${strong ? 'text-sm font-bold text-slate-900' : 'text-xs text-slate-600'}`}>
+      <span>{label}</span>
+      <span>{value}</span>
+    </div>
+  );
+  return (
+    <div className="rounded-2xl border bg-white p-4" style={{ borderColor: theme.colors.gray[200] }}>
+      <p className="mb-3 text-sm font-bold text-slate-900">Récapitulatif réservation</p>
+      <div className="space-y-1.5">
+        {f.unit_price != null && f.units != null && (
+          <Row
+            label={`Prix unitaire × ${f.units % 1 === 0 ? f.units : f.units.toFixed(1)} ${f.unit_label ?? ''}`}
+            value={`${fmt(f.unit_price)} ${f.currency}`}
+          />
+        )}
+        <Row label="Sous-total prestation" value={`${fmt(f.subtotal)} ${f.currency}`} />
+        <Row label={`Commission (${Math.round(f.commission_rate * 100)} %)`} value={`${fmt(f.commission)} ${f.currency}`} />
+        <Row label={`TVA (${Math.round(f.tva_rate * 100)} %)`} value={`${fmt(f.tva)} ${f.currency}`} />
+        <div className="my-2 border-t" style={{ borderColor: theme.colors.gray[200] }} />
+        <Row label="Total à payer" value={`${fmt(f.total)} ${f.currency}`} strong />
+      </div>
+      {f.escrow_required && (
+        <div
+          className="mt-3 flex items-center justify-between rounded-xl px-3 py-2 text-xs font-semibold"
+          style={{ background: theme.colors.successLight, color: theme.colors.success }}
+        >
+          <span className="flex items-center gap-1">
+            <ShieldCheck size={14} /> Escrow (séquestre)
+          </span>
+          <span>{fmt(f.escrow_amount)} {f.currency} · Bloqué</span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function prefillFromEntities(entities: Record<string, unknown>): FormValues {
   const v: FormValues = {};
@@ -36,10 +87,48 @@ export default function SearchExperience() {
   const [values, setValues] = useState<FormValues>({});
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [quote, setQuote] = useState<Quote | null>(null);
+  const [preview, setPreview] = useState<Quote | null>(null);
 
   useEffect(() => {
     api.sectors().then(setSectors).catch(() => setSectors([]));
   }, []);
+
+  // Clés de dates / durée présentes dans le schéma courant.
+  const dateKeys = useMemo(() => {
+    const keys = new Set((schema?.fields ?? []).map((f) => f.key));
+    return {
+      startKey: DATE_START_KEYS.find((k) => keys.has(k)) ?? null,
+      endKey: DATE_END_KEYS.find((k) => keys.has(k)) ?? null,
+      durationKey: keys.has('duree_jours') ? 'duree_jours' : null,
+      hasDate: DATE_START_KEYS.some((k) => keys.has(k)),
+    };
+  }, [schema]);
+
+  const supportsRange = schema?.pricing_model === 'per_day' && !!dateKeys.endKey;
+
+  const calendarRange: DateRange = {
+    start: (dateKeys.startKey && (values[dateKeys.startKey] as string)) || undefined,
+    end: (dateKeys.endKey && (values[dateKeys.endKey] as string)) || undefined,
+  };
+
+  function onCalendarChange(r: DateRange) {
+    setValues((prev) => {
+      const nv: FormValues = { ...prev };
+      if (dateKeys.startKey) nv[dateKeys.startKey] = r.start ?? '';
+      if (dateKeys.endKey) nv[dateKeys.endKey] = r.end ?? '';
+      if (dateKeys.durationKey && r.start && r.end) nv[dateKeys.durationKey] = nights(r.start, r.end);
+      return nv;
+    });
+  }
+
+  // Devis live (sans validation) pour alimenter le récapitulatif financier.
+  useEffect(() => {
+    if (step !== 'form' || !schema) return;
+    const t = setTimeout(() => {
+      api.quotation(schema.sector, values, false).then(setPreview).catch(() => undefined);
+    }, 450);
+    return () => clearTimeout(t);
+  }, [values, step, schema]);
 
   async function loadForm(sector: string, entities: Record<string, unknown> = {}) {
     setLoading(true);
@@ -50,6 +139,7 @@ export default function SearchExperience() {
       setValues(prefillFromEntities(entities));
       setFieldErrors({});
       setQuote(null);
+      setPreview(null);
       setStep('form');
     } catch (e) {
       setError(e instanceof ApiError ? e.message : 'Erreur de chargement du formulaire');
@@ -157,7 +247,7 @@ export default function SearchExperience() {
         </div>
       )}
 
-      {/* Formulaire dynamique */}
+      {/* Formulaire dynamique + calendrier + récapitulatif */}
       {step === 'form' && schema && (
         <div>
           <button
@@ -171,19 +261,50 @@ export default function SearchExperience() {
             Renseignez votre demande pour obtenir une estimation immédiate.
           </p>
 
-          <DynamicForm schema={schema} values={values} errors={fieldErrors} onChange={(k, v) =>
-            setValues((prev) => ({ ...prev, [k]: v }))
-          } />
+          <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
+            <div>
+              <DynamicForm schema={schema} values={values} errors={fieldErrors} onChange={(k, v) =>
+                setValues((prev) => ({ ...prev, [k]: v }))
+              } />
 
-          <button
-            onClick={onSubmitForm}
-            disabled={loading}
-            className="mt-2 flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-sm font-bold text-white"
-            style={{ backgroundColor: theme.colors.primary }}
-          >
-            {loading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
-            Obtenir mon devis
-          </button>
+              <button
+                onClick={onSubmitForm}
+                disabled={loading}
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-sm font-bold text-white"
+                style={{ backgroundColor: theme.colors.primary }}
+              >
+                {loading ? <Loader2 size={16} className="animate-spin" /> : <Sparkles size={16} />}
+                Obtenir mon devis
+              </button>
+            </div>
+
+            {/* Colonne réservation : calendrier + calcul intelligent */}
+            <div className="space-y-4 self-start lg:sticky lg:top-4">
+              {dateKeys.hasDate && (
+                <div>
+                  <p className="mb-2 text-sm font-bold text-slate-900">
+                    {supportsRange ? 'Choisissez vos dates' : 'Choisissez une date'}
+                  </p>
+                  <ReservationCalendar
+                    sector={schema.sector}
+                    range={calendarRange}
+                    onChange={onCalendarChange}
+                    supportsRange={supportsRange}
+                  />
+                  {supportsRange && calendarRange.start && calendarRange.end && (
+                    <p className="mt-2 text-xs font-semibold" style={{ color: theme.colors.primary }}>
+                      {new Date(calendarRange.start).toLocaleDateString('fr-FR')} →{' '}
+                      {new Date(calendarRange.end).toLocaleDateString('fr-FR')} ·{' '}
+                      {nights(calendarRange.start, calendarRange.end)} nuit(s)
+                    </p>
+                  )}
+                </div>
+              )}
+              {preview?.financials && Object.keys(preview.financials).length > 0 && (
+                <FinancialSummary f={preview.financials} />
+              )}
+            </div>
+          </div>
         </div>
       )}
 
@@ -222,6 +343,12 @@ export default function SearchExperience() {
               </div>
             )}
           </div>
+
+          {quote.financials && Object.keys(quote.financials).length > 0 && (
+            <div className="mt-4">
+              <FinancialSummary f={quote.financials} />
+            </div>
+          )}
 
           {quote.assumptions.length > 0 && (
             <ul className="mt-4 space-y-1 text-xs text-slate-500">

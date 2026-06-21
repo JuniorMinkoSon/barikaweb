@@ -6,7 +6,10 @@ from typing import Any, Optional
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 
+from datetime import date
+
 from backend.engines import detect_intent, estimate_quote, validate_submission, FormError
+from backend.engines import month_availability
 from backend.engines.matching import Provider, rank_providers, comparator
 
 router = APIRouter(prefix="/api", tags=["engines"])
@@ -57,7 +60,34 @@ def quotation(req: QuoteRequest) -> dict:
         "breakdown": q.breakdown,
         "assumptions": q.assumptions,
         "confidence": q.confidence,
+        "financials": q.financials,
     }
+
+
+# --- Disponibilité / calendrier ----------------------------------------------
+@router.get("/availability/{sector}")
+def availability(
+    sector: str,
+    year: int | None = None,
+    month: int | None = None,
+    listing_id: str | None = None,
+    capacity: int | None = None,
+) -> dict:
+    """Disponibilité jour par jour (calendrier client) pour un mois.
+
+    Capacity-aware : villa/BTP = verrou unique, véhicules = flotte, fleuriste =
+    capacité/jour, déménageurs = équipes. Statut par jour :
+    available | partial | occupied | past.
+    """
+    today = date.today()
+    return month_availability(
+        sector,
+        year=year or today.year,
+        month=month or today.month,
+        listing_id=listing_id,
+        capacity=capacity,
+        today=today,
+    )
 
 
 # --- Matching / classement ---------------------------------------------------

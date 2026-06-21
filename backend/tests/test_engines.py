@@ -1,8 +1,11 @@
 """Tests des moteurs universels + référentiel métier."""
 import pytest
 
+from datetime import date
+
 from backend.catalog import SECTORS, FAMILIES, family_of, sector_keys, find_commune
 from backend.engines import detect_intent, estimate_quote, validate_submission, FormError
+from backend.engines import month_availability
 from backend.engines.forms import get_form
 from backend.engines.matching import Provider, rank_providers, comparator
 
@@ -64,6 +67,36 @@ def test_quote_demenagement_range():
 def test_quote_unknown_sector():
     q = estimate_quote("inconnu", {})
     assert q.confidence == "indisponible"
+
+
+def test_quote_financials_villa():
+    q = estimate_quote("location_villa", {"duree_jours": 5})
+    f = q.financials
+    assert f["unit_price"] == 75000 and f["units"] == 5
+    assert f["subtotal"] == 375000
+    assert f["commission"] == 37500  # 375000 * 10 %
+    # TVA arrondie au palier de 500 (≈ commission * 18 %)
+    assert abs(f["tva"] - f["commission"] * f["tva_rate"]) <= 500
+    assert f["escrow_required"] is True
+    assert f["escrow_amount"] == f["subtotal"]
+    assert f["total"] == f["subtotal"] + f["commission"] + f["tva"]
+
+
+def test_availability_single_lock_villa():
+    a = month_availability("location_villa", year=2030, month=6,
+                           listing_id="villa-x", today=date(2030, 6, 1))
+    assert a["capacity_type"] == "single" and a["capacity"] == 1
+    assert a["min_nights"] == 3
+    statuses = {d["status"] for d in a["days"]}
+    assert statuses <= {"available", "occupied", "past"}  # jamais "partial" en single
+
+
+def test_availability_fleet_partial():
+    a = month_availability("chauffeur_prive", year=2030, month=6, capacity=3,
+                           listing_id="prado", today=date(2030, 6, 1))
+    assert a["capacity_type"] == "fleet" and a["capacity"] == 3
+    for d in a["days"]:
+        assert d["available"] == max(0, d["capacity"] - d["reserved"])
 
 
 def test_ranking_and_comparator():

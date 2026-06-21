@@ -13,6 +13,7 @@ from typing import Optional
 from backend.catalog import get_sector
 
 CURRENCY = "FCFA"
+TVA_RATE = 0.18  # TVA Côte d'Ivoire, appliquée sur la commission de la plateforme
 _URGENCY_MULT = {"normale": 1.0, "prioritaire": 1.15, "immédiate": 1.3, "immediate": 1.3}
 
 
@@ -26,6 +27,7 @@ class Quote:
     breakdown: list[dict] = dc_field(default_factory=list)
     assumptions: list[str] = dc_field(default_factory=list)
     confidence: str = "estimation"  # estimation | indisponible
+    financials: dict = dc_field(default_factory=dict)  # prix unitaire, commission, TVA, escrow, total
 
 
 def _round(v: float, step: int = 500) -> float:
@@ -38,6 +40,46 @@ def _range(base: float, spread: float = 0.13) -> tuple[float, float]:
 
 def _urgency(payload: dict) -> float:
     return _URGENCY_MULT.get(str(payload.get("urgence", "normale")).lower(), 1.0)
+
+
+def _financials(
+    sector_key: str,
+    subtotal: float,
+    *,
+    unit_price: Optional[float] = None,
+    units: Optional[float] = None,
+    unit_label: Optional[str] = None,
+) -> dict:
+    """Récapitulatif financier transparent d'une réservation.
+
+    subtotal = montant de la prestation (séquestré en escrow pour le prestataire).
+    commission = part plateforme (taux du secteur). TVA appliquée sur la commission.
+    total = ce que paie le client (prestation + commission + TVA).
+    """
+    sec = get_sector(sector_key)
+    rate = sec.commission_rate if sec else 0.10
+    escrow_required = sec.escrow_required if sec else True
+    subtotal = _round(subtotal)
+    commission = _round(subtotal * rate)
+    tva = _round(commission * TVA_RATE)
+    f: dict = {
+        "subtotal": subtotal,
+        "commission_rate": rate,
+        "commission": commission,
+        "tva_rate": TVA_RATE,
+        "tva": tva,
+        "escrow_required": escrow_required,
+        "escrow_amount": subtotal if escrow_required else 0.0,
+        "total": subtotal + commission + tva,
+        "currency": CURRENCY,
+    }
+    if unit_price is not None:
+        f["unit_price"] = _round(unit_price)
+    if units is not None:
+        f["units"] = units
+    if unit_label is not None:
+        f["unit_label"] = unit_label
+    return f
 
 
 def _camion_for_volume(v: float) -> str:
@@ -67,11 +109,14 @@ def _q_demenagement(p: dict) -> Quote:
         p.get("commune_depart") != p.get("commune_arrivee")
     if inter:
         base += 30000
+    subtotal = base
     base *= _urgency(p)
     lo, hi = _range(max(base, 40000))
     return Quote(
         sector="demenagement", price_min=lo, price_max=hi,
         estimated={"volume_m3": volume, "camion": camion},
+        financials=_financials("demenagement", max(subtotal, 40000),
+                               unit_label="forfait déménagement"),
         breakdown=[
             {"label": "Volume estimé", "value": f"{volume} m³"},
             {"label": "Camion conseillé", "value": camion},
@@ -85,33 +130,42 @@ def _q_demenagement(p: dict) -> Quote:
 
 def _q_per_unit(sector_key: str, p: dict, unit_price: float, unit_label: str) -> Quote:
     qty = float(p.get("quantite", 0) or p.get("quantity", 0) or 1)
-    base = qty * unit_price * _urgency(p)
+    subtotal = qty * unit_price
+    base = subtotal * _urgency(p)
     lo, hi = _range(max(base, unit_price))
     return Quote(sector=sector_key, price_min=lo, price_max=hi,
                  estimated={"quantite": qty},
                  breakdown=[{"label": unit_label, "value": f"{qty:g}"}],
-                 assumptions=[f"Prix unitaire indicatif ≈ {int(unit_price)} {CURRENCY}"])
+                 assumptions=[f"Prix unitaire indicatif ≈ {int(unit_price)} {CURRENCY}"],
+                 financials=_financials(sector_key, subtotal, unit_price=unit_price,
+                                        units=qty, unit_label=unit_label))
 
 
 def _q_per_day(sector_key: str, p: dict, day_price: float) -> Quote:
-    days = float(p.get("duree_jours", 0) or 1)
-    base = days * day_price * _urgency(p)
+    days = float(p.get("duree_jours", 0) or p.get("nb_nuits", 0) or 1)
+    subtotal = days * day_price
+    base = subtotal * _urgency(p)
     lo, hi = _range(max(base, day_price))
     return Quote(sector=sector_key, price_min=lo, price_max=hi,
                  estimated={"jours": days},
                  breakdown=[{"label": "Durée", "value": f"{days:g} jour(s)"}],
-                 assumptions=[f"Tarif journalier indicatif ≈ {int(day_price)} {CURRENCY}"])
+                 assumptions=[f"Tarif journalier indicatif ≈ {int(day_price)} {CURRENCY}"],
+                 financials=_financials(sector_key, subtotal, unit_price=day_price,
+                                        units=days, unit_label="jour(s)"))
 
 
 def _q_per_hour(sector_key: str, p: dict, hour_price: float) -> Quote:
     hours = float(p.get("duree_heures", 0) or p.get("duree_mission_h", 0) or 1)
     agents = float(p.get("nb_agents", 1) or 1)
-    base = hours * hour_price * agents * _urgency(p)
+    subtotal = hours * hour_price * agents
+    base = subtotal * _urgency(p)
     lo, hi = _range(max(base, hour_price))
     return Quote(sector=sector_key, price_min=lo, price_max=hi,
                  estimated={"heures": hours, "agents": agents},
                  breakdown=[{"label": "Durée", "value": f"{hours:g} h"}],
-                 assumptions=[f"Tarif horaire indicatif ≈ {int(hour_price)} {CURRENCY}"])
+                 assumptions=[f"Tarif horaire indicatif ≈ {int(hour_price)} {CURRENCY}"],
+                 financials=_financials(sector_key, subtotal, unit_price=hour_price * agents,
+                                        units=hours, unit_label="heure(s)"))
 
 
 # Barèmes indicatifs par secteur (FCFA)
@@ -154,7 +208,8 @@ def estimate_quote(sector_key: str, payload: dict) -> Quote:
     if budget > 0:
         lo, hi = _range(budget, 0.2)
         return Quote(sector=sector_key, price_min=lo, price_max=hi,
-                     assumptions=["Fourchette autour du budget indiqué (±20%)"])
+                     assumptions=["Fourchette autour du budget indiqué (±20%)"],
+                     financials=_financials(sector_key, budget, unit_label="forfait"))
     return Quote(sector=sector_key, price_min=0, price_max=0,
                  confidence="indisponible",
                  assumptions=["Devis sur mesure — un prestataire vous proposera un prix."])

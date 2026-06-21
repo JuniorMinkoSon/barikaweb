@@ -51,6 +51,7 @@ export default function ReservationCalendar({
   const [data, setData] = useState<MonthAvailability | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -108,6 +109,7 @@ export default function ReservationCalendar({
   function handleClick(dateStr: string) {
     const info = dayMap.get(dateStr);
     if (!selectable(info)) return;
+    setNotice(null);
     if (!supportsRange) {
       onChange({ start: dateStr });
       return;
@@ -126,7 +128,14 @@ export default function ReservationCalendar({
       return;
     }
     const nights = nightsBetween(start, dateStr);
-    if (data && nights > data.max_nights) return;
+    if (data && nights > data.max_nights) {
+      setNotice(`Séjour maximum : ${data.max_nights} nuit(s).`);
+      return;
+    }
+    if (data && nights < data.min_nights) {
+      setNotice(`Séjour minimum : ${data.min_nights} nuit(s).`);
+      return;
+    }
     onChange({ start, end: dateStr });
   }
 
@@ -251,6 +260,8 @@ export default function ReservationCalendar({
                 : `Capacité ${data.capacity} / jour.`}
         </p>
       )}
+
+      {notice && <p className="mt-2 text-[11px] font-semibold text-amber-600">{notice}</p>}
 
       {error && <p className="mt-2 text-[11px] text-red-500">{error}</p>}
     </div>

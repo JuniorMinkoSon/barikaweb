@@ -46,6 +46,9 @@ function FinancialSummary({ f }: { f: Financials }) {
             value={`${fmt(f.unit_price)} ${f.currency}`}
           />
         )}
+        {f.urgency_mult != null && f.urgency_mult !== 1 && (
+          <Row label={`Majoration urgence (×${f.urgency_mult})`} value={`+${fmt(f.subtotal - (f.subtotal_base ?? f.subtotal))} ${f.currency}`} />
+        )}
         <Row label="Sous-total prestation" value={`${fmt(f.subtotal)} ${f.currency}`} />
         <Row label={`Commission (${Math.round(f.commission_rate * 100)} %)`} value={`${fmt(f.commission)} ${f.currency}`} />
         <Row label={`TVA (${Math.round(f.tva_rate * 100)} %)`} value={`${fmt(f.tva)} ${f.currency}`} />

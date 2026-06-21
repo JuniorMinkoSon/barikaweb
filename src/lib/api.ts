@@ -103,6 +103,8 @@ export interface Financials {
   unit_price?: number;
   units?: number;
   unit_label?: string;
+  urgency_mult?: number;
+  subtotal_base?: number;
 }
 
 export interface Quote {

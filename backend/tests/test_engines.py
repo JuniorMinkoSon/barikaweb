@@ -82,6 +82,29 @@ def test_quote_financials_villa():
     assert f["total"] == f["subtotal"] + f["commission"] + f["tva"]
 
 
+def test_quote_financials_urgency_consistency():
+    # Bug de revue : le sous-total financier doit inclure la majoration d'urgence
+    # pour rester cohérent avec la fourchette de prix affichée à côté.
+    base = estimate_quote("location_caterpillar", {"duree_jours": 2})
+    urgent = estimate_quote("location_caterpillar", {"duree_jours": 2, "urgence": "immédiate"})
+    f = urgent.financials
+    assert f["urgency_mult"] == 1.3
+    # le sous-total de base correspond au devis sans urgence
+    assert f["subtotal_base"] == base.financials["subtotal"]
+    assert f["subtotal"] > f["subtotal_base"]
+    # la fourchette de prix encadre le sous-total prestation majoré
+    assert urgent.price_min <= f["subtotal"] <= urgent.price_max
+    assert f["total"] == f["subtotal"] + f["commission"] + f["tva"]
+
+
+def test_quote_days_from_dates():
+    # Sans duree_jours, la durée est déduite de la plage de dates du calendrier.
+    q = estimate_quote("location_villa",
+                       {"date_arrivee": "2026-06-20", "date_depart": "2026-06-25"})
+    assert q.financials["units"] == 5
+    assert q.financials["subtotal"] == 5 * 75000
+
+
 def test_availability_single_lock_villa():
     a = month_availability("location_villa", year=2030, month=6,
                            listing_id="villa-x", today=date(2030, 6, 1))

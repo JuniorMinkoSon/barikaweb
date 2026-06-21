@@ -142,6 +142,17 @@ export default function DynamicForm({ schema, values, errors, onChange }: Props)
           />
         );
         break;
+      case 'time':
+        control = (
+          <input
+            type="time"
+            className={inputBase}
+            style={{ borderColor }}
+            value={(value as string) ?? ''}
+            onChange={(e) => onChange(field.key, e.target.value)}
+          />
+        );
+        break;
       case 'photos':
         control = (
           <input

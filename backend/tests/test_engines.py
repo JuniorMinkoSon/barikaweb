@@ -1,8 +1,11 @@
 """Tests des moteurs universels + référentiel métier."""
 import pytest
 
+from datetime import date
+
 from backend.catalog import SECTORS, FAMILIES, family_of, sector_keys, find_commune
 from backend.engines import detect_intent, estimate_quote, validate_submission, FormError
+from backend.engines import month_availability
 from backend.engines.forms import get_form
 from backend.engines.matching import Provider, rank_providers, comparator
 
@@ -64,6 +67,59 @@ def test_quote_demenagement_range():
 def test_quote_unknown_sector():
     q = estimate_quote("inconnu", {})
     assert q.confidence == "indisponible"
+
+
+def test_quote_financials_villa():
+    q = estimate_quote("location_villa", {"duree_jours": 5})
+    f = q.financials
+    assert f["unit_price"] == 75000 and f["units"] == 5
+    assert f["subtotal"] == 375000
+    assert f["commission"] == 37500  # 375000 * 10 %
+    # TVA arrondie au palier de 500 (≈ commission * 18 %)
+    assert abs(f["tva"] - f["commission"] * f["tva_rate"]) <= 500
+    assert f["escrow_required"] is True
+    assert f["escrow_amount"] == f["subtotal"]
+    assert f["total"] == f["subtotal"] + f["commission"] + f["tva"]
+
+
+def test_quote_financials_urgency_consistency():
+    # Bug de revue : le sous-total financier doit inclure la majoration d'urgence
+    # pour rester cohérent avec la fourchette de prix affichée à côté.
+    base = estimate_quote("location_caterpillar", {"duree_jours": 2})
+    urgent = estimate_quote("location_caterpillar", {"duree_jours": 2, "urgence": "immédiate"})
+    f = urgent.financials
+    assert f["urgency_mult"] == 1.3
+    # le sous-total de base correspond au devis sans urgence
+    assert f["subtotal_base"] == base.financials["subtotal"]
+    assert f["subtotal"] > f["subtotal_base"]
+    # la fourchette de prix encadre le sous-total prestation majoré
+    assert urgent.price_min <= f["subtotal"] <= urgent.price_max
+    assert f["total"] == f["subtotal"] + f["commission"] + f["tva"]
+
+
+def test_quote_days_from_dates():
+    # Sans duree_jours, la durée est déduite de la plage de dates du calendrier.
+    q = estimate_quote("location_villa",
+                       {"date_arrivee": "2026-06-20", "date_depart": "2026-06-25"})
+    assert q.financials["units"] == 5
+    assert q.financials["subtotal"] == 5 * 75000
+
+
+def test_availability_single_lock_villa():
+    a = month_availability("location_villa", year=2030, month=6,
+                           listing_id="villa-x", today=date(2030, 6, 1))
+    assert a["capacity_type"] == "single" and a["capacity"] == 1
+    assert a["min_nights"] == 3
+    statuses = {d["status"] for d in a["days"]}
+    assert statuses <= {"available", "occupied", "past"}  # jamais "partial" en single
+
+
+def test_availability_fleet_partial():
+    a = month_availability("chauffeur_prive", year=2030, month=6, capacity=3,
+                           listing_id="prado", today=date(2030, 6, 1))
+    assert a["capacity_type"] == "fleet" and a["capacity"] == 3
+    for d in a["days"]:
+        assert d["available"] == max(0, d["capacity"] - d["reserved"])
 
 
 def test_ranking_and_comparator():

@@ -90,6 +90,23 @@ export interface IntentResult {
   entities: Record<string, unknown>;
 }
 
+export interface Financials {
+  subtotal: number;
+  commission_rate: number;
+  commission: number;
+  tva_rate: number;
+  tva: number;
+  escrow_required: boolean;
+  escrow_amount: number;
+  total: number;
+  currency: string;
+  unit_price?: number;
+  units?: number;
+  unit_label?: string;
+  urgency_mult?: number;
+  subtotal_base?: number;
+}
+
 export interface Quote {
   ok: boolean;
   sector: string;
@@ -100,7 +117,31 @@ export interface Quote {
   breakdown: { label: string; value: string }[];
   assumptions: string[];
   confidence: string;
+  financials?: Financials;
   errors?: Record<string, string>;
+}
+
+export type DayStatus = 'available' | 'partial' | 'occupied' | 'past';
+
+export interface DayAvailability {
+  date: string; // ISO yyyy-mm-dd
+  status: DayStatus;
+  capacity: number;
+  reserved: number;
+  available: number;
+}
+
+export interface MonthAvailability {
+  sector: string;
+  label: string;
+  year: number;
+  month: number;
+  capacity_type: 'single' | 'fleet' | 'daily_capacity' | 'teams';
+  capacity: number;
+  min_nights: number;
+  max_nights: number;
+  legend: Record<string, string>;
+  days: DayAvailability[];
 }
 
 export interface ProviderInput {
@@ -177,6 +218,20 @@ export const api = {
       method: 'POST',
       body: JSON.stringify({ sector, payload, validate_fields: validate }),
     }),
+
+  availability: (
+    sector: string,
+    year: number,
+    month: number,
+    opts?: { listingId?: string; capacity?: number },
+  ) => {
+    const qs = new URLSearchParams({ year: String(year), month: String(month) });
+    if (opts?.listingId) qs.set('listing_id', opts.listingId);
+    if (opts?.capacity) qs.set('capacity', String(opts.capacity));
+    return request<MonthAvailability>(
+      `/api/availability/${encodeURIComponent(sector)}?${qs.toString()}`,
+    );
+  },
 
   matching: (providers: ProviderInput[], weights?: Record<string, number>) =>
     request<MatchResult>('/api/matching', {

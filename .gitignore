@@ -28,3 +28,6 @@ __pycache__/
 *.egg-info/
 .venv/
 venv/
+
+# Local dev SQLite DB (created at runtime)
+locaconnecte_dev.db
